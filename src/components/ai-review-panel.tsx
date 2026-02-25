@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { AIEnhancementResult, ImpactFormData, ProgramArea } from '@/lib/types';
+import type { AIEnhancementResult, ImpactFormData } from '@/lib/types';
 import { IMPACT_TYPES, KPI_KEYS } from '@/lib/constants';
 
 interface AiReviewPanelProps {

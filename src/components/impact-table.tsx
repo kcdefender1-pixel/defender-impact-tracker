@@ -52,8 +52,8 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
     if (typeFilter) list = list.filter((i) => i.impact_type === typeFilter);
 
     list.sort((a, b) => {
-      let av: string = String(a[sortKey] ?? '');
-      let bv: string = String(b[sortKey] ?? '');
+      const av: string = String(a[sortKey] ?? '');
+      const bv: string = String(b[sortKey] ?? '');
       return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
     });
     return list;
@@ -71,7 +71,7 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
   const setLoading = (id: string, val: boolean) => {
     setLoadingIds((prev) => {
       const next = new Set(prev);
-      val ? next.add(id) : next.delete(id);
+      if (val) { next.add(id); } else { next.delete(id); }
       return next;
     });
   };
@@ -168,7 +168,7 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
   const toggleSelect = (id: string) => {
     setSelected((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) { next.delete(id); } else { next.add(id); }
       return next;
     });
   };

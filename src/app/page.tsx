@@ -1,101 +1,142 @@
-import Image from "next/image";
+import { createClient } from '@/lib/supabase/server';
+import { KpiGrid } from '@/components/kpi-grid';
+import { ImpactTimeline } from '@/components/impact-timeline';
+import type { KpiConfig, MetricSnapshot, ImpactEvent, IntegrationStatus } from '@/lib/types';
+import Link from 'next/link';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+function formatSyncTime(iso: string | null): string {
+  if (!iso) return 'Never';
+  const diff = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(diff / 60_000);
+  const hours = Math.floor(diff / 3_600_000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return `${mins}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+export default async function CommandCenter() {
+  const supabase = createClient();
+
+  // Fetch all data in parallel
+  const [kpisRes, snapshotsRes, impactsRes, syncRes, pendingRes] = await Promise.all([
+    supabase.from('kpi_config').select('*').order('sort_order', { ascending: true }),
+    supabase.from('metric_snapshots').select('*').order('taken_at', { ascending: false }),
+    supabase
+      .from('impact_events')
+      .select('*')
+      .eq('status', 'approved')
+      .order('reported_at', { ascending: false })
+      .limit(10),
+    supabase
+      .from('integration_status')
+      .select('*')
+      .eq('name', 'rss_kansascitydefender')
+      .maybeSingle(),
+    supabase
+      .from('impact_events')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'pending'),
+  ]);
+
+  const kpis: KpiConfig[] = kpisRes.data ?? [];
+  const allSnapshots: MetricSnapshot[] = snapshotsRes.data ?? [];
+  const impacts: ImpactEvent[] = impactsRes.data ?? [];
+  const syncStatus: IntegrationStatus | null = syncRes.data ?? null;
+  const pendingCount: number = pendingRes.count ?? 0;
+
+  // Group snapshots by metric_key, keep last 6 per key for sparklines
+  const snapshotsByKey: Record<string, MetricSnapshot[]> = {};
+  for (const snap of allSnapshots) {
+    if (!snapshotsByKey[snap.metric_key]) snapshotsByKey[snap.metric_key] = [];
+    if (snapshotsByKey[snap.metric_key].length < 6) {
+      snapshotsByKey[snap.metric_key].push(snap);
+    }
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="px-4 py-8 md:px-8 md:py-10">
+      {/* Header row */}
+      <div className="flex items-start justify-between mb-8 gap-4">
+        <div>
+          <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
+            The Kansas City Defender
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-defender-black leading-tight">
+            Command Center
+          </h1>
+          <p className="text-gray-500 text-sm mt-1.5">
+            Organizational impact at a glance.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Status badges */}
+        <div className="flex flex-col items-end gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 text-xs font-mono text-gray-400">
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${
+                syncStatus?.status === 'ok'
+                  ? 'bg-defender-green'
+                  : syncStatus?.status === 'warning'
+                  ? 'bg-defender-gold'
+                  : 'bg-gray-300'
+              }`}
+            />
+            RSS: {formatSyncTime(syncStatus?.last_run_at ?? null)}
+          </div>
+          {pendingCount > 0 && (
+            <Link
+              href="/admin/impacts"
+              className="text-xs font-semibold bg-amber-100 text-amber-800 rounded-full px-2.5 py-1 hover:bg-amber-200 transition-colors"
+            >
+              {pendingCount} pending review
+            </Link>
+          )}
+        </div>
+      </div>
+
+      {/* Big 10 KPI grid */}
+      <section className="mb-10">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-bold text-defender-black tracking-tight">
+            The Big 10
+          </h2>
+          <Link
+            href="/admin/metrics"
+            className="text-xs font-semibold text-defender-red hover:underline"
+          >
+            + Add snapshot
+          </Link>
+        </div>
+        <KpiGrid kpis={kpis} snapshotsByKey={snapshotsByKey} />
+      </section>
+
+      {/* Recent impacts timeline */}
+      <section>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-bold text-defender-black tracking-tight">
+            Recent Impacts
+          </h2>
+          <div className="flex gap-3">
+            <Link
+              href="/report"
+              className="text-xs font-semibold text-defender-red hover:underline"
+            >
+              + Report Impact
+            </Link>
+            <Link
+              href="/admin/impacts"
+              className="text-xs font-semibold text-gray-400 hover:text-gray-600"
+            >
+              View all
+            </Link>
+          </div>
+        </div>
+        <ImpactTimeline impacts={impacts} />
+      </section>
     </div>
   );
 }

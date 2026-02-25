@@ -10,6 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        cream: "#FAF7F2",
+        "defender-red": "#E11D48",
+        "defender-black": "#0B0B0B",
+        "defender-green": "#16A34A",
+        "defender-gold": "#F59E0B",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -55,6 +60,8 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        card: "14px",
+        button: "10px",
       },
       keyframes: {
         "accordion-down": {

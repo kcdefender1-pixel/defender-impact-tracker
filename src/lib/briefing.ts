@@ -66,4 +66,5 @@ async function _generateBriefing(): Promise<string> {
 
 export const generateBriefing = unstable_cache(_generateBriefing, ['defender-briefing'], {
   revalidate: 3600,
+  tags: ['defender-briefing'],
 });

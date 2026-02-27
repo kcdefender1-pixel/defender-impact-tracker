@@ -61,6 +61,26 @@ const KPI_CONFIG_UPDATES = [
     sort_order: 1,
     notes: 'Pull from Instagram Insights + Facebook Page Insights monthly. Combine IG views + FB views for total.',
   },
+  {
+    key: 'community_served_count',
+    title: 'Community Members Served',
+    description: 'Total number of community members directly served through Defender mutual aid programs including distributions, events, and direct resource delivery.',
+    rationale: 'Tracks Material Power: direct, tangible impact on community members through mutual aid.',
+    freq: 'monthly',
+    unit: 'people',
+    sort_order: 5,
+    notes: 'Count unique individuals/families served at each mutual aid event. Report monthly.',
+  },
+  {
+    key: 'mutual_aid_participation_team_members',
+    title: 'Mutual Aid Organizers Active',
+    description: 'Number of Defender organizers who actively participated in mutual aid events and distributions.',
+    rationale: 'Tracks internal organizing capacity and team engagement in Material Power programs.',
+    freq: 'monthly',
+    unit: 'organizers',
+    sort_order: 6,
+    notes: 'Count Defender organizers who showed up and led or supported each mutual aid event.',
+  },
 ];
 
 const SEED_IMPACTS = [
@@ -213,6 +233,9 @@ const SEED_METRICS = [
   // Political education (B-REAL Cohort 3: 40 enrolled)
   { metric_key: 'political_education_participants', value: 22, taken_at: '2026-01-20T00:00:00Z' },
   { metric_key: 'political_education_participants', value: 40, taken_at: '2026-02-13T00:00:00Z' },
+  // Material Power — mutual aid clothing distribution (Feb 21)
+  { metric_key: 'community_served_count', value: 25, taken_at: '2026-02-21T00:00:00Z' },
+  { metric_key: 'mutual_aid_participation_team_members', value: 15, taken_at: '2026-02-21T00:00:00Z' },
 ];
 
 export async function GET(request: Request) {

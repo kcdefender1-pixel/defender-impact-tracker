@@ -176,7 +176,7 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
-                Highlights
+                Top Highlights
               </Link>
               <Link
                 href={`/?period=${period}&view=recent`}

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { createServiceClient } from '@/lib/supabase/server';
 
 const SEED_STORIES = [
@@ -68,6 +69,7 @@ const SEED_IMPACTS = [
     program_area: 'editorial',
     impact_type: 'accountability',
     raw_description: 'Our investigation into KCPD budget revealed the department received $1.2 billion since 2022 while claiming it cannot afford basic services. An officer who has killed three people remains on active patrol. Story generated significant community response and was shared over 2,000 times.',
+    ai_narrative: "The Kansas City Defender's investigation uncovered that KCPD has received $1.2 billion in taxpayer funding since 2022, yet continues to claim it cannot afford basic services. Meanwhile, an officer responsible for killing three people remains on active patrol. This story ignited community outrage and accountability conversations, generating over 2,000 shares across social platforms and putting direct pressure on city leadership to answer for the department's choices.",
     internal_headline: 'We Exposed KCPD for Hoarding $1.2B While a Killer Cop Patrols Free',
     funder_headline: 'Defender Investigation Reveals $1.2B Police Budget Gap, Sparks Accountability Push',
     radical_metric_label: 'Shares',
@@ -82,12 +84,13 @@ const SEED_IMPACTS = [
     reported_by_name: 'Melissa Ferrer-Civil',
     program_area: 'political_education',
     impact_type: 'event_turnout',
-    raw_description: 'B-REAL Academy Cohort 3 received over 60 applicants total. 20 of the 40 student seats are filled by high school students. The program kicks off this weekend, marking a major moment for the Defender abolitionist freedom school.',
-    internal_headline: '60+ Applied. 20 High Schoolers In. B-REAL Academy Kicks Off This Weekend.',
-    funder_headline: 'Freedom School Cohort 3 Draws 60+ Applicants; 50% High School Students',
-    radical_metric_label: 'Applicants',
-    radical_metric_value: 60,
-    radical_metric_unit: 'applicants',
+    raw_description: 'B-REAL Academy Cohort 3 launched with 40 students enrolled out of 60 applicants. Half of enrolled students are high school students. The program kicked off this month, marking a major moment for the Defender abolitionist freedom school.',
+    ai_narrative: 'B-REAL Academy, the Defender\'s Abolitionist Freedom School, launched Cohort 3 with an overwhelming community response. 60 people applied for 40 available seats, a testament to the hunger for radical political education in Kansas City. Half of enrolled students are high schoolers, meaning the Defender is building the next generation of abolitionist organizers. The program combines political education, direct action training, and community building rooted in Black radical tradition.',
+    internal_headline: '40 Students In, 60 Applied. B-REAL Freedom School Cohort 3 Is Underway.',
+    funder_headline: 'Freedom School Cohort 3 Enrolls 40 Students From 60 Applicants; 50% High Schoolers',
+    radical_metric_label: 'Students Enrolled',
+    radical_metric_value: 40,
+    radical_metric_unit: 'students',
     kpis_impacted: ['political_education_participants'],
     status: 'approved',
     confidence: 90,
@@ -97,7 +100,8 @@ const SEED_IMPACTS = [
     reported_by_name: 'Ryan Sorrell',
     program_area: 'editorial',
     impact_type: 'policy_win',
-    raw_description: 'After weeks of Defender reporting and sustained community organizing, Platform Ventures backed down from selling a property to ICE for use as a detention center. The Defender helped lead the narrative that turned public opinion and shaped the conditions for this victory. This is what narrative power looks like.',
+    raw_description: 'After weeks of Defender reporting and sustained community organizing, Platform Ventures backed down from selling a property to ICE for use as a detention center. The Defender helped lead the narrative that turned public opinion and shaped the conditions for this victory.',
+    ai_narrative: 'After weeks of relentless Defender reporting and sustained community organizing, Platform Ventures withdrew from plans to sell a property to ICE for use as a detention center. The Defender helped lead the narrative and shaped the conditions that made this victory possible. This win is a direct demonstration of how radical Black media translates into material outcomes. The people organized, the Defender amplified, and the community won.',
     internal_headline: 'WE WON: The Defender Led the Narrative That Stopped the ICE Facility',
     funder_headline: 'Defender Narrative Leadership Helps Win Campaign Against ICE Detention Center',
     radical_metric_label: 'ICE Facilities Blocked',
@@ -112,10 +116,11 @@ const SEED_IMPACTS = [
     reported_by_name: 'Ryan Sorrell',
     program_area: 'editorial',
     impact_type: 'narrative_shift',
-    raw_description: 'Jon Jeter\'s Plunder Papers series, written by the Defender, launched with the first installment on February 2. Two-time Pulitzer finalist examining African poverty and colonial legacy. The Defender wrote and published this ongoing investigative series examining why Africans continue to live in grinding poverty seven decades after the alleged close of the colonial era.',
+    raw_description: "Jon Jeter's Plunder Papers series launched with the first installment on February 2. Two-time Pulitzer finalist examining African poverty and colonial legacy. The Defender published this ongoing investigative series examining why Africans continue to live in grinding poverty seven decades after the alleged close of the colonial era.",
+    ai_narrative: 'Jon Jeter, a two-time Pulitzer Prize finalist, launched The Plunder Papers through the Defender. This ongoing investigative series examines why African nations continue to live under grinding poverty seven decades after the supposed close of the colonial era. The Defender committed to publishing this groundbreaking international work, expanding its investigative journalism beyond Kansas City to expose the global systems of exploitation that connect directly to conditions here at home. This is the Defender operating as a world-class Black press.',
     internal_headline: 'Plunder Papers Launches: The Defender Takes On Colonial Theft, Globally',
     funder_headline: 'Defender Publishes New Investigative Series on Colonial Legacy by Jon Jeter',
-    radical_metric_label: 'Series Installments',
+    radical_metric_label: 'Series Installments Published',
     radical_metric_value: 1,
     radical_metric_unit: 'installments',
     kpis_impacted: ['audience_growth_total_reach', 'editorial_narrative_power_pct', 'stories_published_total_weekly'],
@@ -127,7 +132,8 @@ const SEED_IMPACTS = [
     reported_by_name: 'Silas Lee',
     program_area: 'editorial',
     impact_type: 'event_turnout',
-    raw_description: 'Our coverage and call to action for the January 30 nationwide general strike against ICE reached over 15,000 people on social media. We were one of the first outlets to amplify the strike call following Minnesota successful action.',
+    raw_description: 'Our coverage and call to action for the January 30 nationwide general strike against ICE reached over 15,000 people on social media. We were one of the first outlets to amplify the strike call following successful Minnesota action.',
+    ai_narrative: 'The Kansas City Defender was among the first media outlets to amplify the call for the January 30 nationwide general strike against ICE enforcement. Following successful actions in Minnesota, the Defender mobilized its audience and reached over 15,000 people on social media. The Defender served as a critical organizing hub, connecting local community members to the national movement at a key moment of escalation.',
     internal_headline: '15K Reached on Strike Day: The Defender Led the Call',
     funder_headline: 'Defender Coverage of National Strike Reaches 15,000+ on Social Media',
     radical_metric_label: 'People Reached',
@@ -143,6 +149,7 @@ const SEED_IMPACTS = [
     program_area: 'editorial',
     impact_type: 'narrative_shift',
     raw_description: '62 high school students were suspended after protesting a bill that would allow ICE agents into schools. The Defender broke and led the narrative on this story, which reached 411K views and helped shape public consciousness around the ICE fight in Kansas City.',
+    ai_narrative: 'When 62 high school students walked out to protest a bill that would allow ICE agents onto school grounds, every one of them was suspended. The Defender broke the story and led the national narrative, reaching 411,000 views and helping shape public consciousness around the ICE fight in Kansas City. The story sparked outrage, went viral, and became a rallying point for the broader movement against ICE expansion in schools. This is Defender journalism turning community pain into movement power.',
     internal_headline: '62 Students Suspended for Standing Up. We Told Their Story to 411K People.',
     funder_headline: 'Defender Coverage of Student ICE Protest Reaches 411K Views',
     radical_metric_label: 'Views',
@@ -157,11 +164,12 @@ const SEED_IMPACTS = [
     reported_by_name: 'KC Defender Staff',
     program_area: 'mutual_aid',
     impact_type: 'resource_delivery',
-    raw_description: 'Free children\'s clothing distribution event held on 2/21/26 at Vineyard Neighborhood Association. Community members received free kids clothing through the Defender mutual aid program.',
-    internal_headline: 'Free Kids Clothing in the Community: Mutual Aid Delivers Again',
-    funder_headline: 'Defender Mutual Aid Program Hosts Free Children\'s Clothing Distribution',
+    raw_description: "Free children's clothing distribution event held on 2/21/26 at Vineyard Neighborhood Association. 25 families received free kids clothing. 15 Defender organizers led the effort on the ground.",
+    ai_narrative: "On February 21, 2026, the Defender's Mutual Aid program hosted a free children's clothing distribution at Vineyard Neighborhood Association. 25 families received free kids clothing, with 15 Defender organizers coordinating and leading the effort on the ground. This is the Defender's commitment to material solidarity in action. Mutual aid is not charity. It is the community taking care of the community.",
+    internal_headline: '25 Families Clothed, 15 Organizers Strong: Mutual Aid Delivers Again',
+    funder_headline: 'Defender Mutual Aid Serves 25 Families at Free Children\'s Clothing Distribution',
     radical_metric_label: 'Families Served',
-    radical_metric_value: null,
+    radical_metric_value: 25,
     radical_metric_unit: 'families',
     kpis_impacted: ['mutual_aid_participation_team_members', 'community_served_count'],
     status: 'approved',
@@ -173,6 +181,7 @@ const SEED_IMPACTS = [
     program_area: 'political_education',
     impact_type: 'event_turnout',
     raw_description: 'The Defender hosted an organizer training for students, building political education and direct action skills. Students participated in hands-on training around abolitionist organizing strategies.',
+    ai_narrative: 'The Defender hosted an intensive organizer training for student activists, drawing participants committed to abolitionist direct action. Students built practical skills across political education, community organizing strategy, and movement building rooted in Black radical tradition. This training is an investment in the next generation of Defender comrades and a demonstration of the organization\'s commitment to developing leadership from within the community it serves.',
     internal_headline: 'Students Trained. The Next Generation of Organizers Is Ready.',
     funder_headline: 'Defender Delivers Organizer Training for Student Activists',
     radical_metric_label: 'Students Trained',
@@ -201,9 +210,9 @@ const SEED_METRICS = [
   { metric_key: 'stories_published_total_weekly', value: 5, taken_at: '2026-02-10T00:00:00Z' },
   { metric_key: 'stories_published_total_weekly', value: 4, taken_at: '2026-02-17T00:00:00Z' },
   { metric_key: 'stories_published_total_weekly', value: 3, taken_at: '2026-02-24T00:00:00Z' },
-  // Political education
+  // Political education (B-REAL Cohort 3: 40 enrolled)
   { metric_key: 'political_education_participants', value: 22, taken_at: '2026-01-20T00:00:00Z' },
-  { metric_key: 'political_education_participants', value: 60, taken_at: '2026-02-13T00:00:00Z' },
+  { metric_key: 'political_education_participants', value: 40, taken_at: '2026-02-13T00:00:00Z' },
 ];
 
 export async function GET(request: Request) {
@@ -286,6 +295,9 @@ export async function GET(request: Request) {
     { onConflict: 'name' }
   );
   results.integration = integErr ? { error: integErr.message } : 'ok';
+
+  // Bust the briefing cache so the next page load regenerates with fresh data
+  revalidateTag('defender-briefing');
 
   return NextResponse.json({
     message: 'Seed complete',

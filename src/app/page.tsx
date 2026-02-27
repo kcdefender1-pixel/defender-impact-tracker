@@ -39,11 +39,12 @@ function getCutoff(period: string): string | null {
 }
 
 interface CommandCenterProps {
-  searchParams: { period?: string };
+  searchParams: { period?: string; view?: string };
 }
 
 export default async function CommandCenter({ searchParams }: CommandCenterProps) {
   const period = searchParams.period ?? '30d';
+  const view = searchParams.view ?? 'highlights';
   const cutoff = getCutoff(period);
 
   const supabase = createClient();
@@ -57,12 +58,19 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
   const [kpisRes, snapshotsRes, impactsRes, syncRes, pendingRes] = await Promise.all([
     supabase.from('kpi_config').select('*').order('sort_order', { ascending: true }),
     snapshotsQuery,
-    supabase
-      .from('impact_events')
-      .select('*')
-      .eq('status', 'approved')
-      .order('reported_at', { ascending: false })
-      .limit(10),
+    view === 'highlights'
+      ? supabase
+          .from('impact_events')
+          .select('*')
+          .eq('status', 'approved')
+          .order('confidence', { ascending: false })
+          .limit(10)
+      : supabase
+          .from('impact_events')
+          .select('*')
+          .eq('status', 'approved')
+          .order('reported_at', { ascending: false })
+          .limit(10),
     supabase
       .from('integration_status')
       .select('*')
@@ -151,12 +159,37 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
         <KpiGrid kpis={kpis} snapshotsByKey={snapshotsByKey} period={period} />
       </section>
 
-      {/* Recent impacts timeline */}
+      {/* Impacts timeline */}
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-defender-black tracking-tight">
-            Recent Impacts
-          </h2>
+          <div className="flex items-center gap-3">
+            <h2 className="text-lg font-bold text-defender-black tracking-tight">
+              {view === 'highlights' ? 'Top Highlights' : 'Recent Impacts'}
+            </h2>
+            {/* View toggle tabs */}
+            <div className="flex items-center gap-1 bg-gray-100 rounded-full p-0.5">
+              <Link
+                href={`/?period=${period}&view=highlights`}
+                className={`text-xs font-semibold px-3 py-1 rounded-full transition-colors ${
+                  view === 'highlights'
+                    ? 'bg-defender-red text-white'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                Highlights
+              </Link>
+              <Link
+                href={`/?period=${period}&view=recent`}
+                className={`text-xs font-semibold px-3 py-1 rounded-full transition-colors ${
+                  view === 'recent'
+                    ? 'bg-defender-red text-white'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                Recent
+              </Link>
+            </div>
+          </div>
           <div className="flex gap-3">
             <Link
               href="/report"

@@ -39,13 +39,26 @@ const SEED_STORIES = [
     source: 'manual',
   },
   {
-    title: 'Abolitionist Architecture: How Black Designers Are Building a Liberatory Future',
-    link: 'https://kansascitydefender.com/arts-culture/abolitionist-architecture-how-black-designers-are-building-a-liberatory-future/',
-    published_at: '2025-12-02T12:00:00Z',
+    title: '62 High School Students Protest Bill That Would Allow ICE Agents Into Schools. ALL 62 Get Suspended.',
+    link: 'https://kansascitydefender.com/justice/62-students-suspended-ice-protest/',
+    published_at: '2026-02-18T12:00:00Z',
     author: 'KC Defender Staff',
-    tags: ['arts-culture', 'architecture', 'abolition', 'design'],
-    summary_raw: 'How Black designers are reimagining built environments through an abolitionist lens.',
+    tags: ['justice', 'ice', 'students', 'protest', 'schools'],
+    summary_raw: '62 high school students were suspended after walking out to protest a bill that would allow ICE agents into schools. The Defender led the narrative on this story.',
     source: 'manual',
+  },
+];
+
+const KPI_CONFIG_UPDATES = [
+  {
+    key: 'audience_growth_total_reach',
+    title: 'Narrative Impact (FB + IG Views)',
+    description: 'Total video and post views across Instagram and Facebook combined. IG: 2.2M + FB: 235K = 2.43M for last 28 days (Jan 30 - Feb 26, 2026).',
+    rationale: 'Tracks narrative power and audience reach through actual platform view data.',
+    freq: 'weekly',
+    unit: 'views',
+    sort_order: 1,
+    notes: 'Pull from Instagram Insights + Facebook Page Insights monthly. Combine IG views + FB views for total.',
   },
 ];
 
@@ -66,42 +79,27 @@ const SEED_IMPACTS = [
     reported_at: '2026-02-05T18:00:00Z',
   },
   {
-    reported_by_name: 'Khadijah Bland',
-    program_area: 'development_fundraising',
-    impact_type: 'funds_raised',
-    raw_description: 'Platform Ventures/ICE victory generated a wave of new donations. 12 new sustaining donors signed up in the week following the victory announcement. Total new monthly recurring revenue: $840.',
-    internal_headline: 'The People Won and Then They Gave: 12 New Sustainers After ICE Victory',
-    funder_headline: '12 New Sustaining Donors Join After Community Organizing Victory',
-    radical_metric_label: 'New Sustaining Donors',
-    radical_metric_value: 12,
-    radical_metric_unit: 'donors',
-    kpis_impacted: ['membership_sustaining_donors_new_monthly', 'revenue_mix_quarterly_share_and_growth'],
-    status: 'approved',
-    confidence: 95,
-    reported_at: '2026-02-14T10:00:00Z',
-  },
-  {
     reported_by_name: 'Melissa Ferrer-Civil',
     program_area: 'political_education',
     impact_type: 'event_turnout',
-    raw_description: 'B-REAL Academy Cohort 3 applications opened February 10. Within 72 hours we received 34 applications for the 14-week abolitionist freedom school program. 80% of applicants are under 30.',
-    internal_headline: '34 Future Organizers Applied to Freedom School in 72 Hours',
-    funder_headline: 'Freedom School Cohort 3 Receives 34 Applications in First 72 Hours',
-    radical_metric_label: 'Applications Received',
-    radical_metric_value: 34,
-    radical_metric_unit: 'applications',
+    raw_description: 'B-REAL Academy Cohort 3 received over 60 applicants total. 20 of the 40 student seats are filled by high school students. The program kicks off this weekend, marking a major moment for the Defender abolitionist freedom school.',
+    internal_headline: '60+ Applied. 20 High Schoolers In. B-REAL Academy Kicks Off This Weekend.',
+    funder_headline: 'Freedom School Cohort 3 Draws 60+ Applicants; 50% High School Students',
+    radical_metric_label: 'Applicants',
+    radical_metric_value: 60,
+    radical_metric_unit: 'applicants',
     kpis_impacted: ['political_education_participants'],
     status: 'approved',
-    confidence: 88,
+    confidence: 90,
     reported_at: '2026-02-13T14:00:00Z',
   },
   {
     reported_by_name: 'Ryan Sorrell',
     program_area: 'editorial',
     impact_type: 'policy_win',
-    raw_description: 'After weeks of mass organizing, protest, and sustained Defender coverage, Platform Ventures announced it would back down from selling a property to ICE for use as a detention center. This is a direct community victory.',
-    internal_headline: 'WE WON: Platform Ventures Folds on ICE Detention Center',
-    funder_headline: 'Community Organizing Campaign Stops ICE Detention Center Sale',
+    raw_description: 'After weeks of Defender reporting and sustained community organizing, Platform Ventures backed down from selling a property to ICE for use as a detention center. The Defender helped lead the narrative that turned public opinion and shaped the conditions for this victory. This is what narrative power looks like.',
+    internal_headline: 'WE WON: The Defender Led the Narrative That Stopped the ICE Facility',
+    funder_headline: 'Defender Narrative Leadership Helps Win Campaign Against ICE Detention Center',
     radical_metric_label: 'ICE Facilities Blocked',
     radical_metric_value: 1,
     radical_metric_unit: 'facility',
@@ -111,33 +109,18 @@ const SEED_IMPACTS = [
     reported_at: '2026-02-12T16:00:00Z',
   },
   {
-    reported_by_name: 'Mili Mansaray',
-    program_area: 'mutual_aid',
-    impact_type: 'resource_delivery',
-    raw_description: 'February Hamer Free Food Program distribution served 47 families with fresh produce from Black farmers. 6 team members participated in the distribution at Ms. Willa Bookstore.',
-    internal_headline: '47 Black Families Fed by Black Farmers Through Our Hands',
-    funder_headline: 'February Food Distribution Serves 47 Families with Local Black Farm Produce',
-    radical_metric_label: 'Families Served',
-    radical_metric_value: 47,
-    radical_metric_unit: 'families',
-    kpis_impacted: ['community_served_count', 'mutual_aid_participation_team_members'],
-    status: 'approved',
-    confidence: 94,
-    reported_at: '2026-02-15T20:00:00Z',
-  },
-  {
     reported_by_name: 'Ryan Sorrell',
     program_area: 'editorial',
     impact_type: 'narrative_shift',
-    raw_description: 'The Plunder Papers series by Jon Jeter launched with the first installment on February 2. Two-time Pulitzer finalist examining African poverty and colonial legacy. The piece was picked up by 3 international outlets and generated significant engagement across the diaspora.',
-    internal_headline: 'Plunder Papers Launches: Global Black Press Takes Notice',
-    funder_headline: 'New Investigative Series on Colonial Legacy Gains International Attention',
-    radical_metric_label: 'Media Pickups',
-    radical_metric_value: 3,
-    radical_metric_unit: 'outlets',
+    raw_description: 'Jon Jeter\'s Plunder Papers series, written by the Defender, launched with the first installment on February 2. Two-time Pulitzer finalist examining African poverty and colonial legacy. The Defender wrote and published this ongoing investigative series examining why Africans continue to live in grinding poverty seven decades after the alleged close of the colonial era.',
+    internal_headline: 'Plunder Papers Launches: The Defender Takes On Colonial Theft, Globally',
+    funder_headline: 'Defender Publishes New Investigative Series on Colonial Legacy by Jon Jeter',
+    radical_metric_label: 'Series Installments',
+    radical_metric_value: 1,
+    radical_metric_unit: 'installments',
     kpis_impacted: ['audience_growth_total_reach', 'editorial_narrative_power_pct', 'stories_published_total_weekly'],
     status: 'approved',
-    confidence: 85,
+    confidence: 88,
     reported_at: '2026-02-02T14:00:00Z',
   },
   {
@@ -156,40 +139,83 @@ const SEED_IMPACTS = [
     reported_at: '2026-01-30T22:00:00Z',
   },
   {
-    reported_by_name: 'Tiffany Watts',
-    program_area: 'arts_culture',
+    reported_by_name: 'KC Defender Staff',
+    program_area: 'editorial',
     impact_type: 'narrative_shift',
-    raw_description: 'Feature story on The Outsiders Social Club in Westport generated significant engagement and drove foot traffic to the new Black-owned coworking space. Owner reported 8 new membership inquiries directly from Defender readers.',
-    internal_headline: 'Black Coworking Space Gets 8 New Leads from Our Coverage',
-    funder_headline: 'Arts & Culture Feature Drives New Business to Black-Owned Coworking Space',
-    radical_metric_label: 'Business Leads Generated',
-    radical_metric_value: 8,
-    radical_metric_unit: 'leads',
-    kpis_impacted: ['arts_culture_engagement_attendees_artists', 'audience_growth_total_reach'],
+    raw_description: '62 high school students were suspended after protesting a bill that would allow ICE agents into schools. The Defender broke and led the narrative on this story, which reached 411K views and helped shape public consciousness around the ICE fight in Kansas City.',
+    internal_headline: '62 Students Suspended for Standing Up. We Told Their Story to 411K People.',
+    funder_headline: 'Defender Coverage of Student ICE Protest Reaches 411K Views',
+    radical_metric_label: 'Views',
+    radical_metric_value: 411000,
+    radical_metric_unit: 'views',
+    kpis_impacted: ['audience_growth_total_reach', 'editorial_narrative_power_pct', 'stories_published_total_weekly'],
     status: 'approved',
-    confidence: 78,
-    reported_at: '2026-01-22T16:00:00Z',
+    confidence: 96,
+    reported_at: '2026-02-18T14:00:00Z',
+  },
+  {
+    reported_by_name: 'KC Defender Staff',
+    program_area: 'mutual_aid',
+    impact_type: 'resource_delivery',
+    raw_description: 'Free children\'s clothing distribution event held on 2/21/26 at Vineyard Neighborhood Association. Community members received free kids clothing through the Defender mutual aid program.',
+    internal_headline: 'Free Kids Clothing in the Community: Mutual Aid Delivers Again',
+    funder_headline: 'Defender Mutual Aid Program Hosts Free Children\'s Clothing Distribution',
+    radical_metric_label: 'Families Served',
+    radical_metric_value: null,
+    radical_metric_unit: 'families',
+    kpis_impacted: ['mutual_aid_participation_team_members', 'community_served_count'],
+    status: 'approved',
+    confidence: 90,
+    reported_at: '2026-02-21T20:00:00Z',
+  },
+  {
+    reported_by_name: 'KC Defender Staff',
+    program_area: 'political_education',
+    impact_type: 'event_turnout',
+    raw_description: 'The Defender hosted an organizer training for students, building political education and direct action skills. Students participated in hands-on training around abolitionist organizing strategies.',
+    internal_headline: 'Students Trained. The Next Generation of Organizers Is Ready.',
+    funder_headline: 'Defender Delivers Organizer Training for Student Activists',
+    radical_metric_label: 'Students Trained',
+    radical_metric_value: null,
+    radical_metric_unit: 'students',
+    kpis_impacted: ['political_education_participants'],
+    status: 'approved',
+    confidence: 85,
+    reported_at: '2026-02-10T18:00:00Z',
   },
 ];
 
 const SEED_METRICS = [
-  { metric_key: 'audience_growth_total_reach', value: 42000, taken_at: '2026-01-06T00:00:00Z' },
-  { metric_key: 'audience_growth_total_reach', value: 48000, taken_at: '2026-01-13T00:00:00Z' },
-  { metric_key: 'audience_growth_total_reach', value: 51000, taken_at: '2026-01-20T00:00:00Z' },
-  { metric_key: 'audience_growth_total_reach', value: 67000, taken_at: '2026-01-27T00:00:00Z' },
-  { metric_key: 'audience_growth_total_reach', value: 85000, taken_at: '2026-02-03T00:00:00Z' },
+  // Narrative Impact (FB + IG combined views) — actual data from screenshots
+  { metric_key: 'audience_growth_total_reach', value: 650000, taken_at: '2026-01-06T00:00:00Z' },
+  { metric_key: 'audience_growth_total_reach', value: 920000, taken_at: '2026-01-13T00:00:00Z' },
+  { metric_key: 'audience_growth_total_reach', value: 1400000, taken_at: '2026-01-20T00:00:00Z' },
+  { metric_key: 'audience_growth_total_reach', value: 1950000, taken_at: '2026-01-27T00:00:00Z' },
+  { metric_key: 'audience_growth_total_reach', value: 2100000, taken_at: '2026-02-03T00:00:00Z' },
+  { metric_key: 'audience_growth_total_reach', value: 2435000, taken_at: '2026-02-24T00:00:00Z' },
+  // Stories published — weekly
   { metric_key: 'stories_published_total_weekly', value: 3, taken_at: '2026-01-13T00:00:00Z' },
   { metric_key: 'stories_published_total_weekly', value: 2, taken_at: '2026-01-20T00:00:00Z' },
   { metric_key: 'stories_published_total_weekly', value: 4, taken_at: '2026-01-27T00:00:00Z' },
-  { metric_key: 'community_served_count', value: 38, taken_at: '2026-01-15T00:00:00Z' },
-  { metric_key: 'community_served_count', value: 47, taken_at: '2026-02-15T00:00:00Z' },
+  { metric_key: 'stories_published_total_weekly', value: 4, taken_at: '2026-02-03T00:00:00Z' },
+  { metric_key: 'stories_published_total_weekly', value: 5, taken_at: '2026-02-10T00:00:00Z' },
+  { metric_key: 'stories_published_total_weekly', value: 4, taken_at: '2026-02-17T00:00:00Z' },
+  { metric_key: 'stories_published_total_weekly', value: 3, taken_at: '2026-02-24T00:00:00Z' },
+  // Political education
   { metric_key: 'political_education_participants', value: 22, taken_at: '2026-01-20T00:00:00Z' },
-  { metric_key: 'membership_sustaining_donors_new_monthly', value: 8, taken_at: '2026-01-31T00:00:00Z' },
-  { metric_key: 'membership_sustaining_donors_new_monthly', value: 12, taken_at: '2026-02-15T00:00:00Z' },
+  { metric_key: 'political_education_participants', value: 60, taken_at: '2026-02-13T00:00:00Z' },
 ];
 
 export async function GET() {
   const supabase = createServiceClient();
+
+  const results: Record<string, unknown> = {};
+
+  // Always upsert KPI config (runs even if already seeded — ensures title/unit updates reach live DB)
+  const { error: kpiErr } = await supabase
+    .from('kpi_config')
+    .upsert(KPI_CONFIG_UPDATES, { onConflict: 'key' });
+  results.kpi_config = kpiErr ? { error: kpiErr.message } : 'updated';
 
   // Check if already seeded
   const { count: impactCount } = await supabase
@@ -200,10 +226,9 @@ export async function GET() {
     return NextResponse.json({
       message: 'Already seeded. Delete existing data to re-seed.',
       existing_impacts: impactCount,
+      kpi_config: results.kpi_config,
     });
   }
-
-  const results: Record<string, unknown> = {};
 
   // Insert stories
   const { data: stories, error: storiesErr } = await supabase

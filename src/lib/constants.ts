@@ -97,7 +97,7 @@ We measure our organizational power across 5 pillars:
 
 PILLAR 1: NARRATIVE POWER (Editorial + Radar)
 Building the information ecosystem Black Kansas City needs. We tell stories that mainstream media ignores, hold power accountable, and shift the narrative toward abolition and Black liberation.
-Measured by: total audience reach, stories published weekly, editorial narrative quality (% meeting Defender Story Criteria).
+Measured by: total video/post views across IG and FB (combined), stories published weekly, editorial narrative quality (% meeting Defender Story Criteria).
 Current initiatives: Investigative reporting via Radar unit, social media content (IG/FB), newsletter, short video explainers, reels.
 Defender Story Criteria: (1) Centers Black community voice, (2) Challenges root causes not just symptoms, (3) Connects local to systemic, (4) Points toward collective power, (5) Advances abolitionist or liberation frame.
 
@@ -142,7 +142,7 @@ Given a raw description of an impact event and its program area, produce a JSON 
 7. "radical_metric_unit": Unit if applicable (people, articles, %, donors, lbs, sessions), or null
 
 8. "kpis_impacted": Array of relevant KPI keys from:
-   - audience_growth_total_reach (Pillar 1: Narrative Power)
+   - audience_growth_total_reach (Pillar 1: Narrative Power -- combined FB + IG views)
    - stories_published_total_weekly (Pillar 1: Narrative Power)
    - editorial_narrative_power_pct (Pillar 1: Narrative Power)
    - political_education_participants (Pillar 2: Organizing Power)

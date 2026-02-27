@@ -202,7 +202,7 @@ create policy "Public can read integration status"
 -- KPI SEED DATA (Big 10)
 -- ============================================================
 insert into kpi_config (key, title, description, rationale, freq, unit, sort_order, notes) values
-('audience_growth_total_reach', 'Audience Growth (Editorial + Org-wide)', 'Total people reached across IG, FB, website, and newsletter.', 'Tracks narrative power and audience expansion.', 'weekly', 'people', 1, 'For MVP, allow manual entry or CSV upload; automate later.'),
+('audience_growth_total_reach', 'Narrative Impact (FB + IG Views)', 'Total video and post views across Instagram and Facebook combined. IG: 2.2M + FB: 235K = 2.43M for last 28 days (Jan 30 - Feb 26, 2026).', 'Tracks narrative power and audience reach through actual platform view data.', 'weekly', 'views', 1, 'Pull from Instagram Insights + Facebook Page Insights. Combine IG views + FB views for total.'),
 ('stories_published_total_weekly', 'Number of Defender Stories Published', 'Total number of stories published (social posts, reels, short video explainers, newsletters, articles). Goal: at least 2 per week.', 'Adds accountability to story pipeline health without being punitive.', 'weekly', 'stories', 2, null),
 ('editorial_narrative_power_pct', 'Editorial Narrative Power', '% of stories (all formats) that meet at least 3 of 5 defined Defender Story Criteria.', 'Measures narrative quality and alignment with Defender criteria.', 'weekly', '%', 3, null),
 ('political_education_participants', 'Political Education Engagement', 'Number of participants in Freedom School, trainings, and educational offerings.', 'Measures leadership in abolitionist pedagogy and Black political education.', 'weekly', 'participants', 4, null),

@@ -6,9 +6,10 @@ import type { MetricSnapshot } from '@/lib/types';
 interface SparklineProps {
   snapshots: MetricSnapshot[];
   color?: string;
+  height?: number;
 }
 
-export function Sparkline({ snapshots, color = '#E11D48' }: SparklineProps) {
+export function Sparkline({ snapshots, color = '#E11D48', height = 40 }: SparklineProps) {
   if (snapshots.length < 2) return null;
 
   const data = snapshots
@@ -17,7 +18,7 @@ export function Sparkline({ snapshots, color = '#E11D48' }: SparklineProps) {
     .map((s) => ({ v: s.value }));
 
   return (
-    <div className="w-full h-10">
+    <div style={{ width: '100%', height }}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ top: 2, right: 2, bottom: 2, left: 2 }}>
           <Line

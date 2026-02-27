@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { CheckCircle, Lock, Loader2, Plus, X } from 'lucide-react';
+import { CheckCircle, Loader2, Plus, X } from 'lucide-react';
 import { PROGRAM_AREAS } from '@/lib/constants';
 import type { AIEnhancementResult, ImpactFormData, ProgramArea } from '@/lib/types';
 import { AiReviewPanel } from '@/components/ai-review-panel';
 import { createClient } from '@/lib/supabase/client';
 
-type Phase = 'passcode' | 'form' | 'enhancing' | 'review' | 'saving' | 'done';
+type Phase = 'form' | 'enhancing' | 'review' | 'saving' | 'done';
 
 const EMPTY_FORM: ImpactFormData = {
   reported_by_name: '',
@@ -19,38 +19,13 @@ const EMPTY_FORM: ImpactFormData = {
 };
 
 export default function ReportPage() {
-  const [phase, setPhase] = useState<Phase>('passcode');
-  const [passcode, setPasscode] = useState('');
-  const [passcodeError, setPasscodeError] = useState('');
-  const [checkingPasscode, setCheckingPasscode] = useState(false);
+  const [phase, setPhase] = useState<Phase>('form');
   const [form, setForm] = useState<ImpactFormData>(EMPTY_FORM);
   const [linkInput, setLinkInput] = useState('');
   const [formError, setFormError] = useState('');
   const [aiResult, setAiResult] = useState<AIEnhancementResult | null>(null);
   const [enhanceError, setEnhanceError] = useState('');
   const [savedId, setSavedId] = useState('');
-
-  const handlePasscode = async () => {
-    setCheckingPasscode(true);
-    setPasscodeError('');
-    try {
-      const res = await fetch('/api/check-passcode', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ passcode }),
-      });
-      const { valid } = await res.json();
-      if (valid) {
-        setPhase('form');
-      } else {
-        setPasscodeError('Incorrect passcode. Check with your team lead.');
-      }
-    } catch {
-      setPasscodeError('Could not verify passcode. Please try again.');
-    } finally {
-      setCheckingPasscode(false);
-    }
-  };
 
   const handleEnhance = async () => {
     if (!form.reported_by_name.trim()) {
@@ -166,42 +141,9 @@ export default function ReportPage() {
           Report an Impact
         </h1>
         <p className="text-gray-500 mt-1.5 text-sm">
-          Share what happened. Claude will help turn it into a narrative, headline, and metric.
+          Describe what happened in plain language. Claude will turn it into a structured impact record with headlines and metrics.
         </p>
       </div>
-
-      {/* Passcode */}
-      {phase === 'passcode' && (
-        <div className="max-w-sm">
-          <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <Lock size={16} className="text-gray-400" />
-              <span className="text-sm font-semibold text-defender-black">Team Access</span>
-            </div>
-            <p className="text-xs text-gray-500 mb-4">
-              Enter the team passcode to submit an impact report.
-            </p>
-            <input
-              type="password"
-              value={passcode}
-              onChange={(e) => setPasscode(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handlePasscode()}
-              placeholder="Passcode"
-              className={inputClass}
-            />
-            {passcodeError && (
-              <p className="text-xs text-defender-red mt-2">{passcodeError}</p>
-            )}
-            <button
-              onClick={handlePasscode}
-              disabled={!passcode || checkingPasscode}
-              className="mt-3 w-full bg-defender-red text-white rounded-button px-4 py-2.5 text-sm font-semibold hover:bg-rose-700 transition-colors disabled:opacity-60"
-            >
-              {checkingPasscode ? 'Checking...' : 'Continue'}
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Form */}
       {(phase === 'form' || phase === 'enhancing') && (
@@ -231,7 +173,7 @@ export default function ReportPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className={labelClass}>Program Area *</label>
+              <label className={labelClass}>Pillar / Program Area *</label>
               <select
                 value={form.program_area}
                 onChange={(e) =>
@@ -239,7 +181,7 @@ export default function ReportPage() {
                 }
                 className={inputClass}
               >
-                <option value="">Select program area...</option>
+                <option value="">Select pillar...</option>
                 {PROGRAM_AREAS.map((a) => (
                   <option key={a.value} value={a.value}>
                     {a.label}
@@ -253,7 +195,7 @@ export default function ReportPage() {
                 type="text"
                 value={form.location_text}
                 onChange={(e) => setForm((f) => ({ ...f, location_text: e.target.value }))}
-                placeholder="e.g. Kansas City, MO"
+                placeholder="e.g. Ms. Willa's, Kansas City MO"
                 className={inputClass}
               />
             </div>
@@ -265,7 +207,7 @@ export default function ReportPage() {
               value={form.raw_description}
               onChange={(e) => setForm((f) => ({ ...f, raw_description: e.target.value }))}
               rows={6}
-              placeholder="Describe the impact in your own words. Include numbers, names, places, and context. The more you share, the better the AI can help you tell this story."
+              placeholder="Write it like you'd say it in Slack. Include numbers, names, places, and context. For example: 'Washed approximately 400 pounds of kids clothing on 2/11 in preparation for the 2/21 community clothing distribution at Vineyard Neighborhood Association.'"
               className={inputClass}
             />
           </div>
@@ -321,10 +263,10 @@ export default function ReportPage() {
             {phase === 'enhancing' ? (
               <>
                 <Loader2 size={16} className="animate-spin" />
-                Claude is writing your impact narrative...
+                Claude is building your impact record...
               </>
             ) : (
-              'Submit & Enhance'
+              'Submit & Enhance with AI'
             )}
           </button>
         </div>
@@ -354,7 +296,7 @@ export default function ReportPage() {
           <CheckCircle size={48} className="text-defender-green mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-defender-black mb-2">Impact Submitted</h2>
           <p className="text-gray-500 text-sm mb-6">
-            Your impact report has been saved and is pending review. An admin will approve it shortly.
+            Your impact report is saved and pending review. An admin will approve it shortly.
           </p>
           {savedId && (
             <p className="text-xs font-mono text-gray-400 mb-6">ID: {savedId}</p>

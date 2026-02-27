@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { KpiGrid } from '@/components/kpi-grid';
 import { ImpactTimeline } from '@/components/impact-timeline';
+import { BriefingBlock } from '@/components/briefing-block';
 import type { KpiConfig, MetricSnapshot, ImpactEvent, IntegrationStatus } from '@/lib/types';
 import Link from 'next/link';
 
@@ -18,13 +19,44 @@ function formatSyncTime(iso: string | null): string {
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
-export default async function CommandCenter() {
+function getCutoff(period: string): string | null {
+  const now = new Date();
+
+  if (period === 'this_month') {
+    return new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+  }
+  if (period === '30d') {
+    return new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  }
+  if (period === '60d') {
+    return new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString();
+  }
+  if (period === '90d') {
+    return new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString();
+  }
+
+  return null; // all time
+}
+
+interface CommandCenterProps {
+  searchParams: { period?: string };
+}
+
+export default async function CommandCenter({ searchParams }: CommandCenterProps) {
+  const period = searchParams.period ?? '30d';
+  const cutoff = getCutoff(period);
+
   const supabase = createClient();
 
   // Fetch all data in parallel
+  let snapshotsQuery = supabase.from('metric_snapshots').select('*').order('taken_at', { ascending: false });
+  if (cutoff) {
+    snapshotsQuery = snapshotsQuery.gte('taken_at', cutoff);
+  }
+
   const [kpisRes, snapshotsRes, impactsRes, syncRes, pendingRes] = await Promise.all([
     supabase.from('kpi_config').select('*').order('sort_order', { ascending: true }),
-    supabase.from('metric_snapshots').select('*').order('taken_at', { ascending: false }),
+    snapshotsQuery,
     supabase
       .from('impact_events')
       .select('*')
@@ -98,6 +130,11 @@ export default async function CommandCenter() {
         </div>
       </div>
 
+      {/* Impact Briefing */}
+      <section className="mb-10">
+        <BriefingBlock />
+      </section>
+
       {/* Big 10 KPI grid */}
       <section className="mb-10">
         <div className="flex items-center justify-between mb-4">
@@ -111,7 +148,7 @@ export default async function CommandCenter() {
             + Add snapshot
           </Link>
         </div>
-        <KpiGrid kpis={kpis} snapshotsByKey={snapshotsByKey} />
+        <KpiGrid kpis={kpis} snapshotsByKey={snapshotsByKey} period={period} />
       </section>
 
       {/* Recent impacts timeline */}

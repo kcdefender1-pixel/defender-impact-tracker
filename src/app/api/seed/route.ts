@@ -206,7 +206,10 @@ const SEED_METRICS = [
   { metric_key: 'political_education_participants', value: 60, taken_at: '2026-02-13T00:00:00Z' },
 ];
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const reset = searchParams.get('reset') === 'true';
+
   const supabase = createServiceClient();
 
   const results: Record<string, unknown> = {};
@@ -217,14 +220,28 @@ export async function GET() {
     .upsert(KPI_CONFIG_UPDATES, { onConflict: 'key' });
   results.kpi_config = kpiErr ? { error: kpiErr.message } : 'updated';
 
-  // Check if already seeded
+  // If reset=true, clear existing data first
+  if (reset) {
+    const [e1, e2, e3] = await Promise.all([
+      supabase.from('impact_events').delete().neq('id', '00000000-0000-0000-0000-000000000000'),
+      supabase.from('metric_snapshots').delete().neq('id', '00000000-0000-0000-0000-000000000000'),
+      supabase.from('stories').delete().neq('id', '00000000-0000-0000-0000-000000000000'),
+    ]);
+    results.cleared = {
+      impacts: e1.error ? e1.error.message : true,
+      metrics: e2.error ? e2.error.message : true,
+      stories: e3.error ? e3.error.message : true,
+    };
+  }
+
+  // Check if already seeded (skip if reset was just done)
   const { count: impactCount } = await supabase
     .from('impact_events')
     .select('id', { count: 'exact', head: true });
 
-  if ((impactCount ?? 0) > 0) {
+  if (!reset && (impactCount ?? 0) > 0) {
     return NextResponse.json({
-      message: 'Already seeded. Delete existing data to re-seed.',
+      message: 'Already seeded. Visit /api/seed?reset=true to clear and re-seed.',
       existing_impacts: impactCount,
       kpi_config: results.kpi_config,
     });

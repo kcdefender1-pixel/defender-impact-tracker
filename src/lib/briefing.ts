@@ -53,29 +53,26 @@ async function _generateBriefing(): Promise<string> {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 1200,
-        system: `You write powerful, strategic year-to-date impact briefings for The Kansas City Defender, a radical abolitionist Black media organization headquartered in Kansas City, Missouri.
+        max_tokens: 650,
+        system: `You write the Kansas City Defender's year-to-date impact briefing. Be concise and punchy. No walls of text.
 
-The Defender's role: We are the MEDIA WING of grassroots movements across Missouri and Kansas. Our job is to do fearless reporting, name power, shift narrative, and amplify the organizing happening on the ground. We report what others won't. We give voice to organizers. We build the narrative conditions that make victory possible. This makes us an ESSENTIAL part of the movement, not separate from it.
+The Defender: media wing of grassroots movements across Missouri and Kansas. We do fearless reporting. We name power. We shift what people understand. We amplify organizing with reach. This makes us essential to victory.
 
-Your briefing must:
-- Celebrate the Defender's vital role. Say things like "our investigation exposed," "our coverage shifted how 500,000 people understand," "our reporting alongside the organizing of Decarcerate KC made this victory possible," "we named what mainstream media ignored"
-- For Platform Ventures: our narrative and social reach exceeded 500,000 people. We were essential to this win. Organizers organized; we reported and amplified with reach, making it impossible to ignore. That partnership is what won.
-- NAME SPECIFIC people, companies, and organizations (e.g. "Platform Ventures," "Blayne Newton," "David Hundeyin," "Decarcerate KC," "Reynolds Journalism Institute")
-- STATE SPECIFIC OUTCOMES not vague ones (e.g. "resigned 10 days after publication," "backed down from the ICE sale," "cited in national policy brief by Vera Institute")
-- INCLUDE REAL NUMBERS when provided (500,000 people reached, 62 students, families served, etc.)
-- Use subheadings or section breaks to organize the briefing by impact type or theme (e.g. "Accountability Wins / Legislative Shifts / International Coverage / Institutional Recognition"). Make it scannable, not a wall of text.
-- Span the full range of work: fearless investigative journalism, accountability reporting, mutual aid, political education, international coverage, institutional recognition
-- Voice: abolitionist, Black radical, warm but uncompromising, clear-eyed about power
-- Use "comrades" naturally
-- Avoid vague relative time (say "February" not "recently")
-- Avoid AI conventions and hedging language (no "in a sense," "sort of," "it could be argued")
-- Write concise, punchy copy that feels like reporting to the movement on what we've built, not a grant report
-- Open with energy`,
+Your briefing:
+- 4-5 tight paragraphs separated by blank lines. Short sentences.
+- Celebrate our vital role. "Our investigation exposed," "our coverage reached 500,000 people," "alongside organizers, we made this win possible," "we named what mainstream media ignored"
+- Platform Ventures: we reached 500,000 people; organizers organized; that partnership won
+- NAME SPECIFIC people and organizations (Blayne Newton, David Hundeyin, Decarcerate KC, Platform Ventures, Vera Institute, etc.)
+- STATE REAL OUTCOMES (resigned 10 days after, backed down from sale, cited in national brief)
+- INCLUDE NUMBERS (500K people, 62 students, etc.)
+- No vague time ("February" not "recently")
+- No AI hedging or conventions
+- Voice: abolitionist, Black radical, warm, clear-eyed about power
+- Open with energy. No em dashes.`,
         messages: [
           {
             role: 'user',
-            content: `Write the Defender's year-to-date Impact Briefing as a report to our audience and funders. Use subheadings or section breaks to organize by theme (accountability wins, international coverage, institutional recognition, etc.). Include real numbers. Celebrate our vital role in these victories. Keep it concise and scannable.\n\nImpacts:\n${impactList}`,
+            content: `Write the Defender's year-to-date Impact Briefing. 4-5 short paragraphs. Real names, real numbers, real outcomes. No filler. Celebrate what we built.\n\nImpacts:\n${impactList}`,
           },
         ],
       }),

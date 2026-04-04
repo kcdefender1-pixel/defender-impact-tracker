@@ -7,9 +7,9 @@ import { PeriodFilter } from '@/components/period-filter';
 import { KPI_TO_PILLAR } from '@/lib/constants';
 
 const PILLARS = [
-  { value: 'narrative', label: 'Narrative Power' },
   { value: 'organizing', label: 'Organizing Power' },
   { value: 'material', label: 'Material Power' },
+  { value: 'narrative', label: 'Narrative Power' },
   { value: 'cultural', label: 'Cultural Power' },
   { value: 'institutional', label: 'Institutional Power' },
 ];

@@ -13,12 +13,16 @@ async function _generateBriefing(): Promise<string> {
   try {
     const supabase = getServiceClient();
 
+    // Always use year-to-date so the briefing tells the full arc of the year's work
+    const yearStart = new Date(new Date().getFullYear(), 0, 1).toISOString();
+
     const { data: impacts } = await supabase
       .from('impact_events')
-      .select('internal_headline, radical_metric_label, radical_metric_value, radical_metric_unit, reported_at')
+      .select('internal_headline, funder_headline, radical_metric_label, radical_metric_value, radical_metric_unit, reported_at, impact_type, program_area')
       .eq('status', 'approved')
-      .order('reported_at', { ascending: false })
-      .limit(5);
+      .gte('reported_at', yearStart)
+      .order('confidence', { ascending: false })
+      .limit(8);
 
     if (!impacts || impacts.length === 0) {
       return 'The Kansas City Defender is building power every day. Check back soon for highlights from our latest impact.';
@@ -26,10 +30,16 @@ async function _generateBriefing(): Promise<string> {
 
     const impactList = impacts
       .map((imp, i) => {
-        const metric = imp.radical_metric_value
-          ? ` (${imp.radical_metric_value}${imp.radical_metric_unit ? ' ' + imp.radical_metric_unit : ''})`
-          : '';
-        return `${i + 1}. ${imp.internal_headline}${metric}`;
+        const date = new Date(imp.reported_at).toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
+        });
+        const metric =
+          imp.radical_metric_value != null
+            ? ` -- ${imp.radical_metric_value.toLocaleString()}${imp.radical_metric_unit ? ' ' + imp.radical_metric_unit : ''}`
+            : '';
+        return `${i + 1}. [${date}] ${imp.internal_headline ?? imp.funder_headline}${metric}`;
       })
       .join('\n');
 
@@ -42,12 +52,12 @@ async function _generateBriefing(): Promise<string> {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 300,
-        system: `You write brief, galvanizing impact briefings for The Kansas City Defender, a radical abolitionist Black media organization in Kansas City. Write in a warm, affirming tone. Use "comrade" naturally. Start with an affirmation like "Peace, comrades!" or "What an incredible week!" Highlight 2-3 specific wins with numbers. Keep it to 3-4 sentences. Never use em dashes. Write like a trusted comrade giving a brief report at the start of a meeting.`,
+        max_tokens: 320,
+        system: `You write brief, galvanizing year-to-date impact briefings for The Kansas City Defender, a radical abolitionist Black media organization in Kansas City. Write in a warm, affirming tone that honors the work. Use "comrades" naturally. Start with an affirmation like "Peace, comrades!" or a strong opening line. Highlight 2-3 specific wins with numbers or outcomes. Keep it to 3-4 sentences. Never use em dashes. Never use relative time language like "last week", "recently", or "just" -- always use the specific month and year provided in brackets (e.g., "In February," or "This March,"). Write like a trusted comrade giving a brief year-in-review report at the start of a meeting.`,
         messages: [
           {
             role: 'user',
-            content: `Write a brief Defender Impact Briefing based on these recent wins:\n\n${impactList}\n\nKeep it warm, galvanizing, 3-4 sentences max.`,
+            content: `Write a brief Defender Impact Briefing covering our top wins so far this year. Each item includes its date in brackets -- use those specific dates in your writing.\n\n${impactList}\n\nKeep it warm, galvanizing, 3-4 sentences max.`,
           },
         ],
       }),

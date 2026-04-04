@@ -90,7 +90,7 @@ const KPI_CONFIG_UPDATES = [
   {
     key: 'audience_growth_total_reach',
     title: 'Narrative Impact (FB + IG Views)',
-    description: 'Total video and post views across Instagram and Facebook combined. Most recent 28-day window (Mar 31, 2026): ~3.21M total views. Trend: 650K (Jan 6) growing to 3.21M (Mar 31).',
+    description: 'Total video and post views across Instagram and Facebook combined. Last verified: IG 2.2M + FB 235K = 2.43M (28-day window ending Feb 24, 2026). Update monthly from Instagram Insights + Facebook Page Insights.',
     rationale: 'Tracks narrative power and audience reach through actual platform view data.',
     freq: 'weekly',
     unit: 'views',
@@ -332,18 +332,13 @@ const SEED_IMPACTS = [
 ];
 
 const SEED_METRICS = [
-  // Narrative Impact (FB + IG combined views)
+  // Narrative Impact (FB + IG combined views) — verified through Feb 24, 2026
   { metric_key: 'audience_growth_total_reach', value: 650000, taken_at: '2026-01-06T00:00:00Z' },
   { metric_key: 'audience_growth_total_reach', value: 920000, taken_at: '2026-01-13T00:00:00Z' },
   { metric_key: 'audience_growth_total_reach', value: 1400000, taken_at: '2026-01-20T00:00:00Z' },
   { metric_key: 'audience_growth_total_reach', value: 1950000, taken_at: '2026-01-27T00:00:00Z' },
   { metric_key: 'audience_growth_total_reach', value: 2100000, taken_at: '2026-02-03T00:00:00Z' },
   { metric_key: 'audience_growth_total_reach', value: 2435000, taken_at: '2026-02-24T00:00:00Z' },
-  { metric_key: 'audience_growth_total_reach', value: 2580000, taken_at: '2026-03-03T00:00:00Z' },
-  { metric_key: 'audience_growth_total_reach', value: 2720000, taken_at: '2026-03-10T00:00:00Z' },
-  { metric_key: 'audience_growth_total_reach', value: 2890000, taken_at: '2026-03-17T00:00:00Z' },
-  { metric_key: 'audience_growth_total_reach', value: 3050000, taken_at: '2026-03-24T00:00:00Z' },
-  { metric_key: 'audience_growth_total_reach', value: 3210000, taken_at: '2026-03-31T00:00:00Z' },
   // Stories published — weekly (Jan through early April)
   { metric_key: 'stories_published_total_weekly', value: 3, taken_at: '2026-01-13T00:00:00Z' },
   { metric_key: 'stories_published_total_weekly', value: 2, taken_at: '2026-01-20T00:00:00Z' },

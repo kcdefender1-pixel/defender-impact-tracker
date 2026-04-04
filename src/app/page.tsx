@@ -21,7 +21,6 @@ function formatSyncTime(iso: string | null): string {
 
 function getCutoff(period: string): string | null {
   const now = new Date();
-
   if (period === 'this_month') {
     return new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
   }
@@ -34,8 +33,13 @@ function getCutoff(period: string): string | null {
   if (period === '90d') {
     return new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString();
   }
-
   return null; // all time
+}
+
+function formatMetricValue(val: number): string {
+  if (val >= 1_000_000) return `${(val / 1_000_000).toFixed(1)}M`;
+  if (val >= 1_000) return `${(val / 1_000).toFixed(0)}K`;
+  return String(val);
 }
 
 interface CommandCenterProps {
@@ -43,34 +47,37 @@ interface CommandCenterProps {
 }
 
 export default async function CommandCenter({ searchParams }: CommandCenterProps) {
-  const period = searchParams.period ?? '30d';
+  const period = searchParams.period ?? 'all';
   const view = searchParams.view ?? 'highlights';
   const cutoff = getCutoff(period);
 
+  // Year-to-date start for Victory Board (always Jan 1 of current year)
+  const yearStart = new Date(new Date().getFullYear(), 0, 1).toISOString();
+
   const supabase = createClient();
 
-  // Fetch all data in parallel
   let snapshotsQuery = supabase.from('metric_snapshots').select('*').order('taken_at', { ascending: false });
   if (cutoff) {
     snapshotsQuery = snapshotsQuery.gte('taken_at', cutoff);
   }
 
-  const [kpisRes, snapshotsRes, impactsRes, syncRes, pendingRes] = await Promise.all([
+  // Period-filtered impacts for the timeline
+  let impactsQuery = supabase
+    .from('impact_events')
+    .select('*')
+    .eq('status', 'approved');
+  if (cutoff) {
+    impactsQuery = impactsQuery.gte('reported_at', cutoff);
+  }
+  const impactsOrdered =
+    view === 'highlights'
+      ? impactsQuery.order('confidence', { ascending: false }).limit(10)
+      : impactsQuery.order('reported_at', { ascending: false }).limit(10);
+
+  const [kpisRes, snapshotsRes, impactsRes, syncRes, pendingRes, victoriesRes] = await Promise.all([
     supabase.from('kpi_config').select('*').order('sort_order', { ascending: true }),
     snapshotsQuery,
-    view === 'highlights'
-      ? supabase
-          .from('impact_events')
-          .select('*')
-          .eq('status', 'approved')
-          .order('confidence', { ascending: false })
-          .limit(10)
-      : supabase
-          .from('impact_events')
-          .select('*')
-          .eq('status', 'approved')
-          .order('reported_at', { ascending: false })
-          .limit(10),
+    impactsOrdered,
     supabase
       .from('integration_status')
       .select('*')
@@ -80,6 +87,15 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
       .from('impact_events')
       .select('id', { count: 'exact', head: true })
       .eq('status', 'pending'),
+    // Victory Board: accountability + policy wins, year-to-date, always unfiltered by period
+    supabase
+      .from('impact_events')
+      .select('*')
+      .eq('status', 'approved')
+      .in('impact_type', ['accountability', 'policy_win'])
+      .gte('reported_at', yearStart)
+      .order('confidence', { ascending: false })
+      .limit(6),
   ]);
 
   const kpis: KpiConfig[] = kpisRes.data ?? [];
@@ -87,6 +103,7 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
   const impacts: ImpactEvent[] = impactsRes.data ?? [];
   const syncStatus: IntegrationStatus | null = syncRes.data ?? null;
   const pendingCount: number = pendingRes.count ?? 0;
+  const victories: ImpactEvent[] = victoriesRes.data ?? [];
 
   // Group snapshots by metric_key, keep last 6 per key for sparklines
   const snapshotsByKey: Record<string, MetricSnapshot[]> = {};
@@ -96,6 +113,41 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
       snapshotsByKey[snap.metric_key].push(snap);
     }
   }
+
+  // Stats strip: aggregate year-to-date from victories + period-filtered impacts
+  const allImpactsForStats = victoriesRes.data ?? [];
+  const accountabilityWins = allImpactsForStats.filter(
+    (v: ImpactEvent) => v.impact_type === 'accountability'
+  ).length;
+  const policyWins = allImpactsForStats.filter(
+    (v: ImpactEvent) => v.impact_type === 'policy_win'
+  ).length;
+
+  // For mutual aid and education stats, pull from current period impacts
+  const mutualAidImpacts = impacts.filter((i) => i.program_area === 'mutual_aid');
+  const familiesServed = mutualAidImpacts
+    .filter((i) => i.radical_metric_unit === 'families' && i.radical_metric_value)
+    .reduce((sum, i) => sum + (i.radical_metric_value ?? 0), 0);
+
+  const edImpacts = impacts.filter(
+    (i) => i.program_area === 'political_education' && i.radical_metric_value
+  );
+  const studentsInFreedomSchool =
+    edImpacts.length > 0
+      ? Math.max(...edImpacts.map((i) => i.radical_metric_value ?? 0))
+      : 0;
+
+  // Highest reach story
+  const topReachImpact = [...impacts]
+    .filter((i) => i.radical_metric_unit === 'views' && i.radical_metric_value)
+    .sort((a, b) => (b.radical_metric_value ?? 0) - (a.radical_metric_value ?? 0))[0];
+
+  const showStatsStrip =
+    accountabilityWins > 0 ||
+    policyWins > 0 ||
+    familiesServed > 0 ||
+    studentsInFreedomSchool > 0 ||
+    topReachImpact != null;
 
   return (
     <div className="px-4 py-8 md:px-8 md:py-10">
@@ -139,15 +191,75 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
       </div>
 
       {/* Impact Briefing */}
-      <section className="mb-10">
+      <section className="mb-8">
         <BriefingBlock />
       </section>
 
-      {/* Big 10 KPI grid */}
+      {/* What We Built stats strip */}
+      {showStatsStrip && (
+        <section className="mb-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {accountabilityWins > 0 && (
+              <StatPill
+                value={String(accountabilityWins)}
+                label={accountabilityWins === 1 ? 'Accountability Win' : 'Accountability Wins'}
+                color="red"
+              />
+            )}
+            {policyWins > 0 && (
+              <StatPill
+                value={String(policyWins)}
+                label={policyWins === 1 ? 'Policy Win' : 'Policy Wins'}
+                color="green"
+              />
+            )}
+            {studentsInFreedomSchool > 0 && (
+              <StatPill
+                value={String(studentsInFreedomSchool)}
+                label="In Freedom School"
+                color="gold"
+              />
+            )}
+            {familiesServed > 0 && (
+              <StatPill
+                value={String(familiesServed)}
+                label="Families Served"
+                color="green"
+              />
+            )}
+            {topReachImpact && (
+              <StatPill
+                value={formatMetricValue(topReachImpact.radical_metric_value ?? 0)}
+                label="Peak Story Views"
+                color="gold"
+              />
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Victory Board */}
+      {victories.length > 0 && (
+        <section className="mb-10">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-defender-black tracking-tight">
+              Victory Board
+            </h2>
+            <span className="text-xs text-gray-400">Year to date</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {victories.map((win) => (
+              <VictoryCard key={win.id} win={win} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 5 Pillars of Power */}
       <section className="mb-10">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-defender-black tracking-tight">
-            The Big 10
+            5 Pillars of Power
           </h2>
           <Link
             href="/admin/metrics"
@@ -207,6 +319,102 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
         </div>
         <ImpactTimeline impacts={impacts} />
       </section>
+    </div>
+  );
+}
+
+// --- Sub-components ---
+
+function StatPill({
+  value,
+  label,
+  color,
+}: {
+  value: string;
+  label: string;
+  color: 'red' | 'green' | 'gold';
+}) {
+  const colorMap = {
+    red: { bg: 'bg-red-50', border: 'border-red-100', val: 'text-defender-red', label: 'text-red-700' },
+    green: { bg: 'bg-green-50', border: 'border-green-100', val: 'text-defender-green', label: 'text-green-700' },
+    gold: { bg: 'bg-amber-50', border: 'border-amber-100', val: 'text-amber-600', label: 'text-amber-700' },
+  };
+  const c = colorMap[color];
+  return (
+    <div className={`${c.bg} border ${c.border} rounded-xl px-4 py-3`}>
+      <div className={`text-2xl font-bold tabular-nums tracking-tight ${c.val}`}>{value}</div>
+      <div className={`text-xs font-medium mt-0.5 ${c.label}`}>{label}</div>
+    </div>
+  );
+}
+
+const WIN_TYPE_LABELS: Record<string, string> = {
+  accountability: 'Accountability Win',
+  policy_win: 'Policy Win',
+};
+
+const AREA_LABELS: Record<string, string> = {
+  editorial: 'Editorial',
+  mutual_aid: 'Mutual Aid',
+  political_education: 'Political Education',
+  arts_culture: 'Arts & Culture',
+  development_fundraising: 'Development',
+  operations_systems: 'Operations',
+  radar: 'Radar',
+  other: 'Other',
+};
+
+function VictoryCard({ win }: { win: ImpactEvent }) {
+  const isAccountability = win.impact_type === 'accountability';
+  const date = new Date(win.reported_at).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  return (
+    <div
+      className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm"
+      style={{ borderLeft: `3px solid ${isAccountability ? '#E11D48' : '#16A34A'}` }}
+    >
+      <div className="flex items-center justify-between mb-2 gap-2">
+        <span
+          className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+            isAccountability
+              ? 'bg-red-50 text-defender-red'
+              : 'bg-green-50 text-defender-green'
+          }`}
+        >
+          {WIN_TYPE_LABELS[win.impact_type ?? ''] ?? win.impact_type}
+        </span>
+        <span className="text-xs text-gray-400 shrink-0">{date}</span>
+      </div>
+
+      <p className="text-sm font-bold text-defender-black leading-snug mb-2">
+        {win.internal_headline ?? win.funder_headline ?? win.raw_description.slice(0, 80)}
+      </p>
+
+      {win.radical_metric_value != null && (
+        <div className="flex items-center gap-1.5 mt-2">
+          <span
+            className={`text-lg font-bold tabular-nums ${
+              isAccountability ? 'text-defender-red' : 'text-defender-green'
+            }`}
+          >
+            {win.radical_metric_value.toLocaleString()}
+          </span>
+          {win.radical_metric_unit && (
+            <span className="text-xs text-gray-500">{win.radical_metric_unit}</span>
+          )}
+          {win.radical_metric_label && (
+            <span className="text-xs text-gray-400">· {win.radical_metric_label}</span>
+          )}
+        </div>
+      )}
+
+      <div className="mt-3 text-xs text-gray-400">
+        {AREA_LABELS[win.program_area] ?? win.program_area}
+      </div>
     </div>
   );
 }

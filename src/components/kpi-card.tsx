@@ -4,7 +4,7 @@ import { useState } from 'react';
 import type { KpiConfig, MetricSnapshot } from '@/lib/types';
 import { KPI_LEFT_BORDER } from '@/lib/constants';
 import { Sparkline } from '@/components/sparkline';
-import Link from 'next/link';
+import { useToast } from '@/lib/toast-context';
 
 interface KpiCardProps {
   kpi: KpiConfig;
@@ -38,18 +38,56 @@ function formatDate(iso: string): string {
 
 export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
   const [expanded, setExpanded] = useState(false);
+  const [localSnapshots, setLocalSnapshots] = useState(snapshots);
+  const [logValue, setLogValue] = useState('');
+  const [logNotes, setLogNotes] = useState('');
+  const [logging, setLogging] = useState(false);
+  const { toast } = useToast();
+
   const borderColor = KPI_LEFT_BORDER[kpi.key] ?? 'border-l-gray-300';
   const sparkColor = KPI_SPARKLINE_COLOR[kpi.key] ?? '#6B7280';
-  const hasData = latestValue !== null;
 
-  const sorted = [...snapshots].sort(
+  const sorted = [...localSnapshots].sort(
     (a, b) => new Date(b.taken_at).getTime() - new Date(a.taken_at).getTime()
   );
+  const currentLatest = sorted[0]?.value ?? latestValue;
+  const hasData = currentLatest !== null;
   const prev = sorted[1]?.value ?? null;
   const trend =
     hasData && prev !== null && prev !== 0
-      ? ((latestValue! - prev) / prev) * 100
+      ? ((currentLatest! - prev) / prev) * 100
       : null;
+
+  const handleLogSnapshot = async (e: React.FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!logValue || isNaN(Number(logValue))) return;
+    setLogging(true);
+    try {
+      const res = await fetch('/api/metric-snapshots', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          metric_key: kpi.key,
+          value: Number(logValue),
+          notes: logNotes || null,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.snapshot) {
+        setLocalSnapshots((prev) => [data.snapshot, ...prev].slice(0, 6));
+        setLogValue('');
+        setLogNotes('');
+        toast('Snapshot logged');
+      } else {
+        toast(data.error ?? 'Failed to log', 'error');
+      }
+    } catch {
+      toast('Failed to log snapshot', 'error');
+    } finally {
+      setLogging(false);
+    }
+  };
 
   return (
     <div
@@ -73,7 +111,7 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
           {hasData ? (
             <>
               <span className="font-mono text-2xl font-bold text-defender-black leading-none">
-                {formatValue(latestValue!, kpi.unit)}
+                {formatValue(currentLatest!, kpi.unit)}
               </span>
               {kpi.unit && kpi.unit !== '%' && (
                 <span className="text-xs text-gray-400 pb-0.5">{kpi.unit}</span>
@@ -94,8 +132,8 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
           )}
         </div>
 
-        {snapshots.length >= 2 && (
-          <Sparkline snapshots={snapshots} color={sparkColor} />
+        {localSnapshots.length >= 2 && (
+          <Sparkline snapshots={localSnapshots} color={sparkColor} />
         )}
 
         <div className="text-[10px] text-gray-400 font-mono uppercase tracking-wider">
@@ -106,7 +144,7 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
       {/* Expandable detail section */}
       <div
         className={`overflow-hidden transition-all duration-300 ${
-          expanded ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          expanded ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="px-4 pb-4 border-t border-gray-100 pt-3 space-y-3">
@@ -114,10 +152,10 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
             <p className="text-xs text-gray-600 leading-relaxed">{kpi.description}</p>
           )}
 
-          {snapshots.length >= 2 && (
+          {localSnapshots.length >= 2 && (
             <div>
               <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Trend</div>
-              <Sparkline snapshots={snapshots} color={sparkColor} height={96} />
+              <Sparkline snapshots={localSnapshots} color={sparkColor} height={96} />
             </div>
           )}
 
@@ -148,13 +186,42 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
             <p className="text-[10px] text-gray-400 italic leading-relaxed">{kpi.rationale}</p>
           )}
 
-          <Link
-            href="/admin/metrics"
+          {/* Inline snapshot form */}
+          <form
+            onSubmit={handleLogSnapshot}
             onClick={(e) => e.stopPropagation()}
-            className="inline-block text-xs font-semibold text-defender-red hover:underline"
+            className="flex items-end gap-2 pt-1"
           >
-            + Log a snapshot
-          </Link>
+            <div className="flex-1 min-w-0">
+              <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">
+                Log today&apos;s value
+              </label>
+              <input
+                type="number"
+                step="any"
+                value={logValue}
+                onChange={(e) => setLogValue(e.target.value)}
+                placeholder={kpi.unit ?? 'Value'}
+                className="w-full border border-gray-200 rounded-lg px-2.5 py-1.5 text-sm text-defender-black placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <input
+                type="text"
+                value={logNotes}
+                onChange={(e) => setLogNotes(e.target.value)}
+                placeholder="Notes (optional)"
+                className="w-full border border-gray-200 rounded-lg px-2.5 py-1.5 text-sm text-defender-black placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={logging || !logValue}
+              className="shrink-0 bg-defender-red text-white text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-rose-700 transition-colors disabled:opacity-40"
+            >
+              {logging ? '...' : 'Log'}
+            </button>
+          </form>
         </div>
       </div>
     </div>

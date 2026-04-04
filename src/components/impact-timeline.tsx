@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { ImpactEvent } from '@/lib/types';
 import { PROGRAM_AREA_BADGE, PROGRAM_AREAS } from '@/lib/constants';
+import { useToast } from '@/lib/toast-context';
 import Link from 'next/link';
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
@@ -81,6 +82,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const { toast } = useToast();
   const [edit, setEdit] = useState<EditState>({
     internal_headline: init.internal_headline ?? '',
     funder_headline: init.funder_headline ?? '',
@@ -137,8 +139,9 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
       const { impact: updated } = await res.json();
       setImpact(updated);
       setEditing(false);
+      toast('Impact saved');
     } catch {
-      setSaveError('Network error — please try again.');
+      setSaveError('Network error. Please try again.');
     } finally {
       setSaving(false);
     }
@@ -468,7 +471,37 @@ interface ImpactTimelineProps {
   impacts: ImpactEvent[];
 }
 
+const FILTER_AREAS = [
+  { value: 'all', label: 'All' },
+  { value: 'editorial', label: 'Editorial' },
+  { value: 'mutual_aid', label: 'Mutual Aid' },
+  { value: 'political_education', label: 'Political Ed' },
+  { value: 'arts_culture', label: 'Arts & Culture' },
+  { value: 'development_fundraising', label: 'Development' },
+];
+
 export function ImpactTimeline({ impacts }: ImpactTimelineProps) {
+  const [search, setSearch] = useState('');
+  const [filterArea, setFilterArea] = useState('all');
+
+  const filtered = impacts.filter((impact) => {
+    if (filterArea !== 'all' && impact.program_area !== filterArea) return false;
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      const text = [
+        impact.internal_headline,
+        impact.funder_headline,
+        impact.ai_narrative,
+        impact.raw_description,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      if (!text.includes(q)) return false;
+    }
+    return true;
+  });
+
   if (impacts.length === 0) {
     return (
       <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm p-8 text-center">
@@ -485,10 +518,60 @@ export function ImpactTimeline({ impacts }: ImpactTimelineProps) {
   }
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm overflow-hidden divide-y divide-black/[0.04]">
-      {impacts.map((impact) => (
-        <ImpactCard key={impact.id} impact={impact} />
-      ))}
+    <div>
+      {/* Search + Program Filter */}
+      <div className="flex flex-col sm:flex-row gap-3 mb-3">
+        <div className="relative flex-1">
+          <svg
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search impacts..."
+            className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm text-defender-black placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red bg-white/80"
+          />
+        </div>
+        <div className="flex gap-1.5 flex-wrap shrink-0">
+          {FILTER_AREAS.map((area) => (
+            <button
+              key={area.value}
+              onClick={() => setFilterArea(area.value)}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+                filterArea === area.value
+                  ? 'bg-defender-red text-white'
+                  : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              {area.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {filtered.length === 0 ? (
+        <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm p-8 text-center">
+          <p className="text-gray-400 text-sm">No impacts match your search.</p>
+        </div>
+      ) : (
+        <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm overflow-hidden divide-y divide-black/[0.04]">
+          {filtered.map((impact) => (
+            <ImpactCard key={impact.id} impact={impact} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

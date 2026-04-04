@@ -9,11 +9,13 @@ import {
   BookOpen,
   BarChart2,
   Settings,
+  Share2,
 } from 'lucide-react';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Command Center', icon: Home },
   { href: '/report', label: 'Report Impact', icon: FileText },
+  { href: '/share', label: 'Share', icon: Share2 },
   { href: '/admin/impacts', label: 'Impacts', icon: Zap },
   { href: '/admin/stories', label: 'Stories', icon: BookOpen },
   { href: '/admin/metrics', label: 'Metrics', icon: BarChart2 },
@@ -29,7 +31,7 @@ export function NavSidebar() {
   };
 
   return (
-    <aside className="hidden md:flex fixed left-0 top-0 h-full w-64 flex-col bg-white/90 backdrop-blur-md border-r border-gray-200/50 z-40">
+    <aside data-print-hide className="hidden md:flex fixed left-0 top-0 h-full w-64 flex-col bg-white/90 backdrop-blur-md border-r border-gray-200/50 z-40">
       {/* Wordmark */}
       <div className="px-6 pt-7 pb-6 border-b border-gray-100">
         <div className="text-defender-red font-bold tracking-widest text-xs uppercase mb-0.5">

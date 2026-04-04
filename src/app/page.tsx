@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { KpiGrid } from '@/components/kpi-grid';
 import { ImpactTimeline } from '@/components/impact-timeline';
 import { BriefingBlock } from '@/components/briefing-block';
+import { VictoryCard } from '@/components/victory-card';
 import type { KpiConfig, MetricSnapshot, ImpactEvent, IntegrationStatus } from '@/lib/types';
 import Link from 'next/link';
 
@@ -348,73 +349,3 @@ function StatPill({
   );
 }
 
-const WIN_TYPE_LABELS: Record<string, string> = {
-  accountability: 'Accountability Win',
-  policy_win: 'Policy Win',
-};
-
-const AREA_LABELS: Record<string, string> = {
-  editorial: 'Editorial',
-  mutual_aid: 'Mutual Aid',
-  political_education: 'Political Education',
-  arts_culture: 'Arts & Culture',
-  development_fundraising: 'Development',
-  operations_systems: 'Operations',
-  radar: 'Radar',
-  other: 'Other',
-};
-
-function VictoryCard({ win }: { win: ImpactEvent }) {
-  const isAccountability = win.impact_type === 'accountability';
-  const date = new Date(win.reported_at).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });
-
-  return (
-    <div
-      className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm"
-      style={{ borderLeft: `3px solid ${isAccountability ? '#E11D48' : '#16A34A'}` }}
-    >
-      <div className="flex items-center justify-between mb-2 gap-2">
-        <span
-          className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-            isAccountability
-              ? 'bg-red-50 text-defender-red'
-              : 'bg-green-50 text-defender-green'
-          }`}
-        >
-          {WIN_TYPE_LABELS[win.impact_type ?? ''] ?? win.impact_type}
-        </span>
-        <span className="text-xs text-gray-400 shrink-0">{date}</span>
-      </div>
-
-      <p className="text-sm font-bold text-defender-black leading-snug mb-2">
-        {win.internal_headline ?? win.funder_headline ?? win.raw_description.slice(0, 80)}
-      </p>
-
-      {win.radical_metric_value != null && (
-        <div className="flex items-center gap-1.5 mt-2">
-          <span
-            className={`text-lg font-bold tabular-nums ${
-              isAccountability ? 'text-defender-red' : 'text-defender-green'
-            }`}
-          >
-            {win.radical_metric_value.toLocaleString()}
-          </span>
-          {win.radical_metric_unit && (
-            <span className="text-xs text-gray-500">{win.radical_metric_unit}</span>
-          )}
-          {win.radical_metric_label && (
-            <span className="text-xs text-gray-400">· {win.radical_metric_label}</span>
-          )}
-        </div>
-      )}
-
-      <div className="mt-3 text-xs text-gray-400">
-        {AREA_LABELS[win.program_area] ?? win.program_area}
-      </div>
-    </div>
-  );
-}

@@ -53,26 +53,32 @@ async function _generateBriefing(): Promise<string> {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 650,
-        system: `You write the Kansas City Defender's year-to-date impact briefing. Be concise and punchy. No walls of text.
+        max_tokens: 700,
+        system: `You write the Kansas City Defender's year-to-date impact briefing. The title and subtitle are handled separately -- write ONLY the body paragraphs.
 
-The Defender: media wing of grassroots movements across Missouri and Kansas. We do fearless reporting. We name power. We shift what people understand. We amplify organizing with reach. This makes us essential to victory.
+Style guide -- match this exactly:
+- 4 paragraphs, each separated by a blank line
+- Declarative, plain, authoritative. Short sentences. No hedging.
+- Name specific people, companies, organizations, and outcomes
+- Include real numbers from the data
+- Say what the Defender did and what changed because of it
+- The Defender is both essential to these wins AND the media arm of broader movement organizing -- name coalition partners when relevant
+- Span coverage, accountability, mutual aid, and recognition across the paragraphs
+- No em dashes. No "comrades." No vague time (use months). No AI hedging language.
+- Close with a line that establishes the Defender's national significance
 
-Your briefing:
-- 4-5 tight paragraphs separated by blank lines. Short sentences.
-- Celebrate our vital role. "Our investigation exposed," "our coverage reached 500,000 people," "alongside organizers, we made this win possible," "we named what mainstream media ignored"
-- Platform Ventures: we reached 500,000 people; organizers organized; that partnership won
-- NAME SPECIFIC people and organizations (Blayne Newton, David Hundeyin, Decarcerate KC, Platform Ventures, Vera Institute, etc.)
-- STATE REAL OUTCOMES (resigned 10 days after, backed down from sale, cited in national brief)
-- INCLUDE NUMBERS (500K people, 62 students, etc.)
-- No vague time ("February" not "recently")
-- No AI hedging or conventions
-- Voice: abolitionist, Black radical, warm, clear-eyed about power
-- Open with energy. No em dashes.`,
+Example tone and structure:
+"Four months into 2026, the Kansas City Defender has helped force a corporate reversal on an ICE detention sale, driven an officer out of the Kansas City Police Department, and reached over three million people with coverage of student resistance to ICE in schools.
+
+We have been the only media organization in the room as twenty-three organizations launched a campaign to stop a $25 million World Cup Jail from becoming permanent infrastructure. We took our reporting international, exposing how the State Department is weaponizing foreign secret police. The Vera Institute cited our ICE reporting in a national policy brief.
+
+[Third paragraph covering other key wins and institutional recognition.]
+
+A Black abolitionist outlet in the middle of the country is doing some of the most important journalism in it."`,
         messages: [
           {
             role: 'user',
-            content: `Write the Defender's year-to-date Impact Briefing. 4-5 short paragraphs. Real names, real numbers, real outcomes. No filler. Celebrate what we built.\n\nImpacts:\n${impactList}`,
+            content: `Write the body of the Defender's year-to-date Impact Briefing. 4 paragraphs, blank line between each. Real names, real numbers, real outcomes. Match the tone and structure from the style guide exactly.\n\nImpacts:\n${impactList}`,
           },
         ],
       }),

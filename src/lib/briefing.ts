@@ -13,16 +13,15 @@ async function _generateBriefing(): Promise<string> {
   try {
     const supabase = getServiceClient();
 
-    // Always use year-to-date so the briefing tells the full arc of the year's work
     const yearStart = new Date(new Date().getFullYear(), 0, 1).toISOString();
 
     const { data: impacts } = await supabase
       .from('impact_events')
-      .select('internal_headline, funder_headline, radical_metric_label, radical_metric_value, radical_metric_unit, reported_at, impact_type, program_area')
+      .select('internal_headline, funder_headline, ai_narrative, radical_metric_label, radical_metric_value, radical_metric_unit, reported_at, impact_type, program_area, confidence')
       .eq('status', 'approved')
       .gte('reported_at', yearStart)
       .order('confidence', { ascending: false })
-      .limit(8);
+      .limit(12);
 
     if (!impacts || impacts.length === 0) {
       return 'The Kansas City Defender is building power every day. Check back soon for highlights from our latest impact.';
@@ -32,16 +31,18 @@ async function _generateBriefing(): Promise<string> {
       .map((imp, i) => {
         const date = new Date(imp.reported_at).toLocaleDateString('en-US', {
           month: 'long',
-          day: 'numeric',
           year: 'numeric',
         });
         const metric =
           imp.radical_metric_value != null
-            ? ` -- ${imp.radical_metric_value.toLocaleString()}${imp.radical_metric_unit ? ' ' + imp.radical_metric_unit : ''}`
+            ? ` [${imp.radical_metric_value.toLocaleString()}${imp.radical_metric_unit ? ' ' + imp.radical_metric_unit : ''}]`
             : '';
-        return `${i + 1}. [${date}] ${imp.internal_headline ?? imp.funder_headline}${metric}`;
+        const narrative = imp.ai_narrative
+          ? `\n   Context: ${imp.ai_narrative.slice(0, 200)}`
+          : '';
+        return `${i + 1}. [${date}] ${imp.funder_headline ?? imp.internal_headline}${metric}${narrative}`;
       })
-      .join('\n');
+      .join('\n\n');
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -52,12 +53,24 @@ async function _generateBriefing(): Promise<string> {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 320,
-        system: `You write brief, galvanizing year-to-date impact briefings for The Kansas City Defender, a radical abolitionist Black media organization in Kansas City. Write in a warm, affirming tone that honors the work. Use "comrades" naturally. Start with an affirmation like "Peace, comrades!" or a strong opening line. Highlight 2-3 specific wins with numbers or outcomes. Keep it to 3-4 sentences. Never use em dashes. Never use relative time language like "last week", "recently", or "just" -- always use the specific month and year provided in brackets (e.g., "In February," or "This March,"). Write like a trusted comrade giving a brief year-in-review report at the start of a meeting.`,
+        max_tokens: 520,
+        system: `You write powerful, strategic year-to-date impact briefings for The Kansas City Defender, a radical abolitionist Black media organization headquartered in Kansas City, Missouri.
+
+Your briefing must:
+- NAME SPECIFIC people, companies, and organizations involved in wins (e.g. "Platform Ventures," "KCPD officer Blayne Newton," "David Hundeyin," "Decarcerate KC," "Reynolds Journalism Institute," "Pivot Fund")
+- STATE SPECIFIC OUTCOMES, not vague accomplishments (e.g. "resigned 10 days after publication," "backed down from the ICE sale," "cited in a Vera Institute national policy brief")
+- INCLUDE REAL NUMBERS when provided (views, families served, students enrolled, organizations in coalition)
+- Span the full range of the organization's work: fearless investigative journalism, mutual aid, political education, international coverage, and institutional recognition
+- Reflect the Defender's voice: abolitionist, Black radical, warm but uncompromising, clear-eyed about power
+- Use "comrades" naturally
+- Never use em dashes
+- Never use vague relative time ("recently," "last week") -- use specific months from the data
+- Write 5-6 punchy sentences that feel like a movement victory lap, not a grant report
+- Open with energy: something like "Peace, comrades." or a declarative statement of power`,
         messages: [
           {
             role: 'user',
-            content: `Write a brief Defender Impact Briefing covering our top wins so far this year. Each item includes its date in brackets -- use those specific dates in your writing.\n\n${impactList}\n\nKeep it warm, galvanizing, 3-4 sentences max.`,
+            content: `Write the Defender's year-to-date Impact Briefing. Each impact below includes the month, headline, outcome, and context. Name the real people, companies, and outcomes. This should feel like a powerful report to the movement on what we've built this year.\n\n${impactList}`,
           },
         ],
       }),

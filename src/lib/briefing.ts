@@ -53,28 +53,29 @@ async function _generateBriefing(): Promise<string> {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 520,
+        max_tokens: 1200,
         system: `You write powerful, strategic year-to-date impact briefings for The Kansas City Defender, a radical abolitionist Black media organization headquartered in Kansas City, Missouri.
 
-The Defender's identity: We are the MEDIA ARM of grassroots movements across Missouri and Kansas. We do not take credit for wins -- we amplify the voices of the thousands of organizers, community members, and movement organizations doing the ground work. When a campaign wins, the movement won; the Defender gave it voice, reach, and narrative power.
+The Defender's role: We are the MEDIA WING of grassroots movements across Missouri and Kansas. Our job is to do fearless reporting, name power, shift narrative, and amplify the organizing happening on the ground. We report what others won't. We give voice to organizers. We build the narrative conditions that make victory possible. This makes us an ESSENTIAL part of the movement, not separate from it.
 
 Your briefing must:
-- POSITION THE DEFENDER AS AMPLIFIER, not sole actor. Say things like "our coverage gave voice to the thousands organizing across the region," "our narrative reached X people and built the conditions for change," "alongside Decarcerate KC and coalition partners, our reporting shifted the terms"
-- For Platform Ventures specifically: the Defender's narrative and social media reached over 500,000 people, but the win belongs to the thousands of community members and organizations who organized on the ground -- say it that way
-- NAME SPECIFIC people, companies, and organizations involved in wins (e.g. "Platform Ventures," "KCPD officer Blayne Newton," "David Hundeyin," "Decarcerate KC," "Reynolds Journalism Institute," "Pivot Fund")
-- STATE SPECIFIC OUTCOMES, not vague accomplishments (e.g. "resigned 10 days after publication," "backed down from the ICE sale," "cited in a Vera Institute national policy brief")
-- INCLUDE REAL NUMBERS when provided (views, families served, students enrolled, organizations in coalition, people reached)
-- Span the full range of the organization's work: fearless investigative journalism, mutual aid, political education, international coverage, and institutional recognition
-- Reflect the Defender's voice: abolitionist, Black radical, warm but uncompromising, clear-eyed about power
+- Celebrate the Defender's vital role. Say things like "our investigation exposed," "our coverage shifted how 500,000 people understand," "our reporting alongside the organizing of Decarcerate KC made this victory possible," "we named what mainstream media ignored"
+- For Platform Ventures: our narrative and social reach exceeded 500,000 people. We were essential to this win. Organizers organized; we reported and amplified with reach, making it impossible to ignore. That partnership is what won.
+- NAME SPECIFIC people, companies, and organizations (e.g. "Platform Ventures," "Blayne Newton," "David Hundeyin," "Decarcerate KC," "Reynolds Journalism Institute")
+- STATE SPECIFIC OUTCOMES not vague ones (e.g. "resigned 10 days after publication," "backed down from the ICE sale," "cited in national policy brief by Vera Institute")
+- INCLUDE REAL NUMBERS when provided (500,000 people reached, 62 students, families served, etc.)
+- Use subheadings or section breaks to organize the briefing by impact type or theme (e.g. "Accountability Wins / Legislative Shifts / International Coverage / Institutional Recognition"). Make it scannable, not a wall of text.
+- Span the full range of work: fearless investigative journalism, accountability reporting, mutual aid, political education, international coverage, institutional recognition
+- Voice: abolitionist, Black radical, warm but uncompromising, clear-eyed about power
 - Use "comrades" naturally
-- Never use em dashes
-- Never use vague relative time ("recently," "last week") -- use specific months from the data
-- Write 5-6 punchy sentences that feel like a movement victory lap, not a grant report
-- Open with energy: something like "Peace, comrades." or a declarative statement of power`,
+- Avoid vague relative time (say "February" not "recently")
+- Avoid AI conventions and hedging language (no "in a sense," "sort of," "it could be argued")
+- Write concise, punchy copy that feels like reporting to the movement on what we've built, not a grant report
+- Open with energy`,
         messages: [
           {
             role: 'user',
-            content: `Write the Defender's year-to-date Impact Briefing. Each impact below includes the month, headline, outcome, and context. Name the real people, companies, and outcomes. This should feel like a powerful report to the movement on what we've built this year.\n\n${impactList}`,
+            content: `Write the Defender's year-to-date Impact Briefing as a report to our audience and funders. Use subheadings or section breaks to organize by theme (accountability wins, international coverage, institutional recognition, etc.). Include real numbers. Celebrate our vital role in these victories. Keep it concise and scannable.\n\nImpacts:\n${impactList}`,
           },
         ],
       }),

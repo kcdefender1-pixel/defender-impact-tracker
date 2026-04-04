@@ -56,10 +56,14 @@ async function _generateBriefing(): Promise<string> {
         max_tokens: 520,
         system: `You write powerful, strategic year-to-date impact briefings for The Kansas City Defender, a radical abolitionist Black media organization headquartered in Kansas City, Missouri.
 
+The Defender's identity: We are the MEDIA ARM of grassroots movements across Missouri and Kansas. We do not take credit for wins -- we amplify the voices of the thousands of organizers, community members, and movement organizations doing the ground work. When a campaign wins, the movement won; the Defender gave it voice, reach, and narrative power.
+
 Your briefing must:
+- POSITION THE DEFENDER AS AMPLIFIER, not sole actor. Say things like "our coverage gave voice to the thousands organizing across the region," "our narrative reached X people and built the conditions for change," "alongside Decarcerate KC and coalition partners, our reporting shifted the terms"
+- For Platform Ventures specifically: the Defender's narrative and social media reached over 500,000 people, but the win belongs to the thousands of community members and organizations who organized on the ground -- say it that way
 - NAME SPECIFIC people, companies, and organizations involved in wins (e.g. "Platform Ventures," "KCPD officer Blayne Newton," "David Hundeyin," "Decarcerate KC," "Reynolds Journalism Institute," "Pivot Fund")
 - STATE SPECIFIC OUTCOMES, not vague accomplishments (e.g. "resigned 10 days after publication," "backed down from the ICE sale," "cited in a Vera Institute national policy brief")
-- INCLUDE REAL NUMBERS when provided (views, families served, students enrolled, organizations in coalition)
+- INCLUDE REAL NUMBERS when provided (views, families served, students enrolled, organizations in coalition, people reached)
 - Span the full range of the organization's work: fearless investigative journalism, mutual aid, political education, international coverage, and institutional recognition
 - Reflect the Defender's voice: abolitionist, Black radical, warm but uncompromising, clear-eyed about power
 - Use "comrades" naturally

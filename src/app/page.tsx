@@ -155,27 +155,27 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
       {/* Header row */}
       <div className="flex items-start justify-between mb-8 gap-4">
         <div>
-          <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
+          <div className="text-[10px] font-black text-defender-red uppercase tracking-[0.15em] mb-1">
             The Kansas City Defender
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-defender-black leading-tight">
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
             Command Center
           </h1>
-          <p className="text-gray-500 text-sm mt-1.5">
+          <p className="text-white/40 text-sm mt-1.5">
             Organizational impact at a glance.
           </p>
         </div>
 
         {/* Status badges */}
         <div className="flex flex-col items-end gap-2 shrink-0">
-          <div className="flex items-center gap-1.5 text-xs font-mono text-gray-400">
+          <div className="flex items-center gap-1.5 text-xs font-mono text-white/30">
             <span
               className={`w-1.5 h-1.5 rounded-full ${
                 syncStatus?.status === 'ok'
-                  ? 'bg-defender-green'
+                  ? 'bg-emerald-400'
                   : syncStatus?.status === 'warning'
-                  ? 'bg-defender-gold'
-                  : 'bg-gray-300'
+                  ? 'bg-amber-400'
+                  : 'bg-white/20'
               }`}
             />
             RSS: {formatSyncTime(syncStatus?.last_run_at ?? null)}
@@ -183,7 +183,7 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
           {pendingCount > 0 && (
             <Link
               href="/admin/impacts"
-              className="text-xs font-semibold bg-amber-100 text-amber-800 rounded-full px-2.5 py-1 hover:bg-amber-200 transition-colors"
+              className="text-xs font-semibold bg-amber-500/15 text-amber-400 rounded-full px-2.5 py-1 hover:bg-amber-500/25 transition-colors"
             >
               {pendingCount} pending review
             </Link>
@@ -242,11 +242,14 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
       {/* Victory Board */}
       {victories.length > 0 && (
         <section className="mb-10">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-defender-black tracking-tight">
-              Victory Board
-            </h2>
-            <span className="text-xs text-gray-400">Year to date</span>
+          <div className="flex items-center justify-between mb-5">
+            <div>
+              <h2 className="text-2xl font-black text-white uppercase tracking-tight">
+                Victory Board
+              </h2>
+              <div className="w-8 h-[3px] bg-defender-red mt-1" />
+            </div>
+            <span className="text-xs font-mono text-white/30 uppercase tracking-wider">Year to date</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {victories.map((win) => (
@@ -258,13 +261,16 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
 
       {/* 5 Pillars of Power */}
       <section className="mb-10">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-defender-black tracking-tight">
-            5 Pillars of Power
-          </h2>
+        <div className="flex items-center justify-between mb-5">
+          <div>
+            <h2 className="text-2xl font-black text-white uppercase tracking-tight">
+              5 Pillars of Power
+            </h2>
+            <div className="w-8 h-[3px] bg-defender-red mt-1" />
+          </div>
           <Link
             href="/admin/metrics"
-            className="text-xs font-semibold text-defender-red hover:underline"
+            className="text-xs font-semibold text-white/40 hover:text-defender-red transition-colors"
           >
             + Add snapshot
           </Link>
@@ -276,17 +282,20 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
       <section>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <h2 className="text-lg font-bold text-defender-black tracking-tight">
-              {view === 'highlights' ? 'Top Highlights' : 'Recent Impacts'}
-            </h2>
+            <div>
+              <h2 className="text-2xl font-black text-white uppercase tracking-tight">
+                {view === 'highlights' ? 'Top Highlights' : 'Recent Impacts'}
+              </h2>
+              <div className="w-8 h-[3px] bg-defender-red mt-1" />
+            </div>
             {/* View toggle tabs */}
-            <div className="flex items-center gap-1 bg-gray-100 rounded-full p-0.5">
+            <div className="flex items-center gap-1 bg-surface-card border border-white/[0.07] rounded-full p-0.5 mt-1">
               <Link
                 href={`/?period=${period}&view=highlights`}
                 className={`text-xs font-semibold px-3 py-1 rounded-full transition-colors ${
                   view === 'highlights'
                     ? 'bg-defender-red text-white'
-                    : 'text-gray-500 hover:text-gray-700'
+                    : 'text-white/40 hover:text-white'
                 }`}
               >
                 Top Highlights
@@ -296,7 +305,7 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
                 className={`text-xs font-semibold px-3 py-1 rounded-full transition-colors ${
                   view === 'recent'
                     ? 'bg-defender-red text-white'
-                    : 'text-gray-500 hover:text-gray-700'
+                    : 'text-white/40 hover:text-white'
                 }`}
               >
                 Recent
@@ -312,7 +321,7 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
             </Link>
             <Link
               href="/admin/impacts"
-              className="text-xs font-semibold text-gray-400 hover:text-gray-600"
+              className="text-xs font-semibold text-white/30 hover:text-white/60"
             >
               View all
             </Link>
@@ -336,15 +345,15 @@ function StatPill({
   color: 'red' | 'green' | 'gold';
 }) {
   const colorMap = {
-    red: { bg: 'bg-red-50', border: 'border-red-100', val: 'text-defender-red', label: 'text-red-700' },
-    green: { bg: 'bg-green-50', border: 'border-green-100', val: 'text-defender-green', label: 'text-green-700' },
-    gold: { bg: 'bg-amber-50', border: 'border-amber-100', val: 'text-amber-600', label: 'text-amber-700' },
+    red: { border: 'border-t-defender-red', val: 'text-defender-red' },
+    green: { border: 'border-t-emerald-500', val: 'text-emerald-400' },
+    gold: { border: 'border-t-amber-500', val: 'text-amber-400' },
   };
   const c = colorMap[color];
   return (
-    <div className={`${c.bg} border ${c.border} rounded-xl px-4 py-3`}>
-      <div className={`text-2xl font-bold tabular-nums tracking-tight ${c.val}`}>{value}</div>
-      <div className={`text-xs font-medium mt-0.5 ${c.label}`}>{label}</div>
+    <div className={`bg-surface-card border border-white/[0.07] border-t-2 ${c.border} rounded-xl px-4 py-4 hover:-translate-y-0.5 transition-transform duration-200`}>
+      <div className={`text-3xl font-black tabular-nums tracking-tight ${c.val}`}>{value}</div>
+      <div className="text-xs font-medium mt-1 text-white/40">{label}</div>
     </div>
   );
 }

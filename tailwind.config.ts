@@ -11,6 +11,10 @@ const config: Config = {
     extend: {
       colors: {
         cream: "#FAF7F2",
+        surface: "#0d0f14",
+        "surface-card": "#13151e",
+        "surface-hover": "#1a1d28",
+        "surface-border": "rgba(255,255,255,0.07)",
         "defender-red": "#E11D48",
         "defender-black": "#0B0B0B",
         "defender-green": "#16A34A",

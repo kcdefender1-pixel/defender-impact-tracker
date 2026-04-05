@@ -30,7 +30,7 @@ export function KpiGrid({ kpis, snapshotsByKey, period }: KpiGridProps) {
 
   if (kpis.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-400 text-sm">
+      <div className="text-center py-12 text-white/30 text-sm">
         No KPIs configured. Run the Supabase schema to seed the Big 10.
       </div>
     );
@@ -57,7 +57,7 @@ export function KpiGrid({ kpis, snapshotsByKey, period }: KpiGridProps) {
               className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                 isActive
                   ? 'bg-defender-red text-white'
-                  : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                  : 'bg-surface-card border border-white/10 text-white/50 hover:bg-surface-hover hover:text-white'
               }`}
             >
               {pillar.label}
@@ -71,7 +71,7 @@ export function KpiGrid({ kpis, snapshotsByKey, period }: KpiGridProps) {
 
       {/* KPI cards for active pillar */}
       {pillarKpis.length === 0 ? (
-        <div className="text-center py-8 text-gray-400 text-sm">
+        <div className="text-center py-8 text-white/30 text-sm">
           No KPIs mapped to this pillar yet.
         </div>
       ) : (

@@ -32,7 +32,7 @@ export function PeriodFilter({ current = '30d' }: PeriodFilterProps) {
             className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
               isActive
                 ? 'bg-defender-red text-white'
-                : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                : 'bg-surface-card border border-white/10 text-white/50 hover:bg-surface-hover hover:text-white'
             }`}
           >
             {p.label}

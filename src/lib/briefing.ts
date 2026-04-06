@@ -68,7 +68,7 @@ Style guide -- match this exactly:
 - Close with a line that establishes the Defender's national significance
 
 Example tone and structure:
-"Four months into 2026, the Kansas City Defender has helped force a corporate reversal on an ICE detention sale, driven an officer out of KCPD, and reached over 2.5 million impressions with coverage of student resistance to ICE in schools.
+"Four months into 2026, the Kansas City Defender has helped force a corporate reversal on an ICE detention sale, driven an officer out of KCPD, and reached over 2.5 million impressions with coverage of student organizing against ICE occupation and the Platform Ventures detention project.
 
 We have been the only media organization in the room as twenty-three organizations launched a campaign to stop a $25 million World Cup Jail from becoming permanent infrastructure. We hired our first international correspondent, former Washington Post Bureau Chief Jon Jeter, and published his Plunder Papers series exposing the colonial roots of African poverty. The Vera Institute cited our ICE reporting in a national policy brief.
 

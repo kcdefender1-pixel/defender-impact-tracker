@@ -45,52 +45,52 @@ export function AiReviewPanel({
     update('kpis_impacted', kpis);
   };
 
-  const labelClass = 'block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1';
+  const labelClass = 'block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1';
   const inputClass =
-    'w-full rounded-[10px] border border-gray-200 bg-white/80 px-3 py-2 text-sm text-defender-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red transition-colors';
+    'w-full rounded-[10px] border border-white/10 bg-surface px-3 py-2 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red transition-colors';
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Left: Raw submission */}
       <div className="space-y-4">
-        <div className="bg-white/60 border border-gray-200/50 rounded-card p-5">
-          <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
+        <div className="bg-surface-card border border-white/[0.07] rounded-card p-5">
+          <div className="text-xs font-bold text-white/40 uppercase tracking-widest mb-3">
             Your Submission
           </div>
-          <div className="space-y-3 text-sm text-gray-700">
+          <div className="space-y-3 text-sm text-white/65">
             <div>
-              <span className="font-semibold text-defender-black">{rawData.reported_by_name}</span>
+              <span className="font-semibold text-white">{rawData.reported_by_name}</span>
               {rawData.reported_by_email && (
-                <span className="text-gray-400 ml-1">({rawData.reported_by_email})</span>
+                <span className="text-white/35 ml-1">({rawData.reported_by_email})</span>
               )}
             </div>
             <div>
-              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Program Area</span>
+              <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Program Area</span>
               <div className="mt-0.5 capitalize">{rawData.program_area.replace(/_/g, ' ')}</div>
             </div>
             {rawData.location_text && (
               <div>
-                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Location</span>
+                <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Location</span>
                 <div className="mt-0.5">{rawData.location_text}</div>
               </div>
             )}
             <div>
-              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Description</span>
+              <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Description</span>
               <div className="mt-1 leading-relaxed whitespace-pre-wrap">{rawData.raw_description}</div>
             </div>
           </div>
         </div>
 
-        <div className="bg-amber-50 border border-amber-200/50 rounded-card p-4">
-          <div className="text-xs font-semibold text-amber-700 mb-1">Confidence Score</div>
+        <div className="bg-amber-500/10 border border-amber-500/20 rounded-card p-4">
+          <div className="text-xs font-semibold text-amber-400 mb-1">Confidence Score</div>
           <div className="flex items-center gap-3">
-            <div className="flex-1 h-2 bg-amber-100 rounded-full overflow-hidden">
+            <div className="flex-1 h-2 bg-amber-500/20 rounded-full overflow-hidden">
               <div
                 className="h-full bg-amber-500 rounded-full transition-all"
                 style={{ width: `${edited.confidence}%` }}
               />
             </div>
-            <span className="text-sm font-bold font-mono text-amber-800">
+            <span className="text-sm font-bold font-mono text-amber-300">
               {edited.confidence}%
             </span>
           </div>
@@ -99,7 +99,7 @@ export function AiReviewPanel({
 
       {/* Right: AI outputs (editable) */}
       <div className="space-y-4">
-        <div className="bg-white/80 border border-gray-200/50 rounded-card p-5 space-y-4">
+        <div className="bg-surface-card border border-white/[0.07] rounded-card p-5 space-y-4">
           <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
             AI Enhancement - Review and Edit
           </div>
@@ -123,7 +123,7 @@ export function AiReviewPanel({
               maxLength={100}
               className={inputClass}
             />
-            <div className="text-right text-xs text-gray-400 mt-0.5">
+            <div className="text-right text-xs text-white/35 mt-0.5">
               {edited.internal_headline.length}/100
             </div>
           </div>
@@ -137,7 +137,7 @@ export function AiReviewPanel({
               maxLength={110}
               className={inputClass}
             />
-            <div className="text-right text-xs text-gray-400 mt-0.5">
+            <div className="text-right text-xs text-white/35 mt-0.5">
               {edited.funder_headline.length}/110
             </div>
           </div>
@@ -206,7 +206,7 @@ export function AiReviewPanel({
                     onChange={() => toggleKpi(key)}
                     className="w-3.5 h-3.5 accent-defender-red"
                   />
-                  <span className="text-xs text-gray-600 group-hover:text-defender-black transition-colors">
+                  <span className="text-xs text-white/55 group-hover:text-white transition-colors">
                     {KPI_LABELS[key]}
                   </span>
                 </label>
@@ -227,7 +227,7 @@ export function AiReviewPanel({
           <button
             onClick={onReset}
             disabled={isSaving}
-            className="px-4 py-3 text-sm font-semibold text-gray-600 border border-gray-200 rounded-button hover:bg-gray-50 transition-colors disabled:opacity-60"
+            className="px-4 py-3 text-sm font-semibold text-white/50 border border-white/10 rounded-button hover:bg-white/[0.05] transition-colors disabled:opacity-60"
           >
             Start Over
           </button>

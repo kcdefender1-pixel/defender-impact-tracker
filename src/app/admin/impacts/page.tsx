@@ -23,10 +23,10 @@ export default async function AdminImpactsPage() {
           <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
             Admin
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-defender-black">
+          <h1 className="text-3xl font-bold tracking-tight text-white">
             Impact Events
           </h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-white/50 text-sm mt-1">
             Review, approve, and manage submitted impact reports.
           </p>
         </div>
@@ -39,7 +39,7 @@ export default async function AdminImpactsPage() {
       </div>
 
       {error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-card text-sm text-red-700">
+        <div className="mb-4 p-4 bg-rose-500/10 border border-rose-500/20 rounded-card text-sm text-rose-400">
           Could not load impacts. Make sure you have run the Supabase schema and seeded data.
         </div>
       )}

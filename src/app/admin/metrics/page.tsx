@@ -83,8 +83,8 @@ export default function AdminMetricsPage() {
   const keysWithData = Object.keys(byKey).sort();
 
   const inputClass =
-    'w-full rounded-[10px] border border-gray-200 bg-white/80 px-3 py-2 text-sm text-defender-black focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red transition-colors';
-  const labelClass = 'block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5';
+    'w-full rounded-[10px] border border-white/10 bg-surface px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-defender-red/40 focus:border-defender-red transition-colors';
+  const labelClass = 'block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5';
 
   return (
     <div className="px-4 py-8 md:px-8 md:py-10 max-w-6xl">
@@ -92,10 +92,10 @@ export default function AdminMetricsPage() {
         <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
           Admin
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-defender-black">
+        <h1 className="text-3xl font-bold tracking-tight text-white">
           Metrics
         </h1>
-        <p className="text-gray-500 text-sm mt-1">
+        <p className="text-white/50 text-sm mt-1">
           Log KPI snapshots and track trends over time.
         </p>
       </div>
@@ -103,8 +103,8 @@ export default function AdminMetricsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: entry form */}
         <div>
-          <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm p-5">
-            <div className="text-sm font-bold text-defender-black mb-4">Add Snapshot</div>
+          <div className="bg-surface-card border border-white/[0.07] rounded-card p-5">
+            <div className="text-sm font-bold text-white mb-4">Add Snapshot</div>
 
             <div className="space-y-3">
               <div>
@@ -173,9 +173,9 @@ export default function AdminMetricsPage() {
         {/* Right: charts + tables */}
         <div className="lg:col-span-2 space-y-6">
           {loading ? (
-            <div className="text-center py-12 text-gray-400 text-sm">Loading metrics...</div>
+            <div className="text-center py-12 text-white/30 text-sm">Loading metrics...</div>
           ) : keysWithData.length === 0 ? (
-            <div className="text-center py-12 text-gray-400 text-sm">
+            <div className="text-center py-12 text-white/30 text-sm">
               No metric snapshots yet. Add your first one.
             </div>
           ) : (
@@ -191,15 +191,15 @@ export default function AdminMetricsPage() {
               return (
                 <div
                   key={key}
-                  className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm p-4"
+                  className="bg-surface-card border border-white/[0.07] rounded-card p-4"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-sm font-semibold text-defender-black">{label}</div>
+                    <div className="text-sm font-semibold text-white">{label}</div>
                     {latest !== undefined && (
-                      <div className="font-mono font-bold text-defender-black">
+                      <div className="font-mono font-bold text-white">
                         {latest.toLocaleString()}
                         {kpiUnit && (
-                          <span className="text-xs text-gray-400 ml-1">{kpiUnit}</span>
+                          <span className="text-xs text-white/35 ml-1">{kpiUnit}</span>
                         )}
                       </div>
                     )}
@@ -207,11 +207,11 @@ export default function AdminMetricsPage() {
                   {data.length >= 2 ? (
                     <ResponsiveContainer width="100%" height={80}>
                       <LineChart data={data} margin={{ top: 4, right: 4, bottom: 4, left: 4 }}>
-                        <XAxis dataKey="date" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} />
+                        <XAxis dataKey="date" tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.3)' }} tickLine={false} axisLine={false} />
                         <YAxis hide />
                         <Tooltip
-                          contentStyle={{ fontSize: 11, borderRadius: 8, border: '1px solid #e5e7eb' }}
-                          itemStyle={{ color: '#0B0B0B' }}
+                          contentStyle={{ fontSize: 11, borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)', background: '#13151e', color: '#fff' }}
+                          itemStyle={{ color: '#E11D48' }}
                         />
                         <Line
                           type="monotone"
@@ -224,9 +224,9 @@ export default function AdminMetricsPage() {
                       </LineChart>
                     </ResponsiveContainer>
                   ) : (
-                    <p className="text-xs text-gray-400 mt-1">Add 2+ snapshots to see a trend line.</p>
+                    <p className="text-xs text-white/30 mt-1">Add 2+ snapshots to see a trend line.</p>
                   )}
-                  <div className="mt-2 text-xs text-gray-400">
+                  <div className="mt-2 text-xs text-white/30">
                     {data.length} snapshot{data.length !== 1 ? 's' : ''}
                   </div>
                 </div>

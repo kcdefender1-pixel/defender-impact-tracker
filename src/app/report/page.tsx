@@ -127,8 +127,8 @@ export default function ReportPage() {
   };
 
   const inputClass =
-    'w-full rounded-[10px] border border-gray-200 bg-white/80 px-3 py-2.5 text-sm text-defender-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red transition-colors';
-  const labelClass = 'block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5';
+    'w-full rounded-[10px] border border-white/10 bg-surface px-3 py-2.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red transition-colors';
+  const labelClass = 'block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5';
 
   return (
     <div className="min-h-screen px-4 py-8 md:px-8 md:py-10 max-w-4xl mx-auto">
@@ -137,17 +137,17 @@ export default function ReportPage() {
         <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
           The Kansas City Defender
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-defender-black leading-tight">
+        <h1 className="text-3xl font-bold tracking-tight text-white leading-tight">
           Report an Impact
         </h1>
-        <p className="text-gray-500 mt-1.5 text-sm">
+        <p className="text-white/50 mt-1.5 text-sm">
           Describe what happened in plain language. Claude will turn it into a structured impact record with headlines and metrics.
         </p>
       </div>
 
       {/* Form */}
       {(phase === 'form' || phase === 'enhancing') && (
-        <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm p-6 md:p-8">
+        <div className="bg-surface-card border border-white/[0.07] rounded-card p-6 md:p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
               <label className={labelClass}>Your Name *</label>
@@ -226,7 +226,7 @@ export default function ReportPage() {
               <button
                 onClick={addLink}
                 type="button"
-                className="px-3 py-2.5 border border-gray-200 rounded-[10px] text-gray-500 hover:bg-gray-50 transition-colors shrink-0"
+                className="px-3 py-2.5 border border-white/10 rounded-[10px] text-white/40 hover:bg-white/[0.05] transition-colors shrink-0"
               >
                 <Plus size={16} />
               </button>
@@ -236,7 +236,7 @@ export default function ReportPage() {
                 {form.evidence_links.map((link) => (
                   <div
                     key={link}
-                    className="flex items-center gap-1.5 bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 max-w-xs"
+                    className="flex items-center gap-1.5 bg-white/[0.08] rounded-full px-3 py-1 text-xs text-white/55 max-w-xs"
                   >
                     <span className="truncate">{link}</span>
                     <button onClick={() => removeLink(link)} className="shrink-0 hover:text-defender-red">
@@ -294,12 +294,12 @@ export default function ReportPage() {
       {phase === 'done' && (
         <div className="max-w-md mx-auto text-center py-16">
           <CheckCircle size={48} className="text-defender-green mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-defender-black mb-2">Impact Submitted</h2>
-          <p className="text-gray-500 text-sm mb-6">
+          <h2 className="text-2xl font-bold text-white mb-2">Impact Submitted</h2>
+          <p className="text-white/50 text-sm mb-6">
             Your impact report is saved and pending review. An admin will approve it shortly.
           </p>
           {savedId && (
-            <p className="text-xs font-mono text-gray-400 mb-6">ID: {savedId}</p>
+            <p className="text-xs font-mono text-white/35 mb-6">ID: {savedId}</p>
           )}
           <div className="flex gap-3 justify-center">
             <button
@@ -310,7 +310,7 @@ export default function ReportPage() {
             </button>
             <a
               href="/"
-              className="border border-gray-200 rounded-button px-5 py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors"
+              className="border border-white/10 rounded-button px-5 py-2.5 text-sm font-semibold text-white/55 hover:bg-white/[0.05] transition-colors"
             >
               Back to Dashboard
             </a>

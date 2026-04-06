@@ -70,22 +70,22 @@ export default async function SharePage() {
           <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
             The Kansas City Defender
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-defender-black leading-tight">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
             Impact Report
           </h1>
-          <p className="text-gray-500 text-sm mt-1.5">{today}</p>
+          <p className="text-white/45 text-sm mt-1.5">{today}</p>
         </div>
         <PrintButton />
       </div>
 
       {/* Briefing */}
       <section className="mb-10">
-        <div className="bg-gradient-to-br from-red-50/60 via-white/80 to-white/80 border border-red-100/60 rounded-card p-6 md:p-8">
+        <div className="bg-surface-card border border-white/[0.07] rounded-card p-6 md:p-8">
           <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-3">
             Impact Briefing
           </div>
           <div className="w-12 h-[2px] bg-defender-red/30 mb-4" />
-          <p className="text-[1.05rem] text-defender-black leading-[1.7] font-medium">
+          <p className="text-[1.05rem] text-white/80 leading-[1.7] font-medium">
             {briefingText}
           </p>
         </div>
@@ -118,10 +118,10 @@ export default async function SharePage() {
       {victories.length > 0 && (
         <section className="mb-10">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-defender-black tracking-tight">
+            <h2 className="text-lg font-bold text-white tracking-tight">
               Victory Board
             </h2>
-            <span className="text-xs text-gray-400">Year to date</span>
+            <span className="text-xs text-white/35">Year to date</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {victories.map((win) => (
@@ -134,7 +134,7 @@ export default async function SharePage() {
       {/* Top Highlights */}
       {highlights.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-lg font-bold text-defender-black tracking-tight mb-4">
+          <h2 className="text-lg font-bold text-white tracking-tight mb-4">
             Top Highlights
           </h2>
           <div className="space-y-3">
@@ -146,8 +146,8 @@ export default async function SharePage() {
       )}
 
       {/* Footer */}
-      <div className="pt-6 border-t border-gray-200 text-center">
-        <div className="text-xs text-gray-400">
+      <div className="pt-6 border-t border-white/[0.07] text-center">
+        <div className="text-xs text-white/35">
           The Kansas City Defender &middot; Impact Dashboard &middot; {today}
         </div>
       </div>
@@ -167,9 +167,9 @@ function ShareStat({
   color: 'red' | 'green' | 'gold';
 }) {
   const colorMap = {
-    red: { bg: 'bg-red-50', border: 'border-red-100', val: 'text-defender-red', label: 'text-red-700' },
-    green: { bg: 'bg-green-50', border: 'border-green-100', val: 'text-defender-green', label: 'text-green-700' },
-    gold: { bg: 'bg-amber-50', border: 'border-amber-100', val: 'text-amber-600', label: 'text-amber-700' },
+    red:   { bg: 'bg-rose-500/10',    border: 'border-rose-500/20',    val: 'text-rose-400',    label: 'text-rose-300'    },
+    green: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', val: 'text-emerald-400', label: 'text-emerald-300' },
+    gold:  { bg: 'bg-amber-500/10',   border: 'border-amber-500/20',   val: 'text-amber-400',   label: 'text-amber-300'   },
   };
   const c = colorMap[color];
   return (
@@ -196,29 +196,29 @@ function ShareHighlightCard({ impact }: { impact: ImpactEvent }) {
   });
 
   return (
-    <div className="bg-white/80 border border-gray-100 rounded-xl p-4 flex gap-4 items-start">
+    <div className="bg-surface-card border border-white/[0.07] rounded-xl p-4 flex gap-4 items-start">
       <div className="shrink-0 mt-0.5">
         <div className="w-2 h-2 rounded-full bg-defender-red" />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-[11px] font-medium text-gray-400">{date}</span>
+          <span className="text-[11px] font-medium text-white/35">{date}</span>
           <span className="text-[11px] font-medium text-defender-red/70">
             {AREA_LABELS[impact.program_area] ?? impact.program_area}
           </span>
         </div>
-        <p className="text-sm font-bold text-defender-black leading-snug mb-1">
+        <p className="text-sm font-bold text-white leading-snug mb-1">
           {impact.funder_headline ?? impact.internal_headline ?? impact.raw_description.slice(0, 120)}
         </p>
         {impact.radical_metric_value != null && (
-          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-            <span className="font-bold text-defender-black">{impact.radical_metric_value.toLocaleString()}</span>
+          <div className="flex items-center gap-1.5 text-xs text-white/45">
+            <span className="font-bold text-white">{impact.radical_metric_value.toLocaleString()}</span>
             {impact.radical_metric_unit && <span>{impact.radical_metric_unit}</span>}
           </div>
         )}
       </div>
       {impact.confidence >= 90 && (
-        <div className="shrink-0 text-[10px] font-bold text-defender-green bg-green-50 rounded-full px-2 py-0.5">
+        <div className="shrink-0 text-[10px] font-bold text-defender-green bg-emerald-500/10 rounded-full px-2 py-0.5">
           {impact.confidence}%
         </div>
       )}

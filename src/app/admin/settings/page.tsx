@@ -81,7 +81,7 @@ export default function AdminSettingsPage() {
   };
 
   const inputClass =
-    'w-full rounded-[8px] border border-gray-200 bg-white/80 px-2.5 py-1.5 text-sm text-defender-black focus:outline-none focus:ring-1 focus:ring-defender-red/40 focus:border-defender-red transition-colors';
+    'w-full rounded-[8px] border border-white/10 bg-surface px-2.5 py-1.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-defender-red/40 focus:border-defender-red transition-colors';
 
   return (
     <div className="px-4 py-8 md:px-8 md:py-10 max-w-4xl">
@@ -89,42 +89,42 @@ export default function AdminSettingsPage() {
         <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
           Admin
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-defender-black">Settings</h1>
-        <p className="text-gray-500 text-sm mt-1">
+        <h1 className="text-3xl font-bold tracking-tight text-white">Settings</h1>
+        <p className="text-white/50 text-sm mt-1">
           Configure KPIs, RSS feeds, and integrations.
         </p>
       </div>
 
       {loading ? (
-        <div className="text-center py-12 text-gray-400 text-sm">Loading settings...</div>
+        <div className="text-center py-12 text-white/30 text-sm">Loading settings...</div>
       ) : (
         <div className="space-y-8">
           {/* Section 1: KPI Config */}
           <section>
-            <h2 className="text-lg font-bold text-defender-black mb-4">KPI Configuration</h2>
-            <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm overflow-hidden">
+            <h2 className="text-lg font-bold text-white mb-4">KPI Configuration</h2>
+            <div className="bg-surface-card border border-white/[0.07] rounded-card overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[700px]">
-                  <thead className="border-b border-gray-100">
+                  <thead className="border-b border-white/[0.07]">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-8">
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-white/40 uppercase tracking-wider w-8">
                         #
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-white/40 uppercase tracking-wider">
                         Title
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-24">
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-white/40 uppercase tracking-wider w-24">
                         Unit
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-28">
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-white/40 uppercase tracking-wider w-28">
                         Frequency
                       </th>
                       <th className="px-4 py-3 w-16" />
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-white/[0.05]">
                     {kpis.map((kpi) => (
-                      <tr key={kpi.id} className="hover:bg-gray-50/50 transition-colors">
+                      <tr key={kpi.id} className="hover:bg-white/[0.03] transition-colors">
                         <td className="px-4 py-3">
                           <input
                             type="number"
@@ -132,7 +132,7 @@ export default function AdminSettingsPage() {
                             onChange={(e) =>
                               updateKpi(kpi.id, 'sort_order', parseInt(e.target.value) || 0)
                             }
-                            className="w-12 rounded-[8px] border border-gray-200 px-2 py-1 text-xs text-center focus:outline-none focus:border-defender-red"
+                            className="w-12 rounded-[8px] border border-white/10 bg-surface px-2 py-1 text-xs text-center text-white focus:outline-none focus:border-defender-red"
                           />
                         </td>
                         <td className="px-4 py-3">
@@ -170,8 +170,8 @@ export default function AdminSettingsPage() {
                             disabled={savingId === kpi.id}
                             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-[8px] text-xs font-semibold transition-colors ${
                               savedId === kpi.id
-                                ? 'bg-green-100 text-green-700'
-                                : 'text-gray-500 border border-gray-200 hover:bg-gray-50'
+                                ? 'bg-emerald-500/15 text-emerald-400'
+                                : 'text-white/40 border border-white/10 hover:bg-white/[0.05]'
                             }`}
                           >
                             {savingId === kpi.id ? (
@@ -196,14 +196,14 @@ export default function AdminSettingsPage() {
 
           {/* Section 2: RSS Feeds */}
           <section>
-            <h2 className="text-lg font-bold text-defender-black mb-4">RSS Ingestion</h2>
-            <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm p-5">
+            <h2 className="text-lg font-bold text-white mb-4">RSS Ingestion</h2>
+            <div className="bg-surface-card border border-white/[0.07] rounded-card p-5">
               <div className="flex items-center justify-between gap-4 mb-4">
                 <div>
-                  <div className="text-sm font-semibold text-defender-black mb-0.5">
+                  <div className="text-sm font-semibold text-white mb-0.5">
                     kansascitydefender.com/feed/
                   </div>
-                  <div className="text-xs text-gray-400">
+                  <div className="text-xs text-white/35">
                     WordPress RSS feed (auto-ingested hourly via Vercel Cron)
                   </div>
                 </div>
@@ -218,30 +218,30 @@ export default function AdminSettingsPage() {
               </div>
 
               {ingestMsg && (
-                <div className="text-xs text-gray-600 bg-gray-50 rounded-[8px] px-3 py-2">
+                <div className="text-xs text-white/55 bg-white/[0.06] rounded-[8px] px-3 py-2">
                   {ingestMsg}
                 </div>
               )}
 
               {integrations.length > 0 && (
-                <div className="mt-4 border-t border-gray-100 pt-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                <div className="mt-4 border-t border-white/[0.07] pt-4">
+                  <div className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-2">
                     Integration Status
                   </div>
                   {integrations.map((integ) => (
-                    <div key={integ.id} className="flex items-center gap-3 text-xs text-gray-600">
+                    <div key={integ.id} className="flex items-center gap-3 text-xs text-white/55">
                       <span
                         className={`w-2 h-2 rounded-full shrink-0 ${
                           integ.status === 'ok'
-                            ? 'bg-defender-green'
+                            ? 'bg-emerald-400'
                             : integ.status === 'warning'
-                            ? 'bg-defender-gold'
-                            : 'bg-red-400'
+                            ? 'bg-amber-400'
+                            : 'bg-rose-400'
                         }`}
                       />
                       <span className="font-medium">{integ.name}</span>
                       <span className="text-gray-400">
-                        Last run: {formatDate(integ.last_run_at)}
+                        Last run: <span className="text-white/35">{formatDate(integ.last_run_at)}</span>
                       </span>
                       {integ.message && (
                         <span className="text-gray-400 truncate max-w-xs">{integ.message}</span>
@@ -255,21 +255,21 @@ export default function AdminSettingsPage() {
 
           {/* Section 3: Passcode */}
           <section>
-            <h2 className="text-lg font-bold text-defender-black mb-4">Report Form Access</h2>
-            <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm p-5">
-              <div className="text-sm text-gray-600 mb-2">
-                The report form at <code className="bg-gray-100 rounded px-1 text-xs">/report</code> is protected by a passcode. To change it:
+            <h2 className="text-lg font-bold text-white mb-4">Report Form Access</h2>
+            <div className="bg-surface-card border border-white/[0.07] rounded-card p-5">
+              <div className="text-sm text-white/55 mb-2">
+                The report form at <code className="bg-white/[0.08] rounded px-1 text-xs text-white/70">/report</code> is protected by a passcode. To change it:
               </div>
-              <ol className="text-sm text-gray-500 list-decimal list-inside space-y-1">
+              <ol className="text-sm text-white/45 list-decimal list-inside space-y-1">
                 <li>
-                  Open <code className="bg-gray-100 rounded px-1 text-xs">.env.local</code> in your project root
+                  Open <code className="bg-white/[0.08] rounded px-1 text-xs text-white/70">.env.local</code> in your project root
                 </li>
                 <li>
-                  Update <code className="bg-gray-100 rounded px-1 text-xs">REPORT_PASSCODE=yournewpasscode</code>
+                  Update <code className="bg-white/[0.08] rounded px-1 text-xs text-white/70">REPORT_PASSCODE=yournewpasscode</code>
                 </li>
                 <li>Restart the dev server or redeploy to Vercel</li>
               </ol>
-              <div className="mt-3 text-xs text-gray-400">
+              <div className="mt-3 text-xs text-white/30">
                 Current passcode env var: <code>REPORT_PASSCODE</code> (set server-side, never exposed to client)
               </div>
             </div>

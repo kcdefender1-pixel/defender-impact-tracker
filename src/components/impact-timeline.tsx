@@ -176,7 +176,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
               {programLabel}
             </span>
             {isEditorial && (
-              <span className="inline-flex items-center rounded-full px-2 py-[2px] text-[10px] font-semibold bg-gray-100 text-gray-500">
+              <span className="inline-flex items-center rounded-full px-2 py-[2px] text-[10px] font-semibold bg-white/[0.08] text-white/50">
                 Story
               </span>
             )}

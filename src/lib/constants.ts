@@ -49,14 +49,14 @@ export const KPI_TO_PILLAR: Record<string, string> = {
 };
 
 export const PROGRAM_AREA_BADGE: Record<string, string> = {
-  editorial: 'bg-rose-100 text-rose-700',
-  mutual_aid: 'bg-green-100 text-green-700',
-  political_education: 'bg-amber-100 text-amber-700',
-  arts_culture: 'bg-purple-100 text-purple-700',
-  development_fundraising: 'bg-blue-100 text-blue-700',
-  operations_systems: 'bg-gray-100 text-gray-700',
-  radar: 'bg-orange-100 text-orange-700',
-  other: 'bg-gray-100 text-gray-700',
+  editorial: 'bg-rose-500/15 text-rose-400',
+  mutual_aid: 'bg-emerald-500/15 text-emerald-400',
+  political_education: 'bg-amber-500/15 text-amber-400',
+  arts_culture: 'bg-purple-500/15 text-purple-400',
+  development_fundraising: 'bg-blue-500/15 text-blue-400',
+  operations_systems: 'bg-slate-500/15 text-slate-300',
+  radar: 'bg-orange-500/15 text-orange-400',
+  other: 'bg-slate-500/15 text-slate-400',
 };
 
 export const PROGRAM_AREA_DOT: Record<string, string> = {
@@ -84,9 +84,9 @@ export const KPI_LEFT_BORDER: Record<string, string> = {
 };
 
 export const STATUS_BADGE: Record<string, string> = {
-  pending: 'bg-amber-100 text-amber-800',
-  approved: 'bg-green-100 text-green-800',
-  archived: 'bg-gray-100 text-gray-600',
+  pending: 'bg-amber-500/15 text-amber-400',
+  approved: 'bg-emerald-500/15 text-emerald-400',
+  archived: 'bg-slate-500/15 text-slate-400',
 };
 
 export const AI_SYSTEM_PROMPT = `You are an impact tracker for The Kansas City Defender, a radical abolitionist Black nonprofit media organization in Kansas City, Missouri. Your role is to take plain-language descriptions of impact events (written like Slack messages or casual notes) and structure them for organizational tracking and funder reporting.

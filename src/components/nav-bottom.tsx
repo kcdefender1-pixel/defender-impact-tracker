@@ -21,7 +21,7 @@ export function NavBottom() {
   };
 
   return (
-    <nav data-print-hide className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-t border-gray-200/50">
+    <nav data-print-hide className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface-card/95 backdrop-blur-md border-t border-white/[0.07]">
       <div className="flex items-center justify-around px-2 py-2">
         {BOTTOM_ITEMS.map(({ href, label, icon: Icon }) => {
           const active = isActive(href);
@@ -30,7 +30,7 @@ export function NavBottom() {
               key={href}
               href={href}
               className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-[10px] transition-colors ${
-                active ? 'text-defender-red' : 'text-gray-500'
+                active ? 'text-defender-red' : 'text-white/40'
               }`}
             >
               <Icon size={20} strokeWidth={active ? 2.2 : 1.8} />

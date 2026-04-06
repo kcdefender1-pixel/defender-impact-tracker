@@ -122,22 +122,22 @@ function ExpandedRow({
         >
           {!editing ? (
             /* READ MODE */
-            <div className="divide-y divide-black/[0.05]">
+            <div className="divide-y divide-white/[0.05]">
               {/* Narrative */}
               <div className="px-6 py-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-gray-400 mb-2">
+                <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/40 mb-2">
                   Impact Narrative
                 </p>
-                <p className="text-[13px] text-gray-700 leading-relaxed max-w-3xl">{narrative}</p>
+                <p className="text-[13px] text-white/65 leading-relaxed max-w-3xl">{narrative}</p>
               </div>
 
               {/* Funder headline */}
               {init.funder_headline && (
                 <div className="px-6 py-3">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-gray-400 mb-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/40 mb-1">
                     Funder Headline
                   </p>
-                  <p className="text-[13px] text-gray-600 italic">{init.funder_headline}</p>
+                  <p className="text-[13px] text-white/55 italic">{init.funder_headline}</p>
                 </div>
               )}
 
@@ -160,7 +160,7 @@ function ExpandedRow({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="text-[11px] font-semibold text-gray-400 hover:text-gray-600 px-2.5 py-1.5 rounded-lg hover:bg-black/5 transition-colors"
+                    className="text-[11px] font-semibold text-white/40 hover:text-white/70 px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05] transition-colors"
                   >
                     Collapse
                   </button>
@@ -186,14 +186,14 @@ function ExpandedRow({
               <div className="grid grid-cols-2 gap-3">
                 {/* Internal headline */}
                 <div className="col-span-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-gray-400 block mb-1">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/40 block mb-1">
                     Internal Headline
                   </label>
                   <input
                     type="text"
                     value={edit.internal_headline}
                     onChange={(e) => setEdit((s) => ({ ...s, internal_headline: e.target.value }))}
-                    className="w-full text-[13px] font-semibold text-gray-900 bg-white border border-black/10 rounded-lg px-3 py-2 focus:outline-none"
+                    className="w-full text-[13px] font-semibold text-white bg-surface border border-white/10 rounded-lg px-3 py-2 focus:outline-none"
                     onFocus={(e) => (e.currentTarget.style.boxShadow = `0 0 0 2px ${accentHex}40`)}
                     onBlur={(e) => (e.currentTarget.style.boxShadow = '')}
                   />
@@ -201,14 +201,14 @@ function ExpandedRow({
 
                 {/* Funder headline */}
                 <div className="col-span-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-gray-400 block mb-1">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/40 block mb-1">
                     Funder Headline
                   </label>
                   <input
                     type="text"
                     value={edit.funder_headline}
                     onChange={(e) => setEdit((s) => ({ ...s, funder_headline: e.target.value }))}
-                    className="w-full text-[13px] italic text-gray-700 bg-white border border-black/10 rounded-lg px-3 py-2 focus:outline-none"
+                    className="w-full text-[13px] italic text-white/80 bg-surface border border-white/10 rounded-lg px-3 py-2 focus:outline-none"
                     onFocus={(e) => (e.currentTarget.style.boxShadow = `0 0 0 2px ${accentHex}40`)}
                     onBlur={(e) => (e.currentTarget.style.boxShadow = '')}
                   />
@@ -216,14 +216,14 @@ function ExpandedRow({
 
                 {/* Raw description */}
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-gray-400 block mb-1">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/40 block mb-1">
                     Raw Description
                   </label>
                   <textarea
                     value={edit.raw_description}
                     onChange={(e) => setEdit((s) => ({ ...s, raw_description: e.target.value }))}
                     rows={3}
-                    className="w-full text-[12px] text-gray-700 bg-white border border-black/10 rounded-lg px-3 py-2 focus:outline-none resize-none"
+                    className="w-full text-[12px] text-white/80 bg-surface border border-white/10 rounded-lg px-3 py-2 focus:outline-none resize-none"
                     onFocus={(e) => (e.currentTarget.style.boxShadow = `0 0 0 2px ${accentHex}40`)}
                     onBlur={(e) => (e.currentTarget.style.boxShadow = '')}
                   />
@@ -231,14 +231,14 @@ function ExpandedRow({
 
                 {/* AI narrative */}
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-gray-400 block mb-1">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/40 block mb-1">
                     AI Narrative
                   </label>
                   <textarea
                     value={edit.ai_narrative}
                     onChange={(e) => setEdit((s) => ({ ...s, ai_narrative: e.target.value }))}
                     rows={3}
-                    className="w-full text-[12px] text-gray-700 bg-white border border-black/10 rounded-lg px-3 py-2 focus:outline-none resize-none"
+                    className="w-full text-[12px] text-white/80 bg-surface border border-white/10 rounded-lg px-3 py-2 focus:outline-none resize-none"
                     onFocus={(e) => (e.currentTarget.style.boxShadow = `0 0 0 2px ${accentHex}40`)}
                     onBlur={(e) => (e.currentTarget.style.boxShadow = '')}
                   />
@@ -252,7 +252,7 @@ function ExpandedRow({
                     { label: 'Unit', field: 'radical_metric_unit' as const, type: 'text', placeholder: 'views' },
                   ].map(({ label, field, type, placeholder }) => (
                     <div key={field}>
-                      <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-gray-400 block mb-1">
+                      <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/40 block mb-1">
                         {label}
                       </label>
                       <input
@@ -260,7 +260,7 @@ function ExpandedRow({
                         value={edit[field]}
                         onChange={(e) => setEdit((s) => ({ ...s, [field]: e.target.value }))}
                         placeholder={placeholder}
-                        className="w-full text-[12px] font-mono text-gray-700 bg-white border border-black/10 rounded-lg px-2.5 py-2 focus:outline-none"
+                        className="w-full text-[12px] font-mono text-white/80 bg-surface border border-white/10 rounded-lg px-2.5 py-2 focus:outline-none"
                         onFocus={(e) => (e.currentTarget.style.boxShadow = `0 0 0 2px ${accentHex}40`)}
                         onBlur={(e) => (e.currentTarget.style.boxShadow = '')}
                       />
@@ -276,7 +276,7 @@ function ExpandedRow({
                   type="button"
                   onClick={() => { setEditing(false); setSaveError(null); }}
                   disabled={saving}
-                  className="text-[12px] font-semibold text-gray-500 hover:text-gray-700 px-3 py-1.5 rounded-lg hover:bg-black/5 transition-colors"
+                  className="text-[12px] font-semibold text-white/45 hover:text-white/70 px-3 py-1.5 rounded-lg hover:bg-white/[0.05] transition-colors"
                 >
                   Cancel
                 </button>
@@ -420,20 +420,20 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
       sortDir === 'asc' ? <ChevronUp size={12} className="inline ml-0.5" /> : <ChevronDown size={12} className="inline ml-0.5" />
     ) : null;
 
-  const thClass = 'px-3 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:text-defender-black transition-colors select-none';
+  const thClass = 'px-3 py-3 text-left text-xs font-semibold text-white/40 uppercase tracking-wider cursor-pointer hover:text-white transition-colors select-none';
   const tdClass = 'px-3 py-3 text-sm align-top';
 
   return (
     <div>
       {/* Filters */}
       <div className="flex flex-wrap gap-3 mb-4">
-        <div className="flex gap-1 bg-white/60 border border-gray-200/50 rounded-[10px] p-1">
+        <div className="flex gap-1 bg-surface-card border border-white/[0.07] rounded-[10px] p-1">
           {STATUS_TABS.map((tab) => (
             <button
               key={tab.value}
               onClick={() => setStatusFilter(tab.value)}
               className={`px-3 py-1.5 rounded-[8px] text-xs font-semibold transition-colors ${
-                statusFilter === tab.value ? 'bg-defender-red text-white' : 'text-gray-500 hover:text-defender-black'
+                statusFilter === tab.value ? 'bg-defender-red text-white' : 'text-white/50 hover:text-white'
               }`}
             >
               {tab.label}
@@ -443,7 +443,7 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
         <select
           value={programFilter}
           onChange={(e) => setProgramFilter(e.target.value)}
-          className="rounded-[10px] border border-gray-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-gray-600 focus:outline-none focus:border-defender-red"
+          className="rounded-[10px] border border-white/[0.07] bg-surface px-3 py-1.5 text-xs font-medium text-white focus:outline-none focus:border-defender-red"
         >
           <option value="">All Programs</option>
           {PROGRAM_AREAS.map((a) => (
@@ -453,14 +453,14 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="rounded-[10px] border border-gray-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-gray-600 focus:outline-none focus:border-defender-red"
+          className="rounded-[10px] border border-white/[0.07] bg-surface px-3 py-1.5 text-xs font-medium text-white focus:outline-none focus:border-defender-red"
         >
           <option value="">All Types</option>
           {IMPACT_TYPES.map((t) => (
             <option key={t.value} value={t.value}>{t.label}</option>
           ))}
         </select>
-        <div className="ml-auto text-xs text-gray-400 self-center">
+        <div className="ml-auto text-xs text-white/35 self-center">
           {filtered.length} event{filtered.length !== 1 ? 's' : ''}
         </div>
       </div>
@@ -470,16 +470,16 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
         <div className="flex items-center gap-3 mb-3 px-3 py-2 bg-defender-red/5 border border-defender-red/20 rounded-[10px]">
           <span className="text-xs font-semibold text-defender-red">{selected.size} selected</span>
           <button onClick={bulkApprove} className="text-xs font-semibold text-defender-green hover:underline">Approve All</button>
-          <button onClick={bulkArchive} className="text-xs font-semibold text-gray-500 hover:underline">Archive All</button>
-          <button onClick={() => setSelected(new Set())} className="ml-auto text-xs text-gray-400 hover:text-gray-600">Clear</button>
+          <button onClick={bulkArchive} className="text-xs font-semibold text-white/50 hover:underline">Archive All</button>
+          <button onClick={() => setSelected(new Set())} className="ml-auto text-xs text-white/35 hover:text-white/60">Clear</button>
         </div>
       )}
 
       {/* Table */}
-      <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-card shadow-sm overflow-hidden">
+      <div className="bg-surface-card border border-white/[0.07] rounded-card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px]">
-            <thead className="border-b border-gray-100">
+            <thead className="border-b border-white/[0.07]">
               <tr>
                 <th className="px-3 py-3 w-8">
                   <input
@@ -497,13 +497,13 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
                 <th className={thClass}>Headline</th>
                 <th className={thClass}>Metric</th>
                 <th className={thClass} onClick={() => toggleSort('status')}>Status <SortIcon col="status" /></th>
-                <th className="px-3 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-3 py-3 text-right text-xs font-semibold text-white/40 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={10} className="px-6 py-12 text-center text-sm text-gray-400">
+                  <td colSpan={10} className="px-6 py-12 text-center text-sm text-white/30">
                     No impact events match your filters.
                   </td>
                 </tr>
@@ -519,7 +519,7 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
                     <>
                       <tr
                         key={impact.id}
-                        className={`transition-colors border-b border-gray-50 ${loading ? 'opacity-60' : ''} ${isExpanded ? 'bg-gray-50/70' : 'hover:bg-gray-50/40'}`}
+                        className={`transition-colors border-b border-white/[0.05] ${loading ? 'opacity-60' : ''} ${isExpanded ? 'bg-white/[0.04]' : 'hover:bg-white/[0.03]'}`}
                         style={isExpanded ? { borderLeft: `3px solid ${accentHex}` } : { borderLeft: '3px solid transparent' }}
                       >
                         <td className="px-3 py-3">
@@ -535,7 +535,7 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
                           <button
                             type="button"
                             onClick={() => setExpandedId(isExpanded ? null : impact.id)}
-                            className="p-1 rounded transition-colors hover:bg-black/5 text-gray-400 hover:text-gray-600"
+                            className="p-1 rounded transition-colors hover:bg-white/[0.05] text-white/30 hover:text-white/60"
                             title={isExpanded ? 'Collapse' : 'Expand'}
                           >
                             <ChevronRight
@@ -548,12 +548,12 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
                           </button>
                         </td>
                         <td className={tdClass}>
-                          <span className="font-mono text-xs text-gray-500">{formatDate(impact.reported_at)}</span>
+                          <span className="font-mono text-xs text-white/40">{formatDate(impact.reported_at)}</span>
                         </td>
                         <td className={tdClass}>
-                          <div className="font-medium text-defender-black text-xs">{impact.reported_by_name}</div>
+                          <div className="font-medium text-white text-xs">{impact.reported_by_name}</div>
                           {impact.reported_by_email && (
-                            <div className="text-gray-400 text-xs">{impact.reported_by_email}</div>
+                            <div className="text-white/35 text-xs">{impact.reported_by_email}</div>
                           )}
                         </td>
                         <td className={tdClass}>
@@ -562,27 +562,27 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
                           </span>
                         </td>
                         <td className={tdClass}>
-                          <span className="text-xs text-gray-500">{typeLabel}</span>
+                          <span className="text-xs text-white/45">{typeLabel}</span>
                         </td>
                         <td className={tdClass}>
-                          <div className="font-semibold text-defender-black text-xs leading-tight max-w-[200px]" title={impact.internal_headline ?? ''}>
-                            {impact.internal_headline || <span className="italic text-gray-400">No headline</span>}
+                          <div className="font-semibold text-white text-xs leading-tight max-w-[200px]" title={impact.internal_headline ?? ''}>
+                            {impact.internal_headline || <span className="italic text-white/30">No headline</span>}
                           </div>
                           {impact.funder_headline && (
-                            <div className="text-gray-400 text-xs mt-0.5 leading-tight max-w-[200px] truncate">{impact.funder_headline}</div>
+                            <div className="text-white/35 text-xs mt-0.5 leading-tight max-w-[200px] truncate">{impact.funder_headline}</div>
                           )}
                         </td>
                         <td className={tdClass}>
                           {impact.radical_metric_label ? (
                             <div>
-                              <span className="font-bold font-mono text-defender-black text-sm">
+                              <span className="font-bold font-mono text-white text-sm">
                                 {impact.radical_metric_value?.toLocaleString() ?? '?'}
                               </span>
-                              <span className="text-xs text-gray-400 ml-1">{impact.radical_metric_unit}</span>
-                              <div className="text-xs text-gray-500">{impact.radical_metric_label}</div>
+                              <span className="text-xs text-white/35 ml-1">{impact.radical_metric_unit}</span>
+                              <div className="text-xs text-white/45">{impact.radical_metric_label}</div>
                             </div>
                           ) : (
-                            <span className="text-gray-300 text-xs">--</span>
+                            <span className="text-white/25 text-xs">--</span>
                           )}
                         </td>
                         <td className={tdClass}>
@@ -597,7 +597,7 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
                                 onClick={() => updateStatus(impact.id, 'approved')}
                                 disabled={loading}
                                 title="Approve"
-                                className="p-1.5 rounded-[8px] text-defender-green hover:bg-green-50 transition-colors disabled:opacity-50"
+                                className="p-1.5 rounded-[8px] text-defender-green hover:bg-emerald-500/10 transition-colors disabled:opacity-50"
                               >
                                 <CheckCircle size={15} />
                               </button>
@@ -607,7 +607,7 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
                                 onClick={() => updateStatus(impact.id, 'archived')}
                                 disabled={loading}
                                 title="Archive"
-                                className="p-1.5 rounded-[8px] text-gray-400 hover:bg-gray-100 transition-colors disabled:opacity-50"
+                                className="p-1.5 rounded-[8px] text-white/35 hover:bg-white/[0.08] transition-colors disabled:opacity-50"
                               >
                                 <Archive size={15} />
                               </button>
@@ -616,7 +616,7 @@ export function ImpactTable({ initialImpacts }: ImpactTableProps) {
                               onClick={() => rerunAi(impact)}
                               disabled={loading}
                               title="Re-run AI"
-                              className="p-1.5 rounded-[8px] text-gray-400 hover:bg-gray-100 transition-colors disabled:opacity-50"
+                              className="p-1.5 rounded-[8px] text-white/35 hover:bg-white/[0.08] transition-colors disabled:opacity-50"
                             >
                               <RefreshCw size={15} className={loading ? 'animate-spin' : ''} />
                             </button>

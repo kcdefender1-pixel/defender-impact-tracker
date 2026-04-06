@@ -495,7 +495,7 @@ const SEED_IMPACTS = [
     reported_by_name: 'Defender Editorial',
     reported_by_email: 'editorial@kansascitydefender.com',
     program_area: 'editorial',
-    impact_type: 'recognition',
+    impact_type: 'narrative_shift',
     raw_description: "The Defender brought on Jon Jeter as its first international correspondent. Jeter is a former Bureau Chief at the Washington Post and a two-time Pulitzer Prize finalist. His Plunder Papers series — an ongoing investigative examination of African poverty and colonial legacy — launched in February 2026 and is published exclusively by the Defender.",
     ai_narrative: "The Kansas City Defender made history by bringing on Jon Jeter — a former Washington Post Bureau Chief and two-time Pulitzer Prize finalist — as its first international correspondent. Jeter's Plunder Papers series, launched in February 2026, examines why Africans continue to live in grinding poverty seven decades after the alleged close of the colonial era. Publishing this series exclusively positions the Defender as not just a local accountability outlet but a nationally and internationally significant Black press institution.",
     internal_headline: 'Defender Hires First International Correspondent: Former WaPo Bureau Chief Jon Jeter',

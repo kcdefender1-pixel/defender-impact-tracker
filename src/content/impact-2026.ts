@@ -148,7 +148,7 @@ export const DOORS: {
     what: 'Our Free Clothing Program, run by an all-Black mutual aid team and set up like a department store owned by the people. No applications, no questions.',
     proof: '3,000+ clothing and hygiene items given to Black families in 2026, by a mutual aid team now about 30 members strong.',
     link: 'https://kansascitydefender.com/mutual-aid-community-programs/peoples-free-store-kc-defender-clothing-hygiene-distribution/',
-    image: `${CDN}/2026/04/27141634/158A3299.jpg`,
+    image: '/photos/mutual-aid-team.jpg',
   },
   {
     name: 'The Hamer Free Food Program',
@@ -184,7 +184,7 @@ export const DOORS: {
     pillar: 'organizing',
     what: 'A standing community of readers working through the Black radical tradition together, at home in Ms. Willa’s Books, Missouri’s oldest Black bookstore.',
     proof: 'Political education that keeps going between cohorts.',
-    image: '/photos/breal-week-2.jpg',
+    image: '/photos/book-club.jpg',
   },
   {
     name: 'The Culture',
@@ -192,7 +192,7 @@ export const DOORS: {
     what: 'Kansas City’s biggest Juneteenth Cookout, built with Decarcerate KC, plus RADAR, our new culture magazine documenting the city’s artists and creators.',
     proof: '500+ neighbors at Harris Park this year, more than 1,000 across the last two, with dozens of Black vendors.',
     link: 'https://kansascitydefender.com/black-life-joy/juneteenth-cookout-kansas-city-or-we-did-juneteenth-kansas-city/',
-    image: `${CDN}/2026/06/22134927/158A1563-scaled.jpg`,
+    image: '/photos/juneteenth-basketball.jpg',
   },
   {
     name: 'Ms. Willa’s Books',
@@ -259,14 +259,13 @@ export const WILLAS = {
   shelfNote: 'Inside: 10,000 volumes, including some of the earliest books written by Black people in the United States after slavery.',
   steps: [
     { title: 'A week from auction', text: 'Ms. Willa’s entire collection, 10,000 volumes of Black history and literature, was a week away from being auctioned off.' },
-    { title: 'We raised the rent', text: 'The Defender raised the money to pay her rent for a full year, then helped Ms. Willa retire with dignity.' },
+    { title: 'We saved the store', text: 'The Defender raised the money to cover a full year of her rent, then helped Ms. Willa retire with dignity.' },
     { title: 'Every book, by hand', text: 'Defender organizers cataloged the entire 10,000-volume collection.' },
     { title: 'Our home', text: '2026 is our first full year running it as our headquarters: the pantry, the mutual aid room, the book club, and the freedom school classroom.' },
     { title: 'Next: a Liberation Hub', text: 'In 2027, Willa’s becomes a year-round Liberation Hub, open to the community every day.' },
   ],
-  image: `${CDN}/2026/07/22122112/KCD-Willas-3.jpg`,
-  imageAlt: 'The Defender team in front of Willa’s Books & Vinyl',
-  credit: 'Led by Nina Kerrs, Site Manager & Willa’s Campaign Lead',
+  image: '/photos/ms-willa.jpg',
+  imageAlt: 'Ms. Willa in her bookstore',
 };
 
 // ─── In their words ─────────────────────────────────────────────────────────
@@ -586,8 +585,8 @@ export const MILESTONES: Milestone[] = [
     kind: 'program',
     title: 'High schoolers design “the school that doesn’t yet exist”',
     summary: 'In B-REAL Academy’s Radical Imagination session, high school students led the room in designing a liberated Black freedom school: farm-to-table lunches from Black farms, trauma-informed classrooms, a mobile school, and lessons on revolutionary figures.',
-    image: '/photos/breal-week-2.jpg',
-    imageAlt: 'B-REAL Academy students present their design for a freedom school',
+    image: '/photos/breal-circle.jpg',
+    imageAlt: 'A B-REAL Academy session in the circle at Ms. Willa’s',
   },
   {
     slug: 'vera',
@@ -692,6 +691,9 @@ export const MILESTONES: Milestone[] = [
     title: 'Say His Name: Saveion',
     summary: 'We reported the killing of nineteen-year-old Saveion McConnell by a Lafayette County deputy, when the state was releasing nothing, and stood with his mother as she called for justice.',
     link: 'https://kansascitydefender.com/justice/saveion-mcconnell-lafayette-county-deputy/',
+    image: '/photos/saveion-justice-and-faith.jpg',
+    imageAlt: 'A young woman holds a “Justice and Faith” sign with Saveion McConnell’s photo',
+    imageTop: true,
   },
   {
     slug: 'breal-graduation',
@@ -1051,6 +1053,9 @@ export const WINS: Win[] = [
     ],
     outcome: 'Nationally renowned civil rights attorney Ben Crump is fighting for Saveion’s family, and the community is demanding the case be reopened.',
     link: 'https://kansascitydefender.com/justice/saveion-mcconnell-bodycam-video/',
+    image: '/photos/saveion-justice-and-faith.jpg',
+    imageAlt: 'A young woman holds a “Justice and Faith” sign with Saveion McConnell’s photo',
+    imageTop: true,
   },
   {
     slug: 'free-store',

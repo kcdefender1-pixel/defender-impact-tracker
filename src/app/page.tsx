@@ -241,7 +241,6 @@ export default function ImpactPage() {
                 </li>
               ))}
             </ol>
-            <p className="kicker text-paper/60 px-6 md:px-10 py-4 border-t-2 border-paper/30">{WILLAS.credit}</p>
           </div>
         </section>
 

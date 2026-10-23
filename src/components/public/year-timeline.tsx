@@ -33,6 +33,9 @@ const FILTERS: { value: Filter; label: string }[] = [
 
 const WIN_SLUGS = new Set(WINS.map((w) => w.slug));
 
+// Always show the year in date order, however entries are arranged in the content file
+const ORDERED = [...MILESTONES].sort((a, b) => a.date.localeCompare(b.date));
+
 function monthOf(m: Milestone) {
   return Number(m.date.slice(5, 7)) - 1;
 }
@@ -40,15 +43,15 @@ function monthOf(m: Milestone) {
 export function YearTimeline() {
   const [filter, setFilter] = useState<Filter>('all');
 
-  const lastMonth = useMemo(() => Math.max(...MILESTONES.map(monthOf)), []);
+  const lastMonth = useMemo(() => Math.max(...ORDERED.map(monthOf)), []);
   const months = MONTHS.slice(0, lastMonth + 1);
 
-  const visible = MILESTONES.filter((m) =>
+  const visible = ORDERED.filter((m) =>
     filter === 'all' ? true : filter === 'win' ? m.kind === 'win' : m.pillar === filter
   );
 
   const byMonth = months.map((_, i) => visible.filter((m) => monthOf(m) === i));
-  const allByMonth = months.map((_, i) => MILESTONES.filter((m) => monthOf(m) === i));
+  const allByMonth = months.map((_, i) => ORDERED.filter((m) => monthOf(m) === i));
   const maxInMonth = Math.max(...allByMonth.map((g) => g.length));
 
   return (

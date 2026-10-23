@@ -235,7 +235,7 @@ export default function ImpactPage() {
             ))}
           </div>
 
-          <h3 className="display text-[2rem] md:text-[2.4rem] mt-14 mb-6">Recognized in 2026</h3>
+          <h3 className="display text-[2rem] md:text-[2.4rem] mt-14 mb-6">Recognition</h3>
           <ul className="grid sm:grid-cols-2 gap-4">
             {RECOGNITION.map((r) => (
               <li key={r.who} className="border-l-4 border-defender-red pl-4 py-1">

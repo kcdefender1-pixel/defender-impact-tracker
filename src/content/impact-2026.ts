@@ -70,7 +70,7 @@ export const MORE_STATS = [
   { value: '500K+', label: 'Reached during the Platform Ventures ICE fight' },
   { value: '23', label: 'Organizations in the coalition against the World Cup Jail' },
   { value: '150+', label: 'Neighbors served in one afternoon at the People’s Free Store' },
-  { value: '10 → 81', label: 'Age range of Freedom School students' },
+  { value: '40%+', label: 'Growth in active subscriptions' },
   { value: '337K+', label: 'Views on our Lincoln Prep walkout story' },
   { value: '100+', label: 'Signed up to defend neighbors from ICE through our coverage' },
   { value: '10+', label: 'School districts across Missouri and Kansas whose students we trained' },
@@ -207,6 +207,7 @@ export const PARTNERS = [
 ];
 
 export const RECOGNITION = [
+  { who: 'Institute for Nonprofit News', what: 'Khadijah Bland, our Director of Development & Revenue, named National Emerging Leader of the Year', date: 'July 2026' },
   { who: 'Reynolds Journalism Institute', what: 'Featured the Defender as a model for Black independent media', date: 'March 2026' },
   { who: 'Vera Institute of Justice', what: 'Cited our ICE reporting in a national policy brief', date: 'March 2026' },
   { who: 'Pivot Fund', what: 'Spotlighted the Defender in its national roundup of grantees', date: 'April 2026' },
@@ -214,6 +215,7 @@ export const RECOGNITION = [
   { who: 'Lab for Journalism Funding', what: 'Selected for the Local Media Association’s 2026 national cohort', date: 'August 2026' },
   { who: 'CUNY Newmark Graduate School of Journalism', what: 'Spotlighted our dual-power model in Spotlight on Community Media', date: 'September 2026' },
   { who: 'One Million Experiments', what: 'Highlighted B-REAL Academy among abolitionist institutions', date: 'October 2026' },
+  { who: 'Ta-Nehisi Coates, Vanity Fair', what: 'Cited our reporting on racism in Mizzou’s Turning Point chapter in “Charlie Kirk, Redeemed”', date: 'September 2025' },
   { who: 'Rime Buddhist Center & Interfaith Council of KC', what: 'Bodhisattva Award for compassion, service, and justice', date: '2025' },
   { who: 'National Black United Front', what: 'Charles Miller Black Liberation Award', date: '2025' },
 ];
@@ -237,7 +239,7 @@ export const IMPACT_AREAS: {
       'Our Lincoln Prep walkout story alone reached 337,000+ views, and our coverage moved a youth movement across state lines.',
       'Liberation Now, our YouTube show, brings candidates, scholars, and ministers to a generation that tuned out of legacy media.',
       'Investigations into nuclear weapons, data center tax schemes, and police killings reframed what the city debates.',
-      'The Vera Institute, Reynolds Journalism Institute, and Pivot Fund all pointed to our work as a national model.',
+      'Ta-Nehisi Coates cited our reporting in Vanity Fair, and the Vera Institute, Reynolds Journalism Institute, CUNY, and Pivot Fund all pointed to our work as a national model.',
     ],
   },
   {
@@ -573,6 +575,19 @@ export const MILESTONES: Milestone[] = [
     summary: 'The Back-to-School People’s Distribution returned on Troost: kids’ clothing and hygiene items, sorted by our all-Black mutual aid team into a free, retail-quality store. No applications, no questions.',
     outcome: 'Black students started the year clothed and cared for, for free.',
     link: 'https://kansascitydefender.com/mutual-aid-community-programs/back-to-school-peoples-distribution-kansas-city-2026/',
+  },
+  {
+    slug: 'inn-emerging-leader',
+    date: '2026-07-20',
+    pillar: 'institutional',
+    kind: 'recognition',
+    title: 'Khadijah Bland named INN’s National Emerging Leader of the Year',
+    summary: 'The Institute for Nonprofit News honored our Director of Development & Revenue for replacing ad hoc fundraising with structured systems, sustainable forecasting, and long-term revenue planning.',
+    outcome: 'Active subscriptions up more than 40%, new revenue from events and Black business partnerships, and the Defender’s first capital campaign.',
+    metric: { value: '40%+', label: 'growth in active subscriptions' },
+    image: '/photos/inn-emerging-leader.jpg',
+    imageAlt: 'Khadijah Bland, INN 2026 Emerging Leader of the Year',
+    imageTop: true,
   },
   {
     slug: 'five-years',

@@ -10,21 +10,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#FAF7F2",
-        surface: "#0d0f14",
-        "surface-card": "#13151e",
-        "surface-hover": "#1a1d28",
-        "surface-border": "rgba(255,255,255,0.07)",
-        "defender-red": "#E11D48",
-        "defender-black": "#0B0B0B",
-        "defender-green": "#16A34A",
-        "defender-gold": "#F59E0B",
+        paper: "#F4EFE7",
+        "paper-2": "#EAE3D7",
+        card: "#FFFDF8",
+        ink: {
+          DEFAULT: "rgb(var(--ink) / <alpha-value>)",
+          2: "#3B3631",
+          3: "#655D54",
+          4: "#8A8176",
+        },
+        line: "rgb(var(--ink) / 0.13)",
+        "defender-red": "#E0263F",
+        "defender-black": "#0E0D0C",
+        "defender-green": "#0B8A4E",
+        "defender-gold": "#FFC229",
+        "defender-blue": "#2B4CFF",
+        "defender-violet": "#B9A4FF",
+        "defender-pink": "#FF9EC4",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -64,8 +68,14 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        card: "14px",
-        button: "10px",
+        card: "4px",
+        button: "999px",
+      },
+      fontFamily: {
+        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+        display: ["var(--font-display)", "var(--font-geist-sans)", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
       },
       keyframes: {
         "accordion-down": {

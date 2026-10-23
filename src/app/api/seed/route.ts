@@ -560,6 +560,13 @@ const SEED_METRICS = [
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
+
+  // Seeding can wipe the database, so it only runs with the SEED_SECRET (unset = disabled)
+  const secret = process.env.SEED_SECRET;
+  if (!secret || searchParams.get('secret') !== secret) {
+    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  }
+
   const reset = searchParams.get('reset') === 'true';
 
   const supabase = createServiceClient();
@@ -593,7 +600,7 @@ export async function GET(request: Request) {
 
   if (!reset && (impactCount ?? 0) > 0) {
     return NextResponse.json({
-      message: 'Already seeded. Visit /api/seed?reset=true to clear and re-seed.',
+      message: 'Already seeded. Add &reset=true to clear and re-seed.',
       existing_impacts: impactCount,
       kpi_config: results.kpi_config,
     });

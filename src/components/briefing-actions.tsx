@@ -36,10 +36,10 @@ export function BriefingActions({ text }: BriefingActionsProps) {
   };
 
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-2">
       <button
         onClick={handleCopy}
-        className="flex items-center gap-1.5 text-xs font-medium text-defender-red/70 hover:text-defender-red px-2 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors"
+        className="flex items-center gap-1.5 text-xs font-bold bg-ink text-paper rounded-button px-3.5 py-2 hover:bg-defender-red transition-colors"
         title="Copy briefing text"
       >
         {copied ? <Check size={13} /> : <Copy size={13} />}
@@ -48,7 +48,7 @@ export function BriefingActions({ text }: BriefingActionsProps) {
       <button
         onClick={handleRefresh}
         disabled={refreshing}
-        className="flex items-center gap-1.5 text-xs font-medium text-white/35 hover:text-white/70 px-2 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors disabled:opacity-50"
+        className="flex items-center gap-1.5 text-xs font-bold text-ink border-2 border-ink rounded-button px-3 py-[6px] hover:bg-ink hover:text-paper transition-colors disabled:opacity-50"
         title="Regenerate briefing"
       >
         <RefreshCw size={13} className={refreshing ? 'animate-spin' : ''} />

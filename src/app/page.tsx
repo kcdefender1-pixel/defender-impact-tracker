@@ -1,333 +1,278 @@
-import { createClient } from '@/lib/supabase/server';
-import { KpiGrid } from '@/components/kpi-grid';
-import { ImpactTimeline } from '@/components/impact-timeline';
-import { BriefingBlock } from '@/components/briefing-block';
-import { VictoryCard } from '@/components/victory-card';
-import type { KpiConfig, MetricSnapshot, ImpactEvent, IntegrationStatus } from '@/lib/types';
-import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import {
+  DOORS,
+  HEADLINE_STATS,
+  IMPACT_AREAS,
+  MORE_STATS,
+  NARRATIVE,
+  PARTNERS,
+  PATHWAY,
+  PILLARS,
+  PULL_QUOTE,
+  RECOGNITION,
+  THESIS,
+  WHO_FOR,
+  WHY_NOW,
+} from '@/content/impact-2026';
+import { PILLAR_STYLE } from '@/lib/pillar-styles';
+import { YearTimeline } from '@/components/public/year-timeline';
+import { WinsBoard } from '@/components/public/wins-board';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
-function formatSyncTime(iso: string | null): string {
-  if (!iso) return 'Never';
-  const diff = Date.now() - new Date(iso).getTime();
-  const mins = Math.floor(diff / 60_000);
-  const hours = Math.floor(diff / 3_600_000);
-  if (mins < 1) return 'Just now';
-  if (mins < 60) return `${mins}m ago`;
-  if (hours < 24) return `${hours}h ago`;
-  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-}
-
-function getCutoff(period: string): string | null {
-  const now = new Date();
-  if (period === 'this_month') {
-    return new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-  }
-  if (period === '30d') {
-    return new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-  }
-  if (period === '60d') {
-    return new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString();
-  }
-  if (period === '90d') {
-    return new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString();
-  }
-  return null; // all time
-}
-
-function formatMetricValue(val: number): string {
-  if (val >= 1_000_000) return `${(val / 1_000_000).toFixed(1)}M`;
-  if (val >= 1_000) return `${(val / 1_000).toFixed(0)}K`;
-  return String(val);
-}
-
-interface CommandCenterProps {
-  searchParams: { period?: string; view?: string };
-}
-
-export default async function CommandCenter({ searchParams }: CommandCenterProps) {
-  const period = searchParams.period ?? 'all';
-  const view = searchParams.view ?? 'highlights';
-  const cutoff = getCutoff(period);
-
-  // Year-to-date start for Victory Board (always Jan 1 of current year)
-  const yearStart = new Date(new Date().getFullYear(), 0, 1).toISOString();
-
-  const supabase = createClient();
-
-  let snapshotsQuery = supabase.from('metric_snapshots').select('*').order('taken_at', { ascending: false });
-  if (cutoff) {
-    snapshotsQuery = snapshotsQuery.gte('taken_at', cutoff);
-  }
-
-  // Period-filtered impacts for the timeline
-  let impactsQuery = supabase
-    .from('impact_events')
-    .select('*')
-    .eq('status', 'approved');
-  if (cutoff) {
-    impactsQuery = impactsQuery.gte('reported_at', cutoff);
-  }
-  const impactsOrdered =
-    view === 'highlights'
-      ? impactsQuery.order('confidence', { ascending: false }).limit(10)
-      : impactsQuery.order('reported_at', { ascending: false }).limit(10);
-
-  const [kpisRes, snapshotsRes, impactsRes, syncRes, pendingRes, victoriesRes] = await Promise.all([
-    supabase.from('kpi_config').select('*').order('sort_order', { ascending: true }),
-    snapshotsQuery,
-    impactsOrdered,
-    supabase
-      .from('integration_status')
-      .select('*')
-      .eq('name', 'rss_kansascitydefender')
-      .maybeSingle(),
-    supabase
-      .from('impact_events')
-      .select('id', { count: 'exact', head: true })
-      .eq('status', 'pending'),
-    // Victory Board: accountability + policy wins, year-to-date, always unfiltered by period
-    supabase
-      .from('impact_events')
-      .select('*')
-      .eq('status', 'approved')
-      .in('impact_type', ['accountability', 'policy_win'])
-      .gte('reported_at', yearStart)
-      .order('confidence', { ascending: false })
-      .limit(6),
-  ]);
-
-  const kpis: KpiConfig[] = kpisRes.data ?? [];
-  const allSnapshots: MetricSnapshot[] = snapshotsRes.data ?? [];
-  const impacts: ImpactEvent[] = impactsRes.data ?? [];
-  const syncStatus: IntegrationStatus | null = syncRes.data ?? null;
-  const pendingCount: number = pendingRes.count ?? 0;
-  const victories: ImpactEvent[] = victoriesRes.data ?? [];
-
-  // Group snapshots by metric_key, keep last 6 per key for sparklines
-  const snapshotsByKey: Record<string, MetricSnapshot[]> = {};
-  for (const snap of allSnapshots) {
-    if (!snapshotsByKey[snap.metric_key]) snapshotsByKey[snap.metric_key] = [];
-    if (snapshotsByKey[snap.metric_key].length < 6) {
-      snapshotsByKey[snap.metric_key].push(snap);
-    }
-  }
-
-  // Stats strip: aggregate year-to-date from victories + period-filtered impacts
-  const allImpactsForStats = victoriesRes.data ?? [];
-  const accountabilityWins = allImpactsForStats.filter(
-    (v: ImpactEvent) => v.impact_type === 'accountability'
-  ).length;
-  const policyWins = allImpactsForStats.filter(
-    (v: ImpactEvent) => v.impact_type === 'policy_win'
-  ).length;
-
-  // For mutual aid and education stats, pull from current period impacts
-  const mutualAidImpacts = impacts.filter((i) => i.program_area === 'mutual_aid');
-  const familiesServed = mutualAidImpacts
-    .filter((i) => i.radical_metric_unit === 'families' && i.radical_metric_value)
-    .reduce((sum, i) => sum + (i.radical_metric_value ?? 0), 0);
-
-  const edImpacts = impacts.filter(
-    (i) => i.program_area === 'political_education' && i.radical_metric_value
-  );
-  const studentsInFreedomSchool =
-    edImpacts.length > 0
-      ? Math.max(...edImpacts.map((i) => i.radical_metric_value ?? 0))
-      : 0;
-
-  // Highest reach story
-  const topReachImpact = [...impacts]
-    .filter((i) => i.radical_metric_unit === 'views' && i.radical_metric_value)
-    .sort((a, b) => (b.radical_metric_value ?? 0) - (a.radical_metric_value ?? 0))[0];
-
-  const showStatsStrip =
-    accountabilityWins > 0 ||
-    policyWins > 0 ||
-    familiesServed > 0 ||
-    studentsInFreedomSchool > 0 ||
-    topReachImpact != null;
-
+export default function ImpactPage() {
   return (
-    <div className="px-4 py-8 md:px-8 md:py-10">
-      {/* Header row */}
-      <div className="flex items-start justify-between mb-8 gap-4">
-        <div>
-          <div className="text-[10px] font-black text-defender-red uppercase tracking-[0.15em] mb-1">
-            The Kansas City Defender
-          </div>
-          <h1 className="text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
-            Command Center
-          </h1>
-          <p className="text-white/40 text-sm mt-1.5">
-            Organizational impact at a glance.
-          </p>
+    <div>
+      {/* ── Cover ─────────────────────────────────────────────── */}
+      <section className="bg-defender-red text-ink relative overflow-hidden border-b-2 border-ink">
+        <div
+          aria-hidden
+          className="display absolute -right-6 -bottom-10 md:-bottom-16 text-[14rem] md:text-[24rem] leading-none text-ink/[0.07] select-none pointer-events-none"
+        >
+          2026
         </div>
 
-        {/* Status badges */}
-        <div className="flex flex-col items-end gap-2 shrink-0">
-          <div className="flex items-center gap-1.5 text-xs font-mono text-white/30">
-            <span
-              className={`w-1.5 h-1.5 rounded-full ${
-                syncStatus?.status === 'ok'
-                  ? 'bg-emerald-400'
-                  : syncStatus?.status === 'warning'
-                  ? 'bg-amber-400'
-                  : 'bg-white/20'
-              }`}
-            />
-            RSS: {formatSyncTime(syncStatus?.last_run_at ?? null)}
-          </div>
-          {pendingCount > 0 && (
-            <Link
-              href="/admin/impacts"
-              className="text-xs font-semibold bg-amber-500/15 text-amber-400 rounded-full px-2.5 py-1 hover:bg-amber-500/25 transition-colors"
+        <div className="relative max-w-[1320px] mx-auto px-4 md:px-8 pt-10 pb-12 md:pt-14 md:pb-16 grid md:grid-cols-12 gap-10 md:gap-8 items-end">
+          <div className="md:col-span-7 rise">
+            <span className="kicker inline-block bg-ink text-paper px-2.5 py-1 mb-6">{THESIS.kicker}</span>
+            <h1 className="display text-[clamp(3.6rem,10vw,9rem)] text-ink">
+              Media that <span className="text-paper">builds power.</span>
+            </h1>
+            <p className="mt-7 max-w-xl text-[17px] md:text-[18px] font-medium text-ink/85 leading-relaxed">
+              {THESIS.dek}
+            </p>
+            <a
+              href="#power"
+              className="mt-8 inline-flex items-center gap-2 bg-ink text-paper rounded-button px-5 py-3 text-[14px] font-bold hover:bg-paper hover:text-ink transition-colors"
             >
-              {pendingCount} pending review
-            </Link>
-          )}
-        </div>
-      </div>
+              Read our story <ArrowRight size={16} />
+            </a>
+          </div>
 
-      {/* Impact Briefing */}
-      <section className="mb-8">
-        <BriefingBlock />
+          <div className="md:col-span-5 flex flex-col gap-2.5">
+            {HEADLINE_STATS.map((s, i) => (
+              <CoverStat key={s.label} value={s.value} label={s.label} index={i} />
+            ))}
+            <span className="kicker text-ink/70 mt-2 text-right">In 2026 alone</span>
+          </div>
+        </div>
       </section>
 
-      {/* What We Built stats strip */}
-      {showStatsStrip && (
-        <section className="mb-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {accountabilityWins > 0 && (
-              <StatPill
-                value={String(accountabilityWins)}
-                label={accountabilityWins === 1 ? 'Accountability Win' : 'Accountability Wins'}
-                color="red"
-              />
-            )}
-            {policyWins > 0 && (
-              <StatPill
-                value={String(policyWins)}
-                label={policyWins === 1 ? 'Policy Win' : 'Policy Wins'}
-                color="green"
-              />
-            )}
-            {studentsInFreedomSchool > 0 && (
-              <StatPill
-                value={String(studentsInFreedomSchool)}
-                label="In Freedom School"
-                color="gold"
-              />
-            )}
-            {familiesServed > 0 && (
-              <StatPill
-                value={String(familiesServed)}
-                label="Families Served"
-                color="green"
-              />
-            )}
-            {topReachImpact && (
-              <StatPill
-                value={formatMetricValue(topReachImpact.radical_metric_value ?? 0)}
-                label="Peak Story Views"
-                color="gold"
-              />
-            )}
+      {/* ── Why now ───────────────────────────────────────────── */}
+      <section className="bg-ink text-paper border-b-2 border-ink" aria-label="Why now">
+        <div className="max-w-[1320px] mx-auto px-4 md:px-8 py-10 md:py-12 grid md:grid-cols-12 gap-8 items-start">
+          <h2 className="md:col-span-3 display text-[2.4rem] md:text-[2.8rem] text-defender-gold">
+            The old press is going dark.
+          </h2>
+          <div className="md:col-span-9 grid sm:grid-cols-3 gap-6 md:gap-8">
+            {WHY_NOW.map((w) => (
+              <div key={w.stat} className="border-t-2 border-paper/25 pt-4">
+                <span className="display block text-[1.9rem] text-defender-red">{w.stat}</span>
+                <p className="mt-2 text-[14.5px] leading-relaxed text-paper/80">{w.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Our Power: the narrative ──────────────────────────── */}
+      <section id="power" className="max-w-[1320px] mx-auto px-4 md:px-8 py-16 md:py-24">
+        <div className="grid md:grid-cols-12 gap-8 md:gap-10">
+          <aside className="md:col-span-3">
+            <div className="md:sticky md:top-32">
+              <p className="kicker text-defender-red mb-3">Our Power</p>
+              <h2 className="display text-[2.6rem] md:text-[3.1rem] text-ink">
+                Where they tune out, we tune in.
+              </h2>
+            </div>
+          </aside>
+
+          <article className="md:col-span-8 md:col-start-5 font-serif text-ink">
+            {NARRATIVE.map((p, i) => (
+              <p
+                key={i}
+                className={
+                  i === 0
+                    ? 'dropcap text-[1.45rem] md:text-[1.7rem] leading-[1.42] mb-7'
+                    : 'text-[1.15rem] md:text-[1.28rem] leading-[1.65] text-ink-2 mb-6'
+                }
+              >
+                {p}
+              </p>
+            ))}
+            <blockquote className="mt-12 pt-8 border-t-2 border-ink">
+              <p className="italic text-[1.9rem] md:text-[2.6rem] leading-[1.12] tracking-[-0.01em]">
+                {PULL_QUOTE}
+              </p>
+            </blockquote>
+          </article>
+        </div>
+      </section>
+
+      <div className="max-w-[1320px] mx-auto px-4 md:px-8">
+        {/* ── How it fits ───────────────────────────────────────── */}
+        <section id="how" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead
+            title="How It Fits"
+            dek="Journalism, mutual aid, political education, and culture are not separate programs. They are one path, and every step builds power."
+          />
+
+          {/* The path */}
+          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink mb-14">
+            {PATHWAY.map((p, i) => (
+              <li key={p.step} className={`relative p-5 md:p-6 ${i === PATHWAY.length - 1 ? 'bg-defender-red text-white sm:col-span-2 lg:col-span-1' : 'bg-card'}`}>
+                <span className={`kicker block mb-2 ${i === PATHWAY.length - 1 ? 'text-white/80' : 'text-ink-4'}`}>
+                  Step {i + 1}
+                </span>
+                <span className="display block text-[2.4rem]">{p.step}</span>
+                <p className={`mt-2 text-[14px] leading-snug ${i === PATHWAY.length - 1 ? 'text-white/90' : 'text-ink-2'}`}>
+                  {p.text}
+                </p>
+                {i < PATHWAY.length - 1 && (
+                  <ArrowRight
+                    size={22}
+                    strokeWidth={2.5}
+                    className="hidden lg:block absolute -right-[13px] top-1/2 -translate-y-1/2 z-10 bg-paper border-2 border-ink rounded-full p-0.5"
+                    aria-hidden
+                  />
+                )}
+              </li>
+            ))}
+          </ol>
+
+          {/* Who it is for */}
+          <h3 className="display text-[2rem] md:text-[2.4rem] mb-6">Who the Defender is for</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
+            {WHO_FOR.map((w) => (
+              <div key={w.who} className="border-2 border-ink bg-card p-5">
+                <span className="font-serif font-semibold text-[1.3rem] block">{w.who}</span>
+                <p className="mt-1.5 text-[14.5px] text-ink-2 leading-relaxed">{w.why}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Into the movement */}
+          <div className="bg-ink text-paper p-6 md:p-8 border-2 border-ink">
+            <span className="kicker text-defender-gold block mb-3">Into the movement</span>
+            <p className="font-serif text-[1.25rem] md:text-[1.45rem] leading-snug max-w-3xl">
+              The Defender is the media arm of a broader movement. The people we reach go on to join and
+              build alongside organizations across the region.
+            </p>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {PARTNERS.map((p) => (
+                <li key={p} className="text-[13px] font-semibold border border-paper/30 rounded-full px-3 py-1">
+                  {p}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
-      )}
 
-      {/* Victory Board */}
-      {victories.length > 0 && (
-        <section className="mb-10">
-          <div className="flex items-center justify-between mb-5">
-            <div>
-              <h2 className="text-2xl font-black text-white uppercase tracking-tight">
-                Victory Board
-              </h2>
-              <div className="w-8 h-[3px] bg-defender-red mt-1" />
-            </div>
-            <span className="text-xs font-mono text-white/30 uppercase tracking-wider">Year to date</span>
+        {/* ── Impact areas ──────────────────────────────────────── */}
+        <section id="areas" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead
+            title="Impact Areas"
+            dek="Where the work moves the needle, with the receipts."
+          />
+          <div className="grid md:grid-cols-2 gap-5">
+            {IMPACT_AREAS.map((a) => {
+              const style = PILLAR_STYLE[a.pillar];
+              return (
+                <article key={a.id} className="border-2 border-ink bg-card flex flex-col">
+                  <div className={`px-6 py-4 border-b-2 border-ink ${style.fill}`}>
+                    <h3 className="display text-[2rem] md:text-[2.3rem]">{a.name}</h3>
+                  </div>
+                  <div className="p-6">
+                    <p className="font-serif font-semibold text-[1.3rem] leading-snug">{a.claim}</p>
+                    <ul className="mt-5 space-y-3">
+                      {a.proof.map((p) => (
+                        <li key={p} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-2">
+                          <span className={`mt-[7px] w-2 h-2 shrink-0 ${style.dot} ring-1 ring-ink`} aria-hidden />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              );
+            })}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {victories.map((win) => (
-              <VictoryCard key={win.id} win={win} />
+        </section>
+
+        {/* ── The Year ──────────────────────────────────────────── */}
+        <section id="year" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead
+            title="The Year"
+            dek="From January to now, in order. Filter by type of work, or open any win for the full story."
+          />
+          <YearTimeline />
+        </section>
+
+        {/* ── Wins ──────────────────────────────────────────────── */}
+        <section id="wins" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead title="Victory Board" dek="The wins of 2026. Open any card for the full story and what changed." />
+          <WinsBoard />
+        </section>
+
+        {/* ── Programs ──────────────────────────────────────────── */}
+        <section id="programs" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead title="The Doors" dek="Every program is a way in. Each one leads to the same home." />
+          <div className="grid md:grid-cols-2 gap-5">
+            {DOORS.map((d, i) => (
+              <DoorCard key={d.name} door={d} wide={DOORS.length % 2 === 1 && i === DOORS.length - 1} />
             ))}
           </div>
         </section>
-      )}
 
-      {/* 5 Pillars of Power */}
-      <section className="mb-10">
-        <div className="flex items-center justify-between mb-5">
-          <div>
-            <h2 className="text-2xl font-black text-white uppercase tracking-tight">
-              5 Pillars of Power
-            </h2>
-            <div className="w-8 h-[3px] bg-defender-red mt-1" />
+        {/* ── By the numbers ────────────────────────────────────── */}
+        <section id="numbers" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead title="By the Numbers" />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink">
+            {[...HEADLINE_STATS, ...MORE_STATS].map((s) => (
+              <div key={s.label} className="bg-card p-5 md:p-6">
+                <span className="display block text-[2.8rem] md:text-[3.4rem] tabular-nums text-ink">{s.value}</span>
+                <span className="block mt-2 text-[13px] font-semibold text-ink-2 leading-snug">{s.label}</span>
+              </div>
+            ))}
           </div>
-          <Link
-            href="/admin/metrics"
-            className="text-xs font-semibold text-white/40 hover:text-defender-red transition-colors"
-          >
-            + Add snapshot
-          </Link>
-        </div>
-        <KpiGrid kpis={kpis} snapshotsByKey={snapshotsByKey} period={period} />
-      </section>
 
-      {/* Impacts timeline */}
-      <section>
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div>
-              <h2 className="text-2xl font-black text-white uppercase tracking-tight">
-                {view === 'highlights' ? 'Top Highlights' : 'Recent Impacts'}
-              </h2>
-              <div className="w-8 h-[3px] bg-defender-red mt-1" />
-            </div>
-            {/* View toggle tabs */}
-            <div className="flex items-center gap-1 bg-surface-card border border-white/[0.07] rounded-full p-0.5 mt-1">
-              <Link
-                href={`/?period=${period}&view=highlights`}
-                className={`text-xs font-semibold px-3 py-1 rounded-full transition-colors ${
-                  view === 'highlights'
-                    ? 'bg-defender-red text-white'
-                    : 'text-white/40 hover:text-white'
-                }`}
-              >
-                Top Highlights
-              </Link>
-              <Link
-                href={`/?period=${period}&view=recent`}
-                className={`text-xs font-semibold px-3 py-1 rounded-full transition-colors ${
-                  view === 'recent'
-                    ? 'bg-defender-red text-white'
-                    : 'text-white/40 hover:text-white'
-                }`}
-              >
-                Recent
-              </Link>
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <Link
-              href="/report"
-              className="text-xs font-semibold text-defender-red hover:underline"
+          <h3 className="display text-[2rem] md:text-[2.4rem] mt-14 mb-6">Recognized in 2026</h3>
+          <ul className="grid sm:grid-cols-2 gap-4">
+            {RECOGNITION.map((r) => (
+              <li key={r.who} className="border-l-4 border-defender-red pl-4 py-1">
+                <span className="kicker text-ink-3 block">{r.date}</span>
+                <span className="font-serif font-semibold text-[1.2rem] block mt-1">{r.who}</span>
+                <span className="text-[14.5px] text-ink-2">{r.what}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      {/* ── Close ─────────────────────────────────────────────── */}
+      <section className="bg-defender-red border-t-2 border-ink" data-print-hide>
+        <div className="max-w-[1320px] mx-auto px-4 md:px-8 py-16 md:py-20 grid md:grid-cols-12 gap-8 items-end">
+          <h2 className="md:col-span-7 display text-[clamp(3rem,7vw,6rem)] text-ink">
+            Build the house <span className="text-paper">with us.</span>
+          </h2>
+          <div className="md:col-span-5 flex flex-wrap gap-3 md:justify-end">
+            <a
+              href="https://kansascitydefender.com/support-us/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 bg-ink text-paper rounded-button px-5 py-3 text-[14px] font-bold hover:bg-paper hover:text-ink transition-colors"
             >
-              + Report Impact
-            </Link>
-            <Link
-              href="/admin/impacts"
-              className="text-xs font-semibold text-white/30 hover:text-white/60"
+              Support the Defender <ArrowUpRight size={16} />
+            </a>
+            <a
+              href="https://kansascitydefender.com/join/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 border-2 border-ink text-ink rounded-button px-5 py-[10px] text-[14px] font-bold hover:bg-ink hover:text-paper transition-colors"
             >
-              View all
-            </Link>
+              Become a member <ArrowUpRight size={16} />
+            </a>
           </div>
         </div>
-        <ImpactTimeline impacts={impacts} />
       </section>
     </div>
   );
@@ -335,26 +280,66 @@ export default async function CommandCenter({ searchParams }: CommandCenterProps
 
 // --- Sub-components ---
 
-function StatPill({
-  value,
-  label,
-  color,
-}: {
-  value: string;
-  label: string;
-  color: 'red' | 'green' | 'gold';
-}) {
-  const colorMap = {
-    red: { border: 'border-t-defender-red', val: 'text-defender-red' },
-    green: { border: 'border-t-emerald-500', val: 'text-emerald-400' },
-    gold: { border: 'border-t-amber-500', val: 'text-amber-400' },
-  };
-  const c = colorMap[color];
+function SectionHead({ title, dek }: { title: string; dek?: string }) {
   return (
-    <div className={`bg-surface-card border border-white/[0.07] border-t-2 ${c.border} rounded-xl px-4 py-4 hover:-translate-y-0.5 transition-transform duration-200`}>
-      <div className={`text-3xl font-black tabular-nums tracking-tight ${c.val}`}>{value}</div>
-      <div className="text-xs font-medium mt-1 text-white/40">{label}</div>
+    <div className="mb-10 max-w-3xl">
+      <h2 className="slab">{title}</h2>
+      {dek && <p className="mt-4 text-[16px] md:text-[17px] text-ink-2 leading-relaxed">{dek}</p>}
     </div>
   );
 }
 
+const COVER_STAT_STYLES = [
+  { bar: 'bg-ink', value: 'text-defender-red', label: 'text-paper', tilt: 'md:-rotate-[1.2deg]' },
+  { bar: 'bg-paper', value: 'text-defender-red', label: 'text-ink', tilt: 'md:rotate-[0.8deg]' },
+  { bar: 'bg-ink', value: 'text-defender-gold', label: 'text-paper', tilt: 'md:-rotate-[0.5deg]' },
+  { bar: 'bg-paper', value: 'text-ink', label: 'text-ink', tilt: 'md:rotate-[1deg]' },
+];
+
+function CoverStat({ value, label, index }: { value: string; label: string; index: number }) {
+  const s = COVER_STAT_STYLES[index % COVER_STAT_STYLES.length];
+  return (
+    <div
+      className={`rise ${s.bar} ${s.tilt} flex items-center justify-between gap-4 px-5 py-3 transition-transform duration-300 hover:rotate-0 hover:scale-[1.02]`}
+      style={{ animationDelay: `${150 + index * 90}ms` }}
+    >
+      <span className={`display text-[clamp(2.6rem,4.6vw,3.8rem)] tabular-nums ${s.value}`}>{value}</span>
+      <span className={`display text-right text-[clamp(1.05rem,1.8vw,1.4rem)] leading-[0.95] ${s.label}`}>
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function DoorCard({ door, wide }: { door: (typeof DOORS)[number]; wide?: boolean }) {
+  const style = PILLAR_STYLE[door.pillar];
+  return (
+    <article className={`flex flex-col border-2 border-ink bg-card overflow-hidden ${wide ? 'md:col-span-2 md:flex-row' : ''}`}>
+      {door.image ? (
+        <div className={`relative aspect-[16/9] border-ink bg-paper-2 ${wide ? 'border-b-2 md:border-b-0 md:border-r-2 md:w-1/2 md:aspect-auto md:min-h-[22rem]' : 'border-b-2'}`}>
+          <Image src={door.image} alt={door.name} fill sizes="(min-width: 768px) 640px, 100vw" className="object-cover" />
+        </div>
+      ) : (
+        <div className={`h-3 ${style.dot}`} />
+      )}
+      <div className={`p-6 flex flex-col flex-1 ${wide ? 'md:p-10 md:justify-center' : ''}`}>
+        <span className={`kicker ${style.text} mb-2`}>{PILLARS[door.pillar].label}</span>
+        <h3 className="display text-[2rem] md:text-[2.3rem]">{door.name}</h3>
+        <p className="mt-3 text-[15px] text-ink-2 leading-relaxed">{door.what}</p>
+        <p className="mt-4 font-serif font-semibold text-[1.12rem] text-ink leading-snug border-l-4 border-ink pl-3">
+          {door.proof}
+        </p>
+        {door.link && (
+          <a
+            href={door.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-auto pt-5 inline-flex items-center gap-1 text-[13px] font-bold text-ink hover:text-defender-red transition-colors self-start"
+          >
+            Learn more <ArrowUpRight size={14} />
+          </a>
+        )}
+      </div>
+    </article>
+  );
+}

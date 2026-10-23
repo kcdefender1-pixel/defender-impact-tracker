@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Bricolage_Grotesque, Newsreader } from 'next/font/google';
 import './globals.css';
-import { NavSidebar } from '@/components/nav-sidebar';
+import { Masthead } from '@/components/masthead';
 import { NavBottom } from '@/components/nav-bottom';
 import { ToastProvider } from '@/lib/toast-context';
 
@@ -15,11 +16,22 @@ const geistMono = localFont({
   variable: '--font-geist-mono',
   weight: '100 900',
 });
+const display = Bricolage_Grotesque({
+  subsets: ['latin'],
+  variable: '--font-display',
+  axes: ['wdth', 'opsz'],
+});
+const serif = Newsreader({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+});
 
 export const metadata: Metadata = {
-  title: 'Defender Impact Dashboard',
+  title: 'The Kansas City Defender · 2026 Impact',
   description:
-    'Internal impact tracker for The Kansas City Defender, a Black nonprofit media organization.',
+    'How The Kansas City Defender builds Black power: journalism, mutual aid, political education, and culture, all under one roof.',
 };
 
 export default function RootLayout({
@@ -28,14 +40,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth" id="top">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-surface`}
+        className={`${geistSans.variable} ${geistMono.variable} ${display.variable} ${serif.variable} antialiased bg-paper`}
       >
         <ToastProvider>
-          <NavSidebar />
+          <Masthead />
           <NavBottom />
-          <main className="md:ml-64 pb-20 md:pb-0 min-h-screen">
+          <main className="pb-24 md:pb-0 min-h-screen">
             {children}
           </main>
         </ToastProvider>

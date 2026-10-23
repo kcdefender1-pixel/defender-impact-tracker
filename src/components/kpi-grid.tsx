@@ -7,11 +7,11 @@ import { PeriodFilter } from '@/components/period-filter';
 import { KPI_TO_PILLAR } from '@/lib/constants';
 
 const PILLARS = [
-  { value: 'organizing', label: 'Organizing Power' },
-  { value: 'material', label: 'Material Power' },
-  { value: 'narrative', label: 'Narrative Power' },
-  { value: 'cultural', label: 'Cultural Power' },
-  { value: 'institutional', label: 'Institutional Power' },
+  { value: 'organizing', label: 'Organizing', active: 'bg-defender-gold text-ink' },
+  { value: 'material', label: 'Material', active: 'bg-defender-green text-white' },
+  { value: 'narrative', label: 'Narrative', active: 'bg-defender-red text-white' },
+  { value: 'cultural', label: 'Cultural', active: 'bg-defender-violet text-ink' },
+  { value: 'institutional', label: 'Institutional', active: 'bg-defender-blue text-white' },
 ];
 
 interface KpiGridProps {
@@ -30,7 +30,7 @@ export function KpiGrid({ kpis, snapshotsByKey, period }: KpiGridProps) {
 
   if (kpis.length === 0) {
     return (
-      <div className="text-center py-12 text-white/30 text-sm">
+      <div className="text-center py-12 text-ink-4 text-sm">
         No KPIs configured. Run the Supabase schema to seed the Big 10.
       </div>
     );
@@ -43,8 +43,8 @@ export function KpiGrid({ kpis, snapshotsByKey, period }: KpiGridProps) {
       <PeriodFilter current={period} />
 
       {/* Pillar tabs */}
-      <div className="flex gap-1.5 flex-wrap mb-5 mt-4">
-        {PILLARS.map((pillar) => {
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink mb-8 mt-6">
+        {PILLARS.map((pillar, i) => {
           const isActive = activePillar === pillar.value;
           const hasData = kpis
             .filter((kpi) => KPI_TO_PILLAR[kpi.key] === pillar.value)
@@ -54,16 +54,17 @@ export function KpiGrid({ kpis, snapshotsByKey, period }: KpiGridProps) {
             <button
               key={pillar.value}
               onClick={() => setActivePillar(pillar.value)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
-                isActive
-                  ? 'bg-defender-red text-white'
-                  : 'bg-surface-card border border-white/10 text-white/50 hover:bg-surface-hover hover:text-white'
-              }`}
+              className={`relative text-left px-4 pt-3 pb-3.5 transition-colors ${
+                i === PILLARS.length - 1 ? 'col-span-2 lg:col-span-1' : ''
+              } ${isActive ? pillar.active : 'bg-card text-ink hover:bg-paper-2'}`}
             >
-              {pillar.label}
-              {hasData && !isActive && (
-                <span className="ml-1 w-1 h-1 rounded-full bg-defender-green inline-block align-middle" />
-              )}
+              <span className={`kicker block mb-1 ${isActive ? 'opacity-80' : 'text-ink-4'}`}>
+                Pillar {i + 1}
+                {hasData && !isActive && (
+                  <span className="ml-1.5 w-1.5 h-1.5 rounded-full bg-defender-green inline-block align-middle" />
+                )}
+              </span>
+              <span className="display text-[1.6rem] md:text-[1.9rem]">{pillar.label}</span>
             </button>
           );
         })}
@@ -71,11 +72,11 @@ export function KpiGrid({ kpis, snapshotsByKey, period }: KpiGridProps) {
 
       {/* KPI cards for active pillar */}
       {pillarKpis.length === 0 ? (
-        <div className="text-center py-8 text-white/30 text-sm">
+        <div className="text-center py-8 text-ink-4 text-sm">
           No KPIs mapped to this pillar yet.
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {pillarKpis.map((kpi) => {
             const snapshots = snapshotsByKey[kpi.key] ?? [];
             const sorted = [...snapshots].sort(

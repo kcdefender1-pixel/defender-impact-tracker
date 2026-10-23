@@ -18,21 +18,19 @@ export function PeriodFilter({ current = '30d' }: PeriodFilterProps) {
   const router = useRouter();
 
   const handlePeriodChange = (period: string) => {
-    router.push(`/?period=${period}`);
+    router.push(`/admin?period=${period}`);
   };
 
   return (
-    <div className="flex gap-1.5 flex-wrap">
+    <div className="inline-flex flex-wrap border-2 border-ink bg-card">
       {PERIODS.map((p) => {
         const isActive = current === p.value;
         return (
           <button
             key={p.value}
             onClick={() => handlePeriodChange(p.value)}
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
-              isActive
-                ? 'bg-defender-red text-white'
-                : 'bg-surface-card border border-white/10 text-white/50 hover:bg-surface-hover hover:text-white'
+            className={`px-3.5 py-2 text-xs font-bold transition-colors ${
+              isActive ? 'bg-ink text-paper' : 'text-ink-2 hover:bg-ink/[0.06] hover:text-ink'
             }`}
           >
             {p.label}

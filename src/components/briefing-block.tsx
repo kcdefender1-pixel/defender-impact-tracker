@@ -10,31 +10,53 @@ export async function BriefingBlock() {
   }
 
   const paragraphs = text.split(/\n\n+/).map(p => p.trim()).filter(Boolean);
+  // The closing line establishes national significance; set it as a pull quote
+  const closer = paragraphs.length > 2 ? paragraphs[paragraphs.length - 1] : null;
+  const body = closer ? paragraphs.slice(0, -1) : paragraphs;
+  const year = new Date().getFullYear();
 
   return (
-    <div className="bg-surface-card border border-white/[0.07] rounded-card p-6 md:p-8">
-      <div className="flex items-start justify-between gap-4 mb-4">
-        <div>
-          <p className="text-[10px] font-black text-defender-red uppercase tracking-[0.15em] mb-1">
-            Impact Briefing &middot; {new Date().getFullYear()}
-          </p>
-          <h2 className="text-xl font-black text-white leading-tight tracking-tight">
-            Kansas City Defender
-          </h2>
-          <p className="text-xs font-semibold text-white/35 uppercase tracking-widest mt-0.5">
-            Reporting to the Movement. Building the Conditions for Victory.
-          </p>
-        </div>
-        <BriefingActions text={text} />
+    <section className="max-w-[1320px] mx-auto px-4 md:px-8 py-14 md:py-24">
+      <div className="grid md:grid-cols-12 gap-8 md:gap-10">
+        <aside className="md:col-span-3">
+          <div className="md:sticky md:top-32">
+            <p className="kicker text-defender-red mb-3">The Briefing &middot; {year}</p>
+            <h2 className="display text-[2.6rem] md:text-[3.1rem] text-ink">
+              Year to date
+            </h2>
+            <p className="mt-4 text-[13px] text-ink-3 leading-relaxed max-w-[16rem]">
+              Written from every approved impact this year. Copy it into a funder update, a board
+              memo, or a post.
+            </p>
+            <div className="mt-5">
+              <BriefingActions text={text} />
+            </div>
+          </div>
+        </aside>
+
+        <article className="md:col-span-8 md:col-start-5 font-serif text-ink">
+          {body.map((p, i) => (
+            <p
+              key={i}
+              className={
+                i === 0
+                  ? 'dropcap text-[1.45rem] md:text-[1.7rem] leading-[1.42] mb-7 [font-variation-settings:"opsz"_36]'
+                  : 'text-[1.15rem] md:text-[1.28rem] leading-[1.65] text-ink-2 mb-6 [font-variation-settings:"opsz"_16]'
+              }
+            >
+              {p}
+            </p>
+          ))}
+
+          {closer && (
+            <blockquote className="mt-12 pt-8 border-t-2 border-ink">
+              <p className="italic text-[1.9rem] md:text-[2.6rem] leading-[1.12] tracking-[-0.01em] [font-variation-settings:'opsz'_72]">
+                {closer}
+              </p>
+            </blockquote>
+          )}
+        </article>
       </div>
-      <div className="w-12 h-[2px] bg-defender-red/50 mb-5" />
-      <div className="space-y-4">
-        {paragraphs.map((p, i) => (
-          <p key={i} className="text-[1.02rem] text-white/75 leading-[1.75] font-medium">
-            {p}
-          </p>
-        ))}
-      </div>
-    </div>
+    </section>
   );
 }

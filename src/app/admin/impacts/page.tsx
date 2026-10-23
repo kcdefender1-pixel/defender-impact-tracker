@@ -20,26 +20,26 @@ export default async function AdminImpactsPage() {
       {/* Header */}
       <div className="flex items-start justify-between mb-6">
         <div>
-          <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
+          <div className="kicker text-defender-red mb-2">
             Admin
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-white">
+          <h1 className="display text-[3rem] md:text-[4rem] text-ink">
             Impact Events
           </h1>
-          <p className="text-white/50 text-sm mt-1">
+          <p className="text-ink-3 text-sm mt-1">
             Review, approve, and manage submitted impact reports.
           </p>
         </div>
         <Link
           href="/report"
-          className="bg-defender-red text-white rounded-button px-4 py-2.5 text-sm font-semibold hover:bg-rose-700 transition-colors shrink-0"
+          className="bg-defender-red text-white rounded-button px-4 py-2.5 text-sm font-semibold hover:bg-ink transition-colors shrink-0"
         >
           + Report Impact
         </Link>
       </div>
 
       {error && (
-        <div className="mb-4 p-4 bg-rose-500/10 border border-rose-500/20 rounded-card text-sm text-rose-400">
+        <div className="mb-4 p-4 bg-rose-500/10 border border-rose-500/20 rounded-card text-sm text-defender-red">
           Could not load impacts. Make sure you have run the Supabase schema and seeded data.
         </div>
       )}

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import type { KpiConfig, MetricSnapshot } from '@/lib/types';
-import { KPI_LEFT_BORDER } from '@/lib/constants';
+import { KPI_ACCENT_BG } from '@/lib/constants';
 import { Sparkline } from '@/components/sparkline';
 import { useToast } from '@/lib/toast-context';
 
@@ -13,16 +13,16 @@ interface KpiCardProps {
 }
 
 const KPI_SPARKLINE_COLOR: Record<string, string> = {
-  audience_growth_total_reach: '#E11D48',
-  stories_published_total_weekly: '#E11D48',
-  editorial_narrative_power_pct: '#E11D48',
-  political_education_participants: '#F59E0B',
-  mutual_aid_participation_team_members: '#16A34A',
-  community_served_count: '#16A34A',
-  arts_culture_engagement_attendees_artists: '#8B5CF6',
-  membership_sustaining_donors_new_monthly: '#3B82F6',
-  membership_retention_rate: '#3B82F6',
-  revenue_mix_quarterly_share_and_growth: '#F59E0B',
+  audience_growth_total_reach: '#E0263F',
+  stories_published_total_weekly: '#E0263F',
+  editorial_narrative_power_pct: '#E0263F',
+  political_education_participants: '#D99A00',
+  mutual_aid_participation_team_members: '#0B8A4E',
+  community_served_count: '#0B8A4E',
+  arts_culture_engagement_attendees_artists: '#7B5CF0',
+  membership_sustaining_donors_new_monthly: '#2B4CFF',
+  membership_retention_rate: '#2B4CFF',
+  revenue_mix_quarterly_share_and_growth: '#2B4CFF',
 };
 
 function formatValue(value: number, unit: string | null): string {
@@ -44,7 +44,7 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
   const [logging, setLogging] = useState(false);
   const { toast } = useToast();
 
-  const borderColor = KPI_LEFT_BORDER[kpi.key] ?? 'border-l-gray-300';
+  const accentBg = KPI_ACCENT_BG[kpi.key] ?? 'bg-ink-4';
   const sparkColor = KPI_SPARKLINE_COLOR[kpi.key] ?? '#6B7280';
 
   const sorted = [...localSnapshots].sort(
@@ -91,16 +91,17 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
 
   return (
     <div
-      className={`bg-surface-card border border-white/[0.07] rounded-card hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40 transition-all duration-200 border-l-4 ${borderColor} overflow-hidden cursor-pointer`}
+      className={`bg-card border-2 border-ink transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#0E0D0C] overflow-hidden cursor-pointer ${expanded ? 'shadow-[6px_6px_0_0_#0E0D0C]' : ''}`}
       onClick={() => setExpanded(!expanded)}
     >
+      <div className={`h-2 ${accentBg}`} />
       {/* Always visible header */}
-      <div className="p-4 flex flex-col gap-2">
+      <div className="p-5 flex flex-col gap-3">
         <div className="flex items-start justify-between gap-2">
-          <div className="text-xs font-semibold text-white/50 leading-tight line-clamp-2 flex-1">
+          <div className="text-[13px] font-semibold text-ink-2 leading-snug line-clamp-2 flex-1">
             {kpi.title}
           </div>
-          <div className={`text-white/30 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}>
+          <div className={`text-ink-4 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -110,20 +111,20 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
         <div className="flex items-end gap-2">
           {hasData ? (
             <>
-              <span className="font-mono text-2xl font-bold text-white leading-none">
+              <span className="display text-[3.4rem] text-ink tabular-nums">
                 {formatValue(currentLatest!, kpi.unit)}
               </span>
               {kpi.unit && kpi.unit !== '%' && (
-                <span className="text-xs text-white/30 pb-0.5">{kpi.unit}</span>
+                <span className="text-xs font-semibold text-ink-3 pb-1.5">{kpi.unit}</span>
               )}
             </>
           ) : (
-            <span className="text-sm text-white/20 italic">No data yet</span>
+            <span className="text-sm text-ink-4 italic">No data yet</span>
           )}
           {trend !== null && (
             <span
-              className={`ml-auto text-xs font-semibold pb-0.5 ${
-                trend >= 0 ? 'text-emerald-400' : 'text-rose-400'
+              className={`ml-auto mb-1.5 text-xs font-bold px-2 py-0.5 ${
+                trend >= 0 ? 'bg-defender-green text-white' : 'bg-defender-red text-white'
               }`}
             >
               {trend >= 0 ? '+' : ''}
@@ -136,7 +137,7 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
           <Sparkline snapshots={localSnapshots} color={sparkColor} />
         )}
 
-        <div className="text-[10px] text-white/25 font-mono uppercase tracking-wider">
+        <div className="kicker text-ink-4">
           {kpi.freq} &middot; {kpi.unit ?? 'value'}
         </div>
       </div>
@@ -147,33 +148,33 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
           expanded ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="px-4 pb-4 border-t border-white/[0.07] pt-3 space-y-3">
+        <div className="px-5 pb-5 border-t-2 border-ink pt-4 space-y-3 bg-paper">
           {kpi.description && (
-            <p className="text-xs text-white/50 leading-relaxed">{kpi.description}</p>
+            <p className="text-xs text-ink-3 leading-relaxed">{kpi.description}</p>
           )}
 
           {localSnapshots.length >= 2 && (
             <div>
-              <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-1.5">Trend</div>
+              <div className="text-[10px] font-semibold text-ink-4 uppercase tracking-wider mb-1.5">Trend</div>
               <Sparkline snapshots={localSnapshots} color={sparkColor} height={96} />
             </div>
           )}
 
           {sorted.length > 0 && (
             <div>
-              <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-1.5">
+              <div className="text-[10px] font-semibold text-ink-4 uppercase tracking-wider mb-1.5">
                 Recent Snapshots
               </div>
               <table className="w-full text-xs">
                 <tbody>
                   {sorted.slice(0, 6).map((s) => (
-                    <tr key={s.id} className="border-b border-white/[0.04] last:border-0">
-                      <td className="py-1 text-white/30">{formatDate(s.taken_at)}</td>
-                      <td className="py-1 font-mono font-semibold text-right text-white">
+                    <tr key={s.id} className="border-b border-line last:border-0">
+                      <td className="py-1 text-ink-4">{formatDate(s.taken_at)}</td>
+                      <td className="py-1 font-mono font-semibold text-right text-ink">
                         {formatValue(Number(s.value), kpi.unit)}
                       </td>
                       {s.notes && (
-                        <td className="py-1 text-white/30 pl-3 max-w-[120px] truncate">{s.notes}</td>
+                        <td className="py-1 text-ink-4 pl-3 max-w-[120px] truncate">{s.notes}</td>
                       )}
                     </tr>
                   ))}
@@ -183,7 +184,7 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
           )}
 
           {kpi.rationale && (
-            <p className="text-[10px] text-white/25 italic leading-relaxed">{kpi.rationale}</p>
+            <p className="text-[10px] text-ink-4 italic leading-relaxed">{kpi.rationale}</p>
           )}
 
           {/* Inline snapshot form */}
@@ -193,7 +194,7 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
             className="flex items-end gap-2 pt-1"
           >
             <div className="flex-1 min-w-0">
-              <label className="block text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-1">
+              <label className="block text-[10px] font-semibold text-ink-4 uppercase tracking-wider mb-1">
                 Log today&apos;s value
               </label>
               <input
@@ -202,7 +203,7 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
                 value={logValue}
                 onChange={(e) => setLogValue(e.target.value)}
                 placeholder={kpi.unit ?? 'Value'}
-                className="w-full bg-surface border border-white/10 rounded-lg px-2.5 py-1.5 text-sm text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-defender-red/40 focus:border-defender-red"
+                className="w-full bg-card border-2 border-ink/80 rounded-none px-2.5 py-1.5 text-sm text-ink placeholder-ink-4 focus:outline-none focus:ring-2 focus:ring-defender-red/40 focus:border-defender-red"
               />
             </div>
             <div className="flex-1 min-w-0">
@@ -211,13 +212,13 @@ export function KpiCard({ kpi, latestValue, snapshots }: KpiCardProps) {
                 value={logNotes}
                 onChange={(e) => setLogNotes(e.target.value)}
                 placeholder="Notes (optional)"
-                className="w-full bg-surface border border-white/10 rounded-lg px-2.5 py-1.5 text-sm text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-defender-red/40 focus:border-defender-red"
+                className="w-full bg-card border-2 border-ink/80 rounded-none px-2.5 py-1.5 text-sm text-ink placeholder-ink-4 focus:outline-none focus:ring-2 focus:ring-defender-red/40 focus:border-defender-red"
               />
             </div>
             <button
               type="submit"
               disabled={logging || !logValue}
-              className="shrink-0 bg-defender-red text-white text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-rose-600 transition-colors disabled:opacity-40"
+              className="shrink-0 bg-defender-red text-white text-xs font-semibold px-3 py-2 rounded-none hover:bg-ink transition-colors disabled:opacity-40"
             >
               {logging ? '...' : 'Log'}
             </button>

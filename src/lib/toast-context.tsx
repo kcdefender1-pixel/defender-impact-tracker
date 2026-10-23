@@ -39,15 +39,15 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         {toasts.map((t) => (
           <div
             key={t.id}
-            className={`pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-full shadow-lg text-sm font-medium text-white animate-[fadeSlideIn_0.25s_ease-out] ${
+            className={`pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-full shadow-lg text-sm font-semibold animate-[fadeSlideIn_0.25s_ease-out] ${
               t.type === 'success'
-                ? 'bg-green-800'
-                : 'bg-red-700'
+                ? 'bg-ink text-paper'
+                : 'bg-defender-red text-white'
             }`}
             onClick={() => dismiss(t.id)}
             style={{ cursor: 'pointer' }}
           >
-            <span className="text-white/80">
+            <span className="opacity-70">
               {t.type === 'success' ? '\u2713' : '\u2717'}
             </span>
             {t.message}

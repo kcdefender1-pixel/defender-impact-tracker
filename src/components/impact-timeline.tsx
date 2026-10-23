@@ -29,25 +29,25 @@ function formatMetricLarge(value: number): string {
 
 // Program-area accent colors for left border & icon ring
 const AREA_HEX: Record<string, string> = {
-  editorial: '#DC2626',
-  mutual_aid: '#16A34A',
-  political_education: '#2563EB',
-  arts_culture: '#9333EA',
-  development_fundraising: '#D97706',
-  operations_systems: '#64748B',
-  radar: '#DB2777',
-  other: '#94A3B8',
+  editorial: '#E0263F',
+  mutual_aid: '#0B8A4E',
+  political_education: '#B07D00',
+  arts_culture: '#6B4EE6',
+  development_fundraising: '#2B4CFF',
+  operations_systems: '#655D54',
+  radar: '#D6337A',
+  other: '#8A8176',
 };
 
 const AREA_LIGHT: Record<string, string> = {
-  editorial: 'rgba(220,38,38,0.10)',
-  mutual_aid: 'rgba(22,163,74,0.10)',
-  political_education: 'rgba(37,99,235,0.10)',
-  arts_culture: 'rgba(147,51,234,0.10)',
-  development_fundraising: 'rgba(217,119,6,0.10)',
-  operations_systems: 'rgba(100,116,139,0.10)',
-  radar: 'rgba(219,39,119,0.10)',
-  other: 'rgba(148,163,184,0.10)',
+  editorial: 'rgba(224,38,63,0.07)',
+  mutual_aid: 'rgba(11,138,78,0.07)',
+  political_education: 'rgba(255,194,41,0.14)',
+  arts_culture: 'rgba(185,164,255,0.18)',
+  development_fundraising: 'rgba(43,76,255,0.07)',
+  operations_systems: 'rgba(14,13,12,0.05)',
+  radar: 'rgba(255,158,196,0.18)',
+  other: 'rgba(14,13,12,0.04)',
 };
 
 const KPI_LABELS: Record<string, string> = {
@@ -150,13 +150,13 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
   return (
     <div
       className="relative transition-colors"
-      style={{ borderLeft: `3px solid ${accentHex}` }}
+      style={{ borderLeft: `6px solid ${accentHex}` }}
     >
       {/* ── Collapsed row ── */}
       <button
         type="button"
         onClick={() => { if (!editing) setOpen((v) => !v); }}
-        className="w-full text-left flex items-start gap-3 px-4 py-4 transition-colors hover:bg-white/[0.03] focus:outline-none group"
+        className="w-full text-left flex items-start gap-4 px-5 py-5 transition-colors hover:bg-ink/[0.03] focus:outline-none group"
         style={open ? { backgroundColor: accentLight } : undefined}
         aria-expanded={open}
       >
@@ -168,20 +168,20 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
 
         {/* text */}
         <span className="flex-1 min-w-0">
-          <span className="block font-semibold text-[13px] leading-snug text-white/85">
+          <span className="block font-serif font-semibold text-[1.15rem] md:text-[1.25rem] leading-snug text-ink">
             {headline}
           </span>
-          <span className="flex flex-wrap items-center gap-1.5 mt-1.5">
-            <span className={`inline-flex items-center rounded-full px-2 py-[2px] text-[10px] font-semibold ${badgeColor}`}>
+          <span className="flex flex-wrap items-center gap-2 mt-2.5">
+            <span className={`kicker inline-flex items-center px-1.5 py-[3px] ${badgeColor}`}>
               {programLabel}
             </span>
             {isEditorial && (
-              <span className="inline-flex items-center rounded-full px-2 py-[2px] text-[10px] font-semibold bg-white/[0.08] text-white/50">
+              <span className="kicker inline-flex items-center px-1.5 py-[3px] border border-ink/40 text-ink-2">
                 Story
               </span>
             )}
             {impact.reported_by_name && (
-              <span className="text-[11px] text-white/35">{impact.reported_by_name}</span>
+              <span className="text-[11px] text-ink-3">{impact.reported_by_name}</span>
             )}
           </span>
         </span>
@@ -191,18 +191,18 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
           <span>
             {impact.radical_metric_value !== null && impact.radical_metric_label && (
               <span className="block">
-                <span className="font-mono font-bold text-[13px] text-white/80">
+                <span className="display text-[2rem] text-ink tabular-nums">
                   {formatMetricLarge(Number(impact.radical_metric_value))}
                 </span>
-                <span className="block text-[10px] text-white/35 leading-tight mt-[1px]">
+                <span className="block text-[10px] text-ink-3 leading-tight mt-[1px]">
                   {impact.radical_metric_label}
                 </span>
               </span>
             )}
-            <span className="block text-[10px] font-mono text-white/30 mt-1">{timeAgo(impact.reported_at)}</span>
+            <span className="block text-[10px] font-mono text-ink-4 mt-1">{timeAgo(impact.reported_at)}</span>
           </span>
           <span
-            className="mt-1 text-white/20 group-hover:text-white/40 transition-all shrink-0"
+            className="mt-1 text-ink-4 group-hover:text-ink transition-all shrink-0"
             style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.28s ease' }}
           >
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
@@ -232,14 +232,14 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
           >
             {!editing ? (
               /* ── READ MODE ── */
-              <div className="divide-y divide-black/[0.05]">
+              <div className="divide-y divide-line">
 
                 {/* Section 1 — Narrative */}
                 <div className="px-5 py-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/35 mb-2">
+                  <p className="kicker text-ink-3 mb-2">
                     {isEditorial ? 'Why This Story Mattered' : 'Impact Narrative'}
                   </p>
-                  <p className="text-[13px] text-white/70 leading-relaxed">{narrative}</p>
+                  <p className="font-serif text-[1.08rem] text-ink-2 leading-relaxed max-w-[68ch]">{narrative}</p>
                 </div>
 
                 {/* Section 2 — Key metric (big display) + funder headline */}
@@ -247,7 +247,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                   <div className="px-5 py-4 grid grid-cols-2 gap-4">
                     {impact.radical_metric_value !== null && (
                       <div>
-                        <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/35 mb-1">
+                        <p className="kicker text-ink-3 mb-1">
                           Key Metric
                         </p>
                         <div className="flex items-end gap-1.5">
@@ -257,7 +257,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                           >
                             {formatMetricLarge(Number(impact.radical_metric_value))}
                           </span>
-                          <span className="text-[12px] text-white/40 mb-1">
+                          <span className="text-[12px] text-ink-3 mb-1">
                             {impact.radical_metric_unit ?? ''}{impact.radical_metric_label ? ` ${impact.radical_metric_label}` : ''}
                           </span>
                         </div>
@@ -265,10 +265,10 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                     )}
                     {impact.funder_headline && (
                       <div>
-                        <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/35 mb-1">
+                        <p className="kicker text-ink-3 mb-1">
                           Funder Framing
                         </p>
-                        <p className="text-[12px] text-white/55 italic leading-snug">{impact.funder_headline}</p>
+                        <p className="text-[12px] text-ink-3 italic leading-snug">{impact.funder_headline}</p>
                       </div>
                     )}
                   </div>
@@ -278,7 +278,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                 <div className="px-5 py-4 flex flex-wrap items-center gap-x-6 gap-y-3">
                   {impact.kpis_impacted && impact.kpis_impacted.length > 0 && (
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/35 mb-1.5">
+                      <p className="kicker text-ink-3 mb-1.5">
                         KPIs Moved
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -298,17 +298,17 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                   {/* Confidence */}
                   <div className="ml-auto flex items-center gap-3">
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/35 mb-1">
+                      <p className="kicker text-ink-3 mb-1">
                         Confidence
                       </p>
                       <div className="flex items-center gap-1.5">
-                        <div className="h-[5px] w-20 bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-[5px] w-20 bg-ink/[0.06] rounded-full overflow-hidden">
                           <div
                             className="h-full rounded-full"
                             style={{ width: `${impact.confidence}%`, backgroundColor: accentHex }}
                           />
                         </div>
-                        <span className="text-[10px] font-mono text-white/40">{impact.confidence}%</span>
+                        <span className="text-[10px] font-mono text-ink-3">{impact.confidence}%</span>
                       </div>
                     </div>
                     <button
@@ -328,7 +328,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                 {/* Section 4 — Evidence links (optional) */}
                 {impact.evidence_links && impact.evidence_links.length > 0 && (
                   <div className="px-5 py-3">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-gray-400 mb-1.5">
+                    <p className="kicker text-ink-4 mb-1.5">
                       Evidence
                     </p>
                     <div className="flex flex-col gap-1">
@@ -351,20 +351,20 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
             ) : (
               /* ── EDIT MODE ── */
               <div className="px-5 py-4 space-y-3">
-                <p className="text-[10px] font-bold uppercase tracking-[0.08em] mb-3" style={{ color: accentHex }}>
+                <p className="kicker mb-3" style={{ color: accentHex }}>
                   Editing Impact
                 </p>
 
                 {/* Internal headline */}
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/35 block mb-1">
+                  <label className="kicker text-ink-3 block mb-1">
                     Internal Headline
                   </label>
                   <input
                     type="text"
                     value={edit.internal_headline}
                     onChange={(e) => setEdit((s) => ({ ...s, internal_headline: e.target.value }))}
-                    className="w-full text-[13px] font-semibold text-white bg-surface border border-white/10 rounded-lg px-3 py-2 focus:outline-none placeholder-white/20 transition-shadow"
+                    className="w-full text-[13px] font-semibold text-ink bg-card border-2 border-ink/70 px-3 py-2 focus:outline-none placeholder-ink-4 transition-shadow"
                     style={{ boxShadow: `0 0 0 0px ${accentHex}40` }}
                     onFocus={(e) => (e.currentTarget.style.boxShadow = `0 0 0 2px ${accentHex}40`)}
                     onBlur={(e) => (e.currentTarget.style.boxShadow = '0 0 0 0px transparent')}
@@ -373,14 +373,14 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
 
                 {/* Funder headline */}
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/35 block mb-1">
+                  <label className="kicker text-ink-3 block mb-1">
                     Funder Headline
                   </label>
                   <input
                     type="text"
                     value={edit.funder_headline}
                     onChange={(e) => setEdit((s) => ({ ...s, funder_headline: e.target.value }))}
-                    className="w-full text-[13px] text-white/70 italic bg-surface border border-white/10 rounded-lg px-3 py-2 focus:outline-none placeholder-white/20 transition-shadow"
+                    className="w-full text-[13px] text-ink-2 italic bg-card border-2 border-ink/70 px-3 py-2 focus:outline-none placeholder-ink-4 transition-shadow"
                     onFocus={(e) => (e.currentTarget.style.boxShadow = `0 0 0 2px ${accentHex}40`)}
                     onBlur={(e) => (e.currentTarget.style.boxShadow = '0 0 0 0px transparent')}
                   />
@@ -388,14 +388,14 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
 
                 {/* Description */}
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/35 block mb-1">
+                  <label className="kicker text-ink-3 block mb-1">
                     Description
                   </label>
                   <textarea
                     value={edit.raw_description}
                     onChange={(e) => setEdit((s) => ({ ...s, raw_description: e.target.value }))}
                     rows={3}
-                    className="w-full text-[13px] text-white/70 bg-surface border border-white/10 rounded-lg px-3 py-2 focus:outline-none resize-none placeholder-white/20 transition-shadow"
+                    className="w-full text-[13px] text-ink-2 bg-card border-2 border-ink/70 px-3 py-2 focus:outline-none resize-none placeholder-ink-4 transition-shadow"
                     onFocus={(e) => (e.currentTarget.style.boxShadow = `0 0 0 2px ${accentHex}40`)}
                     onBlur={(e) => (e.currentTarget.style.boxShadow = '0 0 0 0px transparent')}
                   />
@@ -409,7 +409,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                     { label: 'Unit', field: 'radical_metric_unit' as const, type: 'text', placeholder: 'views' },
                   ].map(({ label, field, type, placeholder }) => (
                     <div key={field}>
-                      <label className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/35 block mb-1">
+                      <label className="kicker text-ink-3 block mb-1">
                         {label}
                       </label>
                       <input
@@ -417,7 +417,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                         value={edit[field]}
                         onChange={(e) => setEdit((s) => ({ ...s, [field]: e.target.value }))}
                         placeholder={placeholder}
-                        className="w-full text-[12px] font-mono text-white/80 bg-surface border border-white/10 rounded-lg px-2.5 py-2 focus:outline-none placeholder-white/20 transition-shadow"
+                        className="w-full text-[12px] font-mono text-ink-2 bg-card border-2 border-ink/70 px-2.5 py-2 focus:outline-none placeholder-ink-4 transition-shadow"
                         onFocus={(e) => (e.currentTarget.style.boxShadow = `0 0 0 2px ${accentHex}40`)}
                         onBlur={(e) => (e.currentTarget.style.boxShadow = '0 0 0 0px transparent')}
                       />
@@ -426,7 +426,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                 </div>
 
                 {saveError && (
-                  <p className="text-[11px] text-rose-400 font-medium">{saveError}</p>
+                  <p className="text-[11px] text-defender-red font-medium">{saveError}</p>
                 )}
 
                 {/* Actions */}
@@ -435,7 +435,7 @@ function ImpactCard({ impact: init }: { impact: ImpactEvent }) {
                     type="button"
                     onClick={() => { setEditing(false); setSaveError(null); }}
                     disabled={saving}
-                    className="text-[12px] font-semibold text-white/40 hover:text-white/70 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors"
+                    className="text-[12px] font-semibold text-ink-3 hover:text-ink px-3 py-1.5 rounded-lg hover:bg-ink/[0.05] transition-colors"
                   >
                     Cancel
                   </button>
@@ -504,9 +504,9 @@ export function ImpactTimeline({ impacts }: ImpactTimelineProps) {
 
   if (impacts.length === 0) {
     return (
-      <div className="bg-surface-card border border-white/[0.07] rounded-card p-8 text-center">
-        <p className="text-white/30 text-sm">No approved impacts yet.</p>
-        <p className="text-white/25 text-xs mt-1">
+      <div className="bg-card border-2 border-ink p-10 text-center">
+        <p className="text-ink-4 text-sm">No approved impacts yet.</p>
+        <p className="text-ink-4 text-xs mt-1">
           Be the first to{' '}
           <Link href="/report" className="text-defender-red hover:underline font-medium">
             report one
@@ -520,10 +520,10 @@ export function ImpactTimeline({ impacts }: ImpactTimelineProps) {
   return (
     <div>
       {/* Search + Program Filter */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-3">
+      <div className="flex flex-col sm:flex-row gap-3 mb-5">
         <div className="relative flex-1">
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-4"
             width="14"
             height="14"
             viewBox="0 0 24 24"
@@ -541,7 +541,7 @@ export function ImpactTimeline({ impacts }: ImpactTimelineProps) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search impacts..."
-            className="w-full pl-9 pr-3 py-2 bg-surface-card border border-white/10 rounded-lg text-sm text-white placeholder-white/25 focus:outline-none focus:ring-2 focus:ring-defender-red/40 focus:border-defender-red"
+            className="w-full pl-9 pr-3 py-2.5 bg-card border-2 border-ink text-sm text-ink placeholder-ink-4 focus:outline-none focus:ring-4 focus:ring-defender-gold/60"
           />
         </div>
         <div className="flex gap-1.5 flex-wrap shrink-0">
@@ -549,10 +549,10 @@ export function ImpactTimeline({ impacts }: ImpactTimelineProps) {
             <button
               key={area.value}
               onClick={() => setFilterArea(area.value)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+              className={`px-3 py-1.5 rounded-full text-xs font-bold border-2 transition-colors ${
                 filterArea === area.value
-                  ? 'bg-defender-red text-white'
-                  : 'bg-surface-card border border-white/10 text-white/50 hover:bg-surface-hover hover:text-white'
+                  ? 'bg-ink border-ink text-paper'
+                  : 'bg-card border-ink/15 text-ink-2 hover:border-ink hover:text-ink'
               }`}
             >
               {area.label}
@@ -562,11 +562,11 @@ export function ImpactTimeline({ impacts }: ImpactTimelineProps) {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="bg-surface-card border border-white/[0.07] rounded-card p-8 text-center">
-          <p className="text-white/30 text-sm">No impacts match your search.</p>
+        <div className="bg-card border-2 border-ink p-10 text-center">
+          <p className="text-ink-4 text-sm">No impacts match your search.</p>
         </div>
       ) : (
-        <div className="bg-surface-card border border-white/[0.07] rounded-card overflow-hidden divide-y divide-white/[0.05]">
+        <div className="bg-card border-2 border-ink overflow-hidden divide-y-2 divide-ink/10">
           {filtered.map((impact) => (
             <ImpactCard key={impact.id} impact={impact} />
           ))}

@@ -127,27 +127,27 @@ export default function ReportPage() {
   };
 
   const inputClass =
-    'w-full rounded-[10px] border border-white/10 bg-surface px-3 py-2.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red transition-colors';
-  const labelClass = 'block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5';
+    'w-full rounded-[10px] border border-line bg-paper px-3 py-2.5 text-sm text-ink placeholder:text-ink-4 focus:outline-none focus:ring-2 focus:ring-defender-red/30 focus:border-defender-red transition-colors';
+  const labelClass = 'block text-xs font-semibold text-ink-3 uppercase tracking-wider mb-1.5';
 
   return (
     <div className="min-h-screen px-4 py-8 md:px-8 md:py-10 max-w-4xl mx-auto">
       {/* Header */}
       <div className="mb-8">
-        <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
+        <div className="kicker text-defender-red mb-2">
           The Kansas City Defender
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-white leading-tight">
+        <h1 className="display text-[3rem] md:text-[4rem] text-ink">
           Report an Impact
         </h1>
-        <p className="text-white/50 mt-1.5 text-sm">
+        <p className="text-ink-3 mt-1.5 text-sm">
           Describe what happened in plain language. Claude will turn it into a structured impact record with headlines and metrics.
         </p>
       </div>
 
       {/* Form */}
       {(phase === 'form' || phase === 'enhancing') && (
-        <div className="bg-surface-card border border-white/[0.07] rounded-card p-6 md:p-8">
+        <div className="bg-card border border-line rounded-card p-6 md:p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
               <label className={labelClass}>Your Name *</label>
@@ -226,7 +226,7 @@ export default function ReportPage() {
               <button
                 onClick={addLink}
                 type="button"
-                className="px-3 py-2.5 border border-white/10 rounded-[10px] text-white/40 hover:bg-white/[0.05] transition-colors shrink-0"
+                className="px-3 py-2.5 border border-line rounded-[10px] text-ink-3 hover:bg-ink/[0.05] transition-colors shrink-0"
               >
                 <Plus size={16} />
               </button>
@@ -236,7 +236,7 @@ export default function ReportPage() {
                 {form.evidence_links.map((link) => (
                   <div
                     key={link}
-                    className="flex items-center gap-1.5 bg-white/[0.08] rounded-full px-3 py-1 text-xs text-white/55 max-w-xs"
+                    className="flex items-center gap-1.5 bg-ink/[0.05] rounded-full px-3 py-1 text-xs text-ink-3 max-w-xs"
                   >
                     <span className="truncate">{link}</span>
                     <button onClick={() => removeLink(link)} className="shrink-0 hover:text-defender-red">
@@ -258,7 +258,7 @@ export default function ReportPage() {
           <button
             onClick={handleEnhance}
             disabled={phase === 'enhancing'}
-            className="flex items-center justify-center gap-2 bg-defender-red text-white rounded-button px-6 py-3 text-sm font-semibold hover:bg-rose-700 transition-colors disabled:opacity-60 w-full md:w-auto"
+            className="flex items-center justify-center gap-2 bg-defender-red text-white rounded-button px-6 py-3 text-sm font-semibold hover:bg-ink transition-colors disabled:opacity-60 w-full md:w-auto"
           >
             {phase === 'enhancing' ? (
               <>
@@ -294,23 +294,23 @@ export default function ReportPage() {
       {phase === 'done' && (
         <div className="max-w-md mx-auto text-center py-16">
           <CheckCircle size={48} className="text-defender-green mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-white mb-2">Impact Submitted</h2>
-          <p className="text-white/50 text-sm mb-6">
+          <h2 className="text-2xl font-bold text-ink mb-2">Impact Submitted</h2>
+          <p className="text-ink-3 text-sm mb-6">
             Your impact report is saved and pending review. An admin will approve it shortly.
           </p>
           {savedId && (
-            <p className="text-xs font-mono text-white/35 mb-6">ID: {savedId}</p>
+            <p className="text-xs font-mono text-ink-3 mb-6">ID: {savedId}</p>
           )}
           <div className="flex gap-3 justify-center">
             <button
               onClick={handleReset}
-              className="bg-defender-red text-white rounded-button px-5 py-2.5 text-sm font-semibold hover:bg-rose-700 transition-colors"
+              className="bg-defender-red text-white rounded-button px-5 py-2.5 text-sm font-semibold hover:bg-ink transition-colors"
             >
               Report Another Impact
             </button>
             <a
-              href="/"
-              className="border border-white/10 rounded-button px-5 py-2.5 text-sm font-semibold text-white/55 hover:bg-white/[0.05] transition-colors"
+              href="/admin"
+              className="border border-line rounded-button px-5 py-2.5 text-sm font-semibold text-ink-3 hover:bg-ink/[0.05] transition-colors"
             >
               Back to Dashboard
             </a>

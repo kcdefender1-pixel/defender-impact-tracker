@@ -49,44 +49,45 @@ export const KPI_TO_PILLAR: Record<string, string> = {
 };
 
 export const PROGRAM_AREA_BADGE: Record<string, string> = {
-  editorial: 'bg-rose-500/15 text-rose-400',
-  mutual_aid: 'bg-emerald-500/15 text-emerald-400',
-  political_education: 'bg-amber-500/15 text-amber-400',
-  arts_culture: 'bg-purple-500/15 text-purple-400',
-  development_fundraising: 'bg-blue-500/15 text-blue-400',
-  operations_systems: 'bg-slate-500/15 text-slate-300',
-  radar: 'bg-orange-500/15 text-orange-400',
-  other: 'bg-slate-500/15 text-slate-400',
+  editorial: 'bg-defender-red text-white',
+  mutual_aid: 'bg-defender-green text-white',
+  political_education: 'bg-defender-gold text-ink',
+  arts_culture: 'bg-defender-violet text-ink',
+  development_fundraising: 'bg-defender-blue text-white',
+  operations_systems: 'bg-ink/10 text-ink-2',
+  radar: 'bg-defender-pink text-ink',
+  other: 'bg-ink/10 text-ink-3',
 };
 
 export const PROGRAM_AREA_DOT: Record<string, string> = {
   editorial: 'bg-defender-red',
   mutual_aid: 'bg-defender-green',
   political_education: 'bg-defender-gold',
-  arts_culture: 'bg-purple-500',
-  development_fundraising: 'bg-blue-500',
-  operations_systems: 'bg-gray-400',
-  radar: 'bg-orange-500',
-  other: 'bg-gray-400',
+  arts_culture: 'bg-defender-violet',
+  development_fundraising: 'bg-defender-blue',
+  operations_systems: 'bg-ink-4',
+  radar: 'bg-defender-pink',
+  other: 'bg-ink-4',
 };
 
-export const KPI_LEFT_BORDER: Record<string, string> = {
-  audience_growth_total_reach: 'border-l-defender-red',
-  stories_published_total_weekly: 'border-l-defender-red',
-  editorial_narrative_power_pct: 'border-l-defender-red',
-  political_education_participants: 'border-l-defender-gold',
-  mutual_aid_participation_team_members: 'border-l-defender-green',
-  community_served_count: 'border-l-defender-green',
-  arts_culture_engagement_attendees_artists: 'border-l-purple-500',
-  membership_sustaining_donors_new_monthly: 'border-l-blue-500',
-  membership_retention_rate: 'border-l-blue-500',
-  revenue_mix_quarterly_share_and_growth: 'border-l-defender-gold',
+// Accent band color per KPI, matching its pillar
+export const KPI_ACCENT_BG: Record<string, string> = {
+  audience_growth_total_reach: 'bg-defender-red',
+  stories_published_total_weekly: 'bg-defender-red',
+  editorial_narrative_power_pct: 'bg-defender-red',
+  political_education_participants: 'bg-defender-gold',
+  mutual_aid_participation_team_members: 'bg-defender-green',
+  community_served_count: 'bg-defender-green',
+  arts_culture_engagement_attendees_artists: 'bg-defender-violet',
+  membership_sustaining_donors_new_monthly: 'bg-defender-blue',
+  membership_retention_rate: 'bg-defender-blue',
+  revenue_mix_quarterly_share_and_growth: 'bg-defender-blue',
 };
 
 export const STATUS_BADGE: Record<string, string> = {
-  pending: 'bg-amber-500/15 text-amber-400',
-  approved: 'bg-emerald-500/15 text-emerald-400',
-  archived: 'bg-slate-500/15 text-slate-400',
+  pending: 'bg-defender-gold text-ink',
+  approved: 'bg-defender-green text-white',
+  archived: 'bg-ink/10 text-ink-3',
 };
 
 export const AI_SYSTEM_PROMPT = `You are an impact tracker for The Kansas City Defender, a radical abolitionist Black nonprofit media organization in Kansas City, Missouri. Your role is to take plain-language descriptions of impact events (written like Slack messages or casual notes) and structure them for organizational tracking and funder reporting.

@@ -83,19 +83,19 @@ export default function AdminMetricsPage() {
   const keysWithData = Object.keys(byKey).sort();
 
   const inputClass =
-    'w-full rounded-[10px] border border-white/10 bg-surface px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-defender-red/40 focus:border-defender-red transition-colors';
-  const labelClass = 'block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5';
+    'w-full rounded-[10px] border border-line bg-paper px-3 py-2 text-sm text-ink placeholder-ink-4 focus:outline-none focus:ring-2 focus:ring-defender-red/40 focus:border-defender-red transition-colors';
+  const labelClass = 'block text-xs font-semibold text-ink-3 uppercase tracking-wider mb-1.5';
 
   return (
     <div className="px-4 py-8 md:px-8 md:py-10 max-w-6xl">
       <div className="mb-6">
-        <div className="text-xs font-bold text-defender-red uppercase tracking-widest mb-1">
+        <div className="kicker text-defender-red mb-2">
           Admin
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-white">
+        <h1 className="display text-[3rem] md:text-[4rem] text-ink">
           Metrics
         </h1>
-        <p className="text-white/50 text-sm mt-1">
+        <p className="text-ink-3 text-sm mt-1">
           Log KPI snapshots and track trends over time.
         </p>
       </div>
@@ -103,8 +103,8 @@ export default function AdminMetricsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: entry form */}
         <div>
-          <div className="bg-surface-card border border-white/[0.07] rounded-card p-5">
-            <div className="text-sm font-bold text-white mb-4">Add Snapshot</div>
+          <div className="bg-card border border-line rounded-card p-5">
+            <div className="text-sm font-bold text-ink mb-4">Add Snapshot</div>
 
             <div className="space-y-3">
               <div>
@@ -158,7 +158,7 @@ export default function AdminMetricsPage() {
               <button
                 onClick={handleSave}
                 disabled={!formKey || !formValue || saving}
-                className="w-full bg-defender-red text-white rounded-button px-4 py-2.5 text-sm font-semibold hover:bg-rose-700 transition-colors disabled:opacity-60"
+                className="w-full bg-defender-red text-white rounded-button px-4 py-2.5 text-sm font-semibold hover:bg-ink transition-colors disabled:opacity-60"
               >
                 {saving ? 'Saving...' : 'Save Snapshot'}
               </button>
@@ -173,9 +173,9 @@ export default function AdminMetricsPage() {
         {/* Right: charts + tables */}
         <div className="lg:col-span-2 space-y-6">
           {loading ? (
-            <div className="text-center py-12 text-white/30 text-sm">Loading metrics...</div>
+            <div className="text-center py-12 text-ink-4 text-sm">Loading metrics...</div>
           ) : keysWithData.length === 0 ? (
-            <div className="text-center py-12 text-white/30 text-sm">
+            <div className="text-center py-12 text-ink-4 text-sm">
               No metric snapshots yet. Add your first one.
             </div>
           ) : (
@@ -191,15 +191,15 @@ export default function AdminMetricsPage() {
               return (
                 <div
                   key={key}
-                  className="bg-surface-card border border-white/[0.07] rounded-card p-4"
+                  className="bg-card border border-line rounded-card p-4"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-sm font-semibold text-white">{label}</div>
+                    <div className="text-sm font-semibold text-ink">{label}</div>
                     {latest !== undefined && (
-                      <div className="font-mono font-bold text-white">
+                      <div className="font-mono font-bold text-ink">
                         {latest.toLocaleString()}
                         {kpiUnit && (
-                          <span className="text-xs text-white/35 ml-1">{kpiUnit}</span>
+                          <span className="text-xs text-ink-3 ml-1">{kpiUnit}</span>
                         )}
                       </div>
                     )}
@@ -224,9 +224,9 @@ export default function AdminMetricsPage() {
                       </LineChart>
                     </ResponsiveContainer>
                   ) : (
-                    <p className="text-xs text-white/30 mt-1">Add 2+ snapshots to see a trend line.</p>
+                    <p className="text-xs text-ink-4 mt-1">Add 2+ snapshots to see a trend line.</p>
                   )}
-                  <div className="mt-2 text-xs text-white/30">
+                  <div className="mt-2 text-xs text-ink-4">
                     {data.length} snapshot{data.length !== 1 ? 's' : ''}
                   </div>
                 </div>

@@ -148,7 +148,7 @@ export const DOORS: {
     what: 'Our Free Clothing Program, run by an all-Black mutual aid team and set up like a department store owned by the people. No applications, no questions.',
     proof: '3,000+ clothing and hygiene items given to Black families in 2026, by a mutual aid team now about 30 members strong.',
     link: 'https://kansascitydefender.com/mutual-aid-community-programs/peoples-free-store-kc-defender-clothing-hygiene-distribution/',
-    image: '/photos/mutual-aid-team.jpg',
+    image: `${CDN}/2026/04/27141634/158A3299.jpg`,
   },
   {
     name: 'The Hamer Free Food Program',

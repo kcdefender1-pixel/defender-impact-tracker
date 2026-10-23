@@ -10,6 +10,9 @@ import { PILLAR_STYLE, formatMonthDay } from '@/lib/pillar-styles';
 // so a specific win can be linked to directly, and the timeline can open one.
 const HASH_PREFIX = '#win-';
 
+// Board order follows the calendar; year-long totals carry a late date so they close the run
+const ORDERED_WINS = [...WINS].sort((a, b) => a.date.localeCompare(b.date));
+
 function slugFromHash() {
   if (typeof window === 'undefined') return null;
   const h = window.location.hash;
@@ -28,8 +31,8 @@ export function WinsBoard() {
     return () => window.removeEventListener('hashchange', sync);
   }, []);
 
-  const index = WINS.findIndex((w) => w.slug === openSlug);
-  const win = index >= 0 ? WINS[index] : null;
+  const index = ORDERED_WINS.findIndex((w) => w.slug === openSlug);
+  const win = index >= 0 ? ORDERED_WINS[index] : null;
 
   useEffect(() => {
     const d = dialogRef.current;
@@ -55,14 +58,14 @@ export function WinsBoard() {
   }, []);
 
   const step = (dir: 1 | -1) => {
-    const next = WINS[(index + dir + WINS.length) % WINS.length];
+    const next = ORDERED_WINS[(index + dir + ORDERED_WINS.length) % ORDERED_WINS.length];
     open(next.slug);
   };
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {WINS.map((w, i) => (
+        {ORDERED_WINS.map((w, i) => (
           <WinCard key={w.slug} win={w} index={i} onOpen={() => open(w.slug)} />
         ))}
       </div>
@@ -77,7 +80,7 @@ export function WinsBoard() {
         aria-labelledby="win-title"
         className="backdrop:bg-ink/70 backdrop:backdrop-blur-sm bg-transparent p-0 m-auto w-[min(860px,calc(100vw-24px))] max-h-[calc(100dvh-24px)] open:animate-[fadeSlideIn_0.25s_ease-out]"
       >
-        {win && <WinDetail win={win} onClose={close} onPrev={() => step(-1)} onNext={() => step(1)} position={`${index + 1} of ${WINS.length}`} />}
+        {win && <WinDetail win={win} onClose={close} onPrev={() => step(-1)} onNext={() => step(1)} position={`${index + 1} of ${ORDERED_WINS.length}`} />}
       </dialog>
     </>
   );
@@ -107,7 +110,7 @@ function WinCard({ win, index, onOpen }: { win: Win; index: number; onOpen: () =
     >
       <div className="flex items-center justify-between gap-2 mb-5">
         <span className={`kicker px-2 py-1 ${t.badge}`}>{win.label} win</span>
-        <span className={`kicker shrink-0 ${t.muted}`}>{formatMonthDay(win.date)}</span>
+        <span className={`kicker shrink-0 ${t.muted}`}>{win.dateLabel ?? formatMonthDay(win.date)}</span>
       </div>
       <p className="font-serif font-semibold text-[1.4rem] leading-[1.18] mb-6">{win.title}</p>
       <div className={`mt-auto flex items-end justify-between gap-3 pt-4 border-t-2 ${t.rule}`}>
@@ -165,7 +168,7 @@ function WinDetail({
         <div className="flex flex-wrap items-center gap-2 mb-4">
           <span className={`kicker px-2 py-1 ${style.fill}`}>{win.label} win</span>
           <span className="kicker text-ink-3">
-            {formatMonthDay(win.date)}, 2026 &middot; {PILLARS[win.pillar].label}
+            {win.dateLabel ?? `${formatMonthDay(win.date)}, 2026`} &middot; {PILLARS[win.pillar].label}
           </span>
         </div>
 

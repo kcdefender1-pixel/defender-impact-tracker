@@ -2,15 +2,22 @@ import Image from 'next/image';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import {
   DOORS,
+  FUNDERS,
+  FUNDERS_THANKS,
   HEADLINE_STATS,
   IMPACT_AREAS,
+  IMPACT_AREAS_INTRO,
   MORE_STATS,
+  NEXT,
   NARRATIVE,
   PARTNERS,
   PATHWAY,
   PILLARS,
   PULL_QUOTE,
   RECOGNITION,
+  TEAM,
+  TEAM_THANKS,
+  TESTIMONIALS,
   THESIS,
   WHO_FOR,
   WHY_NOW,
@@ -169,21 +176,20 @@ export default function ImpactPage() {
 
         {/* ── Impact areas ──────────────────────────────────────── */}
         <section id="areas" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead
-            title="Impact Areas"
-            dek="Where the work moves the needle, with the receipts."
-          />
+          <SectionHead title="Impact Areas" dek={IMPACT_AREAS_INTRO} />
           <div className="grid md:grid-cols-2 gap-5">
-            {IMPACT_AREAS.map((a) => {
+            {IMPACT_AREAS.map((a, i) => {
               const style = PILLAR_STYLE[a.pillar];
+              const wide = IMPACT_AREAS.length % 2 === 1 && i === IMPACT_AREAS.length - 1;
               return (
-                <article key={a.id} className="border-2 border-ink bg-card flex flex-col">
+                <article key={a.id} className={`border-2 border-ink bg-card flex flex-col ${wide ? 'md:col-span-2' : ''}`}>
                   <div className={`px-6 py-4 border-b-2 border-ink ${style.fill}`}>
                     <h3 className="display text-[2rem] md:text-[2.3rem]">{a.name}</h3>
+                    <p className="kicker mt-1 opacity-80">Speaks to: {a.speaksTo.join(' · ')}</p>
                   </div>
                   <div className="p-6">
                     <p className="font-serif font-semibold text-[1.3rem] leading-snug">{a.claim}</p>
-                    <ul className="mt-5 space-y-3">
+                    <ul className={`mt-5 grid gap-3 ${wide ? 'md:grid-cols-2 md:gap-x-8' : ''}`}>
                       {a.proof.map((p) => (
                         <li key={p} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-2">
                           <span className={`mt-[7px] w-2 h-2 shrink-0 ${style.dot} ring-1 ring-ink`} aria-hidden />
@@ -211,6 +217,28 @@ export default function ImpactPage() {
         <section id="wins" className="py-16 md:py-20 border-t-2 border-ink">
           <SectionHead title="Victory Board" dek="The wins of 2026. Open any card for the full story and what changed." />
           <WinsBoard />
+        </section>
+
+        {/* ── In their words ───────────────────────────────────── */}
+        <section className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="words-title">
+          <h2 id="words-title" className="slab mb-10">In Their Words</h2>
+          <div className="grid md:grid-cols-2 gap-5">
+            {TESTIMONIALS.map((t, i) => (
+              <figure
+                key={t.quote}
+                className={`border-2 border-ink p-7 md:p-8 flex flex-col justify-between ${
+                  i % 3 === 0 ? 'bg-defender-gold' : i % 3 === 1 ? 'bg-card' : 'bg-ink text-paper'
+                }`}
+              >
+                <blockquote className="font-serif italic text-[1.6rem] md:text-[1.9rem] leading-[1.18]">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <figcaption className={`kicker mt-6 ${i % 3 === 2 ? 'text-paper/70' : 'text-ink-3'}`}>
+                  {t.who}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </section>
 
         {/* ── Programs ──────────────────────────────────────────── */}
@@ -248,29 +276,76 @@ export default function ImpactPage() {
         </section>
       </div>
 
-      {/* ── Close ─────────────────────────────────────────────── */}
-      <section className="bg-defender-red border-t-2 border-ink" data-print-hide>
-        <div className="max-w-[1320px] mx-auto px-4 md:px-8 py-16 md:py-20 grid md:grid-cols-12 gap-8 items-end">
-          <h2 className="md:col-span-7 display text-[clamp(3rem,7vw,6rem)] text-ink">
-            Build the house <span className="text-paper">with us.</span>
+      {/* ── What's next ──────────────────────────────────────── */}
+      <section id="next" className="bg-defender-red border-t-2 border-ink">
+        <div className="max-w-[1320px] mx-auto px-4 md:px-8 py-16 md:py-24">
+          <span className="kicker inline-block bg-ink text-paper px-2.5 py-1 mb-6">What&apos;s next</span>
+          <h2 className="display text-[clamp(3rem,7vw,6rem)] text-ink max-w-4xl">
+            {NEXT.headline.split(' ').slice(0, -1).join(' ')}{' '}
+            <span className="text-paper">{NEXT.headline.split(' ').slice(-1)}</span>
           </h2>
-          <div className="md:col-span-5 flex flex-wrap gap-3 md:justify-end">
-            <a
-              href="https://kansascitydefender.com/support-us/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 bg-ink text-paper rounded-button px-5 py-3 text-[14px] font-bold hover:bg-paper hover:text-ink transition-colors"
-            >
-              Support the Defender <ArrowUpRight size={16} />
-            </a>
-            <a
-              href="https://kansascitydefender.com/join/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 border-2 border-ink text-ink rounded-button px-5 py-[10px] text-[14px] font-bold hover:bg-ink hover:text-paper transition-colors"
-            >
-              Become a member <ArrowUpRight size={16} />
-            </a>
+          <p className="mt-5 max-w-2xl text-[17px] font-medium text-ink/85 leading-relaxed">{NEXT.dek}</p>
+
+          <ol className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink">
+            {NEXT.goals.map((g, i) => (
+              <li key={g.title} className="bg-paper p-5 md:p-6">
+                <span className="display block text-[2.6rem] text-defender-red">{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-serif font-semibold text-[1.2rem] leading-snug block mt-2">{g.title}</span>
+                <p className="mt-2 text-[14px] text-ink-2 leading-relaxed">{g.text}</p>
+              </li>
+            ))}
+          </ol>
+
+          <h3 className="display text-[2.2rem] md:text-[2.6rem] text-ink mt-16 mb-6">Get involved</h3>
+          <div className="grid md:grid-cols-3 gap-4" data-print-hide>
+            {NEXT.ways.map((w, i) => (
+              <a
+                key={w.label}
+                href={w.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group border-2 border-ink p-6 flex flex-col shadow-[6px_6px_0_0_#0E0D0C] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[10px_10px_0_0_#0E0D0C] ${
+                  i === 0 ? 'bg-ink text-paper' : 'bg-paper text-ink'
+                }`}
+              >
+                <span className="display text-[2rem]">{w.label}</span>
+                <span className={`mt-2 text-[14.5px] ${i === 0 ? 'text-paper/80' : 'text-ink-2'}`}>{w.text}</span>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold group-hover:gap-2.5 transition-all">
+                  Go <ArrowUpRight size={15} />
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Thank you ────────────────────────────────────────── */}
+      <section id="thanks" className="max-w-[1320px] mx-auto px-4 md:px-8 py-16 md:py-24">
+        <SectionHead title="Thank You" dek="None of this happens alone." />
+
+        <div className="grid lg:grid-cols-12 gap-10">
+          <div className="lg:col-span-7">
+            <h3 className="display text-[2rem] md:text-[2.4rem] mb-6">Our team</h3>
+            <ul className="grid sm:grid-cols-2 gap-4">
+              {TEAM.map((t) => (
+                <li key={t.name} className="border-2 border-ink bg-card p-5">
+                  <span className="font-serif font-semibold text-[1.3rem] block">{t.name}</span>
+                  <span className="kicker text-defender-red block mt-1">{t.role}</span>
+                  <p className="mt-3 text-[14px] text-ink-2 leading-relaxed">{t.note}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 font-serif text-[1.15rem] leading-relaxed text-ink-2 max-w-2xl">{TEAM_THANKS}</p>
+          </div>
+
+          <div className="lg:col-span-5">
+            <h3 className="display text-[2rem] md:text-[2.4rem] mb-6">Our funders</h3>
+            <ul className="border-2 border-ink bg-card divide-y-2 divide-ink/10">
+              {FUNDERS.map((f) => (
+                <li key={f} className="px-5 py-3.5 font-serif font-semibold text-[1.15rem]">{f}</li>
+              ))}
+            </ul>
+            <p className="mt-6 font-serif text-[1.15rem] leading-relaxed text-ink-2">{FUNDERS_THANKS}</p>
           </div>
         </div>
       </section>
@@ -329,6 +404,17 @@ function DoorCard({ door, wide }: { door: (typeof DOORS)[number]; wide?: boolean
         <p className="mt-4 font-serif font-semibold text-[1.12rem] text-ink leading-snug border-l-4 border-ink pl-3">
           {door.proof}
         </p>
+        {door.stats && (
+          <dl className="mt-5 grid grid-cols-3 gap-[2px] bg-ink border-2 border-ink">
+            {door.stats.map((st) => (
+              <div key={st.label} className="bg-paper px-3 py-3">
+                <dt className="sr-only">{st.label}</dt>
+                <dd className="display text-[2rem] tabular-nums">{st.value}</dd>
+                <dd className="text-[11.5px] font-semibold text-ink-3 leading-snug mt-1">{st.label}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
         {door.link && (
           <a
             href={door.link}

@@ -22,7 +22,9 @@ export const PUBLIC_SECTIONS = [
   { id: 'year', label: 'The Year' },
   { id: 'wins', label: 'Wins' },
   { id: 'programs', label: 'Programs' },
-  { id: 'numbers', label: 'By the Numbers' },
+  { id: 'numbers', label: 'Numbers' },
+  { id: 'next', label: '2027' },
+  { id: 'thanks', label: 'Thank You' },
 ];
 
 function useActiveSection(enabled: boolean) {
@@ -133,7 +135,7 @@ export function Masthead() {
                   <a
                     key={id}
                     href={`#${id}`}
-                    className={`px-3 py-1.5 text-[13px] font-semibold whitespace-nowrap transition-colors ${
+                    className={`px-2.5 py-1.5 text-[13px] font-semibold whitespace-nowrap transition-colors ${
                       active === id ? 'bg-ink text-paper' : 'text-ink-2 hover:bg-ink/[0.06] hover:text-ink'
                     }`}
                   >

@@ -28,7 +28,7 @@ const FILTERS: { value: Filter; label: string }[] = [
   { value: 'material', label: PILLARS.material.short },
   { value: 'organizing', label: PILLARS.organizing.short },
   { value: 'cultural', label: PILLARS.cultural.short },
-  { value: 'institutional', label: 'Recognition & Growth' },
+  { value: 'institutional', label: PILLARS.institutional.short },
 ];
 
 const WIN_SLUGS = new Set(WINS.map((w) => w.slug));
@@ -96,7 +96,7 @@ export function YearTimeline() {
           {(Object.keys(PILLARS) as Pillar[]).map((p) => (
             <span key={p} className="inline-flex items-center gap-1.5 text-[12px] text-ink-2">
               <span className={`w-2.5 h-2.5 ${PILLAR_STYLE[p].dot}`} />
-              {p === 'institutional' ? 'Recognition & Growth' : PILLARS[p].short}
+              {PILLARS[p].short}
             </span>
           ))}
           <span className="inline-flex items-center gap-1.5 text-[12px] text-ink-2">

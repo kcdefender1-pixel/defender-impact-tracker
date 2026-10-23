@@ -62,6 +62,7 @@ function useActiveSection(enabled: boolean) {
 export function Masthead() {
   const pathname = usePathname();
   const isPublic = pathname === '/';
+  const isLogin = pathname === '/staff';
   const active = useActiveSection(isPublic);
 
   // Keep the current section's pill in view in the scrolling mobile strip
@@ -93,9 +94,22 @@ export function Masthead() {
               Staff
             </Link>
           ) : (
-            <Link href="/" className="hover:text-paper transition-colors">
-              View public page &rarr;
-            </Link>
+            <span className="flex items-center gap-4">
+              <Link href="/" className="hover:text-paper transition-colors">
+                View public page &rarr;
+              </Link>
+              {!isLogin && (
+                <button
+                  onClick={async () => {
+                    await fetch('/api/staff-login', { method: 'DELETE' });
+                    window.location.assign('/');
+                  }}
+                  className="hover:text-paper transition-colors uppercase"
+                >
+                  Sign out
+                </button>
+              )}
+            </span>
           )}
         </div>
       </div>
@@ -135,7 +149,7 @@ export function Masthead() {
                 <span className="hidden sm:inline">Print / PDF</span>
               </button>
             </>
-          ) : (
+          ) : isLogin ? null : (
             <>
               <nav className="hidden md:flex items-center gap-1 flex-1 min-w-0">
                 {STAFF_ITEMS.map(({ href, label }) => (

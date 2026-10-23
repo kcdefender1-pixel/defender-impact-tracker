@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
-import { ArrowUpRight, Maximize2 } from 'lucide-react';
+import { ArrowUpRight, Maximize2, Star } from 'lucide-react';
 import {
   KIND_LABEL,
   MILESTONES,
@@ -158,19 +158,32 @@ function MilestoneItem({ m }: { m: Milestone }) {
   return (
     <li className="relative pl-7 md:pl-10 pb-10 last:pb-6">
       {/* Node on the spine */}
-      <span
-        className={`absolute -left-[9px] top-1 w-4 h-4 border-2 border-ink ${style.dot} ${
-          isWin ? 'scale-125 rotate-45' : ''
-        }`}
-        aria-hidden
-      />
+      {m.featured ? (
+        <Star
+          size={30}
+          strokeWidth={1.5}
+          className="star-pulse absolute -left-[16px] -top-0.5 fill-defender-gold text-ink"
+          aria-hidden
+        />
+      ) : (
+        <span
+          className={`absolute -left-[9px] top-1 w-4 h-4 border-2 border-ink ${style.dot} ${
+            isWin ? 'scale-125 rotate-45' : ''
+          }`}
+          aria-hidden
+        />
+      )}
 
-      <div className={`grid gap-5 ${m.image ? 'lg:grid-cols-[1fr_240px]' : ''}`}>
+      <div
+        className={`grid gap-5 ${m.image ? 'lg:grid-cols-[1fr_240px]' : ''} ${
+          m.featured ? 'glow-card bg-defender-gold/25 border-2 border-ink p-5 md:p-6' : ''
+        }`}
+      >
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="kicker text-ink-3">{formatMonthDay(m.date)}</span>
-            <span className={`kicker px-1.5 py-[3px] ${isWin ? 'bg-ink text-paper' : style.fill}`}>
-              {isWin ? 'Win' : KIND_LABEL[m.kind]}
+            <span className={`kicker px-1.5 py-[3px] ${isWin || m.featured ? 'bg-ink text-paper' : style.fill}`}>
+              {m.featured ? '★ Top honor' : isWin ? 'Win' : KIND_LABEL[m.kind]}
             </span>
             <span className={`kicker ${style.text}`}>{PILLARS[m.pillar].short}</span>
           </div>

@@ -20,6 +20,7 @@ export interface Milestone {
   image?: string;
   imageAlt?: string;
   imageTop?: boolean; // anchor the crop to the top (for social graphics with text below the photo)
+  featured?: boolean; // gets the glowing star treatment
 }
 
 export interface Win {
@@ -196,8 +197,9 @@ export const DOORS: {
   {
     name: 'Ms. Willa’s Books',
     pillar: 'institutional',
-    what: 'Missouri’s oldest Black bookstore was a week away from having its entire 10,000-volume collection auctioned off when the Defender paid a year of rent to save it. 2026 is our first full year operating it as our headquarters: home to our pantry, free store, book club, and freedom school classroom.',
+    what: 'Missouri’s oldest Black bookstore, saved from auction by the Defender and now our headquarters: home to our pantry, free store, book club, and freedom school classroom.',
     proof: 'A permanent Black institution and 10,000 volumes, kept in Black hands.',
+    link: '#willas',
     image: `${CDN}/2026/07/22122112/KCD-Willas-3.jpg`,
   },
 ];
@@ -224,6 +226,15 @@ export const PARTNERS = [
   'Ivanhoe Neighborhood Association',
 ];
 
+export const SPOTLIGHT = {
+  kicker: 'Columbia Journalism School · April 2026',
+  title: 'Selected by the Lipman Center for Journalism and Civil and Human Rights',
+  text: 'One of five 2026 Arnold Grant recipients nationwide for reporting on race and the U.S. criminal justice system, alongside Pulitzer Prize winner Mississippi Today and CalMatters.',
+  quote: 'journalism’s power to serve the public and provide a check on power',
+  quoteBy: 'Prof. Kat Chow, grant selection committee, on the 2026 projects',
+  href: 'https://journalism.columbia.edu/news/2026-lipman-center-arnold-grants',
+};
+
 export const RECOGNITION = [
   { who: 'Institute for Nonprofit News', what: 'Khadijah Bland, our Director of Development & Revenue, named National Emerging Leader of the Year', date: 'July 2026' },
   { who: 'Reynolds Journalism Institute', what: 'Featured the Defender as a model for Black independent media', date: 'March 2026' },
@@ -237,6 +248,26 @@ export const RECOGNITION = [
   { who: 'Rime Buddhist Center & Interfaith Council of KC', what: 'Bodhisattva Award for compassion, service, and justice', date: '2025' },
   { who: 'National Black United Front', what: 'Charles Miller Black Liberation Award', date: '2025' },
 ];
+
+// ─── Willa's Books x Defender Liberation Hub ────────────────────────────────
+
+export const WILLAS = {
+  kicker: 'Willa’s Books x Defender Liberation Hub',
+  headline: 'We saved Missouri’s oldest Black bookstore. Now it is our home.',
+  dek: 'The house in “one house, many doors” is real. It is Ms. Willa’s.',
+  shelf: ['Frederick Douglass', 'W.E.B. Du Bois', 'Paul Laurence Dunbar', 'Langston Hughes'],
+  shelfNote: 'Inside: 10,000 volumes, including some of the earliest books written by Black people in the United States after slavery.',
+  steps: [
+    { title: 'A week from auction', text: 'Ms. Willa’s entire collection, 10,000 volumes of Black history and literature, was a week away from being auctioned off.' },
+    { title: 'We raised the rent', text: 'The Defender raised the money to pay her rent for a full year, then helped Ms. Willa retire with dignity.' },
+    { title: 'Every book, by hand', text: 'Defender organizers cataloged the entire 10,000-volume collection.' },
+    { title: 'Our home', text: '2026 is our first full year running it as our headquarters: the pantry, the mutual aid room, the book club, and the freedom school classroom.' },
+    { title: 'Next: a Liberation Hub', text: 'In 2027, Willa’s becomes a year-round Liberation Hub, open to the community every day.' },
+  ],
+  image: `${CDN}/2026/07/22122112/KCD-Willas-3.jpg`,
+  imageAlt: 'The Defender team in front of Willa’s Books & Vinyl',
+  credit: 'Led by Nina Kerrs, Site Manager & Willa’s Campaign Lead',
+};
 
 // ─── In their words ─────────────────────────────────────────────────────────
 
@@ -298,12 +329,20 @@ export const FUNDERS_THANKS =
 
 export const NEXT = {
   headline: 'Where we go in 2027',
-  dek: 'Everything in this report was built in one year, by fifty members, in the middle of the country. Here is what we are building next.',
+  lead: 'Journalism first.',
+  dek: 'In 2027 the Defender grows from Kansas City’s essential Black newsroom into the Black newsroom of the Midwest, with reporting that starts on Prospect Avenue and reaches the world.',
+  reach: [
+    { scope: 'Kansas City', title: 'Own the city’s front page', text: 'Daily short-form video news on the platforms young Kansas City actually uses, a student newsroom reporting from inside their own schools, and print in the people’s hands through Hamer boxes, Willa’s, and the streets.' },
+    { scope: 'Missouri & the region', title: 'Build a statewide desk', text: 'Follow the power to Jefferson City and across Missouri and Kansas: the statehouse, the ballot fights, the prisons, and the small towns industry targets because it thinks no one is watching.' },
+    { scope: 'National', title: 'Set the national agenda', text: 'Own the beats nobody else will, from AI surveillance and nuclear weapons to ICE and police accountability, and partner with national outlets to carry our investigations across the country.' },
+    { scope: 'International', title: 'Take it global', text: 'Grow our international desk across the African diaspora and take Liberation Now international, connecting Kansas City’s fights to the global struggle for Black liberation.' },
+  ],
+  mediums: ['Investigations', 'Liberation Now on YouTube', 'Daily short-form video', 'RADAR & print editions', 'The newsletter', 'Live town halls & events'],
+  powerHeadline: 'And the power we build around it',
   goals: [
     { title: 'A youth organizing & leadership pipeline', text: 'Grow the Student Action Network and B-REAL Academy, and train young people in journalism and media careers, so every young person who finds us has a path to lead.' },
-    { title: 'Ms. Willa’s as a year-round hub', text: 'The free store, pantry, book club, and freedom school under one roof, open to the community all year.' },
+    { title: 'Willa’s as a year-round Liberation Hub', text: 'The free store, pantry, book club, and freedom school under one roof, open to the community all year.' },
     { title: 'Scale our mutual aid programs', text: 'More families clothed and fed, more Black farms paid, and more Mutual Aid Leaders organizing alongside them.' },
-    { title: 'Take Liberation Now international', text: 'International interviews and a global audience for the Midwest’s radical Black video news show.' },
     { title: 'Grow Black Feast Week', text: 'A diner passport and a public directory of Kansas City’s Black businesses, so visibility reaches founders at every stage.' },
   ],
   ways: [
@@ -393,7 +432,7 @@ export const IMPACT_AREAS: {
       'Active subscriptions up 40%+, new revenue from events and Black business partnerships, and our first capital campaign.',
       'Khadijah Bland, our Director of Development & Revenue, named INN’s National Emerging Leader of the Year.',
       'An international desk led by two-time Pulitzer finalist Jon Jeter.',
-      'Ms. Willa’s Books, Missouri’s oldest Black bookstore, saved from auction with its 10,000 volumes. 2026 is our first full year running it as our headquarters.',
+      'Ms. Willa’s Books, Missouri’s oldest Black bookstore, saved from auction. Our organizers cataloged all 10,000 volumes, and 2026 is our first full year running it as our headquarters.',
       'LION Publishers’ 2026 Community Engagement Award, five years of operation, and a seat in the 2026 national Lab for Journalism Funding cohort.',
     ],
   },
@@ -593,6 +632,17 @@ export const MILESTONES: Milestone[] = [
     metric: { value: '10', label: 'comrades' },
     image: '/photos/sort-day.jpg',
     imageAlt: 'Mutual aid volunteers sorting clothing into storage units',
+  },
+  {
+    slug: 'lipman',
+    date: '2026-04-15',
+    pillar: 'institutional',
+    kind: 'recognition',
+    featured: true,
+    title: 'Columbia Journalism School’s Lipman Center selects the Defender',
+    summary: 'The Ira A. Lipman Center for Journalism and Civil and Human Rights named the Defender one of five 2026 Arnold Grant recipients nationwide, for reporting on race and the criminal justice system, alongside Pulitzer Prize winner Mississippi Today and CalMatters.',
+    outcome: 'Our reporters join Columbia Journalism School’s community of fellows.',
+    link: 'https://journalism.columbia.edu/news/2026-lipman-center-arnold-grants',
   },
   {
     slug: 'liberation-now',

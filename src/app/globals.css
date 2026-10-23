@@ -116,9 +116,44 @@
   animation: marquee 40s linear infinite;
 }
 
+/* A gold star that breathes, for the year's top honors */
+@keyframes star-pulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 0 rgba(255, 194, 41, 0));
+  }
+  50% {
+    transform: scale(1.18) rotate(8deg);
+    filter: drop-shadow(0 0 10px rgba(255, 194, 41, 0.95));
+  }
+}
+
+.star-pulse {
+  animation: star-pulse 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* A soft gold halo that pulses around a featured card */
+@keyframes glow-ring {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 194, 41, 0), 6px 6px 0 0 #0e0d0c;
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 194, 41, 0.38), 6px 6px 0 0 #0e0d0c;
+  }
+}
+
+.glow-card {
+  animation: glow-ring 2.8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise,
-  .marquee-track {
+  .marquee-track,
+  .star-pulse,
+  .glow-card {
     animation: none;
   }
 }

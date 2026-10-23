@@ -18,6 +18,7 @@ const STAFF_ITEMS = [
 export const PUBLIC_SECTIONS = [
   { id: 'power', label: 'Our Power' },
   { id: 'how', label: 'How It Fits' },
+  { id: 'willas', label: 'Willa’s' },
   { id: 'areas', label: 'Impact Areas' },
   { id: 'year', label: 'The Year' },
   { id: 'wins', label: 'Wins' },

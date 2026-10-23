@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Star } from 'lucide-react';
 import {
   DOORS,
   FUNDERS,
@@ -15,12 +15,14 @@ import {
   PILLARS,
   PULL_QUOTE,
   RECOGNITION,
+  SPOTLIGHT,
   TEAM,
   TEAM_THANKS,
   TESTIMONIALS,
   THESIS,
   WHO_FOR,
   WHY_NOW,
+  WILLAS,
 } from '@/content/impact-2026';
 import { PILLAR_STYLE } from '@/lib/pillar-styles';
 import { YearTimeline } from '@/components/public/year-timeline';
@@ -60,6 +62,16 @@ export default function ImpactPage() {
               <CoverStat key={s.label} value={s.value} label={s.label} index={i} />
             ))}
             <span className="kicker text-ink/70 mt-2 text-right">In 2026 alone</span>
+            <a
+              href="#spotlight"
+              className="rise mt-3 self-end inline-flex items-center gap-2.5 bg-ink text-paper pl-2.5 pr-4 py-2 border-2 border-ink hover:bg-paper hover:text-ink transition-colors"
+              style={{ animationDelay: '600ms' }}
+            >
+              <Star size={22} strokeWidth={1.5} className="star-pulse fill-defender-gold text-defender-gold shrink-0" aria-hidden />
+              <span className="text-[12.5px] font-bold leading-tight">
+                Selected by Columbia Journalism School&apos;s Lipman Center
+              </span>
+            </a>
           </div>
         </div>
       </section>
@@ -174,6 +186,65 @@ export default function ImpactPage() {
           </div>
         </section>
 
+        {/* ── Willa's Books x Defender Liberation Hub ──────────── */}
+        <section id="willas" className="py-16 md:py-20 border-t-2 border-ink">
+          <div className="glow-card border-2 border-ink bg-ink text-paper overflow-hidden">
+            <div className="grid lg:grid-cols-12">
+              <div className="lg:col-span-7 p-6 md:p-10">
+                <span className="kicker inline-flex items-center gap-2 text-defender-gold">
+                  <Star size={16} strokeWidth={1.5} className="star-pulse fill-defender-gold text-defender-gold" aria-hidden />
+                  {WILLAS.kicker}
+                </span>
+                <h2 className="display text-[clamp(2.6rem,5.5vw,4.6rem)] mt-4">{WILLAS.headline}</h2>
+                <p className="mt-4 font-serif italic text-[1.35rem] text-paper/85">{WILLAS.dek}</p>
+
+                {/* The shelf: hover a spine */}
+                <div className="mt-8 flex items-end gap-2 h-[190px]" aria-label="Authors in the Willa’s collection">
+                  {WILLAS.shelf.map((name, i) => (
+                    <div
+                      key={name}
+                      className={`group relative flex-1 max-w-[74px] border-2 border-paper flex items-end justify-center pb-3 transition-transform duration-300 hover:-translate-y-3 ${
+                        ['bg-defender-red', 'bg-defender-gold text-ink', 'bg-defender-green', 'bg-defender-violet text-ink'][i % 4]
+                      }`}
+                      style={{ height: `${[100, 88, 94, 82][i % 4]}%` }}
+                    >
+                      <span className="display text-[1.05rem] [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
+                        {name}
+                      </span>
+                    </div>
+                  ))}
+                  <div className="flex-1 max-w-[120px] h-[70%] border-2 border-dashed border-paper/50 flex items-center justify-center text-center px-2">
+                    <span className="display text-[1.5rem] leading-none text-defender-gold">
+                      +10,000
+                      <span className="block text-[0.8rem] text-paper/70 mt-1">volumes</span>
+                    </span>
+                  </div>
+                </div>
+                <div className="h-2 bg-paper/80 mt-0" aria-hidden />
+                <p className="mt-4 text-[14.5px] text-paper/80 leading-relaxed max-w-xl">{WILLAS.shelfNote}</p>
+              </div>
+              <div className="lg:col-span-5 relative min-h-[18rem] border-t-2 lg:border-t-0 lg:border-l-2 border-paper/30">
+                <Image src={WILLAS.image} alt={WILLAS.imageAlt} fill sizes="(min-width: 1024px) 540px, 100vw" className="object-cover" />
+              </div>
+            </div>
+
+            <ol className="grid sm:grid-cols-2 lg:grid-cols-5 gap-[2px] bg-paper/25 border-t-2 border-paper/30">
+              {WILLAS.steps.map((st, i) => (
+                <li key={st.title} className={`p-5 md:p-6 ${i === WILLAS.steps.length - 1 ? 'bg-defender-gold text-ink' : 'bg-ink'}`}>
+                  <span className={`display block text-[2.2rem] ${i === WILLAS.steps.length - 1 ? 'text-ink' : 'text-defender-red'}`}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="font-serif font-semibold text-[1.2rem] block mt-1">{st.title}</span>
+                  <p className={`mt-2 text-[14px] leading-relaxed ${i === WILLAS.steps.length - 1 ? 'text-ink/80' : 'text-paper/75'}`}>
+                    {st.text}
+                  </p>
+                </li>
+              ))}
+            </ol>
+            <p className="kicker text-paper/60 px-6 md:px-10 py-4 border-t-2 border-paper/30">{WILLAS.credit}</p>
+          </div>
+        </section>
+
         {/* ── Impact areas ──────────────────────────────────────── */}
         <section id="areas" className="py-16 md:py-20 border-t-2 border-ink">
           <SectionHead title="Impact Areas" dek={IMPACT_AREAS_INTRO} />
@@ -264,6 +335,27 @@ export default function ImpactPage() {
           </div>
 
           <h3 className="display text-[2rem] md:text-[2.4rem] mt-14 mb-6">Recognition</h3>
+          <a
+            id="spotlight"
+            href={SPOTLIGHT.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glow-card scroll-mt-40 group mb-8 grid md:grid-cols-[auto_1fr] gap-6 items-center border-2 border-ink bg-defender-gold p-6 md:p-8"
+          >
+            <Star size={72} strokeWidth={1.25} className="star-pulse fill-ink text-ink" aria-hidden />
+            <div>
+              <span className="kicker text-ink/70">{SPOTLIGHT.kicker}</span>
+              <span className="display block text-[1.9rem] md:text-[2.5rem] mt-1 text-ink">{SPOTLIGHT.title}</span>
+              <p className="mt-2 text-[15.5px] text-ink/85 leading-relaxed max-w-3xl">{SPOTLIGHT.text}</p>
+              <p className="mt-4 font-serif italic text-[1.15rem] text-ink">
+                &ldquo;{SPOTLIGHT.quote}&rdquo;
+                <span className="not-italic font-sans text-[12px] font-semibold text-ink/70 block mt-1">{SPOTLIGHT.quoteBy}</span>
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1 text-[13px] font-bold text-ink border-b-2 border-ink group-hover:gap-2 transition-all">
+                Read Columbia&apos;s announcement <ArrowUpRight size={14} />
+              </span>
+            </div>
+          </a>
           <ul className="grid sm:grid-cols-2 gap-4">
             {RECOGNITION.map((r) => (
               <li key={r.who} className="border-l-4 border-defender-red pl-4 py-1">
@@ -284,9 +376,39 @@ export default function ImpactPage() {
             {NEXT.headline.split(' ').slice(0, -1).join(' ')}{' '}
             <span className="text-paper">{NEXT.headline.split(' ').slice(-1)}</span>
           </h2>
-          <p className="mt-5 max-w-2xl text-[17px] font-medium text-ink/85 leading-relaxed">{NEXT.dek}</p>
+          <p className="mt-6 display text-[2.2rem] md:text-[2.8rem] text-paper">{NEXT.lead}</p>
+          <p className="mt-3 max-w-3xl text-[17px] md:text-[18px] font-medium text-ink/85 leading-relaxed">{NEXT.dek}</p>
 
-          <ol className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink">
+          {/* Reach, widening ring by ring: KC to the world */}
+          <ol className="mt-12 grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {NEXT.reach.map((r, i) => (
+              <li
+                key={r.scope}
+                className="relative border-2 border-ink bg-ink text-paper p-6 md:p-7 shadow-[6px_6px_0_0_#0E0D0C] overflow-hidden"
+              >
+                <span
+                  aria-hidden
+                  className="absolute -right-10 -top-10 rounded-full border-[3px] border-defender-red/60"
+                  style={{ width: `${90 + i * 45}px`, height: `${90 + i * 45}px` }}
+                />
+                <span className="kicker text-defender-gold">{String(i + 1).padStart(2, '0')} · {r.scope}</span>
+                <span className="display block text-[2rem] md:text-[2.3rem] mt-3 relative">{r.title}</span>
+                <p className="mt-3 text-[14.5px] text-paper/80 leading-relaxed relative">{r.text}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-8 flex flex-wrap items-center gap-2">
+            <span className="kicker text-ink mr-1">Across every medium:</span>
+            {NEXT.mediums.map((m) => (
+              <span key={m} className="text-[13px] font-bold bg-paper text-ink border-2 border-ink rounded-full px-3 py-1">
+                {m}
+              </span>
+            ))}
+          </div>
+
+          <h3 className="display text-[2.2rem] md:text-[2.6rem] text-ink mt-16 mb-6">{NEXT.powerHeadline}</h3>
+          <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink">
             {NEXT.goals.map((g, i) => (
               <li key={g.title} className="bg-paper p-5 md:p-6">
                 <span className="display block text-[2.6rem] text-defender-red">{String(i + 1).padStart(2, '0')}</span>
@@ -415,8 +537,7 @@ function DoorCard({ door, wide }: { door: (typeof DOORS)[number]; wide?: boolean
         {door.link && (
           <a
             href={door.link}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(door.link.startsWith('#') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
             className="mt-auto pt-5 inline-flex items-center gap-1 text-[13px] font-bold text-ink hover:text-defender-red transition-colors self-start"
           >
             Learn more <ArrowUpRight size={14} />

@@ -323,31 +323,28 @@ export default function ImpactPage() {
       <section id="thanks" className="max-w-[1320px] mx-auto px-4 md:px-8 py-16 md:py-24">
         <SectionHead title="Thank You" dek="None of this happens alone." />
 
-        <div className="grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-7">
-            <h3 className="display text-[2rem] md:text-[2.4rem] mb-6">Our team</h3>
-            <ul className="grid sm:grid-cols-2 gap-4">
-              {TEAM.map((t) => (
-                <li key={t.name} className="border-2 border-ink bg-card p-5">
-                  <span className="font-serif font-semibold text-[1.3rem] block">{t.name}</span>
-                  <span className="kicker text-defender-red block mt-1">{t.role}</span>
-                  <p className="mt-3 text-[14px] text-ink-2 leading-relaxed">{t.note}</p>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 font-serif text-[1.15rem] leading-relaxed text-ink-2 max-w-2xl">{TEAM_THANKS}</p>
-          </div>
+        <h3 className="display text-[2rem] md:text-[2.4rem] mb-6">Our team</h3>
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {TEAM.map((t) => (
+            <li key={t.name} className={`border-2 border-ink p-5 ${t.note ? 'bg-card' : 'bg-paper'}`}>
+              <span className="font-serif font-semibold text-[1.25rem] block leading-tight">{t.name}</span>
+              <span className="kicker text-defender-red block mt-1.5">{t.role}</span>
+              {t.note && <p className="mt-3 text-[13.5px] text-ink-2 leading-relaxed">{t.note}</p>}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 font-serif text-[1.2rem] leading-relaxed text-ink-2 max-w-3xl">{TEAM_THANKS}</p>
 
-          <div className="lg:col-span-5">
-            <h3 className="display text-[2rem] md:text-[2.4rem] mb-6">Our funders</h3>
-            <ul className="border-2 border-ink bg-card divide-y-2 divide-ink/10">
-              {FUNDERS.map((f) => (
-                <li key={f} className="px-5 py-3.5 font-serif font-semibold text-[1.15rem]">{f}</li>
-              ))}
-            </ul>
-            <p className="mt-6 font-serif text-[1.15rem] leading-relaxed text-ink-2">{FUNDERS_THANKS}</p>
-          </div>
-        </div>
+        <h3 className="display text-[2rem] md:text-[2.4rem] mt-16 mb-6">Our funders</h3>
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink">
+          {FUNDERS.map((f) => (
+            <li key={f} className="bg-card px-5 py-4 font-serif font-semibold text-[1.15rem] flex items-center">{f}</li>
+          ))}
+          <li className="bg-defender-gold px-5 py-4 font-serif font-semibold text-[1.15rem] flex items-center">
+            Every monthly and one-time Defender
+          </li>
+        </ul>
+        <p className="mt-6 font-serif text-[1.2rem] leading-relaxed text-ink-2 max-w-3xl">{FUNDERS_THANKS}</p>
       </section>
     </div>
   );

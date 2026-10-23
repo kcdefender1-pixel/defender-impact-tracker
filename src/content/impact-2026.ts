@@ -71,6 +71,10 @@ export const MORE_STATS = [
   { value: '500K+', label: 'Reached during the Platform Ventures ICE fight' },
   { value: '23', label: 'Organizations in the coalition against the World Cup Jail' },
   { value: '150+', label: 'Neighbors served in one afternoon at the People’s Free Store' },
+  { value: '30', label: 'Members on our mutual aid team' },
+  { value: '10', label: 'New Mutual Aid Leaders who emerged this year' },
+  { value: '100+', label: 'Community volunteers our mutual aid team organizes' },
+  { value: '$7K', label: 'Circulated into Black farms through Hamer' },
   { value: '40%+', label: 'Growth in active subscriptions' },
   { value: '337K+', label: 'Views on our Lincoln Prep walkout story' },
   { value: '100+', label: 'Signed up to defend neighbors from ICE through our coverage' },
@@ -141,7 +145,7 @@ export const DOORS: {
     name: 'The People’s Free Store',
     pillar: 'material',
     what: 'Our Free Clothing Program, run by an all-Black mutual aid team and set up like a department store owned by the people. No applications, no questions.',
-    proof: '3,000+ clothing and hygiene items given to Black families in 2026.',
+    proof: '3,000+ clothing and hygiene items given to Black families in 2026, by a mutual aid team now about 30 members strong.',
     link: 'https://kansascitydefender.com/mutual-aid-community-programs/peoples-free-store-kc-defender-clothing-hygiene-distribution/',
     image: `${CDN}/2026/04/27141634/158A3299.jpg`,
   },
@@ -149,11 +153,11 @@ export const DOORS: {
     name: 'The Hamer Free Food Program',
     pillar: 'material',
     what: 'Named for Fannie Lou Hamer. Launched with Kansas City’s Black farms after Sun Fresh closed, it buys produce at market rate and delivers it free to Black elders and families.',
-    proof: 'The first network to unite the Black farms of Kansas City, and it keeps growing.',
+    proof: 'The first network to unite the Black farms of Kansas City, and winner of LION Publishers’ 2026 Community Engagement Award.',
     stats: [
-      { value: '5', label: 'Black farms in the network' },
+      { value: '$7K', label: 'circulated into Black farms' },
+      { value: '60', label: 'Community Food Leaders, mostly under 30' },
       { value: '51', label: 'bags of produce to seniors in one day' },
-      { value: '25', label: 'volunteers at one distribution' },
     ],
     link: 'https://kansascitydefender.com/mutual-aid-community-programs/kcs-black-farms-unite-hamer-free-food-program/',
     image: '/photos/hamer-food-box.jpg',
@@ -192,8 +196,8 @@ export const DOORS: {
   {
     name: 'Ms. Willa’s Books',
     pillar: 'institutional',
-    what: 'Missouri’s oldest Black bookstore was days from losing its collection when the Defender stepped in. Our organizers cataloged it by hand, and it is now our home: headquarters, pantry, free store, book club, and freedom school classroom.',
-    proof: 'A permanent Black institution, kept in Black hands.',
+    what: 'Missouri’s oldest Black bookstore was a week away from having its entire 10,000-volume collection auctioned off when the Defender paid a year of rent to save it. 2026 is our first full year operating it as our headquarters: home to our pantry, free store, book club, and freedom school classroom.',
+    proof: 'A permanent Black institution and 10,000 volumes, kept in Black hands.',
     image: `${CDN}/2026/07/22122112/KCD-Willas-3.jpg`,
   },
 ];
@@ -210,14 +214,14 @@ export const WHO_FOR = [
 ];
 
 export const PARTNERS = [
-  'Decarcerate KC',
   'KC Tenants',
+  'Decarcerate KC',
+  'Community Movement Builders',
+  'Urban League of Greater Kansas City',
+  'National Black United Front–KC',
   'Advocates for Immigrant Rights & Reconciliation',
   'KC Black Urban Growers',
   'Ivanhoe Neighborhood Association',
-  'Urban League of Greater KC',
-  'North Lawn Tenant Union',
-  'National Black United Front',
 ];
 
 export const RECOGNITION = [
@@ -225,7 +229,7 @@ export const RECOGNITION = [
   { who: 'Reynolds Journalism Institute', what: 'Featured the Defender as a model for Black independent media', date: 'March 2026' },
   { who: 'Vera Institute of Justice', what: 'Cited our ICE reporting in a national policy brief', date: 'March 2026' },
   { who: 'Pivot Fund', what: 'Spotlighted the Defender in its national roundup of grantees', date: 'April 2026' },
-  { who: 'LION Publishers', what: 'Award recognizing our reporting and the Hamer Program', date: 'September 2026' },
+  { who: 'LION Publishers', what: '2026 Community Engagement Award, for the Hamer Free Food Program', date: 'September 2026' },
   { who: 'Lab for Journalism Funding', what: 'Selected for the Local Media Association’s 2026 national cohort', date: 'August 2026' },
   { who: 'CUNY Newmark Graduate School of Journalism', what: 'Spotlighted our dual-power model in Spotlight on Community Media', date: 'September 2026' },
   { who: 'One Million Experiments', what: 'Highlighted B-REAL Academy among abolitionist institutions', date: 'October 2026' },
@@ -257,15 +261,23 @@ export const TESTIMONIALS = [
 
 // ─── The team ───────────────────────────────────────────────────────────────
 
-export const TEAM = [
+export const TEAM: { name: string; role: string; note?: string }[] = [
   { name: 'Ryan Sorrell', role: 'Founder & Executive Editor', note: 'Led the year’s biggest investigations, from Kansas City’s nuclear weapons plant to the first underground reactor.' },
   { name: 'Khadijah Bland', role: 'Director of Development & Revenue', note: 'INN’s 2026 National Emerging Leader of the Year. Grew active subscriptions 40%+ and launched our first capital campaign.' },
   { name: 'Melissa Ferrer-Civil', role: 'Director, B-REAL Academy', note: 'Kansas City’s first Poet Laureate. Led the freedom school through its largest, youngest class and into Cohort 4.' },
   { name: 'Jon Jeter', role: 'International Correspondent', note: 'Two-time Pulitzer Prize finalist. Launched The Plunder Papers from Nairobi.' },
+  { name: 'Nina Kerrs', role: 'Site Manager & Willa’s Campaign Lead', note: 'Led the campaign to save Ms. Willa’s and runs our home base there.' },
+  { name: 'Carmon Smith', role: 'Mutual Aid Co-Lead', note: 'Led the kids’ clothing drive and wash day, and helped design our Sort Day system.' },
+  { name: 'Brittany Vesey', role: 'Mutual Aid Co-Lead', note: 'Led the Hamer distribution to seniors at Palestine Commons, and helped design our Sort Day system.' },
+  { name: 'Vaughan Harrison', role: 'Senior Investigative Reporter' },
+  { name: 'Tiffany Watts', role: 'Reporter on Black Economic Justice' },
+  { name: 'Jylon Hollinshed', role: 'Arts & Culture Lead' },
+  { name: 'Joshua Taylor', role: 'Senior Culture Lead' },
+  { name: 'Curtis Wright', role: 'Strategic Partnerships Lead' },
 ];
 
 export const TEAM_THANKS =
-  'And to every member of our mutual aid, editorial, and organizing teams, the 50 Defenders who sort the clothes, pack the boxes, run the trainings, and tell the stories: this is your work.';
+  'And to our 50 members, the 30-strong mutual aid team and its 10 new leaders, and the 100+ community volunteers who sort the clothes, pack the boxes, run the trainings, and tell the stories: this is your work.';
 
 // ─── With gratitude ─────────────────────────────────────────────────────────
 
@@ -276,6 +288,7 @@ export const FUNDERS = [
   'Press Forward',
   'Racial Equity in Journalism Fund',
   'KC People’s Fund',
+  'Shumaker Family Foundation',
 ];
 
 export const FUNDERS_THANKS =
@@ -287,11 +300,11 @@ export const NEXT = {
   headline: 'Where we go in 2027',
   dek: 'Everything in this report was built in one year, by fifty members, in the middle of the country. Here is what we are building next.',
   goals: [
-    { title: 'Finish our first capital campaign', text: 'Secure the long-term home and infrastructure an institution needs to outlast any one news cycle.' },
-    { title: 'Make Ms. Willa’s a year-round hub', text: 'The free store, pantry, book club, and freedom school under one roof, open to the community.' },
-    { title: 'Build a youth organizing pipeline', text: 'Grow the Student Action Network and B-REAL Academy so every young person who finds us has a path to lead.' },
-    { title: 'Feed more families, pay more farmers', text: 'Scale the Hamer Program so more Black elders eat well and more dollars reach Black farms.' },
-    { title: 'Reach the next million', text: 'Expand Liberation Now, launch RADAR, and keep investigating what no one else will.' },
+    { title: 'A youth organizing & leadership pipeline', text: 'Grow the Student Action Network and B-REAL Academy, and train young people in journalism and media careers, so every young person who finds us has a path to lead.' },
+    { title: 'Ms. Willa’s as a year-round hub', text: 'The free store, pantry, book club, and freedom school under one roof, open to the community all year.' },
+    { title: 'Scale our mutual aid programs', text: 'More families clothed and fed, more Black farms paid, and more Mutual Aid Leaders organizing alongside them.' },
+    { title: 'Take Liberation Now international', text: 'International interviews and a global audience for the Midwest’s radical Black video news show.' },
+    { title: 'Grow Black Feast Week', text: 'A diner passport and a public directory of Kansas City’s Black businesses, so visibility reaches founders at every stage.' },
   ],
   ways: [
     { label: 'Donate', text: 'Become a monthly Defender or give once.', href: 'https://kansascitydefender.com/support-us/' },
@@ -338,6 +351,7 @@ export const IMPACT_AREAS: {
       'Students from more than 10 school districts trained in organizing, civic engagement, and know your rights, and the Student Action Network we pulled together: students from 10+ schools.',
       'The media arm for the 23-organization coalition fighting Kansas City’s World Cup Jail.',
       'B-REAL Academy, our abolitionist freedom school, is in its fourth cohort.',
+      '10 new Mutual Aid Leaders emerged this year to strategize and organize, from a 30-member mutual aid team that mobilizes 100+ community volunteers.',
       '50 active members carrying the work across the organization, plus a packed federal hearing on nuclear weapons and 100+ community defense sign-ups through our coverage.',
     ],
   },
@@ -379,8 +393,8 @@ export const IMPACT_AREAS: {
       'Active subscriptions up 40%+, new revenue from events and Black business partnerships, and our first capital campaign.',
       'Khadijah Bland, our Director of Development & Revenue, named INN’s National Emerging Leader of the Year.',
       'An international desk led by two-time Pulitzer finalist Jon Jeter.',
-      'Ms. Willa’s Books, Missouri’s oldest Black bookstore, saved and now our home.',
-      'Five years of operation, and a seat in the 2026 national Lab for Journalism Funding cohort.',
+      'Ms. Willa’s Books, Missouri’s oldest Black bookstore, saved from auction with its 10,000 volumes. 2026 is our first full year running it as our headquarters.',
+      'LION Publishers’ 2026 Community Engagement Award, five years of operation, and a seat in the 2026 national Lab for Journalism Funding cohort.',
     ],
   },
 ];
@@ -815,11 +829,12 @@ export const MILESTONES: Milestone[] = [
   },
   {
     slug: 'lion-award',
-    date: '2026-09-20',
+    date: '2026-09-09',
     pillar: 'institutional',
     kind: 'recognition',
-    title: 'LION Publishers honors our reporting and the Hamer Program',
-    summary: 'A national award recognizing both our journalism and our mutual aid work.',
+    title: 'LION Publishers’ 2026 Community Engagement Award goes to the Defender',
+    summary: 'LION honored the Hamer Free Food Program in its national Sustainability Awards. The judges called it “a quick and nimble model for solutions-focused community engagement.”',
+    outcome: '$7,000 circulated into Black farms, led by 60 Community Food Leaders, mostly Black residents under 30.',
   },
   {
     slug: 'peoples-buyout',

@@ -114,7 +114,7 @@ export function Masthead() {
 
           {isPublic ? (
             <>
-              <nav className="hidden lg:flex items-center gap-1 flex-1 min-w-0" aria-label="Sections">
+              <nav className="hidden xl:flex items-center gap-1 flex-1 min-w-0" aria-label="Sections">
                 {PUBLIC_SECTIONS.map(({ id, label }) => (
                   <a
                     key={id}
@@ -164,7 +164,7 @@ export function Masthead() {
         {/* Section nav for smaller screens: a horizontal strip that scrolls */}
         {isPublic && (
           <nav
-            className="lg:hidden border-t border-line overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="xl:hidden border-t border-line overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             aria-label="Sections"
           >
             <div className="flex gap-1 px-4 md:px-8 py-2 w-max">

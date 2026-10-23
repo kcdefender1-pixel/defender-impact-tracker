@@ -398,6 +398,13 @@ export default function ImpactPage() {
             ))}
           </ol>
 
+          <div className="mt-4 grid md:grid-cols-[auto_1fr] gap-4 md:gap-8 items-center border-2 border-ink bg-defender-gold p-6 md:p-8 shadow-[6px_6px_0_0_#0E0D0C]">
+            <span className="display text-[2.2rem] md:text-[2.8rem] text-ink leading-[0.9] md:max-w-[14rem]">
+              {NEXT.policy.title}
+            </span>
+            <p className="text-[15.5px] md:text-[16.5px] text-ink leading-relaxed">{NEXT.policy.text}</p>
+          </div>
+
           <div className="mt-8 flex flex-wrap items-center gap-2">
             <span className="kicker text-ink mr-1">Across every medium:</span>
             {NEXT.mediums.map((m) => (
@@ -454,8 +461,10 @@ export default function ImpactPage() {
               {t.note && <p className="mt-3 text-[13.5px] text-ink-2 leading-relaxed">{t.note}</p>}
             </li>
           ))}
+          <li className="sm:col-span-2 lg:col-span-3 border-2 border-ink bg-defender-gold p-6 flex items-center">
+            <p className="font-serif text-[1.2rem] md:text-[1.35rem] leading-relaxed text-ink">{TEAM_THANKS}</p>
+          </li>
         </ul>
-        <p className="mt-6 font-serif text-[1.2rem] leading-relaxed text-ink-2 max-w-3xl">{TEAM_THANKS}</p>
 
         <h3 className="display text-[2rem] md:text-[2.4rem] mt-16 mb-6">Our funders</h3>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink">

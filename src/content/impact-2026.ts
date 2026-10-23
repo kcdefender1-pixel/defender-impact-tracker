@@ -61,7 +61,7 @@ export const KIND_LABEL: Record<MilestoneKind, string> = {
 // ─── The headline numbers ───────────────────────────────────────────────────
 
 export const HEADLINE_STATS = [
-  { value: '1–2M', label: 'Digital impressions a month' },
+  { value: '1M+', label: 'Digital impressions a month, on average' },
   { value: '50', label: 'Active members' },
   { value: '3,000+', label: 'Clothing & hygiene items given' },
   { value: '100', label: 'Black single mothers fed' },
@@ -92,9 +92,9 @@ export const THESIS = {
 
 export const NARRATIVE: string[] = [
   'American media is going dark. This year The Kansas City Call, the Black newspaper that has served this city for more than a century, missed print for the first time in its history. The Kansas City Star cut its newsroom again. Into that silence pours a flood of misinformation and disinformation, aimed squarely at the young Black and brown people that legacy media stopped speaking to long ago. Most of them have tuned out. They have not tuned out of us.',
-  'The Defender reaches the people the rest of the press cannot. This year we have averaged one to two million digital impressions a month across our platforms, and the vast majority of our audience is Black, brown, and young. They find us on their phones, in their feeds, on our YouTube show, in a voice that respects them and a politics that tells them the truth about the forces shaping their lives: the police budget, the ICE detention deal, the data center tax scheme, the nuclear weapons plant down the street. And then they do what most media audiences never do. They show up.',
+  'The Defender reaches the people the rest of the press cannot. This year we have averaged more than one million digital impressions a month across our platforms, and the vast majority of our audience is Black, brown, and young. They find us on their phones, in their feeds, on our YouTube show, in a voice that respects them and a politics that tells them the truth about the forces shaping their lives: the police budget, the ICE detention deal, the data center tax scheme, the nuclear weapons plant down the street. And then they do what most media audiences never do. They show up.',
   'That is the difference. Some people walk in through a story. Others come through the People’s Free Store, a Hamer Program food box from a Black farm, a seat in our Freedom School, the book club, or a Juneteenth cookout with five hundred of their neighbors. Every door leads to the same place: a community that feeds you, teaches you, and then asks you to help build something. Fifty active members now carry that work across the organization, and the people who come through our doors go on to join and lead organizations across the region.',
-  'The results are on the record. Our reporting on students walking out against ICE sparked a wave of walkouts across Missouri, Kansas, and beyond, and we trained students from more than ten school districts in organizing, civic engagement, and their rights. A corporate ICE detention deal collapsed under public pressure we helped build. A police officer who had killed three people left KCPD within ten days of our investigation. We obtained the body camera footage the State of Missouri hid in the killing of nineteen-year-old Saveion McConnell, and nationally renowned civil rights attorney Ben Crump is now fighting for his family. When federal officials came to Kansas City to ask for consent to build the next American bomb, the room was packed. Our investigation into the first underground nuclear reactor in history drew international experts, and the company behind it is now being sued.',
+  'The results are on the record. Our reporting on students walking out against ICE sparked a wave of walkouts across Missouri, Kansas, and beyond, and we trained students from more than ten school districts in organizing, civic engagement, and their rights. A corporate ICE detention deal collapsed under public pressure we helped build. A police officer who had killed three people left KCPD within ten days of our investigation. We obtained the body camera footage the State of Missouri hid in the killing of nineteen-year-old Saveion McConnell, and nationally renowned civil rights attorney Ben Crump is now fighting for his family. When federal officials came to Kansas City to ask for consent to build the next American bomb, the room was packed. Our investigation into the first underground nuclear reactor in history drew international experts, and the company behind it is now being sued. And our reporting changes policy: our investigation into missing Black women led to the reinstatement of Kansas City’s previously disbanded missing persons task force, and to the creation of a statewide missing persons task force.',
   'This is why the Defender matters to so many people at once. To young people, it is the first media that ever treated them as protagonists. To Black families, it is food and clothing given with dignity. To organizers and progressives, it is the media arm of a movement that is winning. To voters, it is The People’s Ballot. To Black businesses and entrepreneurs, it is a platform and a source of capital know-how. To the next generation of leaders, it is a school. And to journalism, at the very moment its old institutions are failing, it is proof of what comes next.',
 ];
 
@@ -138,7 +138,7 @@ export const DOORS: {
     name: 'The Journalism',
     pillar: 'narrative',
     what: 'Investigations, Liberation Now, our flagship YouTube show, The People’s Ballot voter guide, and an international desk led by two-time Pulitzer finalist Jon Jeter.',
-    proof: '1–2 million digital impressions a month. Our reporting moved police, prosecutors, corporations, and federal agencies this year.',
+    proof: '1M+ digital impressions a month, on average. Our reporting moved police, prosecutors, corporations, and federal agencies this year.',
     link: 'https://kansascitydefender.com/',
     image: `${CDN}/2026/03/31093825/9-DSCF2511-scaled.jpg`,
   },
@@ -295,16 +295,17 @@ export const TESTIMONIALS = [
 export const TEAM: { name: string; role: string; note?: string }[] = [
   { name: 'Ryan Sorrell', role: 'Founder & Executive Editor', note: 'Led the year’s biggest investigations, from Kansas City’s nuclear weapons plant to the first underground reactor.' },
   { name: 'Khadijah Bland', role: 'Director of Development & Revenue', note: 'INN’s 2026 National Emerging Leader of the Year. Grew active subscriptions 40%+ and launched our first capital campaign.' },
+  { name: 'Mili Mansaray', role: 'Senior Editor', note: 'Co-leads our award-winning investigations into missing Black women, and reports on housing.' },
+  { name: 'Vaughan Harrison', role: 'Senior Investigative Reporter & Resident Photographer', note: 'Co-leads our award-winning investigations into missing Black women, and captures our work behind the lens.' },
   { name: 'Melissa Ferrer-Civil', role: 'Director, B-REAL Academy', note: 'Kansas City’s first Poet Laureate. Led the freedom school through its largest, youngest class and into Cohort 4.' },
   { name: 'Jon Jeter', role: 'International Correspondent', note: 'Two-time Pulitzer Prize finalist. Launched The Plunder Papers from Nairobi.' },
-  { name: 'Nina Kerrs', role: 'Site Manager & Willa’s Campaign Lead', note: 'Led the campaign to save Ms. Willa’s and runs our home base there.' },
-  { name: 'Carmon Smith', role: 'Mutual Aid Co-Lead', note: 'Led the kids’ clothing drive and wash day, and helped design our Sort Day system.' },
-  { name: 'Brittany Vesey', role: 'Mutual Aid Co-Lead', note: 'Led the Hamer distribution to seniors at Palestine Commons, and helped design our Sort Day system.' },
-  { name: 'Vaughan Harrison', role: 'Senior Investigative Reporter' },
-  { name: 'Tiffany Watts', role: 'Reporter on Black Economic Justice' },
-  { name: 'Jylon Hollinshed', role: 'Arts & Culture Lead' },
-  { name: 'Joshua Taylor', role: 'Senior Culture Lead' },
-  { name: 'Curtis Wright', role: 'Strategic Partnerships Lead' },
+  { name: 'Joshua Taylor', role: 'Senior Culture Lead', note: 'Our earliest member. A cultural creator with his ear closer to Kansas City’s culture scene than anyone, involved in nearly every part of the Defender.' },
+  { name: 'Tiffany Watts', role: 'Reporter on Black Economic Justice & Social Media Lead', note: 'Leads our Black business coverage, with deep relationships among Kansas City entrepreneurs, and helps organize our events.' },
+  { name: 'Jylon Hollinshed', role: 'Arts & Culture Lead', note: 'Leads our Arts & Culture committee, including the Book Club, Juneteenth organizing, and RADAR.' },
+  { name: 'Curtis Wright', role: 'Strategic Partnerships Lead', note: 'Deeply connected with faith leaders and organizers, with a background in violence intervention. Leads our partnership work.' },
+  { name: 'Nina Kerrs', role: 'Site Manager & Willa’s Campaign Lead', note: 'Led the campaign to save Ms. Willa’s and runs our home there. Co-leads mutual aid strategy and organizing, and coordinates our new organizers and leaders.' },
+  { name: 'Carmon Smith', role: 'Mutual Aid Co-Lead', note: 'Co-leads mutual aid strategy and organizing and coordinates our new organizers. Led the kids’ clothing drive and wash day.' },
+  { name: 'Brittany Vesey', role: 'Mutual Aid Co-Lead', note: 'Co-leads mutual aid strategy and organizing and coordinates our new organizers. Led the Hamer distribution to seniors at Palestine Commons.' },
 ];
 
 export const TEAM_THANKS =
@@ -332,12 +333,16 @@ export const NEXT = {
   lead: 'Journalism first.',
   dek: 'In 2027 the Defender grows from Kansas City’s essential Black newsroom into the Black newsroom of the Midwest, with reporting that starts on Prospect Avenue and reaches the world.',
   reach: [
-    { scope: 'Kansas City', title: 'Own the city’s front page', text: 'Daily short-form video news on the platforms young Kansas City actually uses, a student newsroom reporting from inside their own schools, and print in the people’s hands through Hamer boxes, Willa’s, and the streets.' },
+    { scope: 'Kansas City', title: 'Own the city’s front page', text: 'Daily short-form video news on the platforms young Kansas City actually uses, growing our monthly reach well beyond the 1M+ digital impressions we average today.' },
     { scope: 'Missouri & the region', title: 'Build a statewide desk', text: 'Follow the power to Jefferson City and across Missouri and Kansas: the statehouse, the ballot fights, the prisons, and the small towns industry targets because it thinks no one is watching.' },
     { scope: 'National', title: 'Set the national agenda', text: 'Own the beats nobody else will, from AI surveillance and nuclear weapons to ICE and police accountability, and partner with national outlets to carry our investigations across the country.' },
     { scope: 'International', title: 'Take it global', text: 'Grow our international desk across the African diaspora and take Liberation Now international, connecting Kansas City’s fights to the global struggle for Black liberation.' },
   ],
-  mediums: ['Investigations', 'Liberation Now on YouTube', 'Daily short-form video', 'RADAR & print editions', 'The newsletter', 'Live town halls & events'],
+  mediums: ['Investigations', 'Liberation Now on YouTube', 'Daily short-form video', 'The newsletter', 'Live town halls & events'],
+  policy: {
+    title: 'Turn reporting into policy',
+    text: 'Our journalism already changes policy. Our investigation into missing Black women led to the reinstatement of Kansas City’s previously disbanded missing persons task force, and then to a statewide missing persons task force. In 2027 we push every major investigation toward the same result: a policy that changes, a practice that ends, an official who answers.',
+  },
   powerHeadline: 'And the power we build around it',
   goals: [
     { title: 'A youth organizing & leadership pipeline', text: 'Grow the Student Action Network and B-REAL Academy, and train young people in journalism and media careers, so every young person who finds us has a path to lead.' },
@@ -372,7 +377,8 @@ export const IMPACT_AREAS: {
     speaksTo: ['Narrative change'],
     claim: 'We change what Kansas City believes is true, and who gets to say it.',
     proof: [
-      '1–2 million digital impressions a month, from an audience that is mostly Black, brown, and young.',
+      '1M+ digital impressions a month on average, from an audience that is mostly Black, brown, and young.',
+      'Our missing Black women investigation led to the reinstatement of Kansas City’s disbanded missing persons task force, and to a new statewide missing persons task force.',
       'Our Lincoln Prep walkout story alone reached 337,000+ views, and the movement our reporting carried crossed state lines.',
       'Liberation Now, our YouTube show, brings candidates, scholars, and ministers to a generation that tuned out of legacy media.',
       'Investigations into nuclear weapons, data center tax schemes, police killings, and the World Cup Jail reframed what the city debates.',

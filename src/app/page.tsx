@@ -16,6 +16,7 @@ import {
   PULL_QUOTE,
   RECOGNITION,
   SPOTLIGHT,
+  STORY_DOOR,
   TEAM,
   TEAM_THANKS,
   TESTIMONIALS,
@@ -27,6 +28,7 @@ import {
 import { PILLAR_STYLE } from '@/lib/pillar-styles';
 import { YearTimeline } from '@/components/public/year-timeline';
 import { WinsBoard } from '@/components/public/wins-board';
+import { BrothersFeature } from '@/components/public/brothers-feature';
 
 export default function ImpactPage() {
   return (
@@ -135,8 +137,23 @@ export default function ImpactPage() {
             dek="Journalism, mutual aid, political education, and culture are not separate programs. They are one path, and every step builds power."
           />
 
+          {/* The story is a door */}
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-10">
+            <div className="lg:col-span-5">
+              <span className="kicker text-defender-red">{STORY_DOOR.kicker}</span>
+              <p className="display text-[clamp(3rem,6vw,5.2rem)] text-ink mt-3">{STORY_DOOR.headline}</p>
+            </div>
+            <div className="lg:col-span-7 space-y-5 font-serif text-[1.15rem] md:text-[1.25rem] leading-[1.6] text-ink-2">
+              {STORY_DOOR.paragraphs.map((p, i) => (
+                <p key={i} className={i === 0 ? 'text-ink' : ''}>
+                  {p}
+                </p>
+              ))}
+            </div>
+          </div>
+
           {/* The path */}
-          <ol className="grid grid-cols-1 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink mb-14">
+          <ol className="grid grid-cols-1 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink mb-10">
             {PATHWAY.map((p, i) => (
               <li key={p.step} className={`relative p-5 md:p-6 ${i === PATHWAY.length - 1 ? 'bg-defender-red text-white' : 'bg-card'}`}>
                 <span className={`kicker block mb-2 ${i === PATHWAY.length - 1 ? 'text-white/80' : 'text-ink-4'}`}>
@@ -167,6 +184,16 @@ export default function ImpactPage() {
               </li>
             ))}
           </ol>
+
+          <h3 className="kicker text-ink mb-4">{STORY_DOOR.proofHeadline}</h3>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink mb-14">
+            {STORY_DOOR.proof.map((p) => (
+              <div key={p.label} className="bg-defender-gold p-5 md:p-6">
+                <span className="display block text-[2.8rem] md:text-[3.4rem] text-ink tabular-nums">{p.value}</span>
+                <span className="block mt-2 text-[13px] font-semibold text-ink/80 leading-snug">{p.label}</span>
+              </div>
+            ))}
+          </div>
 
           {/* Who it is for */}
           <h3 className="display text-[2rem] md:text-[2.4rem] mb-6">Who the Defender is for</h3>
@@ -253,6 +280,11 @@ export default function ImpactPage() {
               ))}
             </ol>
           </div>
+        </section>
+
+        {/* ── B-REAL for young Black men ────────────────────────── */}
+        <section id="brothers-feature" className="py-16 md:py-20 border-t-2 border-ink">
+          <BrothersFeature />
         </section>
 
         {/* ── Impact areas ──────────────────────────────────────── */}

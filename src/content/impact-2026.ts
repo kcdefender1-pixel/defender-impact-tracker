@@ -88,13 +88,13 @@ export const MORE_STATS = [
 export const THESIS = {
   kicker: 'The Kansas City Defender · 2026 Impact',
   headline: 'Media that builds power.',
-  dek: 'The Kansas City Defender is building a new model for Black media, fusing radical journalism, organizing, and mutual aid into one Black-led institution. We reach the young Black and brown people the rest of the media lost, and we turn that reach into narrative change, civic participation, and organized power for the next generation.',
+  dek: 'The Kansas City Defender is building a new model for Black media, fusing radical journalism, organizing, and mutual aid into one Black-led institution. We reach the young Black people the rest of the media lost, and we turn that reach into organized power, where readers become volunteers, volunteers become leaders, and leaders become the protagonists of the next story.',
 };
 
 export const NARRATIVE: string[] = [
-  'American media is going dark. This year The Kansas City Call, the Black newspaper that has served this city for more than a century, missed print for the first time in its history, and The Kansas City Star cut its newsroom again. Into that silence pours a flood of misinformation and disinformation aimed squarely at the young Black and brown people legacy media stopped speaking to long ago. Most of them have tuned out. They have not tuned out of us.',
+  'American media is going dark. This year The Kansas City Call, the Black newspaper that has served this city for more than a century, missed print for the first time in its history, and The Kansas City Star cut its newsroom again. Into that silence pours a flood of misinformation and disinformation aimed squarely at the young Black people legacy media stopped speaking to long ago. Most of them have tuned out. They have not tuned out of us.',
   'The Defender stands in the lineage of the Black press, a tradition that turns 200 years old in 2027. From Freedom’s Journal in 1827 to the papers that carried the abolitionist, civil rights, and Black Power movements, every movement for our freedom has been catalyzed by a media arm willing to tell the truth. In an era of media consolidation, AI-generated synthetic content, authoritarian censorship, and outlets too fearful to tell the truth, we are telling it.',
-  'We reach the people the rest of the press cannot. We average more than one million digital impressions a month, and the vast majority of our audience is Black, brown, and young. They find us on their phones and on our YouTube show, and then they do what most media audiences never do. They show up, through a story, the People’s Free Store, a Hamer food box, our Freedom School, or a Juneteenth cookout, and 50+ active members now carry that work across the organization. The year that followed is on the record below.',
+  'We reach the people the rest of the press cannot. We average more than one million digital impressions a month, and the vast majority of our audience is Black and young. They find us on their phones and on our YouTube show, and then they do what most media audiences never do. They show up, through a story, the People’s Free Store, a Hamer food box, our Freedom School, or a Juneteenth cookout, and 50+ active members now carry that work across the organization. The year that followed is on the record below.',
   'That is why the Defender matters to so many people at once. To young people, it is the first media that ever treated them as protagonists. To Black families, it is food and clothing given with dignity. To organizers and progressives, it is the media arm of a movement that is winning, and to voters it is The People’s Ballot. To Black businesses and entrepreneurs, it is a platform and a source of capital know-how. To the next generation of leaders, it is a school. And to journalism, at the very moment its old institutions are failing, it is proof of what comes next.',
 ];
 
@@ -112,11 +112,27 @@ export const WHY_NOW = [
   },
   {
     stat: 'Tuned out',
-    text: 'Young Black and brown people are turning away from legacy media just as disinformation targets them hardest.',
+    text: 'Young Black people are turning away from legacy media just as disinformation targets them hardest.',
   },
 ];
 
 // How the pieces fit: the path someone takes through the Defender
+export const STORY_DOOR = {
+  kicker: 'Media that recruits',
+  headline: 'The story is a door.',
+  paragraphs: [
+    'Most media leaves people informed and alone. The Defender attaches every story to a place where the reader can act. The reader of our food desert story ends up handing out Hamer produce on Prospect beside the neighbor she read about. The reader becomes a volunteer, the volunteer becomes a leader, and the leader becomes the protagonist of the next story.',
+    'Our media platform is a recruitment engine for the movement. It is an inherited idea, the Panther paper sold beside the breakfast program and Ida B. Wells writing the pamphlet and organizing the boycott, rebuilt for the phone and run at a scale no one else has reached. For a field that has admitted it cannot solve news avoidance and news fatigue, it is a working answer, and it turns Black media reach into organized power at a cost no legacy outlet or traditional nonprofit can match.',
+  ],
+  proofHeadline: 'Permanent infrastructure, built by media and action together',
+  proof: [
+    { value: '10', label: 'Black Student Unions formed as a result of our school coverage' },
+    { value: '1st', label: 'unified program for Kansas City’s Black farmers, ever' },
+    { value: '10+', label: 'schools in the Student Action Network our walkout coverage built' },
+    { value: '100+', label: 'neighbors signed up to defend against ICE through one dispatch' },
+  ],
+};
+
 export const PATHWAY = [
   { step: 'Reach', text: 'A story finds a young person on their feed, in a voice that respects them.' },
   { step: 'Trust', text: 'We tell the truth when no one else will, and the record proves it.' },
@@ -206,7 +222,7 @@ export const DOORS: {
 
 export const WHO_FOR = [
   { who: 'Youth', why: 'The first media that speaks to them as protagonists, and a school that makes them leaders.' },
-  { who: 'Black & brown families', why: 'Food, clothing, and care, given with dignity and without paperwork.' },
+  { who: 'Black families', why: 'Food, clothing, and care, given with dignity and without paperwork.' },
   { who: 'Organizers & progressives', why: 'The media arm of a movement that is winning real fights.' },
   { who: 'Black businesses', why: 'Black Feast Week, the Buyout, and our Black Economic Power column with KC G.I.F.T. put dollars and know-how into Black-owned businesses.' },
   { who: 'Voters', why: 'The People’s Ballot explains every measure and race in plain language, online and in print.' },
@@ -266,6 +282,30 @@ export const WILLAS = {
   ],
   image: '/photos/ms-willa.jpg',
   imageAlt: 'Ms. Willa in her bookstore',
+};
+
+// ─── B-REAL for young Black men ────────────────────────────────────────────
+
+export const BROTHERS = {
+  kicker: 'B-REAL Academy · Launching at the end of 2026',
+  headline: 'Our brothers are not a problem to be managed.',
+  teaser: 'A new B-REAL Academy cohort built exclusively for Black men between 16 and 24 who have been locked up, surveilled, and written off.',
+  image: '/photos/young-black-men-1.jpg',
+  imageAlt: 'Young Black men talking between games at the Juneteenth basketball tournament',
+  storyImage: '/photos/young-black-men-2.jpg',
+  storyImageAlt: 'Young Black men gathered at the Juneteenth basketball tournament',
+  paragraphs: [
+    'Kansas City spends more on its police department than on every public school in the city combined, and the young Black men that money is aimed at know it. By sixteen many of them have been stopped, cuffed, searched, and jailed. By twenty-four many have done time, been shot at, or buried a friend, and the only institutions that reliably show up for them are the ones built to cage them. The local news finishes the job. It learns their names from a booking photo and never prints them again.',
+    'The Defender exists partly to end that, and we start by refusing the lie that these young men are a problem to be managed. They are our brothers, our cousins, our former classmates, and some of them are us.',
+    'Beginning at the end of 2026, a new cohort of B-REAL Academy will work exclusively with Black men between 16 and 24 who have been locked up, surveilled, and written off, most of them with no one in their corner. Political education, radical imagination, and real mental health care, in one room, from Black people who have walked the same blocks and in some cases sat in the same cells.',
+    'The same institution that investigates KCPD’s budget and the World Cup Jail is the one that opens the door. We cover these young men as protagonists and we give them a place to become the authors of their own freedom, and that is the narrative shift no reporting alone can accomplish.',
+  ],
+  leaders: [
+    { name: 'Curtis Wright', role: 'Strategic Partnerships Lead', note: 'Spent years in violence intervention before he came to the Defender.' },
+    { name: 'Melissa Ferrer-Civil', role: 'Director, B-REAL Academy', note: 'Kansas City’s first Poet Laureate.' },
+    { name: 'Jeff Dayton', role: 'Therapist', note: 'His entire practice is young Black men the system has already touched.' },
+  ],
+  closer: 'A young man the city knows as a case number walks out of Ms. Willa’s as an organizer.',
 };
 
 // ─── In their words ─────────────────────────────────────────────────────────
@@ -344,7 +384,7 @@ export const NEXT = {
   },
   powerHeadline: 'And the power we build around it',
   goals: [
-    { title: 'A youth organizing & leadership pipeline', text: 'Train young people as organizers, leaders, and change makers in their communities and the world, so every young person who finds us has a path to lead.' },
+    { title: 'A youth organizing & leadership pipeline', text: 'Train young people as organizers, leaders, and change makers in their communities and the world, including our new B-REAL cohort for young Black men, so every young person who finds us has a path to lead.' },
     { title: 'Willa’s as a year-round Liberation Hub', text: 'The free store, pantry, book club, and freedom school under one roof, open to the community all year.' },
     { title: 'Scale our mutual aid programs', text: 'More families clothed and fed, more Black farms paid, and more Mutual Aid Leaders organizing alongside them.' },
     { title: 'Grow Black economic power', text: 'Since 2021 we have partnered with 50+ Black-owned businesses and organizations, covering them and putting them in front of our audience. In 2027 we build that into a Black economy network with a public directory, year-round coverage, Black Feast Week, direct lines to capital through partners like KC G.I.F.T., and an advertising co-op that pools buying power so Black businesses can reach our audience at rates they can afford, so more Black dollars circulate in Black Kansas City.' },
@@ -376,7 +416,7 @@ export const IMPACT_AREAS: {
     speaksTo: ['Narrative change'],
     claim: 'We change what Kansas City believes is true, and who gets to say it.',
     proof: [
-      '1M+ digital impressions a month on average, from an audience that is mostly Black, brown, and young.',
+      '1M+ digital impressions a month on average, from an audience that is mostly Black and young.',
       'Our missing Black women investigation led to the reinstatement of Kansas City’s disbanded missing persons task force, and to a new statewide missing persons task force.',
       'Our Lincoln Prep walkout story alone reached 337,000+ views, and the movement our reporting carried crossed state lines.',
       'Liberation Now, our YouTube show, brings candidates, scholars, and ministers to a generation that tuned out of legacy media.',

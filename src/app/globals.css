@@ -203,7 +203,22 @@
   animation: pulse-soft 2.4s ease-in-out infinite;
 }
 
+/* A soft halo that pulses out from a call-to-action button */
+@keyframes btn-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 194, 41, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 194, 41, 0);
+  }
+}
+.btn-glow {
+  animation: btn-glow 2.2s ease-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .btn-glow,
   .rise,
   .marquee-track,
   .star-pulse,

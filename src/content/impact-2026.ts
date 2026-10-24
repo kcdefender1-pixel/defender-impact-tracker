@@ -75,7 +75,7 @@ export const MORE_STATS = [
   { value: '150+', label: 'Neighbors served in one afternoon at the People’s Free Store' },
   { value: '30', label: 'Members on our mutual aid team' },
   { value: '10', label: 'New Mutual Aid Leaders who emerged this year' },
-  { value: '100+', label: 'Community volunteers our mutual aid team organizes' },
+  { value: '100+', label: 'Community members our mutual aid team organizes into our programs' },
   { value: '100', label: 'Black single mothers and their families fed at the People’s Buyout' },
   { value: '40%+', label: 'Growth in active subscriptions in 2025, Khadijah Bland’s first year leading development' },
   { value: '337K+', label: 'Views on our Lincoln Prep walkout story' },
@@ -88,7 +88,7 @@ export const MORE_STATS = [
 export const THESIS = {
   kicker: 'The Kansas City Defender · 2026 Impact',
   headline: 'Media that builds power.',
-  dek: 'The Kansas City Defender is building a new model for Black media, fusing radical journalism, organizing, and mutual aid into one Black-led institution. We reach the young Black people the rest of the media lost, and we turn that reach into organized power, where readers become volunteers, volunteers become leaders, and leaders become the protagonists of the next story.',
+  dek: 'The Kansas City Defender is building a new model for Black media, fusing radical journalism, organizing, and mutual aid into one Black-led institution. We reach the young Black people the rest of the media lost, and we turn that reach into organized power, where readers become members, members become organizers, and organizers become the protagonists of the next story.',
 };
 
 export const NARRATIVE: string[] = [
@@ -118,12 +118,7 @@ export const WHY_NOW = [
 
 // How the pieces fit: the path someone takes through the Defender
 export const STORY_DOOR = {
-  kicker: 'Media that recruits',
-  headline: 'The story is a door.',
-  paragraphs: [
-    'Most media leaves people informed and alone. The Defender attaches every story to a place where the reader can act. The reader of our food desert story ends up handing out Hamer produce on Prospect beside the neighbor she read about. The reader becomes a volunteer, the volunteer becomes a leader, and the leader becomes the protagonist of the next story.',
-    'Our media platform is a recruitment engine for the movement. It is an inherited idea, the Panther paper sold beside the breakfast program and Ida B. Wells writing the pamphlet and organizing the boycott, rebuilt for the phone and run at a scale no one else has reached. For a field that has admitted it cannot solve news avoidance and news fatigue, it is a working answer, and it turns Black media reach into organized power at a cost no legacy outlet or traditional nonprofit can match.',
-  ],
+  example: 'You read our story about the food desert at 31st & Prospect. You join our mutual aid team. Next season you are helping lead the seeding and harvesting on the Black farms that grow food for the Hamer Program.',
   proofHeadline: 'Permanent infrastructure, built by media and action together',
   proof: [
     { value: '10', label: 'Black Student Unions formed as a result of our school coverage' },
@@ -289,7 +284,7 @@ export const WILLAS = {
 export const BROTHERS = {
   kicker: 'B-REAL Academy · Launching at the end of 2026',
   headline: 'Our brothers are not a problem to be managed.',
-  teaser: 'A new B-REAL Academy cohort built exclusively for Black men between 16 and 24 who have been locked up, surveilled, and written off.',
+  teaser: 'A new B-REAL Academy cohort built exclusively for justice-impacted Black men between 16 and 24.',
   image: '/photos/young-black-men-1.jpg',
   imageAlt: 'Young Black men talking between games at the Juneteenth basketball tournament',
   storyImage: '/photos/young-black-men-2.jpg',
@@ -348,7 +343,7 @@ export const TEAM: { name: string; role: string; note?: string; photo?: string }
 ];
 
 export const TEAM_THANKS =
-  'And to our 50+ members, the 30-strong mutual aid team and its 10 new leaders, and the 100+ community volunteers who sort the clothes, pack the boxes, run the trainings, and tell the stories: this is your work.';
+  'And to our 50+ members, the 30-strong mutual aid team and its 10 new leaders, and the 100+ community members who sort the clothes, pack the boxes, run the trainings, and tell the stories: this is your work.';
 
 // ─── With gratitude ─────────────────────────────────────────────────────────
 
@@ -391,7 +386,7 @@ export const NEXT = {
   ],
   ways: [
     { label: 'Donate', text: 'Become a monthly Defender or give once.', href: 'https://kansascitydefender.com/support-us/' },
-    { label: 'Volunteer & join', text: 'Sort, pack, deliver, teach, organize.', href: 'https://kansascitydefender.com/join/' },
+    { label: 'Join & organize', text: 'Become a member. Sort, pack, deliver, teach, organize.', href: 'https://kansascitydefender.com/join/' },
     { label: 'Become a funder or partner', text: 'Invest in the model. Let’s talk.', href: 'https://kansascitydefender.com/contact-us/' },
   ],
 };
@@ -435,7 +430,7 @@ export const IMPACT_AREAS: {
       'Students from more than 10 school districts trained in organizing, civic engagement, and know your rights, and the Student Action Network we pulled together: students from 10+ schools.',
       'The media arm for the 23-organization coalition fighting Kansas City’s World Cup Jail.',
       'B-REAL Academy, our abolitionist freedom school, is in its fourth cohort.',
-      '10 new Mutual Aid Leaders emerged this year to strategize and organize, from a 30-member mutual aid team that mobilizes 100+ community volunteers.',
+      '10 new Mutual Aid Leaders emerged this year to strategize and organize, from a 30-member mutual aid team that organizes 100+ community members into our programs.',
       '50+ active members carrying the work across the organization, plus a packed federal hearing on nuclear weapons and 100+ community defense sign-ups through our coverage.',
     ],
   },
@@ -684,7 +679,7 @@ export const MILESTONES: Milestone[] = [
     outcome: 'Faster, more frequent clothing distributions for the community.',
     metric: { value: '10', label: 'comrades' },
     image: '/photos/sort-day.jpg',
-    imageAlt: 'Mutual aid volunteers sorting clothing into storage units',
+    imageAlt: 'Mutual aid organizers sorting clothing into storage units',
   },
   {
     slug: 'lipman',
@@ -877,11 +872,11 @@ export const MILESTONES: Milestone[] = [
     pillar: 'material',
     kind: 'program',
     title: 'Hamer delivers Black-grown produce to seniors at Palestine Commons',
-    summary: 'In the Hamer Program’s second distribution of the year, 25 volunteers packed and handed out 51 bags of potatoes, tomatoes, onions, peppers, and herbs grown by local Black farmers to seniors near the old Sun Fresh.',
-    outcome: 'Seniors asked for it to keep going, and so did the volunteers.',
+    summary: 'In the Hamer Program’s second distribution of the year, 25 organizers packed and handed out 51 bags of potatoes, tomatoes, onions, peppers, and herbs grown by local Black farmers to seniors near the old Sun Fresh.',
+    outcome: 'Seniors asked for it to keep going, and so did our organizers.',
     metric: { value: '51', label: 'bags of produce' },
     image: '/photos/hamer-seniors.jpg',
-    imageAlt: 'A Defender volunteer packing peppers into Hamer Food Box bags',
+    imageAlt: 'A Defender organizer packing peppers into Hamer Food Box bags',
   },
   {
     slug: 'kc-gift',

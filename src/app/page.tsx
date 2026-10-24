@@ -137,21 +137,6 @@ export default function ImpactPage() {
             dek="Journalism, mutual aid, political education, and culture are not separate programs. They are one path, and every step builds power."
           />
 
-          {/* The story is a door */}
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-10">
-            <div className="lg:col-span-5">
-              <span className="kicker text-defender-red">{STORY_DOOR.kicker}</span>
-              <p className="display text-[clamp(3rem,6vw,5.2rem)] text-ink mt-3">{STORY_DOOR.headline}</p>
-            </div>
-            <div className="lg:col-span-7 space-y-5 font-serif text-[1.15rem] md:text-[1.25rem] leading-[1.6] text-ink-2">
-              {STORY_DOOR.paragraphs.map((p, i) => (
-                <p key={i} className={i === 0 ? 'text-ink' : ''}>
-                  {p}
-                </p>
-              ))}
-            </div>
-          </div>
-
           {/* The path */}
           <ol className="grid grid-cols-1 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink mb-10">
             {PATHWAY.map((p, i) => (
@@ -184,6 +169,11 @@ export default function ImpactPage() {
               </li>
             ))}
           </ol>
+
+          {/* One real path through the door */}
+          <p className="font-serif text-[1.25rem] md:text-[1.5rem] leading-snug text-ink max-w-4xl mb-10 border-l-4 border-defender-red pl-5">
+            {STORY_DOOR.example}
+          </p>
 
           <h3 className="kicker text-ink mb-4">{STORY_DOOR.proofHeadline}</h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink mb-14">

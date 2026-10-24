@@ -463,10 +463,27 @@ export default function ImpactPage() {
         <h3 className="display text-[2rem] md:text-[2.4rem] mb-6">Our team</h3>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {TEAM.map((t) => (
-            <li key={t.name} className={`border-2 border-ink p-5 ${t.note ? 'bg-card' : 'bg-paper'}`}>
-              <span className="font-serif font-semibold text-[1.25rem] block leading-tight">{t.name}</span>
-              <span className="kicker text-defender-red block mt-1.5">{t.role}</span>
-              {t.note && <p className="mt-3 text-[13.5px] text-ink-2 leading-relaxed">{t.note}</p>}
+            <li key={t.name} className="group border-2 border-ink bg-card flex flex-col overflow-hidden">
+              <div className="relative aspect-[4/5] bg-ink border-b-2 border-ink overflow-hidden">
+                {t.photo ? (
+                  <Image
+                    src={t.photo}
+                    alt={t.name}
+                    fill
+                    sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                ) : (
+                  <span className="absolute inset-0 flex items-center justify-center display text-[5rem] text-defender-gold">
+                    {t.name.split(' ').map((w) => w[0]).join('')}
+                  </span>
+                )}
+              </div>
+              <div className="p-5">
+                <span className="font-serif font-semibold text-[1.25rem] block leading-tight">{t.name}</span>
+                <span className="kicker text-defender-red block mt-1.5">{t.role}</span>
+                {t.note && <p className="mt-3 text-[13.5px] text-ink-2 leading-relaxed">{t.note}</p>}
+              </div>
             </li>
           ))}
           <li className="sm:col-span-2 lg:col-span-3 border-2 border-ink bg-defender-gold p-6 flex items-center">

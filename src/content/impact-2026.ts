@@ -291,18 +291,18 @@ export const TESTIMONIALS = [
 
 // ─── The team ───────────────────────────────────────────────────────────────
 
-export const TEAM: { name: string; role: string; note?: string }[] = [
-  { name: 'Ryan Sorrell', role: 'Founder & Executive Editor', note: 'Led the year’s biggest investigations, from Kansas City’s nuclear weapons plant to the first underground reactor.' },
-  { name: 'Khadijah Bland', role: 'Director of Development & Revenue', note: 'INN’s 2026 National Emerging Leader of the Year. Grew active subscriptions 40%+ in her first year and launched our first capital campaign.' },
-  { name: 'Mili Mansaray', role: 'Senior Editor', note: 'Co-leads our award-winning investigations into missing Black women, and reports on housing.' },
-  { name: 'Vaughan Harrison', role: 'Senior Investigative Reporter & Resident Photographer', note: 'Co-leads our award-winning investigations into missing Black women, and captures our work behind the lens.' },
-  { name: 'Melissa Ferrer-Civil', role: 'Director, B-REAL Academy', note: 'Kansas City’s first Poet Laureate. Led the freedom school through its largest, youngest class and into Cohort 4.' },
-  { name: 'Jon Jeter', role: 'International Correspondent', note: 'Two-time Pulitzer Prize finalist. Launched The Plunder Papers from Nairobi.' },
-  { name: 'Joshua Taylor', role: 'Senior Culture Lead', note: 'Our earliest member. A cultural creator with his ear closer to Kansas City’s culture scene than anyone, involved in nearly every part of the Defender.' },
-  { name: 'Tiffany Watts', role: 'Reporter on Black Economic Justice & Social Media Lead', note: 'Leads our Black business coverage, with deep relationships among Kansas City entrepreneurs, and helps organize our events.' },
-  { name: 'Jylon Hollinshed', role: 'Arts & Culture Lead', note: 'Leads our Arts & Culture committee, including the Book Club, Juneteenth organizing, and RADAR.' },
-  { name: 'Curtis Wright', role: 'Strategic Partnerships Lead', note: 'Deeply connected with faith leaders and organizers, with a background in violence intervention. Leads our partnership work.' },
-  { name: 'Nina Kerrs', role: 'Site Manager & Willa’s Campaign Lead', note: 'Led the campaign to save Ms. Willa’s and runs our home there. Co-leads mutual aid strategy and organizing, and coordinates our new organizers and leaders.' },
+export const TEAM: { name: string; role: string; note?: string; photo?: string }[] = [
+  { name: 'Ryan Sorrell', photo: '/photos/team/ryan.jpg', role: 'Founder & Executive Editor', note: 'Led the year’s biggest investigations, from Kansas City’s nuclear weapons plant to the first underground reactor.' },
+  { name: 'Khadijah Bland', photo: '/photos/team/khadijah.jpg', role: 'Director of Development & Revenue', note: 'INN’s 2026 National Emerging Leader of the Year. Grew active subscriptions 40%+ in her first year and launched our first capital campaign.' },
+  { name: 'Mili Mansaray', photo: '/photos/team/mili.jpg', role: 'Senior Editor', note: 'Co-leads our award-winning investigations into missing Black women, and reports on housing.' },
+  { name: 'Vaughan Harrison', photo: '/photos/team/vaughan.jpg', role: 'Senior Investigative Reporter & Resident Photographer', note: 'Co-leads our award-winning investigations into missing Black women, and captures our work behind the lens.' },
+  { name: 'Melissa Ferrer-Civil', photo: '/photos/team/melissa.jpg', role: 'Director, B-REAL Academy', note: 'Kansas City’s first Poet Laureate. Led the freedom school through its largest, youngest class and into Cohort 4.' },
+  { name: 'Jon Jeter', photo: '/photos/team/jon.jpg', role: 'International Correspondent', note: 'Two-time Pulitzer Prize finalist. Launched The Plunder Papers from Nairobi.' },
+  { name: 'Joshua Taylor', photo: '/photos/team/joshua.jpg', role: 'Senior Culture Lead', note: 'Our earliest member. A cultural creator with his ear closer to Kansas City’s culture scene than anyone, involved in nearly every part of the Defender.' },
+  { name: 'Tiffany Watts', photo: '/photos/team/tiffany.jpg', role: 'Reporter on Black Economic Justice & Social Media Lead', note: 'Leads our Black business coverage, with deep relationships among Kansas City entrepreneurs, and helps organize our events.' },
+  { name: 'Jylon Hollinshed', photo: '/photos/team/jylon.jpg', role: 'Arts & Culture Lead', note: 'Leads our Arts & Culture committee, including the Book Club, Juneteenth organizing, and RADAR.' },
+  { name: 'Curtis Wright', photo: '/photos/team/curtis.jpg', role: 'Strategic Partnerships Lead', note: 'Deeply connected with faith leaders and organizers, with a background in violence intervention. Leads our partnership work.' },
+  { name: 'Nina Kerrs', photo: '/photos/team/nina.jpg', role: 'Site Manager & Willa’s Campaign Lead', note: 'Led the campaign to save Ms. Willa’s and runs our home there. Co-leads mutual aid strategy and organizing, and coordinates our new organizers and leaders.' },
   { name: 'Carmon Smith', role: 'Mutual Aid Co-Lead', note: 'Co-leads mutual aid strategy and organizing and coordinates our new organizers. Led the kids’ clothing drive and wash day.' },
   { name: 'Brittany Vesey', role: 'Mutual Aid Co-Lead', note: 'Co-leads mutual aid strategy and organizing and coordinates our new organizers. Led the Hamer distribution to seniors at Palestine Commons.' },
 ];

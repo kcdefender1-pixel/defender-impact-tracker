@@ -10,14 +10,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: "#F4EFE7",
-        "paper-2": "#EAE3D7",
-        card: "#FFFDF8",
+        paper: "#E4E5E1",
+        "paper-2": "#D8D9D4",
+        card: "#F4F4F2",
         ink: {
           DEFAULT: "rgb(var(--ink) / <alpha-value>)",
-          2: "#3B3631",
-          3: "#655D54",
-          4: "#8A8176",
+          2: "#363834",
+          3: "#575953",
+          4: "#74766F",
         },
         line: "rgb(var(--ink) / 0.13)",
         "defender-red": "#E0263F",

@@ -166,12 +166,20 @@ function MilestoneItem({ m }: { m: Milestone }) {
           aria-hidden
         />
       ) : (
-        <span
-          className={`absolute -left-[9px] top-1 w-4 h-4 border-2 border-ink ${style.dot} ${
-            isWin ? 'scale-125 rotate-45' : ''
-          }`}
-          aria-hidden
-        />
+        <>
+          {isWin && (
+            <span
+              className={`absolute -left-[9px] top-1 w-4 h-4 rotate-45 ${style.dot} opacity-60 motion-safe:animate-ping`}
+              aria-hidden
+            />
+          )}
+          <span
+            className={`absolute -left-[9px] top-1 w-4 h-4 border-2 border-ink ${style.dot} ${
+              isWin ? 'scale-125 rotate-45' : ''
+            }`}
+            aria-hidden
+          />
+        </>
       )}
 
       <div

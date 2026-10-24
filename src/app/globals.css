@@ -149,11 +149,69 @@
   animation: glow-ring 2.8s ease-in-out infinite;
 }
 
+/* Gentle motion that keeps the page alive */
+@keyframes float-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+@keyframes float-y-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.08);
+  }
+}
+
+.float-x {
+  animation: float-x 1.6s ease-in-out infinite;
+}
+.float-y {
+  animation: float-y 1.6s ease-in-out infinite;
+}
+.float-y-slow {
+  animation: float-y-slow 6s ease-in-out infinite;
+}
+.pulse-soft {
+  display: inline-block;
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise,
   .marquee-track,
   .star-pulse,
-  .glow-card {
+  .glow-card,
+  .float-x,
+  .float-y,
+  .float-y-slow,
+  .pulse-soft {
     animation: none;
   }
 }

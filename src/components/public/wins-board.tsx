@@ -19,7 +19,7 @@ function slugFromHash() {
   return h.startsWith(HASH_PREFIX) ? h.slice(HASH_PREFIX.length) : null;
 }
 
-export function WinsBoard() {
+export function WinsBoard({ showGrid = true }: { showGrid?: boolean }) {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
@@ -64,11 +64,13 @@ export function WinsBoard() {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {ORDERED_WINS.map((w, i) => (
-          <WinCard key={w.slug} win={w} index={i} onOpen={() => open(w.slug)} />
-        ))}
-      </div>
+      {showGrid && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {ORDERED_WINS.map((w, i) => (
+            <WinCard key={w.slug} win={w} index={i} onOpen={() => open(w.slug)} />
+          ))}
+        </div>
+      )}
 
       <dialog
         ref={dialogRef}

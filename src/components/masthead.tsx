@@ -21,7 +21,6 @@ export const PUBLIC_SECTIONS = [
   { id: 'willas', label: 'Willa’s' },
   { id: 'areas', label: 'Impact Areas' },
   { id: 'year', label: 'The Year' },
-  { id: 'wins', label: 'Wins' },
   { id: 'programs', label: 'Programs' },
   { id: 'numbers', label: 'Numbers' },
   { id: 'next', label: '2027' },

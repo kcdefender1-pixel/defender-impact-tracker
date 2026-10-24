@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowRight, ArrowUpRight, Star } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Star } from 'lucide-react';
 import {
   DOORS,
   FUNDERS,
@@ -35,7 +35,7 @@ export default function ImpactPage() {
       <section className="bg-defender-red text-ink relative overflow-hidden border-b-2 border-ink">
         <div
           aria-hidden
-          className="display absolute -right-6 -bottom-10 md:-bottom-16 text-[14rem] md:text-[24rem] leading-none text-ink/[0.07] select-none pointer-events-none"
+          className="float-y-slow display absolute -right-6 -bottom-10 md:-bottom-16 text-[14rem] md:text-[24rem] leading-none text-ink/[0.07] select-none pointer-events-none"
         >
           2026
         </div>
@@ -53,7 +53,7 @@ export default function ImpactPage() {
               href="#power"
               className="mt-8 inline-flex items-center gap-2 bg-ink text-paper rounded-button px-5 py-3 text-[14px] font-bold hover:bg-paper hover:text-ink transition-colors"
             >
-              Read our story <ArrowRight size={16} />
+              Read our story <ArrowDown size={16} className="float-y" />
             </a>
           </div>
 
@@ -136,9 +136,9 @@ export default function ImpactPage() {
           />
 
           {/* The path */}
-          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink mb-14">
+          <ol className="grid grid-cols-1 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink mb-14">
             {PATHWAY.map((p, i) => (
-              <li key={p.step} className={`relative p-5 md:p-6 ${i === PATHWAY.length - 1 ? 'bg-defender-red text-white sm:col-span-2 lg:col-span-1' : 'bg-card'}`}>
+              <li key={p.step} className={`relative p-5 md:p-6 ${i === PATHWAY.length - 1 ? 'bg-defender-red text-white' : 'bg-card'}`}>
                 <span className={`kicker block mb-2 ${i === PATHWAY.length - 1 ? 'text-white/80' : 'text-ink-4'}`}>
                   Step {i + 1}
                 </span>
@@ -147,12 +147,22 @@ export default function ImpactPage() {
                   {p.text}
                 </p>
                 {i < PATHWAY.length - 1 && (
-                  <ArrowRight
-                    size={22}
-                    strokeWidth={2.5}
-                    className="hidden lg:block absolute -right-[13px] top-1/2 -translate-y-1/2 z-10 bg-paper border-2 border-ink rounded-full p-0.5"
-                    aria-hidden
-                  />
+                  <>
+                    <span className="hidden lg:block absolute -right-[15px] top-1/2 -translate-y-1/2 z-10" aria-hidden>
+                      <ArrowRight
+                        size={26}
+                        strokeWidth={2.5}
+                        className="float-x block bg-defender-gold border-2 border-ink rounded-full p-0.5"
+                      />
+                    </span>
+                    <span className="lg:hidden absolute left-1/2 -bottom-[15px] -translate-x-1/2 z-10" aria-hidden>
+                      <ArrowDown
+                        size={26}
+                        strokeWidth={2.5}
+                        className="float-y block bg-defender-gold border-2 border-ink rounded-full p-0.5"
+                      />
+                    </span>
+                  </>
                 )}
               </li>
             ))}
@@ -173,8 +183,9 @@ export default function ImpactPage() {
           <div className="bg-ink text-paper p-6 md:p-8 border-2 border-ink">
             <span className="kicker text-defender-gold block mb-3">Into the movement</span>
             <p className="font-serif text-[1.25rem] md:text-[1.45rem] leading-snug max-w-3xl">
-              The Defender is the media arm of a broader movement. The people we reach go on to join and
-              build alongside organizations across the region.
+              These are organizations we have partnered with, actively work alongside, and stand in
+              solidarity with. The Defender is the media arm of a broader movement, and the people we reach
+              go on to join and build with them.
             </p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {PARTNERS.map((p) => (
@@ -214,7 +225,7 @@ export default function ImpactPage() {
                     </div>
                   ))}
                   <div className="flex-1 max-w-[120px] h-[70%] border-2 border-dashed border-paper/50 flex items-center justify-center text-center px-2">
-                    <span className="display text-[1.5rem] leading-none text-defender-gold">
+                    <span className="pulse-soft display text-[1.5rem] leading-none text-defender-gold">
                       +10,000
                       <span className="block text-[0.8rem] text-paper/70 mt-1">volumes</span>
                     </span>
@@ -281,13 +292,10 @@ export default function ImpactPage() {
             dek="From January to now, in order. Filter by type of work, or open any win for the full story."
           />
           <YearTimeline />
+          {/* Full stories for the year's wins open from the timeline */}
+          <WinsBoard showGrid={false} />
         </section>
 
-        {/* ── Wins ──────────────────────────────────────────────── */}
-        <section id="wins" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead title="Victory Board" dek="The wins of 2026. Open any card for the full story and what changed." />
-          <WinsBoard />
-        </section>
 
         {/* ── In their words ───────────────────────────────────── */}
         <section className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="words-title">
@@ -296,7 +304,8 @@ export default function ImpactPage() {
             {TESTIMONIALS.map((t, i) => (
               <figure
                 key={t.quote}
-                className={`border-2 border-ink p-7 md:p-8 flex flex-col justify-between ${
+                style={{ animationDelay: `${i * 0.9}s` }}
+                className={`float-y-slow border-2 border-ink p-7 md:p-8 flex flex-col justify-between ${
                   i % 3 === 0 ? 'bg-defender-gold' : i % 3 === 1 ? 'bg-card' : 'bg-ink text-paper'
                 }`}
               >
@@ -439,7 +448,7 @@ export default function ImpactPage() {
                 <span className="display text-[2rem]">{w.label}</span>
                 <span className={`mt-2 text-[14.5px] ${i === 0 ? 'text-paper/80' : 'text-ink-2'}`}>{w.text}</span>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold group-hover:gap-2.5 transition-all">
-                  Go <ArrowUpRight size={15} />
+                  Go <ArrowUpRight size={15} className="float-x" />
                 </span>
               </a>
             ))}

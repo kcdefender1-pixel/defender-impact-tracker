@@ -64,7 +64,7 @@ export const HEADLINE_STATS = [
   { value: '1M+', label: 'Digital impressions a month, on average' },
   { value: '50', label: 'Active members' },
   { value: '3,000+', label: 'Clothing & hygiene items given' },
-  { value: '100', label: 'Black single mothers fed' },
+  { value: '250+', label: 'Black families fed through Hamer' },
   { value: '4th', label: 'Freedom School cohort' },
 ];
 
@@ -75,7 +75,7 @@ export const MORE_STATS = [
   { value: '30', label: 'Members on our mutual aid team' },
   { value: '10', label: 'New Mutual Aid Leaders who emerged this year' },
   { value: '100+', label: 'Community volunteers our mutual aid team organizes' },
-  { value: '$7K', label: 'Circulated into Black farms through Hamer' },
+  { value: '100', label: 'Black single mothers and their families fed at the People’s Buyout' },
   { value: '40%+', label: 'Growth in active subscriptions' },
   { value: '337K+', label: 'Views on our Lincoln Prep walkout story' },
   { value: '100+', label: 'Signed up to defend neighbors from ICE through our coverage' },
@@ -87,15 +87,16 @@ export const MORE_STATS = [
 export const THESIS = {
   kicker: 'The Kansas City Defender · 2026 Impact',
   headline: 'Media that builds power.',
-  dek: 'The Defender is a new model: radical journalism, organizing, and community care fused into one Black-led institution. We reach the young Black and brown people the rest of the media lost, and turn that reach into narrative change, civic participation, and organized power for the next generation.',
+  dek: 'The Kansas City Defender is building a new model for Black media, fusing radical journalism, organizing, and community care into one Black-led institution. We reach the young Black and brown people the rest of the media lost, and we turn that reach into narrative change, civic participation, and organized power for the next generation.',
 };
 
 export const NARRATIVE: string[] = [
-  'American media is going dark. This year The Kansas City Call, the Black newspaper that has served this city for more than a century, missed print for the first time in its history. The Kansas City Star cut its newsroom again. Into that silence pours a flood of misinformation and disinformation, aimed squarely at the young Black and brown people that legacy media stopped speaking to long ago. Most of them have tuned out. They have not tuned out of us.',
-  'The Defender reaches the people the rest of the press cannot. This year we have averaged more than one million digital impressions a month across our platforms, and the vast majority of our audience is Black, brown, and young. They find us on their phones, in their feeds, on our YouTube show, in a voice that respects them and a politics that tells them the truth about the forces shaping their lives: the police budget, the ICE detention deal, the data center tax scheme, the nuclear weapons plant down the street. And then they do what most media audiences never do. They show up.',
-  'That is the difference. Some people walk in through a story. Others come through the People’s Free Store, a Hamer Program food box from a Black farm, a seat in our Freedom School, the book club, or a Juneteenth cookout with five hundred of their neighbors. Every door leads to the same place: a community that feeds you, teaches you, and then asks you to help build something. Fifty active members now carry that work across the organization, and the people who come through our doors go on to join and lead organizations across the region.',
-  'The results are on the record. Our reporting on students walking out against ICE sparked a wave of walkouts across Missouri, Kansas, and beyond, and we trained students from more than ten school districts in organizing, civic engagement, and their rights. A corporate ICE detention deal collapsed under public pressure we helped build. A police officer who had killed three people left KCPD within ten days of our investigation. We obtained the body camera footage the State of Missouri hid in the killing of nineteen-year-old Saveion McConnell, and nationally renowned civil rights attorney Ben Crump is now fighting for his family. When federal officials came to Kansas City to ask for consent to build the next American bomb, the room was packed. Our investigation into the first underground nuclear reactor in history drew international experts, and the company behind it is now being sued. And our reporting changes policy: our investigation into missing Black women led to the reinstatement of Kansas City’s previously disbanded missing persons task force, and to the creation of a statewide missing persons task force.',
-  'This is why the Defender matters to so many people at once. To young people, it is the first media that ever treated them as protagonists. To Black families, it is food and clothing given with dignity. To organizers and progressives, it is the media arm of a movement that is winning. To voters, it is The People’s Ballot. To Black businesses and entrepreneurs, it is a platform and a source of capital know-how. To the next generation of leaders, it is a school. And to journalism, at the very moment its old institutions are failing, it is proof of what comes next.',
+  'American media is going dark. This year The Kansas City Call, the Black newspaper that has served this city for more than a century, missed print for the first time in its history, and The Kansas City Star cut its newsroom again. Into that silence pours a flood of misinformation and disinformation aimed squarely at the young Black and brown people legacy media stopped speaking to long ago. Most of them have tuned out. They have not tuned out of us.',
+  'The Defender stands in the lineage of the Black press, a tradition that turns 200 years old in 2027. From Freedom’s Journal in 1827 to the papers that carried the abolitionist, civil rights, and Black Power movements, every movement for our freedom has been catalyzed by a media arm willing to tell the truth. In an era of media consolidation, AI-generated synthetic content, authoritarian censorship, and outlets too fearful to tell the truth, we are telling it.',
+  'The Defender reaches the people the rest of the press cannot. This year we have averaged more than one million digital impressions a month across our platforms, and the vast majority of our audience is Black, brown, and young. They find us on their phones, in their feeds, and on our YouTube show, in a voice that respects them and a politics that tells them the truth about the forces shaping their lives, from the police budget and the ICE detention deal to the data center tax scheme and the nuclear weapons plant down the street. And then they do what most media audiences never do. They show up.',
+  'Some people walk in through a story. Others come through the People’s Free Store, a Hamer Program food box from a Black farm, a seat in our Freedom School, the book club, or a Juneteenth cookout with five hundred of their neighbors. Every door leads to the same place, a community that feeds you, teaches you, and then asks you to help build something. Fifty active members now carry that work across the organization, and the people who come through our doors go on to join and lead organizations across the region.',
+  'The results are on the record. Our reporting on students walking out against ICE sparked a wave of walkouts across Missouri, Kansas, and beyond, and we trained students from more than ten school districts in organizing, civic engagement, and their rights. A corporate ICE detention deal collapsed under public pressure we helped build, and a police officer who had killed three people left KCPD within ten days of our investigation. We obtained the body camera footage the State of Missouri hid in the killing of nineteen-year-old Saveion McConnell, and nationally renowned civil rights attorney Ben Crump is now fighting for his family. Our investigation into Kansas City as the nuclear weapons capital of the world, where parts for the newest American bomb are being built, packed the room when federal officials came to town. Our reporting on the first underground nuclear reactor in history drew international experts, and the company behind it is now being sued. And our investigation into missing Black women led to the reinstatement of Kansas City’s previously disbanded missing persons task force and the creation of a statewide one.',
+  'That is why the Defender matters to so many people at once. To young people, it is the first media that ever treated them as protagonists. To Black families, it is food and clothing given with dignity. To organizers and progressives, it is the media arm of a movement that is winning, and to voters it is The People’s Ballot. To Black businesses and entrepreneurs, it is a platform and a source of capital know-how. To the next generation of leaders, it is a school. And to journalism, at the very moment its old institutions are failing, it is proof of what comes next.',
 ];
 
 export const PULL_QUOTE =
@@ -153,15 +154,15 @@ export const DOORS: {
   {
     name: 'The Hamer Free Food Program',
     pillar: 'material',
-    what: 'Named for Fannie Lou Hamer. Launched with Kansas City’s Black farms after Sun Fresh closed, it buys produce at market rate and delivers it free to Black elders and families.',
+    what: 'Named for Fannie Lou Hamer and launched with Kansas City’s Black farms after Sun Fresh closed, it buys produce at market rate and delivers it free to Black families. Every bag carries literature we created featuring every Black farm, what they grow, when, and how to get food from them, building long-term networks and food sovereignty.',
     proof: 'The first network to unite the Black farms of Kansas City, and winner of LION Publishers’ 2026 Community Engagement Award.',
     stats: [
+      { value: '250+', label: 'Black families fed within a mile of 31st & Prospect' },
       { value: '$7K', label: 'circulated into Black farms' },
       { value: '60', label: 'Community Food Leaders, mostly under 30' },
-      { value: '51', label: 'bags of produce to seniors in one day' },
     ],
     link: 'https://kansascitydefender.com/mutual-aid-community-programs/kcs-black-farms-unite-hamer-free-food-program/',
-    image: '/photos/hamer-food-box.jpg',
+    image: '/photos/hamer-packing.jpg',
   },
   {
     name: 'The People’s Buyout',
@@ -177,7 +178,7 @@ export const DOORS: {
     what: 'Our Black abolitionist freedom school. Political education, leadership development, and radical imagination, led by Kansas City’s first Poet Laureate.',
     proof: 'Now in its fourth cohort. Students have ranged from age 10 to 81.',
     link: 'https://kansascitydefender.com/education/kansas-citys-black-abolitionist-freedom-school-is-working-and-it-just-graduated-a-new-class-of-organizers/',
-    image: `${CDN}/2026/06/11224001/b-real-cohort-3-scaled.jpg`,
+    image: '/photos/breal-circle.jpg',
   },
   {
     name: 'The Book Club',
@@ -197,7 +198,7 @@ export const DOORS: {
   {
     name: 'Ms. Willa’s Books',
     pillar: 'institutional',
-    what: 'Missouri’s oldest Black bookstore, saved from auction by the Defender and now our headquarters: home to our pantry, free store, book club, and freedom school classroom.',
+    what: 'Missouri’s oldest Black bookstore, saved from auction by the Defender and now our headquarters, home to our pantry, free store, book club, and freedom school classroom.',
     proof: 'A permanent Black institution and 10,000 volumes, kept in Black hands.',
     link: '#willas',
     image: `${CDN}/2026/07/22122112/KCD-Willas-3.jpg`,
@@ -261,7 +262,7 @@ export const WILLAS = {
     { title: 'A week from auction', text: 'Ms. Willa’s entire collection, 10,000 volumes of Black history and literature, was a week away from being auctioned off.' },
     { title: 'We saved the store', text: 'The Defender raised the money to cover a full year of her rent, then helped Ms. Willa retire with dignity.' },
     { title: 'Every book, by hand', text: 'Defender organizers cataloged the entire 10,000-volume collection.' },
-    { title: 'Our home', text: '2026 is our first full year running it as our headquarters: the pantry, the mutual aid room, the book club, and the freedom school classroom.' },
+    { title: 'Our home', text: '2026 is our first full year running it as our headquarters, home to the pantry, the mutual aid room, the book club, and the freedom school classroom.' },
     { title: 'Next: a Liberation Hub', text: 'In 2027, Willa’s becomes a year-round Liberation Hub, open to the community every day.' },
   ],
   image: '/photos/ms-willa.jpg',
@@ -330,7 +331,7 @@ export const FUNDERS_THANKS =
 export const NEXT = {
   headline: 'Where we go in 2027',
   lead: 'Journalism first.',
-  dek: 'In 2027 the Defender grows from Kansas City’s essential Black newsroom into the Black newsroom of the Midwest, with reporting that starts on Prospect Avenue and reaches the world.',
+  dek: '2027 marks 200 years of the Black press. We will honor it by growing from Kansas City’s essential Black newsroom into the Black newsroom of the Midwest, with reporting that starts on Prospect Avenue and reaches the world.',
   reach: [
     { scope: 'Kansas City', title: 'Own the city’s front page', text: 'Daily short-form video news on the platforms young Kansas City actually uses, growing our monthly reach well beyond the 1M+ digital impressions we average today.' },
     { scope: 'Missouri & the region', title: 'Build a statewide desk', text: 'Follow the power to Jefferson City and across Missouri and Kansas: the statehouse, the ballot fights, the prisons, and the small towns industry targets because it thinks no one is watching.' },
@@ -344,7 +345,7 @@ export const NEXT = {
   },
   powerHeadline: 'And the power we build around it',
   goals: [
-    { title: 'A youth organizing & leadership pipeline', text: 'Grow the Student Action Network and B-REAL Academy, and train young people in journalism and media careers, so every young person who finds us has a path to lead.' },
+    { title: 'A youth organizing & leadership pipeline', text: 'Train young people as organizers, leaders, and change makers in their communities and the world, so every young person who finds us has a path to lead.' },
     { title: 'Willa’s as a year-round Liberation Hub', text: 'The free store, pantry, book club, and freedom school under one roof, open to the community all year.' },
     { title: 'Scale our mutual aid programs', text: 'More families clothed and fed, more Black farms paid, and more Mutual Aid Leaders organizing alongside them.' },
     { title: 'Grow Black Feast Week', text: 'A diner passport and a public directory of Kansas City’s Black businesses, so visibility reaches founders at every stage.' },
@@ -408,7 +409,7 @@ export const IMPACT_AREAS: {
     proof: [
       '3,000+ clothing and hygiene items given to Black families this year through the People’s Free Store.',
       'The People’s Buyout fed 100 Black single mothers and their families, spending at a Black-owned restaurant to do it.',
-      'The Hamer Program buys from Black farms at market rate and delivers the produce free to Black elders and families.',
+      'The Hamer Program has delivered free produce to 250+ Black families within a mile of 31st & Prospect, with literature that maps every Black farm and how to get food from them.',
       '400 pounds of kids’ clothing washed by hand for a single distribution.',
       'A permanent mutual aid room and pantry at Ms. Willa’s Books.',
     ],
@@ -503,6 +504,9 @@ export const MILESTONES: Milestone[] = [
     summary: 'The former Washington Post bureau chief launched The Plunder Papers from Nairobi, an investigative series on why Africa remains poor seven decades after colonialism.',
     outcome: 'A Kansas City outlet now has a foreign desk.',
     link: 'https://kansascitydefender.com/author/jonjeter/',
+    image: '/photos/jon-jeter.jpg',
+    imageAlt: 'Jon Jeter',
+    imageTop: true,
   },
   {
     slug: 'kcpd-budget',
@@ -547,6 +551,8 @@ export const MILESTONES: Milestone[] = [
     outcome: 'No ICE detention center at the site.',
     metric: { value: '500K+', label: 'people reached' },
     link: 'https://kansascitydefender.com/justice/platform-ventures-backs-down/',
+    image: '/photos/platform-ventures-cancelled.jpg',
+    imageAlt: 'The Platform Ventures warehouse, stamped cancelled',
   },
   {
     slug: 'breal-cohort-3',
@@ -556,6 +562,8 @@ export const MILESTONES: Milestone[] = [
     title: 'Freedom School Cohort 3 opens: 60 applied for 40 seats',
     summary: 'B-REAL Academy’s third cohort filled with many high school students from Hogan Prep, Lincoln Prep, and beyond.',
     metric: { value: '40', label: 'students' },
+    image: '/photos/breal-cohort-3.jpg',
+    imageAlt: 'B-REAL Academy Cohort 3 in front of Willa’s Books & Vinyl',
   },
   {
     slug: 'kids-clothing',
@@ -585,8 +593,8 @@ export const MILESTONES: Milestone[] = [
     kind: 'program',
     title: 'High schoolers design “the school that doesn’t yet exist”',
     summary: 'In B-REAL Academy’s Radical Imagination session, high school students led the room in designing a liberated Black freedom school: farm-to-table lunches from Black farms, trauma-informed classrooms, a mobile school, and lessons on revolutionary figures.',
-    image: '/photos/breal-circle.jpg',
-    imageAlt: 'A B-REAL Academy session in the circle at Ms. Willa’s',
+    image: '/photos/breal-week-2.jpg',
+    imageAlt: 'B-REAL Academy students present their design for a freedom school',
   },
   {
     slug: 'vera',
@@ -677,9 +685,9 @@ export const MILESTONES: Milestone[] = [
     date: '2026-05-07',
     pillar: 'narrative',
     kind: 'win',
-    title: 'Kansas City learns it builds America’s nuclear weapons, and fills the room',
-    summary: 'Our investigation into the Kansas City National Security Campus, where most non-nuclear components of every American nuclear weapon are made, ran ahead of the federal hearing on plutonium pit production.',
-    outcome: 'A completely packed public engagement session.',
+    title: 'We revealed Kansas City as the nuclear weapons capital of the world',
+    summary: 'Our investigation showed how Kansas City builds most of the non-nuclear parts of every American nuclear weapon, and is now constructing parts for the newest American bomb, ahead of the federal public engagement session on plutonium pits.',
+    outcome: 'The room was completely packed, and many attendees said publicly that our story is what brought them.',
     link: 'https://kansascitydefender.com/global-briefing/kansas-city-inside-americas-nuclear-weapons-capital-as-it-builds-the-newest-american-bomb/',
     image: `${CDN}/2026/05/06193943/Nuclear.png`,
   },
@@ -812,6 +820,8 @@ export const MILESTONES: Milestone[] = [
     title: 'KCATA signed a secret deal to harvest bus riders’ faces',
     summary: 'We obtained the auto-renewing contract giving a private company rights to riders’ faces, video, and voices, with no policy to protect the data.',
     link: 'https://kansascitydefender.com/technology-ai/kcata-facial-recognition-contract/',
+    image: '/photos/kcata-facial-recognition.jpg',
+    imageAlt: 'A face mapped by facial recognition software',
   },
   {
     slug: 'ljf-cohort',
@@ -864,6 +874,8 @@ export const MILESTONES: Milestone[] = [
     summary: 'Two days after the prosecutor declined charges, we published the footage and the prosecutor’s own memo. Both contradict what the state told the public.',
     outcome: 'Civil rights attorney Ben Crump is fighting for Saveion’s family.',
     link: 'https://kansascitydefender.com/justice/saveion-mcconnell-bodycam-video/',
+    image: '/photos/saveion-bodycam.jpg',
+    imageAlt: 'A frame from the body camera footage of the night Saveion McConnell was killed',
   },
   {
     slug: 'cuny-spotlight',
@@ -893,6 +905,8 @@ export const MILESTONES: Milestone[] = [
     title: 'LION Publishers’ 2026 Community Engagement Award goes to the Defender',
     summary: 'LION honored the Hamer Free Food Program in its national Sustainability Awards. The judges called it “a quick and nimble model for solutions-focused community engagement.”',
     outcome: '$7,000 circulated into Black farms, led by 60 Community Food Leaders, mostly Black residents under 30.',
+    image: '/photos/hamer-magazines.jpg',
+    imageAlt: 'The Defender’s Hamer Program literature',
   },
   {
     slug: 'peoples-buyout',
@@ -979,6 +993,7 @@ export const WINS: Win[] = [
     outcome: 'No ICE detention center at the site. The win belongs to the movement, and the Defender gave it voice and reach.',
     partners: ['Decarcerate KC', 'Student organizers', 'Coalition partners across MO and KS'],
     link: 'https://kansascitydefender.com/justice/platform-ventures-backs-down/',
+    image: '/photos/platform-ventures-cancelled.jpg',
   },
   {
     slug: 'blayne-newton',
@@ -1000,13 +1015,13 @@ export const WINS: Win[] = [
     date: '2026-05-07',
     pillar: 'narrative',
     label: 'Mobilization',
-    title: 'A packed room on America’s nuclear weapons',
+    title: 'Kansas City, the nuclear weapons capital of the world, packs the room',
     metric: { value: '80%', label: 'of non-nuclear bomb components made in KC' },
     body: [
       'For seventy-seven years, Kansas City has built most of the non-nuclear components in every American nuclear weapon, and most residents do not know it. Black workers like Maurice Copeland handled carcinogens there for decades without being told.',
-      'Our investigation ran ahead of the federal government’s visit to Kansas City to ask whether the city consents to building the newest American bomb, including plutonium pit production.',
+      'Our investigation named Kansas City as the nuclear weapons capital of the world, now constructing parts for the newest American bomb, and ran ahead of the federal government’s public engagement session on plutonium pits.',
     ],
-    outcome: 'When officials came to Kansas City for the public engagement session, the room was completely packed.',
+    outcome: 'The room was completely packed, and many attendees said publicly that our story is what brought them.',
     link: 'https://kansascitydefender.com/global-briefing/kansas-city-inside-americas-nuclear-weapons-capital-as-it-builds-the-newest-american-bomb/',
     image: `${CDN}/2026/05/06193943/Nuclear.png`,
   },
@@ -1053,9 +1068,8 @@ export const WINS: Win[] = [
     ],
     outcome: 'Nationally renowned civil rights attorney Ben Crump is fighting for Saveion’s family, and the community is demanding the case be reopened.',
     link: 'https://kansascitydefender.com/justice/saveion-mcconnell-bodycam-video/',
-    image: '/photos/saveion-justice-and-faith.jpg',
-    imageAlt: 'A young woman holds a “Justice and Faith” sign with Saveion McConnell’s photo',
-    imageTop: true,
+    image: '/photos/saveion-bodycam.jpg',
+    imageAlt: 'A frame from the body camera footage of the night Saveion McConnell was killed',
   },
   {
     slug: 'free-store',

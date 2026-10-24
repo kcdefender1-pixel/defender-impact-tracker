@@ -347,7 +347,7 @@ export const NEXT = {
     { title: 'A youth organizing & leadership pipeline', text: 'Train young people as organizers, leaders, and change makers in their communities and the world, so every young person who finds us has a path to lead.' },
     { title: 'Willa’s as a year-round Liberation Hub', text: 'The free store, pantry, book club, and freedom school under one roof, open to the community all year.' },
     { title: 'Scale our mutual aid programs', text: 'More families clothed and fed, more Black farms paid, and more Mutual Aid Leaders organizing alongside them.' },
-    { title: 'Grow Black economic power', text: 'Since 2021 we have partnered with 50+ Black-owned businesses and organizations, covering them and putting them in front of our audience. In 2027 we build that into a Black economy network with a public directory, year-round coverage, Black Feast Week, and direct lines to capital through partners like KC G.I.F.T., so more Black dollars circulate in Black Kansas City.' },
+    { title: 'Grow Black economic power', text: 'Since 2021 we have partnered with 50+ Black-owned businesses and organizations, covering them and putting them in front of our audience. In 2027 we build that into a Black economy network with a public directory, year-round coverage, Black Feast Week, direct lines to capital through partners like KC G.I.F.T., and an advertising co-op that pools buying power so Black businesses can reach our audience at rates they can afford, so more Black dollars circulate in Black Kansas City.' },
   ],
   ways: [
     { label: 'Donate', text: 'Become a monthly Defender or give once.', href: 'https://kansascitydefender.com/support-us/' },

@@ -183,7 +183,7 @@ function MilestoneItem({ m }: { m: Milestone }) {
       )}
 
       <div
-        className={`grid gap-5 ${m.image ? 'lg:grid-cols-[1fr_240px]' : ''} ${
+        className={`grid gap-5 ${m.image ? (m.imagePortrait ? 'lg:grid-cols-[1fr_140px]' : 'lg:grid-cols-[1fr_240px]') : ''} ${
           m.featured ? 'glow-card bg-defender-gold/25 border-2 border-ink p-5 md:p-6' : ''
         }`}
       >
@@ -241,12 +241,16 @@ function MilestoneItem({ m }: { m: Milestone }) {
         </div>
 
         {m.image && (
-          <div className="relative aspect-[4/3] border-2 border-ink overflow-hidden bg-paper-2 order-first lg:order-none">
+          <div
+            className={`relative border-2 border-ink overflow-hidden bg-paper-2 order-first lg:order-none ${
+              m.imagePortrait ? 'aspect-[5/7] w-[140px]' : 'aspect-[4/3]'
+            }`}
+          >
             <Image
               src={m.image}
               alt={m.imageAlt ?? ''}
               fill
-              sizes="(min-width: 1024px) 240px, 90vw"
+              sizes={m.imagePortrait ? '140px' : '(min-width: 1024px) 240px, 90vw'}
               className={`object-cover ${m.imageTop ? 'object-top' : ''}`}
             />
           </div>

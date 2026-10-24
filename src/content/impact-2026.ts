@@ -21,6 +21,7 @@ export interface Milestone {
   imageAlt?: string;
   imageTop?: boolean; // anchor the crop to the top (for social graphics with text below the photo)
   featured?: boolean; // gets the glowing star treatment
+  imagePortrait?: boolean; // small headshots render narrow and tall so they stay sharp
 }
 
 export interface Win {
@@ -62,7 +63,7 @@ export const KIND_LABEL: Record<MilestoneKind, string> = {
 
 export const HEADLINE_STATS = [
   { value: '1M+', label: 'Digital impressions a month, on average' },
-  { value: '50', label: 'Active members' },
+  { value: '50+', label: 'Active members' },
   { value: '3,000+', label: 'Clothing & hygiene items given' },
   { value: '250+', label: 'Black families fed through Hamer' },
   { value: '4th', label: 'Freedom School cohort' },
@@ -76,7 +77,7 @@ export const MORE_STATS = [
   { value: '10', label: 'New Mutual Aid Leaders who emerged this year' },
   { value: '100+', label: 'Community volunteers our mutual aid team organizes' },
   { value: '100', label: 'Black single mothers and their families fed at the People’s Buyout' },
-  { value: '40%+', label: 'Growth in active subscriptions' },
+  { value: '40%+', label: 'Growth in active subscriptions in 2025, Khadijah Bland’s first year leading development' },
   { value: '337K+', label: 'Views on our Lincoln Prep walkout story' },
   { value: '100+', label: 'Signed up to defend neighbors from ICE through our coverage' },
   { value: '10+', label: 'School districts across Missouri and Kansas whose students we trained' },
@@ -87,15 +88,13 @@ export const MORE_STATS = [
 export const THESIS = {
   kicker: 'The Kansas City Defender · 2026 Impact',
   headline: 'Media that builds power.',
-  dek: 'The Kansas City Defender is building a new model for Black media, fusing radical journalism, organizing, and community care into one Black-led institution. We reach the young Black and brown people the rest of the media lost, and we turn that reach into narrative change, civic participation, and organized power for the next generation.',
+  dek: 'The Kansas City Defender is building a new model for Black media, fusing radical journalism, organizing, and mutual aid into one Black-led institution. We reach the young Black and brown people the rest of the media lost, and we turn that reach into narrative change, civic participation, and organized power for the next generation.',
 };
 
 export const NARRATIVE: string[] = [
   'American media is going dark. This year The Kansas City Call, the Black newspaper that has served this city for more than a century, missed print for the first time in its history, and The Kansas City Star cut its newsroom again. Into that silence pours a flood of misinformation and disinformation aimed squarely at the young Black and brown people legacy media stopped speaking to long ago. Most of them have tuned out. They have not tuned out of us.',
   'The Defender stands in the lineage of the Black press, a tradition that turns 200 years old in 2027. From Freedom’s Journal in 1827 to the papers that carried the abolitionist, civil rights, and Black Power movements, every movement for our freedom has been catalyzed by a media arm willing to tell the truth. In an era of media consolidation, AI-generated synthetic content, authoritarian censorship, and outlets too fearful to tell the truth, we are telling it.',
-  'The Defender reaches the people the rest of the press cannot. This year we have averaged more than one million digital impressions a month across our platforms, and the vast majority of our audience is Black, brown, and young. They find us on their phones, in their feeds, and on our YouTube show, in a voice that respects them and a politics that tells them the truth about the forces shaping their lives, from the police budget and the ICE detention deal to the data center tax scheme and the nuclear weapons plant down the street. And then they do what most media audiences never do. They show up.',
-  'Some people walk in through a story. Others come through the People’s Free Store, a Hamer Program food box from a Black farm, a seat in our Freedom School, the book club, or a Juneteenth cookout with five hundred of their neighbors. Every door leads to the same place, a community that feeds you, teaches you, and then asks you to help build something. Fifty active members now carry that work across the organization, and the people who come through our doors go on to join and lead organizations across the region.',
-  'The results are on the record. Our reporting on students walking out against ICE sparked a wave of walkouts across Missouri, Kansas, and beyond, and we trained students from more than ten school districts in organizing, civic engagement, and their rights. A corporate ICE detention deal collapsed under public pressure we helped build, and a police officer who had killed three people left KCPD within ten days of our investigation. We obtained the body camera footage the State of Missouri hid in the killing of nineteen-year-old Saveion McConnell, and nationally renowned civil rights attorney Ben Crump is now fighting for his family. Our investigation into Kansas City as the nuclear weapons capital of the world, where parts for the newest American bomb are being built, packed the room when federal officials came to town. Our reporting on the first underground nuclear reactor in history drew international experts, and the company behind it is now being sued. And our investigation into missing Black women led to the reinstatement of Kansas City’s previously disbanded missing persons task force and the creation of a statewide one.',
+  'We reach the people the rest of the press cannot. We average more than one million digital impressions a month, and the vast majority of our audience is Black, brown, and young. They find us on their phones and on our YouTube show, and then they do what most media audiences never do. They show up, through a story, the People’s Free Store, a Hamer food box, our Freedom School, or a Juneteenth cookout, and 50+ active members now carry that work across the organization. The year that followed is on the record below.',
   'That is why the Defender matters to so many people at once. To young people, it is the first media that ever treated them as protagonists. To Black families, it is food and clothing given with dignity. To organizers and progressives, it is the media arm of a movement that is winning, and to voters it is The People’s Ballot. To Black businesses and entrepreneurs, it is a platform and a source of capital know-how. To the next generation of leaders, it is a school. And to journalism, at the very moment its old institutions are failing, it is proof of what comes next.',
 ];
 
@@ -294,7 +293,7 @@ export const TESTIMONIALS = [
 
 export const TEAM: { name: string; role: string; note?: string }[] = [
   { name: 'Ryan Sorrell', role: 'Founder & Executive Editor', note: 'Led the year’s biggest investigations, from Kansas City’s nuclear weapons plant to the first underground reactor.' },
-  { name: 'Khadijah Bland', role: 'Director of Development & Revenue', note: 'INN’s 2026 National Emerging Leader of the Year. Grew active subscriptions 40%+ and launched our first capital campaign.' },
+  { name: 'Khadijah Bland', role: 'Director of Development & Revenue', note: 'INN’s 2026 National Emerging Leader of the Year. Grew active subscriptions 40%+ in her first year and launched our first capital campaign.' },
   { name: 'Mili Mansaray', role: 'Senior Editor', note: 'Co-leads our award-winning investigations into missing Black women, and reports on housing.' },
   { name: 'Vaughan Harrison', role: 'Senior Investigative Reporter & Resident Photographer', note: 'Co-leads our award-winning investigations into missing Black women, and captures our work behind the lens.' },
   { name: 'Melissa Ferrer-Civil', role: 'Director, B-REAL Academy', note: 'Kansas City’s first Poet Laureate. Led the freedom school through its largest, youngest class and into Cohort 4.' },
@@ -309,7 +308,7 @@ export const TEAM: { name: string; role: string; note?: string }[] = [
 ];
 
 export const TEAM_THANKS =
-  'And to our 50 members, the 30-strong mutual aid team and its 10 new leaders, and the 100+ community volunteers who sort the clothes, pack the boxes, run the trainings, and tell the stories: this is your work.';
+  'And to our 50+ members, the 30-strong mutual aid team and its 10 new leaders, and the 100+ community volunteers who sort the clothes, pack the boxes, run the trainings, and tell the stories: this is your work.';
 
 // ─── With gratitude ─────────────────────────────────────────────────────────
 
@@ -348,7 +347,7 @@ export const NEXT = {
     { title: 'A youth organizing & leadership pipeline', text: 'Train young people as organizers, leaders, and change makers in their communities and the world, so every young person who finds us has a path to lead.' },
     { title: 'Willa’s as a year-round Liberation Hub', text: 'The free store, pantry, book club, and freedom school under one roof, open to the community all year.' },
     { title: 'Scale our mutual aid programs', text: 'More families clothed and fed, more Black farms paid, and more Mutual Aid Leaders organizing alongside them.' },
-    { title: 'Grow Black Feast Week', text: 'A diner passport and a public directory of Kansas City’s Black businesses, so visibility reaches founders at every stage.' },
+    { title: 'Grow Black economic power', text: 'Since 2021 we have partnered with 50+ Black-owned businesses and organizations, covering them and putting them in front of our audience. In 2027 we build that into a Black economy network with a public directory, year-round coverage, Black Feast Week, and direct lines to capital through partners like KC G.I.F.T., so more Black dollars circulate in Black Kansas City.' },
   ],
   ways: [
     { label: 'Donate', text: 'Become a monthly Defender or give once.', href: 'https://kansascitydefender.com/support-us/' },
@@ -397,7 +396,7 @@ export const IMPACT_AREAS: {
       'The media arm for the 23-organization coalition fighting Kansas City’s World Cup Jail.',
       'B-REAL Academy, our abolitionist freedom school, is in its fourth cohort.',
       '10 new Mutual Aid Leaders emerged this year to strategize and organize, from a 30-member mutual aid team that mobilizes 100+ community volunteers.',
-      '50 active members carrying the work across the organization, plus a packed federal hearing on nuclear weapons and 100+ community defense sign-ups through our coverage.',
+      '50+ active members carrying the work across the organization, plus a packed federal hearing on nuclear weapons and 100+ community defense sign-ups through our coverage.',
     ],
   },
   {
@@ -422,6 +421,7 @@ export const IMPACT_AREAS: {
     claim: 'We build the culture, and the Black economy, that liberation needs.',
     proof: [
       'Black Feast Week, in its third year, drives customers to Black-owned restaurants across Kansas City.',
+      'Since 2021, 50+ Black-owned businesses and organizations partnered with, covered, and put in front of our audience.',
       'Black Economic Power, our column with KC G.I.F.T., opened with CEO Brandon Calloway on how Black entrepreneurs win funding.',
       'Dozens of Black vendors and 500+ neighbors at the Juneteenth Cookout, where RADAR honored its first class of Kansas City creators.',
       'Liberation Now’s Black Theology & Black Power series, with Dr. J. Kameron Carter and Minister Andrew Hairston.',
@@ -435,7 +435,7 @@ export const IMPACT_AREAS: {
     speaksTo: ['Sustainability', 'Organizational capacity'],
     claim: 'We are building an institution that lasts.',
     proof: [
-      'Active subscriptions up 40%+, new revenue from events and Black business partnerships, and our first capital campaign.',
+      'Active subscriptions grew 40%+ in 2025, our Development Director’s first year, alongside new revenue from events and Black business partnerships and our first capital campaign.',
       'Khadijah Bland, our Director of Development & Revenue, named INN’s National Emerging Leader of the Year.',
       'An international desk led by two-time Pulitzer finalist Jon Jeter.',
       'Ms. Willa’s Books, Missouri’s oldest Black bookstore, saved from auction. Our organizers cataloged all 10,000 volumes, and 2026 is our first full year running it as our headquarters.',
@@ -506,7 +506,7 @@ export const MILESTONES: Milestone[] = [
     link: 'https://kansascitydefender.com/author/jonjeter/',
     image: '/photos/jon-jeter.jpg',
     imageAlt: 'Jon Jeter',
-    imageTop: true,
+    imagePortrait: true,
   },
   {
     slug: 'kcpd-budget',
@@ -559,8 +559,8 @@ export const MILESTONES: Milestone[] = [
     date: '2026-02-13',
     pillar: 'organizing',
     kind: 'program',
-    title: 'Freedom School Cohort 3 opens: 60 applied for 40 seats',
-    summary: 'B-REAL Academy’s third cohort filled with many high school students from Hogan Prep, Lincoln Prep, and beyond.',
+    title: 'Freedom School Cohort 3 opens with our most applications yet',
+    summary: 'B-REAL Academy’s third cohort drew more applicants than ever and filled with high school students from Hogan Prep, Lincoln Prep, and beyond.',
     metric: { value: '40', label: 'students' },
     image: '/photos/breal-cohort-3.jpg',
     imageAlt: 'B-REAL Academy Cohort 3 in front of Willa’s Books & Vinyl',
@@ -765,8 +765,8 @@ export const MILESTONES: Milestone[] = [
     kind: 'recognition',
     title: 'Khadijah Bland named INN’s National Emerging Leader of the Year',
     summary: 'The Institute for Nonprofit News honored our Director of Development & Revenue for replacing ad hoc fundraising with structured systems, sustainable forecasting, and long-term revenue planning.',
-    outcome: 'Active subscriptions up more than 40%, new revenue from events and Black business partnerships, and the Defender’s first capital campaign.',
-    metric: { value: '40%+', label: 'growth in active subscriptions' },
+    outcome: 'In her first year in the role, active subscriptions grew more than 40%, alongside new revenue from events and Black business partnerships and the Defender’s first capital campaign.',
+    metric: { value: '40%+', label: 'subscription growth in her first year' },
     image: '/photos/inn-emerging-leader.jpg',
     imageAlt: 'Khadijah Bland, INN 2026 Emerging Leader of the Year',
     imageTop: true,
@@ -1111,7 +1111,7 @@ export const WINS: Win[] = [
     title: 'Freedom School graduates its largest and youngest class',
     metric: { value: '4', label: 'cohorts and counting' },
     body: [
-      'B-REAL Academy is the region’s only abolitionist freedom school. Cohort 3 drew 60 applicants for 40 seats, more than half of them high school students.',
+      'B-REAL Academy is the region’s only abolitionist freedom school. Cohort 3 drew our most applications yet, and more than half of its students were in high school.',
       'They graduated around a fire on Sankara Farm, twenty-seven acres of Black-owned land. Students have ranged in age from 10 to 81. Cohort 4 is now underway.',
     ],
     outcome: 'A growing class of young organizers trained in political education and leadership.',

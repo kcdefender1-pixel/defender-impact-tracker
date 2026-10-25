@@ -78,7 +78,7 @@ export const THESIS = {
 };
 
 export const NARRATIVE: string[] = [
-  'American media is going dark. This year The Kansas City Call, the Black newspaper that has served this city for more than a century, missed print for the first time in its history, and The Kansas City Star cut its newsroom again. Into that silence pours a flood of misinformation and disinformation aimed squarely at the young Black people legacy media stopped speaking to long ago. Most of them have tuned out. They have not tuned out of us.',
+  'Into the silence left by a collapsing local press pours a flood of misinformation and disinformation, aimed squarely at young Black people, a generation legacy media stopped speaking to long ago. Most of them have tuned out. They have not tuned out of us.',
   'The Defender stands in the lineage of the Black press, a tradition that turns 200 years old in 2027. From Freedom’s Journal in 1827 to the papers that carried the abolitionist, civil rights, and Black Power movements, every movement for our freedom has been catalyzed by a media arm willing to tell the truth. In an era of media consolidation, AI-generated synthetic content, authoritarian censorship, and outlets too fearful to tell the truth, we are telling it.',
   'We reach the people the rest of the press cannot. We average more than one million digital impressions a month, and the vast majority of our audience is Black and young. They find us on their phones and on our YouTube show, and then they do what most media audiences never do. They show up, through a story, the People’s Free Store, a Hamer food box, our Freedom School, or a Juneteenth cookout, and 50+ active members now carry that work across the organization. The year that followed is on the record below.',
   'That is why the Defender matters to so many people at once. To young people, it is the first media that ever treated them as protagonists. To Black families, it is food and clothing given with dignity. To organizers and progressives, it is the media arm of a movement that is winning, and to voters it is The People’s Ballot. To Black businesses and entrepreneurs, it is a platform and a source of capital know-how. To the next generation of leaders, it is a school. And to journalism, at the very moment its old institutions are failing, it is proof of what comes next.',
@@ -192,17 +192,6 @@ export const DOORS: {
   },
 ];
 
-export const WHO_FOR = [
-  { who: 'Youth', why: 'The first media that speaks to them as protagonists, and a school that makes them leaders.' },
-  { who: 'Black families', why: 'Food, clothing, and care, given with dignity and without paperwork.' },
-  { who: 'Organizers & progressives', why: 'The media arm of a movement that is winning real fights.' },
-  { who: 'Black businesses', why: 'Black Feast Week, the Buyout, and our Black Economic Power column with KC G.I.F.T. put dollars and know-how into Black-owned businesses.' },
-  { who: 'Voters', why: 'The People’s Ballot explains every measure and race in plain language, online and in print.' },
-  { who: 'People of faith', why: 'Liberation Now’s Black Theology & Black Power series brings the Black church tradition back into the fight for liberation.' },
-  { who: 'The next generation of leaders', why: 'Freedom School graduates go on to found organizations and teach.' },
-  { who: 'Journalism itself', why: 'A working model of community-owned media while the old institutions collapse.' },
-];
-
 export const PARTNERS = [
   'KC Tenants',
   'Decarcerate KC',
@@ -280,20 +269,21 @@ export const BROTHERS = {
   closer: 'A young man the city knows as a case number walks out of Ms. Willa’s as an organizer.',
 };
 
-// ─── Why invest: one investment, every pillar ──────────────────────────────
+// ─── Why give: every dollar, every pillar ──────────────────────────────────
 
-export const INVEST = {
-  kicker: 'For funders',
-  headline: 'One investment. Every pillar.',
-  dek: 'Most funding buys one outcome. Fund a newsroom and you get stories. Fund a food program and you get meals. Fund the Defender and the same investment does all of it at once, because our journalism, mutual aid, organizing, and culture run as one system.',
-  exampleLabel: 'One program, five returns',
+export const GIVE = {
+  kicker: 'For funders and supporters',
+  headline: 'Every dollar. Every pillar.',
+  center: 'Every dollar',
+  dek: 'Most funding buys one outcome. Fund a newsroom and you get stories. Fund a food program and you get meals. Support the Defender and the same dollar does all of it at once, because our journalism, mutual aid, organizing, and culture run as one system.',
+  exampleLabel: 'One program, five outcomes',
   example: 'The Hamer Program',
   exampleNote: 'Launched with Kansas City’s Black farms after the last grocery store near 31st & Prospect closed.',
   outcomes: [
     { pillar: 'narrative' as const, value: '1st', label: 'unified network of Kansas City’s Black farmers, told through our reporting and farm guide' },
     { pillar: 'material' as const, value: '250+', label: 'Black families fed within a mile of 31st & Prospect' },
     { pillar: 'organizing' as const, value: '60', label: 'Community Food Leaders trained, mostly Black residents under 30' },
-    { pillar: 'cultural' as const, value: '$7K', label: 'circulated directly into Black-owned farms' },
+    { pillar: 'cultural' as const, tag: 'Black Economic Power', value: '$7K', label: 'circulated directly into Black-owned farms' },
     { pillar: 'institutional' as const, value: 'LION', label: 'LION’s 2026 Community Engagement Award, plus a new contracted revenue stream' },
   ],
   compare: [
@@ -312,11 +302,11 @@ export const INVEST = {
         'Our story names the crisis and points to action',
         'Readers become the organizers who deliver the food',
         'The program becomes the next story and the next member',
-        'One investment, one system, returns that compound',
+        'One system, with impact that compounds',
       ],
     },
   ],
-  closer: 'Every investment in the Defender is amplified by a monthly audience of more than a million and a membership that turns attention into action.',
+  closer: 'Every dollar given to the Defender is amplified by more than a million digital impressions a month and a membership that turns attention into action.',
 };
 
 // ─── In their words ─────────────────────────────────────────────────────────
@@ -403,7 +393,7 @@ export const NEXT = {
   ways: [
     { label: 'Donate', text: 'Become a monthly Defender or give once.', href: 'https://kansascitydefender.com/support-us/' },
     { label: 'Join & organize', text: 'Become a member. Sort, pack, deliver, teach, organize.', href: 'https://kansascitydefender.com/join/' },
-    { label: 'Become a funder or partner', text: 'Invest in the model. Let’s talk.', href: 'https://kansascitydefender.com/contact-us/' },
+    { label: 'Become a funder or partner', text: 'Fund the model. Let’s talk.', href: 'https://kansascitydefender.com/contact-us/' },
   ],
 };
 

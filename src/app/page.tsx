@@ -5,7 +5,7 @@ import {
   FUNDERS,
   FUNDERS_THANKS,
   HEADLINE_STATS,
-  INVEST,
+  GIVE,
   IMPACT_AREAS,
   IMPACT_AREAS_INTRO,
   NEXT,
@@ -20,7 +20,6 @@ import {
   TEAM_THANKS,
   TESTIMONIALS,
   THESIS,
-  WHO_FOR,
   WHY_NOW,
   WILLAS,
 } from '@/content/impact-2026';
@@ -28,7 +27,7 @@ import { PILLAR_STYLE } from '@/lib/pillar-styles';
 import { YearTimeline } from '@/components/public/year-timeline';
 import { WinsBoard } from '@/components/public/wins-board';
 import { BrothersFeature } from '@/components/public/brothers-feature';
-import { Invest } from '@/components/public/invest';
+import { Give } from '@/components/public/give';
 import { Orbit } from '@/components/thesis/orbit';
 import { Fork } from '@/components/thesis/fork';
 import { ChooseDoor } from '@/components/thesis/choose-door';
@@ -229,17 +228,6 @@ export default function ImpactPage() {
             ))}
           </div>
 
-          {/* Who it is for */}
-          <h3 className="display text-[2rem] md:text-[2.4rem] mb-6">Who the Defender is for</h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
-            {WHO_FOR.map((w) => (
-              <div key={w.who} className="border-2 border-ink bg-card p-5">
-                <span className="font-serif font-semibold text-[1.3rem] block">{w.who}</span>
-                <p className="mt-1.5 text-[14.5px] text-ink-2 leading-relaxed">{w.why}</p>
-              </div>
-            ))}
-          </div>
-
           {/* Into the movement */}
           <div className="bg-ink text-paper p-6 md:p-8 border-2 border-ink">
             <span className="kicker text-defender-gold block mb-3">Into the movement</span>
@@ -364,10 +352,10 @@ export default function ImpactPage() {
           <ChooseDoor />
         </section>
 
-        {/* ── Why invest ────────────────────────────────────────── */}
-        <section id="invest" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead title={INVEST.headline} dek={INVEST.dek} />
-          <Invest />
+        {/* ── Why give ──────────────────────────────────────────── */}
+        <section id="give" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead title={GIVE.headline} dek={GIVE.dek} />
+          <Give />
         </section>
       </div>
 

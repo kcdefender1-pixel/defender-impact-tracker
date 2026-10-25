@@ -23,7 +23,7 @@ export const PUBLIC_SECTIONS = [
   { id: 'how', label: 'The Thesis' },
   { id: 'willas', label: 'Willa’s' },
   { id: 'programs', label: 'Programs' },
-  { id: 'invest', label: 'Why Invest' },
+  { id: 'give', label: 'Why Give' },
   { id: 'next', label: '2027' },
   { id: 'thanks', label: 'Thank You' },
 ];

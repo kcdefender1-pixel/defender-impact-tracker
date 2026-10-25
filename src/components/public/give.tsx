@@ -1,33 +1,33 @@
 import { ArrowDown } from 'lucide-react';
-import { INVEST, PILLARS } from '@/content/impact-2026';
+import { GIVE, PILLARS } from '@/content/impact-2026';
 import { PILLAR_STYLE } from '@/lib/pillar-styles';
 
-// One investment fans out into a return on every pillar, with Hamer as the worked example.
+// Every dollar fans out into an outcome on every pillar, with Hamer as the worked example.
 // Desktop draws flowing lines from the core to each return; phones stack it top to bottom.
 const ROW = 92; // card height + gap, in px, so the lines meet each card's middle
 const CARD = 80;
 
-export function Invest() {
-  const n = INVEST.outcomes.length;
+export function Give() {
+  const n = GIVE.outcomes.length;
   const height = n * ROW - (ROW - CARD);
   const mid = height / 2;
 
   return (
     <div>
       <div className="grid lg:grid-cols-[300px_110px_1fr] items-center gap-y-4">
-        {/* The investment */}
+        {/* The dollar */}
         <div className="flex flex-col items-center text-center">
           <div className="btn-glow rounded-full w-56 h-56 md:w-64 md:h-64 bg-defender-gold border-[3px] border-ink flex flex-col items-center justify-center p-6 shadow-[6px_6px_0_0_#0E0D0C]">
-            <span className="kicker text-ink/70">{INVEST.exampleLabel}</span>
-            <span className="display text-[2.4rem] md:text-[2.8rem] leading-none mt-2 text-ink">One investment</span>
-            <span className="mt-3 text-[13px] font-bold text-ink">in {INVEST.example}</span>
+            <span className="kicker text-ink/70">{GIVE.exampleLabel}</span>
+            <span className="display text-[2.4rem] md:text-[2.8rem] leading-none mt-2 text-ink">{GIVE.center}</span>
+            <span className="mt-3 text-[13px] font-bold text-ink">in {GIVE.example}</span>
           </div>
-          <p className="mt-5 text-[13.5px] text-ink-2 leading-snug max-w-[17rem]">{INVEST.exampleNote}</p>
+          <p className="mt-5 text-[13.5px] text-ink-2 leading-snug max-w-[17rem]">{GIVE.exampleNote}</p>
         </div>
 
         {/* Lines fanning out (desktop) */}
         <svg viewBox={`0 0 110 ${height}`} className="hidden lg:block w-full" style={{ height }} aria-hidden>
-          {INVEST.outcomes.map((_, i) => {
+          {GIVE.outcomes.map((_, i) => {
             const y = i * ROW + CARD / 2;
             return (
               <path
@@ -45,9 +45,9 @@ export function Invest() {
           <ArrowDown size={26} strokeWidth={2.5} className="float-y" />
         </div>
 
-        {/* The returns */}
+        {/* The outcomes */}
         <ol className="space-y-3 lg:space-y-0 lg:grid" style={{ rowGap: ROW - CARD }}>
-          {INVEST.outcomes.map((o) => (
+          {GIVE.outcomes.map((o) => (
             <li
               key={o.label}
               className="flex items-stretch border-2 border-ink bg-card lg:h-[80px] overflow-hidden"
@@ -56,7 +56,7 @@ export function Invest() {
                 <span className="display text-[1.9rem] md:text-[2.2rem] leading-none">{o.value}</span>
               </span>
               <span className="flex flex-col justify-center px-4 py-2.5">
-                <span className={`kicker ${PILLAR_STYLE[o.pillar].text}`}>{PILLARS[o.pillar].label}</span>
+                <span className={`kicker ${PILLAR_STYLE[o.pillar].text}`}>{'tag' in o ? o.tag : PILLARS[o.pillar].label}</span>
                 <span className="text-[13px] font-semibold text-ink leading-tight mt-0.5">{o.label}</span>
               </span>
             </li>
@@ -66,7 +66,7 @@ export function Invest() {
 
       {/* Siloed funding vs. the Defender */}
       <div className="mt-14 grid md:grid-cols-2 gap-5">
-        {INVEST.compare.map((c, i) => (
+        {GIVE.compare.map((c, i) => (
           <div
             key={c.title}
             className={`border-2 border-ink p-6 md:p-7 ${i === 0 ? 'bg-paper-2 text-ink-2' : 'bg-ink text-paper shadow-[6px_6px_0_0_#E0263F]'}`}
@@ -90,7 +90,7 @@ export function Invest() {
       </div>
 
       <p className="mt-10 font-serif italic text-[1.5rem] md:text-[2rem] leading-snug text-ink max-w-4xl border-l-4 border-defender-red pl-5">
-        {INVEST.closer}
+        {GIVE.closer}
       </p>
     </div>
   );

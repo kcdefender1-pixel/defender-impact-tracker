@@ -70,36 +70,6 @@ export const ORBIT_STAGES = [
   },
 ];
 
-export const LOOP_NODES = [
-  {
-    id: 'journalism',
-    name: 'Journalism',
-    role: 'Tells the truth, and where to act',
-    stat: '1M+ impressions a month',
-    pillar: 'narrative' as const,
-  },
-  {
-    id: 'mutual-aid',
-    name: 'Mutual Aid',
-    role: 'Gives people a home and a role',
-    stat: '30-member team, 10 new leaders',
-    pillar: 'material' as const,
-  },
-  {
-    id: 'culture',
-    name: 'Arts & Culture',
-    role: 'Pulls people close',
-    stat: '500+ at the Juneteenth Cookout',
-    pillar: 'cultural' as const,
-  },
-];
-
-export const LOOP_FLOWS = [
-  { from: 'Journalism', to: 'Mutual Aid', text: 'A story about the food desert at 31st & Prospect becomes a seat at mutual aid orientation.' },
-  { from: 'Mutual Aid', to: 'Arts & Culture', text: 'Our organizers build the cookout, the Book Club, and the tournament that bring the next people in.' },
-  { from: 'Arts & Culture', to: 'Journalism', text: 'The tournament crowd and the cookout crowd start following our reporting, and the loop turns again.' },
-];
-
 export const FORK = {
   doors: ['A story on Instagram', 'An investigation', 'Liberation Now', 'The basketball tournament', 'Hip hop & culture'],
   orbit: 'In our orbit',

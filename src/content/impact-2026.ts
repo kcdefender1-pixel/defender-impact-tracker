@@ -69,20 +69,6 @@ export const HEADLINE_STATS = [
   { value: '4th', label: 'Freedom School cohort' },
 ];
 
-export const MORE_STATS = [
-  { value: '500K+', label: 'Reached during the Platform Ventures ICE fight' },
-  { value: '23', label: 'Organizations in the coalition against the World Cup Jail' },
-  { value: '150+', label: 'Neighbors served in one afternoon at the People’s Free Store' },
-  { value: '30', label: 'Members on our mutual aid team' },
-  { value: '10', label: 'New Mutual Aid Leaders who emerged this year' },
-  { value: '100+', label: 'Community members our mutual aid team organizes into our programs' },
-  { value: '100', label: 'Black single mothers and their families fed at the People’s Buyout' },
-  { value: '40%+', label: 'Growth in active subscriptions in 2025, Khadijah Bland’s first year leading development' },
-  { value: '337K+', label: 'Views on our Lincoln Prep walkout story' },
-  { value: '100+', label: 'Signed up to defend neighbors from ICE through our coverage' },
-  { value: '10+', label: 'School districts across Missouri and Kansas whose students we trained' },
-];
-
 // ─── The narrative ──────────────────────────────────────────────────────────
 
 export const THESIS = {

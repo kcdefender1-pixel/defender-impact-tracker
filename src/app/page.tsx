@@ -7,7 +7,6 @@ import {
   HEADLINE_STATS,
   IMPACT_AREAS,
   IMPACT_AREAS_INTRO,
-  MORE_STATS,
   NEXT,
   NARRATIVE,
   PARTNERS,
@@ -29,7 +28,6 @@ import { YearTimeline } from '@/components/public/year-timeline';
 import { WinsBoard } from '@/components/public/wins-board';
 import { BrothersFeature } from '@/components/public/brothers-feature';
 import { Orbit } from '@/components/thesis/orbit';
-import { LiberationLoop } from '@/components/thesis/liberation-loop';
 import { Fork } from '@/components/thesis/fork';
 import { ChooseDoor } from '@/components/thesis/choose-door';
 
@@ -151,11 +149,6 @@ export default function ImpactPage() {
                 <span className="block mt-2 text-[13px] font-semibold text-ink/80 leading-snug">{p.label}</span>
               </div>
             ))}
-          </div>
-
-          <SubHead name="From Feed to Field" line="Many doors, one path, and two ways to be organized." />
-          <div className="mb-16">
-            <Fork />
           </div>
 
           {/* Who it is for */}
@@ -323,10 +316,10 @@ export default function ImpactPage() {
 
         {/* ── Programs ──────────────────────────────────────────── */}
         <section id="programs" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead title="The Doors" dek="Every program is a way in. Each one leads to the same home, and each one makes the others stronger." />
-          <SubHead name="The Liberation Loop" line="How our journalism, mutual aid, and arts and culture feed each other." />
+          <SectionHead title="The Doors" dek="Every program is a way in, and each one leads to the same home." />
+          <SubHead name="From Feed to Field" line="Many doors, one path, and two ways to be organized." />
           <div className="mb-16">
-            <LiberationLoop />
+            <Fork />
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             {DOORS.map((d, i) => (
@@ -335,19 +328,9 @@ export default function ImpactPage() {
           </div>
         </section>
 
-        {/* ── By the numbers ────────────────────────────────────── */}
-        <section id="numbers" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead title="By the Numbers" />
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink">
-            {[...HEADLINE_STATS, ...MORE_STATS].map((s) => (
-              <div key={s.label} className="bg-card p-5 md:p-6">
-                <span className="display block text-[2.8rem] md:text-[3.4rem] tabular-nums text-ink">{s.value}</span>
-                <span className="block mt-2 text-[13px] font-semibold text-ink-2 leading-snug">{s.label}</span>
-              </div>
-            ))}
-          </div>
-
-          <h3 className="display text-[2rem] md:text-[2.4rem] mt-14 mb-6">Recognition</h3>
+        {/* ── Recognition ───────────────────────────────────────── */}
+        <section id="recognition" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead title="Recognition" />
           <a
             id="spotlight"
             href={SPOTLIGHT.href}

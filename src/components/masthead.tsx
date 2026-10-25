@@ -22,7 +22,7 @@ export const PUBLIC_SECTIONS = [
   { id: 'areas', label: 'Impact Areas' },
   { id: 'year', label: 'The Year' },
   { id: 'programs', label: 'Programs' },
-  { id: 'numbers', label: 'Numbers' },
+  { id: 'recognition', label: 'Recognition' },
   { id: 'next', label: '2027' },
   { id: 'thanks', label: 'Thank You' },
 ];

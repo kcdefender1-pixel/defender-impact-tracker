@@ -217,7 +217,52 @@
   animation: btn-glow 2.2s ease-out infinite;
 }
 
+/* Media-Action visuals: orbits, inward drift, flowing lines */
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.orbit {
+  animation: orbit var(--orbit-duration, 40s) linear infinite;
+}
+.orbit-reverse {
+  animation: orbit var(--orbit-duration, 40s) linear infinite reverse;
+}
+@keyframes drift-in {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 46%;
+    opacity: 0;
+  }
+}
+.drift-in {
+  animation: drift-in var(--drift-duration, 7s) ease-in infinite;
+}
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+.dash-flow {
+  stroke-dasharray: 6 6;
+  animation: dash-flow 1.2s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .orbit,
+  .orbit-reverse,
+  .drift-in,
+  .dash-flow,
   .btn-glow,
   .rise,
   .marquee-track,

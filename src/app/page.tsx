@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowDown, ArrowRight, ArrowUpRight, Star } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Star } from 'lucide-react';
 import {
   DOORS,
   FUNDERS,
@@ -11,7 +11,6 @@ import {
   NEXT,
   NARRATIVE,
   PARTNERS,
-  PATHWAY,
   PILLARS,
   PULL_QUOTE,
   RECOGNITION,
@@ -29,6 +28,10 @@ import { PILLAR_STYLE } from '@/lib/pillar-styles';
 import { YearTimeline } from '@/components/public/year-timeline';
 import { WinsBoard } from '@/components/public/wins-board';
 import { BrothersFeature } from '@/components/public/brothers-feature';
+import { Orbit } from '@/components/thesis/orbit';
+import { LiberationLoop } from '@/components/thesis/liberation-loop';
+import { Fork } from '@/components/thesis/fork';
+import { ChooseDoor } from '@/components/thesis/choose-door';
 
 export default function ImpactPage() {
   return (
@@ -130,59 +133,29 @@ export default function ImpactPage() {
       </section>
 
       <div className="max-w-[1320px] mx-auto px-4 md:px-8">
-        {/* ── How it fits ───────────────────────────────────────── */}
+        {/* ── The Media-Action Thesis ──────────────────────────── */}
         <section id="how" className="py-16 md:py-20 border-t-2 border-ink">
           <SectionHead
-            title="How It Fits"
-            dek="Journalism, mutual aid, political education, and culture are not separate programs. They are one path, and every step builds power."
+            title="The Media-Action Thesis"
+            dek="Most media leaves people informed and alone. The Defender publishes with a door to the street, and people walk through it. Journalism, mutual aid, political education, and culture are one system, and no other media platform in our region is built this way."
           />
 
-          {/* The path */}
-          <ol className="grid grid-cols-1 lg:grid-cols-5 gap-[2px] bg-ink border-2 border-ink mb-10">
-            {PATHWAY.map((p, i) => (
-              <li key={p.step} className={`relative p-5 md:p-6 ${i === PATHWAY.length - 1 ? 'bg-defender-red text-white' : 'bg-card'}`}>
-                <span className={`kicker block mb-2 ${i === PATHWAY.length - 1 ? 'text-white/80' : 'text-ink-4'}`}>
-                  Step {i + 1}
-                </span>
-                <span className="display block text-[2.4rem]">{p.step}</span>
-                <p className={`mt-2 text-[14px] leading-snug ${i === PATHWAY.length - 1 ? 'text-white/90' : 'text-ink-2'}`}>
-                  {p.text}
-                </p>
-                {i < PATHWAY.length - 1 && (
-                  <>
-                    <span className="hidden lg:block absolute -right-[15px] top-1/2 -translate-y-1/2 z-10" aria-hidden>
-                      <ArrowRight
-                        size={26}
-                        strokeWidth={2.5}
-                        className="float-x block bg-defender-gold border-2 border-ink rounded-full p-0.5"
-                      />
-                    </span>
-                    <span className="lg:hidden absolute left-1/2 -bottom-[15px] -translate-x-1/2 z-10" aria-hidden>
-                      <ArrowDown
-                        size={26}
-                        strokeWidth={2.5}
-                        className="float-y block bg-defender-gold border-2 border-ink rounded-full p-0.5"
-                      />
-                    </span>
-                  </>
-                )}
-              </li>
-            ))}
-          </ol>
+          <SubHead name="Orbit to Organizer" line="From the first time someone finds us to the day they organize with us. Tap a ring." />
+          <Orbit />
 
-          {/* One real path through the door */}
-          <p className="font-serif text-[1.25rem] md:text-[1.5rem] leading-snug text-ink max-w-4xl mb-10 border-l-4 border-defender-red pl-5">
-            {STORY_DOOR.example}
-          </p>
-
-          <h3 className="kicker text-ink mb-4">{STORY_DOOR.proofHeadline}</h3>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink mb-14">
+          <h3 className="kicker text-ink mt-16 mb-4">{STORY_DOOR.proofHeadline}</h3>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink mb-16">
             {STORY_DOOR.proof.map((p) => (
               <div key={p.label} className="bg-defender-gold p-5 md:p-6">
                 <span className="display block text-[2.8rem] md:text-[3.4rem] text-ink tabular-nums">{p.value}</span>
                 <span className="block mt-2 text-[13px] font-semibold text-ink/80 leading-snug">{p.label}</span>
               </div>
             ))}
+          </div>
+
+          <SubHead name="From Feed to Field" line="Many doors, one path, and two ways to be organized." />
+          <div className="mb-16">
+            <Fork />
           </div>
 
           {/* Who it is for */}
@@ -342,9 +315,19 @@ export default function ImpactPage() {
           </div>
         </section>
 
+        {/* ── Choose Your Door ─────────────────────────────────── */}
+        <section className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="choose-door">
+          <SubHead id="choose-door" name="Choose Your Door" line="Pick a person and watch how they walk from a first encounter into the work." big />
+          <ChooseDoor />
+        </section>
+
         {/* ── Programs ──────────────────────────────────────────── */}
         <section id="programs" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead title="The Doors" dek="Every program is a way in. Each one leads to the same home." />
+          <SectionHead title="The Doors" dek="Every program is a way in. Each one leads to the same home, and each one makes the others stronger." />
+          <SubHead name="The Liberation Loop" line="How our journalism, mutual aid, and arts and culture feed each other." />
+          <div className="mb-16">
+            <LiberationLoop />
+          </div>
           <div className="grid md:grid-cols-2 gap-5">
             {DOORS.map((d, i) => (
               <DoorCard key={d.name} door={d} wide={DOORS.length % 2 === 1 && i === DOORS.length - 1} />
@@ -535,6 +518,20 @@ function SectionHead({ title, dek }: { title: string; dek?: string }) {
     <div className="mb-10 max-w-3xl">
       <h2 className="slab">{title}</h2>
       {dek && <p className="mt-4 text-[16px] md:text-[17px] text-ink-2 leading-relaxed">{dek}</p>}
+    </div>
+  );
+}
+
+function SubHead({ name, line, id, big }: { name: string; line: string; id?: string; big?: boolean }) {
+  return (
+    <div className="mb-8 flex flex-wrap items-end gap-x-4 gap-y-2">
+      <h3
+        id={id}
+        className={`display text-ink border-b-4 border-defender-red pb-1 ${big ? 'text-[2.6rem] md:text-[3.4rem]' : 'text-[2rem] md:text-[2.6rem]'}`}
+      >
+        {name}
+      </h3>
+      <p className="text-[15px] text-ink-2 pb-2">{line}</p>
     </div>
   );
 }

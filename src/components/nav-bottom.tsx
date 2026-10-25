@@ -21,7 +21,7 @@ export function NavBottom() {
   };
 
   // The public impact page has its own section nav
-  if (pathname === '/' || pathname === '/staff' || pathname === '/lab') return null;
+  if (pathname === '/' || pathname === '/staff') return null;
 
   return (
     <nav data-print-hide className="md:hidden fixed bottom-3 left-3 right-3 z-40 bg-ink rounded-full shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">

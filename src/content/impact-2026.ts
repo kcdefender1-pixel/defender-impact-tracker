@@ -118,7 +118,6 @@ export const WHY_NOW = [
 
 // How the pieces fit: the path someone takes through the Defender
 export const STORY_DOOR = {
-  example: 'You read our story about the food desert at 31st & Prospect. You join our mutual aid team. Next season you are helping lead the seeding and harvesting on the Black farms that grow food for the Hamer Program.',
   proofHeadline: 'Permanent infrastructure, built by media and action together',
   proof: [
     { value: '10', label: 'Black Student Unions formed as a result of our school coverage' },
@@ -127,14 +126,6 @@ export const STORY_DOOR = {
     { value: '100+', label: 'neighbors signed up to defend against ICE through one dispatch' },
   ],
 };
-
-export const PATHWAY = [
-  { step: 'Reach', text: 'A story finds a young person on their feed, in a voice that respects them.' },
-  { step: 'Trust', text: 'We tell the truth when no one else will, and the record proves it.' },
-  { step: 'Care', text: 'They come to the Free Store, a Hamer box, a Buyout, a cookout.' },
-  { step: 'Train', text: 'Freedom School and the book club turn questions into political education.' },
-  { step: 'Lead', text: 'They join the Defender and the movement, and start bringing others in.' },
-];
 
 export const DOORS: {
   name: string;

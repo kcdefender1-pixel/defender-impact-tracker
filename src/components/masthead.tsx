@@ -17,7 +17,7 @@ const STAFF_ITEMS = [
 // Sections of the public impact page, in scroll order
 export const PUBLIC_SECTIONS = [
   { id: 'power', label: 'Our Power' },
-  { id: 'how', label: 'How It Fits' },
+  { id: 'how', label: 'The Thesis' },
   { id: 'willas', label: 'Willa’s' },
   { id: 'areas', label: 'Impact Areas' },
   { id: 'year', label: 'The Year' },
@@ -65,7 +65,6 @@ export function Masthead() {
   const pathname = usePathname();
   const isPublic = pathname === '/';
   const isLogin = pathname === '/staff';
-  const isLab = pathname === '/lab';
   const active = useActiveSection(isPublic);
 
   // Keep the current section's pill in view in the scrolling mobile strip
@@ -101,7 +100,7 @@ export function Masthead() {
               <Link href="/" className="hover:text-paper transition-colors">
                 View public page &rarr;
               </Link>
-              {!isLogin && !isLab && (
+              {!isLogin && (
                 <button
                   onClick={async () => {
                     await fetch('/api/staff-login', { method: 'DELETE' });
@@ -152,7 +151,7 @@ export function Masthead() {
                 <span className="hidden sm:inline">Print / PDF</span>
               </button>
             </>
-          ) : isLogin || isLab ? null : (
+          ) : isLogin ? null : (
             <>
               <nav className="hidden md:flex items-center gap-1 flex-1 min-w-0">
                 {STAFF_ITEMS.map(({ href, label }) => (

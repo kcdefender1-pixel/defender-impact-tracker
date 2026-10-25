@@ -120,7 +120,7 @@ export const FORK = {
 export const DOOR_PATHS = [
   {
     id: 'student',
-    who: 'A UMKC student',
+    who: 'A college student',
     door: 'Reads a story on our Instagram',
     steps: [
       'Reads one of our stories on Instagram',

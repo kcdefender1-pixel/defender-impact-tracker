@@ -17,12 +17,13 @@ const STAFF_ITEMS = [
 // Sections of the public impact page, in scroll order
 export const PUBLIC_SECTIONS = [
   { id: 'power', label: 'Our Power' },
+  { id: 'year', label: 'The Year' },
+  { id: 'areas', label: 'Impact Areas' },
+  { id: 'recognition', label: 'Recognition' },
   { id: 'how', label: 'The Thesis' },
   { id: 'willas', label: 'Willa’s' },
-  { id: 'areas', label: 'Impact Areas' },
-  { id: 'year', label: 'The Year' },
   { id: 'programs', label: 'Programs' },
-  { id: 'recognition', label: 'Recognition' },
+  { id: 'invest', label: 'Why Invest' },
   { id: 'next', label: '2027' },
   { id: 'thanks', label: 'Thank You' },
 ];

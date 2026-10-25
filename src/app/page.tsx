@@ -5,6 +5,7 @@ import {
   FUNDERS,
   FUNDERS_THANKS,
   HEADLINE_STATS,
+  INVEST,
   IMPACT_AREAS,
   IMPACT_AREAS_INTRO,
   NEXT,
@@ -27,6 +28,7 @@ import { PILLAR_STYLE } from '@/lib/pillar-styles';
 import { YearTimeline } from '@/components/public/year-timeline';
 import { WinsBoard } from '@/components/public/wins-board';
 import { BrothersFeature } from '@/components/public/brothers-feature';
+import { Invest } from '@/components/public/invest';
 import { Orbit } from '@/components/thesis/orbit';
 import { Fork } from '@/components/thesis/fork';
 import { ChooseDoor } from '@/components/thesis/choose-door';
@@ -131,6 +133,82 @@ export default function ImpactPage() {
       </section>
 
       <div className="max-w-[1320px] mx-auto px-4 md:px-8">
+        {/* ── The Year ──────────────────────────────────────────── */}
+        <section id="year" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead
+            title="The Year"
+            dek="From January to now, in order. Filter by type of work, or open any win for the full story."
+          />
+          <YearTimeline />
+          {/* Full stories for the year's wins open from the timeline */}
+          <WinsBoard showGrid={false} />
+        </section>
+
+        {/* ── Impact areas ──────────────────────────────────────── */}
+        <section id="areas" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead title="Impact Areas" dek={IMPACT_AREAS_INTRO} />
+          <div className="grid md:grid-cols-2 gap-5">
+            {IMPACT_AREAS.map((a, i) => {
+              const style = PILLAR_STYLE[a.pillar];
+              const wide = IMPACT_AREAS.length % 2 === 1 && i === IMPACT_AREAS.length - 1;
+              return (
+                <article key={a.id} className={`border-2 border-ink bg-card flex flex-col ${wide ? 'md:col-span-2' : ''}`}>
+                  <div className={`px-6 py-4 border-b-2 border-ink ${style.fill}`}>
+                    <h3 className="display text-[2rem] md:text-[2.3rem]">{a.name}</h3>
+                    <p className="kicker mt-1 opacity-80">Speaks to: {a.speaksTo.join(' · ')}</p>
+                  </div>
+                  <div className="p-6">
+                    <p className="font-serif font-semibold text-[1.3rem] leading-snug">{a.claim}</p>
+                    <ul className={`mt-5 grid gap-3 ${wide ? 'md:grid-cols-2 md:gap-x-8' : ''}`}>
+                      {a.proof.map((p) => (
+                        <li key={p} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-2">
+                          <span className={`mt-[7px] w-2 h-2 shrink-0 ${style.dot} ring-1 ring-ink`} aria-hidden />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ── Recognition ───────────────────────────────────────── */}
+        <section id="recognition" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead title="Recognition" />
+          <a
+            id="spotlight"
+            href={SPOTLIGHT.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glow-card scroll-mt-40 group mb-8 grid md:grid-cols-[auto_1fr] gap-6 items-center border-2 border-ink bg-defender-gold p-6 md:p-8"
+          >
+            <Star size={72} strokeWidth={1.25} className="star-pulse fill-ink text-ink" aria-hidden />
+            <div>
+              <span className="kicker text-ink/70">{SPOTLIGHT.kicker}</span>
+              <span className="display block text-[1.9rem] md:text-[2.5rem] mt-1 text-ink">{SPOTLIGHT.title}</span>
+              <p className="mt-2 text-[15.5px] text-ink/85 leading-relaxed max-w-3xl">{SPOTLIGHT.text}</p>
+              <p className="mt-4 font-serif italic text-[1.15rem] text-ink">
+                &ldquo;{SPOTLIGHT.quote}&rdquo;
+                <span className="not-italic font-sans text-[12px] font-semibold text-ink/70 block mt-1">{SPOTLIGHT.quoteBy}</span>
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1 text-[13px] font-bold text-ink border-b-2 border-ink group-hover:gap-2 transition-all">
+                Read Columbia&apos;s announcement <ArrowUpRight size={14} />
+              </span>
+            </div>
+          </a>
+          <ul className="grid sm:grid-cols-2 gap-4">
+            {RECOGNITION.map((r) => (
+              <li key={r.who} className="border-l-4 border-defender-red pl-4 py-1">
+                <span className="kicker text-ink-3 block">{r.date}</span>
+                <span className="font-serif font-semibold text-[1.2rem] block mt-1">{r.who}</span>
+                <span className="text-[14.5px] text-ink-2">{r.what}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         {/* ── The Media-Action Thesis ──────────────────────────── */}
         <section id="how" className="py-16 md:py-20 border-t-2 border-ink">
           <SectionHead
@@ -238,52 +316,19 @@ export default function ImpactPage() {
           </div>
         </section>
 
-        {/* ── B-REAL for young Black men ────────────────────────── */}
-        <section id="brothers-feature" className="py-16 md:py-20 border-t-2 border-ink">
-          <BrothersFeature />
-        </section>
-
-        {/* ── Impact areas ──────────────────────────────────────── */}
-        <section id="areas" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead title="Impact Areas" dek={IMPACT_AREAS_INTRO} />
+        {/* ── Programs ──────────────────────────────────────────── */}
+        <section id="programs" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead title="The Doors" dek="Every program is a way in, and each one leads to the same home." />
+          <SubHead name="From Feed to Field" line="Many doors, one path, and two ways to be organized." />
+          <div className="mb-16">
+            <Fork />
+          </div>
           <div className="grid md:grid-cols-2 gap-5">
-            {IMPACT_AREAS.map((a, i) => {
-              const style = PILLAR_STYLE[a.pillar];
-              const wide = IMPACT_AREAS.length % 2 === 1 && i === IMPACT_AREAS.length - 1;
-              return (
-                <article key={a.id} className={`border-2 border-ink bg-card flex flex-col ${wide ? 'md:col-span-2' : ''}`}>
-                  <div className={`px-6 py-4 border-b-2 border-ink ${style.fill}`}>
-                    <h3 className="display text-[2rem] md:text-[2.3rem]">{a.name}</h3>
-                    <p className="kicker mt-1 opacity-80">Speaks to: {a.speaksTo.join(' · ')}</p>
-                  </div>
-                  <div className="p-6">
-                    <p className="font-serif font-semibold text-[1.3rem] leading-snug">{a.claim}</p>
-                    <ul className={`mt-5 grid gap-3 ${wide ? 'md:grid-cols-2 md:gap-x-8' : ''}`}>
-                      {a.proof.map((p) => (
-                        <li key={p} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-2">
-                          <span className={`mt-[7px] w-2 h-2 shrink-0 ${style.dot} ring-1 ring-ink`} aria-hidden />
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              );
-            })}
+            {DOORS.map((d, i) => (
+              <DoorCard key={d.name} door={d} wide={DOORS.length % 2 === 1 && i === DOORS.length - 1} />
+            ))}
           </div>
         </section>
-
-        {/* ── The Year ──────────────────────────────────────────── */}
-        <section id="year" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead
-            title="The Year"
-            dek="From January to now, in order. Filter by type of work, or open any win for the full story."
-          />
-          <YearTimeline />
-          {/* Full stories for the year's wins open from the timeline */}
-          <WinsBoard showGrid={false} />
-        </section>
-
 
         {/* ── In their words ───────────────────────────────────── */}
         <section className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="words-title">
@@ -308,59 +353,21 @@ export default function ImpactPage() {
           </div>
         </section>
 
-        {/* ── Programs ──────────────────────────────────────────── */}
-        <section id="programs" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead title="The Doors" dek="Every program is a way in, and each one leads to the same home." />
-          <SubHead name="From Feed to Field" line="Many doors, one path, and two ways to be organized." />
-          <div className="mb-16">
-            <Fork />
-          </div>
-          <div className="grid md:grid-cols-2 gap-5">
-            {DOORS.map((d, i) => (
-              <DoorCard key={d.name} door={d} wide={DOORS.length % 2 === 1 && i === DOORS.length - 1} />
-            ))}
-          </div>
-        </section>
-
-        {/* ── Recognition ───────────────────────────────────────── */}
-        <section id="recognition" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead title="Recognition" />
-          <a
-            id="spotlight"
-            href={SPOTLIGHT.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="glow-card scroll-mt-40 group mb-8 grid md:grid-cols-[auto_1fr] gap-6 items-center border-2 border-ink bg-defender-gold p-6 md:p-8"
-          >
-            <Star size={72} strokeWidth={1.25} className="star-pulse fill-ink text-ink" aria-hidden />
-            <div>
-              <span className="kicker text-ink/70">{SPOTLIGHT.kicker}</span>
-              <span className="display block text-[1.9rem] md:text-[2.5rem] mt-1 text-ink">{SPOTLIGHT.title}</span>
-              <p className="mt-2 text-[15.5px] text-ink/85 leading-relaxed max-w-3xl">{SPOTLIGHT.text}</p>
-              <p className="mt-4 font-serif italic text-[1.15rem] text-ink">
-                &ldquo;{SPOTLIGHT.quote}&rdquo;
-                <span className="not-italic font-sans text-[12px] font-semibold text-ink/70 block mt-1">{SPOTLIGHT.quoteBy}</span>
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-[13px] font-bold text-ink border-b-2 border-ink group-hover:gap-2 transition-all">
-                Read Columbia&apos;s announcement <ArrowUpRight size={14} />
-              </span>
-            </div>
-          </a>
-          <ul className="grid sm:grid-cols-2 gap-4">
-            {RECOGNITION.map((r) => (
-              <li key={r.who} className="border-l-4 border-defender-red pl-4 py-1">
-                <span className="kicker text-ink-3 block">{r.date}</span>
-                <span className="font-serif font-semibold text-[1.2rem] block mt-1">{r.who}</span>
-                <span className="text-[14.5px] text-ink-2">{r.what}</span>
-              </li>
-            ))}
-          </ul>
+        {/* ── B-REAL for young Black men ────────────────────────── */}
+        <section id="brothers-feature" className="py-16 md:py-20 border-t-2 border-ink">
+          <BrothersFeature />
         </section>
 
         {/* ── Choose Your Door ─────────────────────────────────── */}
         <section className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="choose-door">
           <SubHead id="choose-door" name="Choose Your Door" line="Find the door that sounds like you, and see where it leads." big />
           <ChooseDoor />
+        </section>
+
+        {/* ── Why invest ────────────────────────────────────────── */}
+        <section id="invest" className="py-16 md:py-20 border-t-2 border-ink">
+          <SectionHead title={INVEST.headline} dek={INVEST.dek} />
+          <Invest />
         </section>
       </div>
 

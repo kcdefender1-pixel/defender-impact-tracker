@@ -280,6 +280,45 @@ export const BROTHERS = {
   closer: 'A young man the city knows as a case number walks out of Ms. Willa’s as an organizer.',
 };
 
+// ─── Why invest: one investment, every pillar ──────────────────────────────
+
+export const INVEST = {
+  kicker: 'For funders',
+  headline: 'One investment. Every pillar.',
+  dek: 'Most funding buys one outcome. Fund a newsroom and you get stories. Fund a food program and you get meals. Fund the Defender and the same investment does all of it at once, because our journalism, mutual aid, organizing, and culture run as one system.',
+  exampleLabel: 'One program, five returns',
+  example: 'The Hamer Program',
+  exampleNote: 'Launched with Kansas City’s Black farms after the last grocery store near 31st & Prospect closed.',
+  outcomes: [
+    { pillar: 'narrative' as const, value: '1st', label: 'unified network of Kansas City’s Black farmers, told through our reporting and farm guide' },
+    { pillar: 'material' as const, value: '250+', label: 'Black families fed within a mile of 31st & Prospect' },
+    { pillar: 'organizing' as const, value: '60', label: 'Community Food Leaders trained, mostly Black residents under 30' },
+    { pillar: 'cultural' as const, value: '$7K', label: 'circulated directly into Black-owned farms' },
+    { pillar: 'institutional' as const, value: 'LION', label: 'LION’s 2026 Community Engagement Award, plus a new contracted revenue stream' },
+  ],
+  compare: [
+    {
+      title: 'Siloed funding',
+      points: [
+        'A newsroom reports on the food desert',
+        'A food program hands out boxes',
+        'An organizing group recruits leaders',
+        'Three grants, three budgets, three audiences',
+      ],
+    },
+    {
+      title: 'The Defender',
+      points: [
+        'Our story names the crisis and points to action',
+        'Readers become the organizers who deliver the food',
+        'The program becomes the next story and the next member',
+        'One investment, one system, returns that compound',
+      ],
+    },
+  ],
+  closer: 'Every investment in the Defender is amplified by a monthly audience of more than a million and a membership that turns attention into action.',
+};
+
 // ─── In their words ─────────────────────────────────────────────────────────
 
 export const TESTIMONIALS = [

@@ -89,7 +89,7 @@ export const FORK = {
 // Composite paths drawn from real Defender programs and stories
 export const DOOR_PATHS = [
   {
-    id: 'student',
+    id: 'college',
     who: 'A college student',
     door: 'Reads a story on our Instagram',
     steps: [
@@ -100,8 +100,8 @@ export const DOOR_PATHS = [
     ],
   },
   {
-    id: 'high-schooler',
-    who: 'A high schooler',
+    id: 'high-school',
+    who: 'A high school student',
     door: 'Sees our walkout coverage',
     steps: [
       'Sees our coverage of students walking out against ICE',
@@ -111,36 +111,58 @@ export const DOOR_PATHS = [
     ],
   },
   {
-    id: 'neighbor',
-    who: 'A neighbor near 31st & Prospect',
+    id: 'community',
+    who: 'A community member',
     door: 'Reads the food desert story',
     steps: [
       'Reads our story about the food desert at 31st & Prospect',
-      'Picks up a Hamer bag and the farm guide inside',
+      'Picks up a Hamer bag and the Black farm guide inside',
       'Joins our mutual aid team',
       'Helps lead seeding and harvesting on the Black farms',
     ],
   },
   {
-    id: 'hooper',
-    who: 'A young brother at the tournament',
-    door: 'Plays in the Juneteenth tournament',
+    id: 'organizer',
+    who: 'An organizer',
+    door: 'Already building a campaign',
     steps: [
-      'Plays in the Juneteenth basketball tournament',
-      'Starts following our culture and hip hop content',
-      'Reads our reporting on Saveion McConnell',
-      'Joins the new B-REAL cohort for justice-impacted young Black men',
+      'Launches a campaign in their neighborhood',
+      'Sees the Defender in the room when no other outlet shows up',
+      'Our coverage brings new people to their next action',
+      'Partners with the Defender as their campaign’s media arm',
     ],
   },
   {
-    id: 'reader',
-    who: 'A longtime reader',
-    door: 'Reads the nuclear weapons investigation',
+    id: 'faith',
+    who: 'A faith leader',
+    door: 'Watches Black Theology & Black Power',
     steps: [
-      'Reads our investigation into the nuclear weapons capital of the world',
-      'Learns the federal government is asking for public input',
-      'Shows up to the public engagement session',
-      'Helps pack the room',
+      'Watches our Black Theology & Black Power series on Liberation Now',
+      'Brings the conversation to their congregation',
+      'Connects with our partnerships team',
+      'Their congregation shows up for mutual aid and the movement',
+    ],
+  },
+  {
+    id: 'unsure',
+    who: 'Interested, not sure how to help',
+    door: 'Has been following quietly',
+    steps: [
+      'Follows the Defender quietly for months',
+      'Sees a post inviting people to a mutual aid orientation',
+      'Comes once, just to see what it is',
+      'Finds a home, and becomes a member',
+    ],
+  },
+  {
+    id: 'youth',
+    who: 'Black youth',
+    door: 'Comes out to the tournament',
+    steps: [
+      'Comes out to the Juneteenth basketball tournament',
+      'Starts following our culture and hip hop content',
+      'Sees young people like them at the center of our reporting',
+      'Joins B-REAL Academy, our freedom school',
     ],
   },
 ];

@@ -308,12 +308,6 @@ export default function ImpactPage() {
           </div>
         </section>
 
-        {/* ── Choose Your Door ─────────────────────────────────── */}
-        <section className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="choose-door">
-          <SubHead id="choose-door" name="Choose Your Door" line="Pick a person and watch how they walk from a first encounter into the work." big />
-          <ChooseDoor />
-        </section>
-
         {/* ── Programs ──────────────────────────────────────────── */}
         <section id="programs" className="py-16 md:py-20 border-t-2 border-ink">
           <SectionHead title="The Doors" dek="Every program is a way in, and each one leads to the same home." />
@@ -361,6 +355,12 @@ export default function ImpactPage() {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* ── Choose Your Door ─────────────────────────────────── */}
+        <section className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="choose-door">
+          <SubHead id="choose-door" name="Choose Your Door" line="Find the door that sounds like you, and see where it leads." big />
+          <ChooseDoor />
         </section>
       </div>
 

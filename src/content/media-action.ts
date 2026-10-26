@@ -35,7 +35,7 @@ export const ORBIT_STAGES = [
     title: 'People find us in a lot of ways',
     text: 'Most first meet us through the news: a story on Instagram, an investigation, Liberation Now on YouTube, or The People’s Ballot. Others come through culture, like the Juneteenth basketball tournament or the hip hop and culture content we publish, or through a Free Store distribution in their neighborhood.',
     chips: ['A story on Instagram', 'An investigation', 'Liberation Now', 'The People’s Ballot', 'The basketball tournament', 'Hip hop & culture', 'The Free Store'],
-    proof: [{ value: '1M+', label: 'digital impressions a month' }],
+    proof: [{ value: '10M+', label: 'views & impressions in 2026' }],
   },
   {
     id: 'orbit',
@@ -43,7 +43,7 @@ export const ORBIT_STAGES = [
     title: 'They follow, and they start trusting us',
     text: 'They follow, subscribe, and start getting their news from the Defender. A generation that tuned out of legacy media tunes in here, and stays.',
     chips: ['Follows', 'The newsletter', 'Shares', 'DMs'],
-    proof: [{ value: '337K+', label: 'views on one walkout story' }],
+    proof: [{ value: '474K+', label: 'Instagram views on one walkout story' }],
   },
   {
     id: 'action',
@@ -73,7 +73,7 @@ export const ORBIT_STAGES = [
 export const FORK = {
   doors: ['A story on Instagram', 'An investigation', 'Liberation Now', 'The basketball tournament', 'Hip hop & culture'],
   orbit: 'In our orbit',
-  orbitNote: '1M+ impressions a month',
+  orbitNote: '10M+ views & impressions in 2026',
   act: 'Called to act',
   actNote: 'A story with an action attached',
   movement: {

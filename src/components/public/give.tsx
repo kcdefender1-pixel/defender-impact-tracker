@@ -17,10 +17,13 @@ export function Give() {
       <div className="grid lg:grid-cols-[300px_110px_1fr] items-center gap-y-4">
         {/* The dollar */}
         <div className="flex flex-col items-center text-center">
-          <div className="btn-glow rounded-full w-56 h-56 md:w-64 md:h-64 bg-defender-gold border-[3px] border-ink flex flex-col items-center justify-center p-6 shadow-[6px_6px_0_0_#0E0D0C]">
+          <div className="btn-glow rounded-full w-64 h-64 bg-defender-gold border-[3px] border-ink flex flex-col items-center justify-center p-6 shadow-[6px_6px_0_0_#0E0D0C]">
+            <span className="star-pulse flex items-center justify-center w-11 h-11 rounded-full bg-ink text-defender-gold border-2 border-ink display text-[1.7rem] leading-none mb-2" aria-hidden>
+              $
+            </span>
             <span className="kicker text-ink/70">{GIVE.exampleLabel}</span>
             <span className="display text-[2.4rem] md:text-[2.8rem] leading-none mt-2 text-ink">{GIVE.center}</span>
-            <span className="mt-3 text-[13px] font-bold text-ink">in {GIVE.example}</span>
+            <span className="mt-2 text-[13px] font-bold text-ink">in {GIVE.example}</span>
           </div>
           <p className="mt-5 text-[13.5px] text-ink-2 leading-snug max-w-[17rem]">{GIVE.exampleNote}</p>
         </div>
@@ -29,19 +32,24 @@ export function Give() {
         <svg viewBox={`0 0 110 ${height}`} className="hidden lg:block w-full" style={{ height }} aria-hidden>
           {GIVE.outcomes.map((_, i) => {
             const y = i * ROW + CARD / 2;
+            const d = `M0 ${mid} C 55 ${mid}, 55 ${y}, 110 ${y}`;
             return (
-              <path
-                key={i}
-                d={`M0 ${mid} C 55 ${mid}, 55 ${y}, 110 ${y}`}
-                fill="none"
-                stroke="#0E0D0C"
-                strokeWidth="3"
-                className="dash-flow"
-              />
+              <g key={i}>
+                <path d={d} fill="none" stroke="#0E0D0C" strokeWidth="3" className="dash-flow" />
+                {/* A dollar coin traveling out to each pillar */}
+                <g className="flow-dollar">
+                  <circle r="10" fill="#FFC229" stroke="#0E0D0C" strokeWidth="2" />
+                  <text textAnchor="middle" dominantBaseline="central" fontSize="13" fontWeight="800" fill="#0E0D0C">
+                    $
+                  </text>
+                  <animateMotion dur="2.6s" begin={`${i * 0.45}s`} repeatCount="indefinite" path={d} />
+                </g>
+              </g>
             );
           })}
         </svg>
-        <div className="lg:hidden flex justify-center" aria-hidden>
+        <div className="lg:hidden flex justify-center items-center gap-2" aria-hidden>
+          <span className="float-y flex items-center justify-center w-8 h-8 rounded-full bg-defender-gold border-2 border-ink display text-[1.2rem] leading-none">$</span>
           <ArrowDown size={26} strokeWidth={2.5} className="float-y" />
         </div>
 

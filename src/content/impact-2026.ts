@@ -62,7 +62,7 @@ export const KIND_LABEL: Record<MilestoneKind, string> = {
 // ─── The headline numbers ───────────────────────────────────────────────────
 
 export const HEADLINE_STATS = [
-  { value: '1M+', label: 'Digital impressions a month, on average' },
+  { value: '10M+', label: 'Views & impressions in 2026' },
   { value: '50+', label: 'Active members' },
   { value: '3,000+', label: 'Clothing & hygiene items given' },
   { value: '250+', label: 'Black families fed through Hamer' },
@@ -80,7 +80,7 @@ export const THESIS = {
 export const NARRATIVE: string[] = [
   'Into the silence left by a collapsing local press pours a flood of misinformation and disinformation, aimed squarely at young Black people, a generation legacy media stopped speaking to long ago. Most of them have tuned out. They have not tuned out of us.',
   'The Defender stands in the lineage of the Black press, a tradition that turns 200 years old in 2027. From Freedom’s Journal in 1827 to the papers that carried the abolitionist, civil rights, and Black Power movements, every movement for our freedom has been catalyzed by a media arm willing to tell the truth. In an era of media consolidation, AI-generated synthetic content, authoritarian censorship, and outlets too fearful to tell the truth, we are telling it.',
-  'We reach the people the rest of the press cannot. We average more than one million digital impressions a month, and the vast majority of our audience is Black and young. They find us on their phones and on our YouTube show, and then they do what most media audiences never do. They show up, through a story, the People’s Free Store, a Hamer food box, our Freedom School, or a Juneteenth cookout, and 50+ active members now carry that work across the organization. The year that followed is on the record below.',
+  'We reach the people the rest of the press cannot. This year our work has drawn more than 10 million views and impressions across our platforms, averaging more than a million a month, and the vast majority of our audience is Black and young. They find us on their phones and on our YouTube show, and then they do what most media audiences never do. They show up, through a story, the People’s Free Store, a Hamer food box, our Freedom School, or a Juneteenth cookout, and 50+ active members now carry that work across the organization. The year that followed is on the record below.',
   'That is why the Defender matters to so many people at once. To young people, it is the first media that ever treated them as protagonists. To Black families, it is food and clothing given with dignity. To organizers and progressives, it is the media arm of a movement that is winning, and to voters it is The People’s Ballot. To Black businesses and entrepreneurs, it is a platform and a source of capital know-how. To the next generation of leaders, it is a school. And to journalism, at the very moment its old institutions are failing, it is proof of what comes next.',
 ];
 
@@ -126,7 +126,7 @@ export const DOORS: {
     name: 'The Journalism',
     pillar: 'narrative',
     what: 'Investigations, Liberation Now, our flagship YouTube show, The People’s Ballot voter guide, and an international desk led by two-time Pulitzer finalist Jon Jeter.',
-    proof: '1M+ digital impressions a month, on average. Our reporting moved police, prosecutors, corporations, and federal agencies this year.',
+    proof: '10M+ views and impressions in 2026. Our reporting moved police, prosecutors, corporations, and federal agencies this year.',
     link: 'https://kansascitydefender.com/',
     image: `${CDN}/2026/03/31093825/9-DSCF2511-scaled.jpg`,
   },
@@ -306,7 +306,7 @@ export const GIVE = {
       ],
     },
   ],
-  closer: 'Every dollar given to the Defender is amplified by more than a million digital impressions a month and a membership that turns attention into action.',
+  closer: 'Every dollar given to the Defender is amplified by more than 10 million views and impressions a year and a membership that turns attention into action.',
 };
 
 // ─── In their words ─────────────────────────────────────────────────────────
@@ -373,7 +373,7 @@ export const NEXT = {
   lead: 'Journalism first.',
   dek: '2027 marks 200 years of the Black press. We will honor it by growing from Kansas City’s essential Black newsroom into the Black newsroom of the Midwest, with reporting that starts on Prospect Avenue and reaches the world.',
   reach: [
-    { scope: 'Kansas City', title: 'Own the city’s front page', text: 'Daily short-form video news on the platforms young Kansas City actually uses, growing our monthly reach well beyond the 1M+ digital impressions we average today.' },
+    { scope: 'Kansas City', title: 'Own the city’s front page', text: 'Daily short-form video news on the platforms young Kansas City actually uses, growing our reach well beyond the 10M+ views and impressions of 2026.' },
     { scope: 'Missouri & the region', title: 'Build a statewide desk', text: 'Follow the power to Jefferson City and across Missouri and Kansas: the statehouse, the ballot fights, the prisons, and the small towns industry targets because it thinks no one is watching.' },
     { scope: 'National', title: 'Set the national agenda', text: 'Own the beats nobody else will, from AI surveillance and nuclear weapons to ICE and police accountability, and partner with national outlets to carry our investigations across the country.' },
     { scope: 'International', title: 'Take it global', text: 'Grow our international desk across the African diaspora and take Liberation Now international, connecting Kansas City’s fights to the global struggle for Black liberation.' },
@@ -417,9 +417,9 @@ export const IMPACT_AREAS: {
     speaksTo: ['Narrative change'],
     claim: 'We change what Kansas City believes is true, and who gets to say it.',
     proof: [
-      '1M+ digital impressions a month on average, from an audience that is mostly Black and young.',
+      '10M+ views and impressions across our platforms in 2026, averaging more than a million a month, from an audience that is mostly Black and young.',
       'Our missing Black women investigation led to the reinstatement of Kansas City’s disbanded missing persons task force, and to a new statewide missing persons task force.',
-      'Our Lincoln Prep walkout story alone reached 337,000+ views, and the movement our reporting carried crossed state lines.',
+      'Our walkout coverage alone drew more than 1.2 million views on Instagram, and the movement our reporting carried crossed state lines.',
       'Liberation Now, our YouTube show, brings candidates, scholars, and ministers to a generation that tuned out of legacy media.',
       'Investigations into nuclear weapons, data center tax schemes, police killings, and the World Cup Jail reframed what the city debates.',
       'Ta-Nehisi Coates cited our reporting in Vanity Fair, and the Vera Institute, Reynolds Journalism Institute, CUNY, and Pivot Fund all pointed to our work as a national model.',
@@ -489,6 +489,20 @@ export const IMPACT_AREAS: {
 
 export const MILESTONES: Milestone[] = [
   {
+    slug: 'kc-detention-ban',
+    date: '2026-01-15',
+    pillar: 'narrative',
+    kind: 'win',
+    title: 'Kansas City passes a five-year ban on mass detention facilities',
+    summary: 'As Homeland Security eyed Kansas City for a 7,500-bed ICE detention center, the City Council passed a five-year moratorium on non-municipal detention facilities. We carried the fight, and the win, to hundreds of thousands.',
+    outcome: 'No permits for new non-municipal detention facilities in Kansas City through 2031.',
+    metric: { value: '489K+', label: 'views on Instagram alone' },
+    link: 'https://kansascitydefender.com/national/immigration/kc-bans-mass-detention-facilities/',
+    image: '/photos/kc-detention-ban.jpg',
+    imageAlt: 'Defender post announcing Kansas City’s five-year ban on mass detention facilities',
+    imageTop: true,
+  },
+  {
     slug: 'bishop-ward-walkout',
     date: '2026-01-20',
     pillar: 'narrative',
@@ -496,7 +510,7 @@ export const MILESTONES: Milestone[] = [
     title: 'Student uprising: 100+ Bishop Ward students walk out against ICE',
     summary: 'We broke the story as students at Bishop Ward High School in Kansas City, Kansas walked out of class. Within ten minutes, Wyandotte High School students joined them.',
     outcome: 'The first spark in a wave of student walkouts across Missouri and Kansas.',
-    metric: { value: '15K+', label: 'likes on one post' },
+    metric: { value: '340K+', label: 'views on Instagram alone' },
     image: '/photos/bishop-ward-walkout.jpg',
     imageTop: true,
     imageAlt: 'Bishop Ward High School students walk out against ICE, flags raised',
@@ -521,7 +535,7 @@ export const MILESTONES: Milestone[] = [
     kind: 'movement',
     title: 'The Defender leads the call on Strike Day',
     summary: 'As Kansas City joined the national general strike against ICE, the Defender carried the call to action across our channels.',
-    metric: { value: '15K', label: 'reached in a day' },
+    metric: { value: '145K+', label: 'views on Instagram alone' },
   },
   {
     slug: 'lincoln-prep-walkout',
@@ -530,8 +544,8 @@ export const MILESTONES: Milestone[] = [
     kind: 'movement',
     title: '“Suspend me if you want”: Lincoln Prep middle schoolers walk out anyway',
     summary: 'Threatened with suspension and blocked at the doors, middle schoolers in KCMO walked out against ICE and the detention camps planned for Kansas City. Parents showed up to stand with them. We were the only outlet to cover it.',
-    outcome: 'The story reached 337,000+ views and led to the Student Action Network, a coalition of students from 10+ schools the Defender pulled together to organize walkouts, protests, and strikes.',
-    metric: { value: '337K+', label: 'views' },
+    outcome: 'The story reached 474,000+ views on Instagram alone and led to the Student Action Network, a coalition of students from 10+ schools the Defender pulled together to organize walkouts, protests, and strikes.',
+    metric: { value: '474K+', label: 'views on Instagram alone' },
     image: '/photos/lincoln-prep-walkout.jpg',
     imageTop: true,
     imageAlt: 'Lincoln Prep middle school students walk out against ICE',
@@ -577,7 +591,7 @@ export const MILESTONES: Milestone[] = [
     title: 'Our coverage crosses state lines: Indiana students organize their own walkout',
     summary: 'After seeing our reporting on Kansas City students, Black and Latino students in Indiana organized a walkout of their own, then reached out to the Defender to tell their story.',
     outcome: 'The movement our reporting carried crossed state lines.',
-    metric: { value: '22K+', label: 'likes' },
+    metric: { value: '466K+', label: 'views on Instagram alone' },
     image: '/photos/indiana-walkout.jpg',
     imageTop: true,
     imageAlt: 'Indiana students protest ICE after hearing about Kansas City students',
@@ -1011,7 +1025,7 @@ export const WINS: Win[] = [
     title: 'Our reporting sparked a wave of student walkouts against ICE',
     metric: { value: '10+', label: 'school districts trained' },
     body: [
-      'On January 20, more than 100 students at Bishop Ward High School in Kansas City, Kansas walked out against ICE, and Wyandotte High School students joined within minutes. The Defender broke the story. Two weeks later, Lincoln Prep middle schoolers in KCMO walked out despite suspension threats. We were the only outlet there, and the story reached more than 337,000 views.',
+      'On January 20, more than 100 students at Bishop Ward High School in Kansas City, Kansas walked out against ICE, and Wyandotte High School students joined within minutes. The Defender broke the story. Two weeks later, Lincoln Prep middle schoolers in KCMO walked out despite suspension threats. We were the only outlet there, and the story drew more than 474,000 views on Instagram alone.',
       'Then it spread. Students in Indiana saw our reporting, organized their own walkout, and reached out to the Defender to tell their story. Dozens of students asked us how to organize, so we trained them: walkouts, core teams, know your rights, safety, demands, and the history of nonviolent resistance and student movements.',
     ],
     outcome: 'The Student Action Network, a coalition of students from 10+ schools that the Defender pulled together, plus students from more than 10 school districts trained in organizing and civic engagement. A youth movement that helped stop an ICE detention center.',

@@ -259,6 +259,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .flow-dollar {
+    display: none;
+  }
   .orbit,
   .orbit-reverse,
   .drift-in,

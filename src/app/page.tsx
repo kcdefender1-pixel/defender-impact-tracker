@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { ArrowDown, ArrowUpRight, Star } from 'lucide-react';
 import {
-  DOORS,
   FUNDERS,
   FUNDERS_THANKS,
   HEADLINE_STATS,
@@ -11,8 +10,6 @@ import {
   NEXT,
   NARRATIVE,
   PARTNERS,
-  PILLARS,
-  PULL_QUOTE,
   RECOGNITION,
   SPOTLIGHT,
   TEAM,
@@ -28,7 +25,6 @@ import { WinsBoard } from '@/components/public/wins-board';
 import { BrothersFeature } from '@/components/public/brothers-feature';
 import { Give } from '@/components/public/give';
 import { Orbit } from '@/components/thesis/orbit';
-import { Fork } from '@/components/thesis/fork';
 import { ChooseDoor } from '@/components/thesis/choose-door';
 
 export default function ImpactPage() {
@@ -121,11 +117,6 @@ export default function ImpactPage() {
                 {p}
               </p>
             ))}
-            <blockquote className="mt-12 pt-8 border-t-2 border-ink">
-              <p className="italic text-[1.9rem] md:text-[2.6rem] leading-[1.12] tracking-[-0.01em]">
-                {PULL_QUOTE}
-              </p>
-            </blockquote>
           </article>
         </div>
       </section>
@@ -150,13 +141,44 @@ export default function ImpactPage() {
               const style = PILLAR_STYLE[a.pillar];
               const wide = IMPACT_AREAS.length % 2 === 1 && i === IMPACT_AREAS.length - 1;
               return (
-                <article key={a.id} className={`border-2 border-ink bg-card flex flex-col ${wide ? 'md:col-span-2' : ''}`}>
+                <article key={a.id} className={`border-2 border-ink bg-card flex flex-col overflow-hidden ${wide ? 'md:col-span-2' : ''}`}>
                   <div className={`px-6 py-4 border-b-2 border-ink ${style.fill}`}>
                     <h3 className="display text-[2rem] md:text-[2.3rem]">{a.name}</h3>
                     <p className="kicker mt-1 opacity-80">Speaks to: {a.speaksTo.join(' · ')}</p>
                   </div>
-                  <div className="p-6">
-                    <p className="font-serif font-semibold text-[1.3rem] leading-snug">{a.claim}</p>
+                  <div
+                    className={`grid gap-[2px] bg-ink border-b-2 border-ink ${
+                      wide ? 'aspect-[16/9] md:aspect-[21/8]' : 'aspect-[16/9]'
+                    } ${
+                      a.programs.length === 3
+                        ? 'grid-cols-[2fr_1fr] grid-rows-2'
+                        : a.programs.length === 2
+                          ? 'grid-cols-2'
+                          : 'grid-cols-1'
+                    }`}
+                  >
+                    {a.programs.map((pr, j) => (
+                      <figure
+                        key={pr.name}
+                        className={`relative bg-paper-2 overflow-hidden group ${
+                          a.programs.length === 3 && j === 0 ? 'row-span-2' : ''
+                        }`}
+                      >
+                        <Image
+                          src={pr.image}
+                          alt={pr.name}
+                          fill
+                          sizes={wide ? '(min-width: 768px) 1280px, 100vw' : '(min-width: 768px) 640px, 100vw'}
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        />
+                        <figcaption className="absolute left-0 bottom-0 bg-ink text-paper text-[11.5px] font-bold px-2 py-1 leading-tight">
+                          {pr.name}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <p className="font-serif font-semibold text-[1.3rem] leading-snug">{a.heading}</p>
                     <ul className={`mt-5 grid gap-3 ${wide ? 'md:grid-cols-2 md:gap-x-8' : ''}`}>
                       {a.proof.map((p) => (
                         <li key={p} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-2">
@@ -165,6 +187,22 @@ export default function ImpactPage() {
                         </li>
                       ))}
                     </ul>
+                    {a.programs.some((pr) => pr.link) && (
+                      <div className="mt-auto pt-5 flex flex-wrap gap-x-5 gap-y-2">
+                        {a.programs
+                          .filter((pr) => pr.link)
+                          .map((pr) => (
+                            <a
+                              key={pr.name}
+                              href={pr.link}
+                              {...(pr.link!.startsWith('#') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+                              className="inline-flex items-center gap-1 text-[13px] font-bold text-ink border-b-2 border-ink hover:text-defender-red hover:border-defender-red transition-colors"
+                            >
+                              {a.programs.length > 1 ? pr.name : 'Learn more'} <ArrowUpRight size={14} />
+                            </a>
+                          ))}
+                      </div>
+                    )}
                   </div>
                 </article>
               );
@@ -293,20 +331,6 @@ export default function ImpactPage() {
           </div>
         </section>
 
-        {/* ── Programs ──────────────────────────────────────────── */}
-        <section id="programs" className="py-16 md:py-20 border-t-2 border-ink">
-          <SectionHead title="The Doors" dek="Every program is a way in, and each one leads to the same home." />
-          <SubHead name="From Feed to Field" line="Many doors, one path, and two ways to be organized." />
-          <div className="mb-16">
-            <Fork />
-          </div>
-          <div className="grid md:grid-cols-2 gap-5">
-            {DOORS.map((d, i) => (
-              <DoorCard key={d.name} door={d} wide={DOORS.length % 2 === 1 && i === DOORS.length - 1} />
-            ))}
-          </div>
-        </section>
-
         {/* ── In their words ───────────────────────────────────── */}
         <section className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="words-title">
           <h2 id="words-title" className="slab mb-10">In Their Words</h2>
@@ -336,7 +360,7 @@ export default function ImpactPage() {
         </section>
 
         {/* ── Choose Your Door ─────────────────────────────────── */}
-        <section className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="choose-door">
+        <section id="doors" className="py-16 md:py-20 border-t-2 border-ink" aria-labelledby="choose-door">
           <SubHead id="choose-door" name="Choose Your Door" line="Find the door that sounds like you, and see where it leads." big />
           <ChooseDoor />
         </section>
@@ -406,13 +430,12 @@ export default function ImpactPage() {
           </ol>
 
           <h3 className="display text-[2.2rem] md:text-[2.6rem] text-ink mt-16 mb-6">Get involved</h3>
-          <div className="grid md:grid-cols-3 gap-4" data-print-hide>
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4" data-print-hide>
             {NEXT.ways.map((w, i) => (
               <a
                 key={w.label}
                 href={w.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(w.href.startsWith('mailto:') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
                 className={`group border-2 border-ink p-6 flex flex-col shadow-[6px_6px_0_0_#0E0D0C] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[10px_10px_0_0_#0E0D0C] ${
                   i === 0 ? 'bg-ink text-paper' : 'bg-paper text-ink'
                 }`}
@@ -420,7 +443,7 @@ export default function ImpactPage() {
                 <span className="display text-[2rem]">{w.label}</span>
                 <span className={`mt-2 text-[14.5px] ${i === 0 ? 'text-paper/80' : 'text-ink-2'}`}>{w.text}</span>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold group-hover:gap-2.5 transition-all">
-                  Go <ArrowUpRight size={15} className="float-x" />
+                  {'cta' in w ? w.cta : 'Go'} <ArrowUpRight size={15} className="float-x" />
                 </span>
               </a>
             ))}
@@ -459,7 +482,7 @@ export default function ImpactPage() {
             </li>
           ))}
           <li className="sm:col-span-2 lg:col-span-3 border-2 border-ink bg-defender-gold p-6 flex items-center">
-            <p className="font-serif text-[1.2rem] md:text-[1.35rem] leading-relaxed text-ink">{TEAM_THANKS}</p>
+            <p className="font-serif italic text-[1.6rem] md:text-[2.3rem] leading-[1.2] text-ink max-w-3xl">{TEAM_THANKS}</p>
           </li>
         </ul>
 
@@ -468,11 +491,8 @@ export default function ImpactPage() {
           {FUNDERS.map((f) => (
             <li key={f} className="bg-card px-5 py-4 font-serif font-semibold text-[1.15rem] flex items-center">{f}</li>
           ))}
-          <li className="bg-defender-gold px-5 py-4 font-serif font-semibold text-[1.15rem] flex items-center">
-            Every monthly and one-time Defender
-          </li>
         </ul>
-        <p className="mt-6 font-serif text-[1.2rem] leading-relaxed text-ink-2 max-w-3xl">{FUNDERS_THANKS}</p>
+        <p className="mt-6 font-serif text-[1.2rem] leading-relaxed text-ink max-w-3xl border-l-4 border-defender-gold pl-4">{FUNDERS_THANKS}</p>
       </section>
     </div>
   );
@@ -525,45 +545,3 @@ function CoverStat({ value, label, index }: { value: string; label: string; inde
   );
 }
 
-function DoorCard({ door, wide }: { door: (typeof DOORS)[number]; wide?: boolean }) {
-  const style = PILLAR_STYLE[door.pillar];
-  return (
-    <article className={`flex flex-col border-2 border-ink bg-card overflow-hidden ${wide ? 'md:col-span-2 md:flex-row' : ''}`}>
-      {door.image ? (
-        <div className={`relative aspect-[16/9] border-ink bg-paper-2 ${wide ? 'border-b-2 md:border-b-0 md:border-r-2 md:w-1/2 md:aspect-auto md:min-h-[22rem]' : 'border-b-2'}`}>
-          <Image src={door.image} alt={door.name} fill sizes="(min-width: 768px) 640px, 100vw" className="object-cover" />
-        </div>
-      ) : (
-        <div className={`h-3 ${style.dot}`} />
-      )}
-      <div className={`p-6 flex flex-col flex-1 ${wide ? 'md:p-10 md:justify-center' : ''}`}>
-        <span className={`kicker ${style.text} mb-2`}>{PILLARS[door.pillar].label}</span>
-        <h3 className="display text-[2rem] md:text-[2.3rem]">{door.name}</h3>
-        <p className="mt-3 text-[15px] text-ink-2 leading-relaxed">{door.what}</p>
-        <p className="mt-4 font-serif font-semibold text-[1.12rem] text-ink leading-snug border-l-4 border-ink pl-3">
-          {door.proof}
-        </p>
-        {door.stats && (
-          <dl className="mt-5 grid grid-cols-3 gap-[2px] bg-ink border-2 border-ink">
-            {door.stats.map((st) => (
-              <div key={st.label} className="bg-paper px-3 py-3">
-                <dt className="sr-only">{st.label}</dt>
-                <dd className="display text-[2rem] tabular-nums">{st.value}</dd>
-                <dd className="text-[11.5px] font-semibold text-ink-3 leading-snug mt-1">{st.label}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
-        {door.link && (
-          <a
-            href={door.link}
-            {...(door.link.startsWith('#') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
-            className="mt-auto pt-5 inline-flex items-center gap-1 text-[13px] font-bold text-ink hover:text-defender-red transition-colors self-start"
-          >
-            Learn more <ArrowUpRight size={14} />
-          </a>
-        )}
-      </div>
-    </article>
-  );
-}

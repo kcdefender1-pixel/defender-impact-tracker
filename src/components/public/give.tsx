@@ -97,6 +97,17 @@ export function Give() {
         ))}
       </div>
 
+      {/* How people give */}
+      <div className="mt-14 grid md:grid-cols-3 gap-[2px] bg-ink border-2 border-ink">
+        {GIVE.ways.map((w, i) => (
+          <div key={w.title} className={`p-6 md:p-7 ${i === 0 ? 'bg-defender-gold' : 'bg-card'}`}>
+            <span className="display block text-[1.7rem] md:text-[1.9rem] leading-[1] text-ink">{w.title}</span>
+            <p className="mt-3 text-[15px] leading-relaxed text-ink-2">{w.text}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-[14px] font-semibold text-ink-3">{GIVE.independence}</p>
+
       <p className="mt-10 font-serif italic text-[1.5rem] md:text-[2rem] leading-snug text-ink max-w-4xl border-l-4 border-defender-red pl-5">
         {GIVE.closer}
       </p>

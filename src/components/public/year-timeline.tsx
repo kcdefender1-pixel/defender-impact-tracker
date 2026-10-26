@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { ArrowUpRight, Maximize2, Star } from 'lucide-react';
 import {
@@ -20,6 +20,14 @@ const MONTH_NAMES = [
 ];
 
 type Filter = 'all' | 'win' | Pillar;
+
+// Layout previews: add ?timeline=b or ?timeline=c to the URL to compare
+type Layout = 'a' | 'b' | 'c';
+const LAYOUTS: { value: Layout; label: string }[] = [
+  { value: 'a', label: 'A · Today' },
+  { value: 'b', label: 'B · Number rail' },
+  { value: 'c', label: 'C · Number on photo' },
+];
 
 const FILTERS: { value: Filter; label: string }[] = [
   { value: 'all', label: 'Everything' },
@@ -42,6 +50,23 @@ function monthOf(m: Milestone) {
 
 export function YearTimeline() {
   const [filter, setFilter] = useState<Filter>('all');
+  const [layout, setLayout] = useState<Layout>('a');
+  const [previewing, setPreviewing] = useState(false);
+
+  useEffect(() => {
+    const t = new URLSearchParams(window.location.search).get('timeline');
+    if (t === 'a' || t === 'b' || t === 'c') {
+      setLayout(t);
+      setPreviewing(true);
+    }
+  }, []);
+
+  const chooseLayout = (l: Layout) => {
+    setLayout(l);
+    const url = new URL(window.location.href);
+    url.searchParams.set('timeline', l);
+    window.history.replaceState(null, '', url);
+  };
 
   const lastMonth = useMemo(() => Math.max(...ORDERED.map(monthOf)), []);
   const months = MONTHS.slice(0, lastMonth + 1);
@@ -106,6 +131,24 @@ export function YearTimeline() {
         </div>
       </div>
 
+      {previewing && (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-max max-w-[calc(100vw-2rem)] flex flex-wrap items-center justify-center gap-2 border-2 border-ink bg-defender-gold px-3 py-2 shadow-[4px_4px_0_0_#0E0D0C]" data-print-hide>
+          <span className="kicker text-ink mr-1">Preview layout</span>
+          {LAYOUTS.map((l) => (
+            <button
+              key={l.value}
+              onClick={() => chooseLayout(l.value)}
+              aria-pressed={layout === l.value}
+              className={`px-3 py-1 rounded-full text-[13px] font-bold border-2 border-ink transition-colors ${
+                layout === l.value ? 'bg-ink text-paper' : 'bg-paper text-ink hover:bg-card'
+              }`}
+            >
+              {l.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* ── Filters ── */}
       <div className="flex flex-wrap gap-1.5 mb-10" role="group" aria-label="Filter the timeline">
         {FILTERS.map((f) => (
@@ -134,11 +177,19 @@ export function YearTimeline() {
               <div className="md:sticky md:top-28 self-start mb-4 md:mb-0">
                 <span className="display text-[2.6rem] md:text-[2.9rem] text-ink">{MONTH_NAMES[i]}</span>
               </div>
-              <ol className="relative border-l-2 border-ink ml-2 md:ml-0">
-                {items.map((m) => (
-                  <MilestoneItem key={m.slug} m={m} />
-                ))}
-              </ol>
+              {layout === 'c' ? (
+                <ol className="grid sm:grid-cols-2 gap-5 pb-8">
+                  {items.map((m) => (
+                    <PhotoCard key={m.slug} m={m} />
+                  ))}
+                </ol>
+              ) : (
+                <ol className="relative border-l-2 border-ink ml-2 md:ml-0">
+                  {items.map((m) => (
+                    <MilestoneItem key={m.slug} m={m} rail={layout === 'b'} />
+                  ))}
+                </ol>
+              )}
             </li>
           );
         })}
@@ -150,7 +201,7 @@ export function YearTimeline() {
   );
 }
 
-function MilestoneItem({ m }: { m: Milestone }) {
+function MilestoneItem({ m, rail = false }: { m: Milestone; rail?: boolean }) {
   const style = PILLAR_STYLE[m.pillar];
   const isWin = m.kind === 'win';
   const hasWinStory = WIN_SLUGS.has(m.slug);
@@ -183,10 +234,36 @@ function MilestoneItem({ m }: { m: Milestone }) {
       )}
 
       <div
-        className={`grid gap-5 ${m.image ? (m.imagePortrait ? 'lg:grid-cols-[1fr_140px]' : 'lg:grid-cols-[1fr_240px]') : ''} ${
+        className={`grid gap-5 ${
+          rail
+            ? m.image
+              ? m.imagePortrait
+                ? 'md:grid-cols-[120px_1fr] lg:grid-cols-[120px_1fr_140px]'
+                : 'md:grid-cols-[120px_1fr] lg:grid-cols-[120px_1fr_240px]'
+              : 'md:grid-cols-[120px_1fr]'
+            : m.image
+              ? m.imagePortrait
+                ? 'lg:grid-cols-[1fr_140px]'
+                : 'lg:grid-cols-[1fr_240px]'
+              : ''
+        } ${
           m.featured ? 'glow-card bg-defender-gold/25 border-2 border-ink p-5 md:p-6' : ''
         }`}
       >
+        {rail && (
+          <div className="md:border-r-2 md:border-ink md:pr-4 flex md:block items-baseline gap-2">
+            {m.metric ? (
+              <>
+                <span className="display block text-[2rem] md:text-[2.3rem] leading-none tabular-nums text-ink">{m.metric.value}</span>
+                <span className="block md:mt-2 text-[11.5px] font-semibold text-ink-3 leading-snug">{m.metric.label}</span>
+              </>
+            ) : (
+              <span className="hidden md:block display text-[2rem] leading-none text-ink/15" aria-hidden>
+                —
+              </span>
+            )}
+          </div>
+        )}
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="kicker text-ink-3">{formatMonthDay(m.date)}</span>
@@ -201,7 +278,14 @@ function MilestoneItem({ m }: { m: Milestone }) {
           </h3>
           <p className="mt-2 text-[15px] leading-relaxed text-ink-2 max-w-[62ch]">{m.summary}</p>
 
-          {(m.outcome || m.metric) && (
+          {rail && m.outcome && (
+            <p className="mt-3 text-[14.5px] text-ink leading-snug max-w-[62ch]">
+              <span className="kicker text-ink-3 mr-2">What changed</span>
+              <span className="font-semibold">{m.outcome}</span>
+            </p>
+          )}
+
+          {!rail && (m.outcome || m.metric) && (
             <div className="mt-4 flex flex-wrap items-stretch gap-3">
               {m.metric && (
                 <div className="border-2 border-ink bg-card px-3.5 py-2 flex items-baseline gap-2">
@@ -243,6 +327,8 @@ function MilestoneItem({ m }: { m: Milestone }) {
         {m.image && (
           <div
             className={`relative border-2 border-ink overflow-hidden bg-paper-2 order-first lg:order-none ${
+              rail ? 'md:col-span-2 lg:col-span-1' : ''
+            } ${
               m.imagePortrait ? 'aspect-[5/7] w-[140px]' : 'aspect-[4/3]'
             }`}
           >
@@ -255,6 +341,87 @@ function MilestoneItem({ m }: { m: Milestone }) {
             />
           </div>
         )}
+      </div>
+    </li>
+  );
+}
+
+// Layout C: photo-led cards, two per row, with the number stamped on the image
+function PhotoCard({ m }: { m: Milestone }) {
+  const style = PILLAR_STYLE[m.pillar];
+  const isWin = m.kind === 'win';
+  const hasWinStory = WIN_SLUGS.has(m.slug);
+
+  return (
+    <li
+      className={`flex flex-col border-2 border-ink overflow-hidden ${
+        m.featured ? 'glow-card bg-defender-gold/25' : 'bg-card'
+      }`}
+    >
+      {m.image ? (
+        <div className="relative aspect-[16/10] bg-paper-2 border-b-2 border-ink overflow-hidden">
+          <Image
+            src={m.image}
+            alt={m.imageAlt ?? ''}
+            fill
+            sizes="(min-width: 1024px) 520px, (min-width: 640px) 45vw, 90vw"
+            className={`object-cover ${m.imageTop || m.imagePortrait ? 'object-top' : ''}`}
+          />
+          {m.metric && (
+            <div className="absolute left-0 bottom-0 bg-ink text-paper px-3 py-1.5 flex items-baseline gap-2 max-w-[90%]">
+              <span className="display text-[1.8rem] leading-none tabular-nums">{m.metric.value}</span>
+              <span className="text-[11.5px] font-semibold text-paper/80 leading-tight">{m.metric.label}</span>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className={`h-3 border-b-2 border-ink ${style.dot}`} />
+      )}
+
+      <div className="p-5 flex flex-col flex-1">
+        <div className="flex flex-wrap items-center gap-2 mb-2">
+          <span className="kicker text-ink-3">{formatMonthDay(m.date)}</span>
+          <span className={`kicker px-1.5 py-[3px] ${isWin || m.featured ? 'bg-ink text-paper' : style.fill}`}>
+            {m.featured ? '★ Top honor' : isWin ? 'Win' : KIND_LABEL[m.kind]}
+          </span>
+          <span className={`kicker ${style.text}`}>{PILLARS[m.pillar].short}</span>
+        </div>
+        <h3 className="font-serif font-semibold text-[1.25rem] leading-[1.2] text-ink">{m.title}</h3>
+        <p className="mt-2 text-[14.5px] leading-relaxed text-ink-2">{m.summary}</p>
+
+        {!m.image && m.metric && (
+          <div className="mt-3 self-start border-2 border-ink bg-paper px-3 py-1.5 flex items-baseline gap-2">
+            <span className="display text-[1.8rem] leading-none tabular-nums">{m.metric.value}</span>
+            <span className="text-[11.5px] font-semibold text-ink-3">{m.metric.label}</span>
+          </div>
+        )}
+        {m.outcome && (
+          <p className="mt-3 text-[14px] text-ink leading-snug">
+            <span className="kicker text-ink-3 mr-2">What changed</span>
+            <span className="font-semibold">{m.outcome}</span>
+          </p>
+        )}
+
+        <div className="mt-auto pt-4 flex flex-wrap gap-4">
+          {hasWinStory && (
+            <a
+              href={`#win-${m.slug}`}
+              className="inline-flex items-center gap-1.5 text-[13px] font-bold text-ink border-b-2 border-ink hover:text-defender-red hover:border-defender-red transition-colors"
+            >
+              <Maximize2 size={13} /> Open the full story
+            </a>
+          )}
+          {m.link && (
+            <a
+              href={m.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[13px] font-bold text-ink-2 hover:text-defender-red transition-colors"
+            >
+              Read the reporting <ArrowUpRight size={14} />
+            </a>
+          )}
+        </div>
       </div>
     </li>
   );

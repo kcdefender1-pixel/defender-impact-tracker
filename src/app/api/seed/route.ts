@@ -201,7 +201,7 @@ const SEED_IMPACTS = [
     reported_at: '2026-02-05T18:00:00Z',
   },
   {
-    reported_by_name: 'Melissa Ferrer-Civil',
+    reported_by_name: 'Melissa Ferrer Civil',
     program_area: 'political_education',
     impact_type: 'event_turnout',
     raw_description: 'B-REAL Academy Cohort 3 launched with 40 students enrolled out of 60 applicants, including many high school students. The program kicked off this month, marking a major moment for the Defender abolitionist freedom school.',
@@ -330,7 +330,7 @@ const SEED_IMPACTS = [
     reported_at: '2026-03-03T18:00:00Z',
   },
   {
-    reported_by_name: 'Melissa Ferrer-Civil',
+    reported_by_name: 'Melissa Ferrer Civil',
     program_area: 'political_education',
     impact_type: 'event_turnout',
     raw_description: 'B-REAL Academy Week 2 session held March 9. Theme: Radical Imagination. Session focus: "Build the School That Doesn\'t Yet Exist." High school students led the session, envisioning radical alternatives to the current education system. Students presented their visions for liberatory Black education.',

@@ -35,7 +35,7 @@ export const ORBIT_STAGES = [
     title: 'People find us in a lot of ways',
     text: 'Most first meet us through the news: a story on Instagram, an investigation, Liberation Now on YouTube, or The People’s Ballot. Others come through culture, like the Juneteenth basketball tournament or the hip hop and culture content we publish, or through a Free Store distribution in their neighborhood.',
     chips: ['A story on Instagram', 'An investigation', 'Liberation Now', 'The People’s Ballot', 'The basketball tournament', 'Hip hop & culture', 'The Free Store'],
-    proof: [{ value: '10M+', label: 'views & impressions in 2026' }],
+    proof: [{ value: '500+', label: 'neighbors at this year’s Juneteenth Cookout' }],
   },
   {
     id: 'orbit',
@@ -69,22 +69,6 @@ export const ORBIT_STAGES = [
     ],
   },
 ];
-
-export const FORK = {
-  doors: ['A story on Instagram', 'An investigation', 'Liberation Now', 'The basketball tournament', 'Hip hop & culture'],
-  orbit: 'In our orbit',
-  orbitNote: '10M+ views & impressions in 2026',
-  act: 'Called to act',
-  actNote: 'A story with an action attached',
-  movement: {
-    title: 'Into the movement',
-    items: ['School walkouts', 'Protests and packed hearings', 'Voting with The People’s Ballot', 'Community defense against ICE', 'Our partner organizations'],
-  },
-  defender: {
-    title: 'Into the Defender',
-    steps: ['Mutual aid orientation', 'Member', 'Organizer', 'Leader'],
-  },
-};
 
 // Composite paths drawn from real Defender programs and stories
 export const DOOR_PATHS = [

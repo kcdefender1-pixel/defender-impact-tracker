@@ -102,17 +102,6 @@ export const WHY_NOW = [
   },
 ];
 
-// How the pieces fit: the path someone takes through the Defender
-export const STORY_DOOR = {
-  proofHeadline: 'Permanent infrastructure, built by media and action together',
-  proof: [
-    { value: '10', label: 'Black Student Unions formed as a result of our school coverage' },
-    { value: '1st', label: 'unified program for Kansas City’s Black farmers, ever' },
-    { value: '10+', label: 'schools in the Student Action Network our walkout coverage built' },
-    { value: '100+', label: 'neighbors signed up to defend against ICE through one dispatch' },
-  ],
-};
-
 export const DOORS: {
   name: string;
   pillar: Pillar;
@@ -430,14 +419,16 @@ export const IMPACT_AREAS: {
     name: 'Organizing Power',
     pillar: 'organizing',
     speaksTo: ['Civic engagement', 'Organizing & power building'],
-    claim: 'We turn readers into participants, and participants into organizers.',
+    claim: 'We build organizers, and we help Kansas City’s movements grow.',
     proof: [
-      'The People’s Ballot: Missouri’s most comprehensive plain-language election guide, online and in print, for the August primary and November general.',
-      'Students from more than 10 school districts trained in organizing, civic engagement, and know your rights, and the Student Action Network we pulled together: students from 10+ schools.',
+      'We are part of the city’s organizing infrastructure. Our coverage gives voice to KC Tenants, Decarcerate KC, the Community Defense Team, AIRR, and more, and every story carries a call to action to join them, so their movements grow and recruit through us.',
+      'More than 100 people signed up for Community Defense Trainings and the Rapid Response Network through one of our dispatches.',
       'The media arm for the 23-organization coalition fighting Kansas City’s World Cup Jail.',
+      'Students from more than 10 school districts trained in organizing, civic engagement, and know your rights, plus the Student Action Network we pulled together across 10+ schools.',
       'B-REAL Academy, our abolitionist freedom school, is in its fourth cohort.',
       '10 new Mutual Aid Leaders emerged this year to strategize and organize, from a 30-member mutual aid team that organizes 100+ community members into our programs.',
-      '50+ active members carrying the work across the organization, plus a packed federal hearing on nuclear weapons and 100+ community defense sign-ups through our coverage.',
+      '50+ active members carrying the work across the organization, and a packed federal hearing on nuclear weapons.',
+      'The People’s Ballot, Missouri’s most comprehensive plain-language election guide, online and in print, for the August primary and November general.',
     ],
   },
   {
@@ -494,8 +485,8 @@ export const MILESTONES: Milestone[] = [
     pillar: 'narrative',
     kind: 'win',
     title: 'Kansas City passes a five-year ban on mass detention facilities',
-    summary: 'As Homeland Security eyed Kansas City for a 7,500-bed ICE detention center, the City Council passed a five-year moratorium on non-municipal detention facilities. We carried the fight, and the win, to hundreds of thousands.',
-    outcome: 'No permits for new non-municipal detention facilities in Kansas City through 2031.',
+    summary: 'As Homeland Security eyed Kansas City for a 7,500-bed ICE detention center, we led the on-the-ground coverage in the weeks before the vote, reporting on AIRR, Decarcerate KC, and the other organizations fighting it. Then the City Council passed a five-year moratorium on non-municipal detention facilities.',
+    outcome: 'No permits for new non-municipal detention facilities in Kansas City through 2031. The ban was a real win, but it did not stop ICE from trying to turn the Platform Ventures warehouse into a detention center weeks later.',
     metric: { value: '489K+', label: 'views on Instagram alone' },
     link: 'https://kansascitydefender.com/national/immigration/kc-bans-mass-detention-facilities/',
     image: '/photos/kc-detention-ban.jpg',
@@ -602,7 +593,7 @@ export const MILESTONES: Milestone[] = [
     pillar: 'narrative',
     kind: 'win',
     title: 'Platform Ventures backs down from selling a warehouse to ICE',
-    summary: 'After weeks of protest, the student walkouts we covered, and organizing across the region, the Kansas City firm dropped its plan to sell a south KC warehouse for use as an ICE detention center.',
+    summary: 'After weeks of protest, the student walkouts we covered, and organizing across the region, the Kansas City firm dropped its plan to sell a south KC warehouse for use as an ICE detention center. The city’s new moratorium had not stopped the attempt. People power did.',
     outcome: 'No ICE detention center at the site.',
     metric: { value: '500K+', label: 'people reached' },
     link: 'https://kansascitydefender.com/justice/platform-ventures-backs-down/',

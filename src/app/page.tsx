@@ -15,7 +15,6 @@ import {
   PULL_QUOTE,
   RECOGNITION,
   SPOTLIGHT,
-  STORY_DOOR,
   TEAM,
   TEAM_THANKS,
   TESTIMONIALS,
@@ -218,18 +217,8 @@ export default function ImpactPage() {
           <SubHead name="Orbit to Organizer" line="From the first time someone finds us to the day they organize with us. Tap a ring." />
           <Orbit />
 
-          <h3 className="kicker text-ink mt-16 mb-4">{STORY_DOOR.proofHeadline}</h3>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink mb-16">
-            {STORY_DOOR.proof.map((p) => (
-              <div key={p.label} className="bg-defender-gold p-5 md:p-6">
-                <span className="display block text-[2.8rem] md:text-[3.4rem] text-ink tabular-nums">{p.value}</span>
-                <span className="block mt-2 text-[13px] font-semibold text-ink/80 leading-snug">{p.label}</span>
-              </div>
-            ))}
-          </div>
-
           {/* Into the movement */}
-          <div className="bg-ink text-paper p-6 md:p-8 border-2 border-ink">
+          <div className="mt-16 bg-ink text-paper p-6 md:p-8 border-2 border-ink">
             <span className="kicker text-defender-gold block mb-3">Into the movement</span>
             <p className="font-serif text-[1.25rem] md:text-[1.45rem] leading-snug max-w-3xl">
               These are organizations we have partnered with, actively work alongside, and stand in

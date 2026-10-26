@@ -331,11 +331,12 @@ export const IMPACT_AREAS: {
     name: 'Narrative Power',
     pillar: 'narrative',
     speaksTo: ['Narrative change'],
-    heading: 'The Journalism',
+    heading: 'Investigations, Liberation Now & Movement Journalism',
     programs: [
       { name: 'The Journalism', image: `${CDN}/2026/03/31093825/9-DSCF2511-scaled.jpg`, link: 'https://kansascitydefender.com/' },
     ],
     proof: [
+      'We are the only media outlet in the region that reaches young Black people, students, and progressives at scale, and the only one that can mobilize them. When we publish a story with a call to action, readers walk out of class, pack hearing rooms, sign up for community defense, and show up for each other.',
       '10M+ views and impressions across our platforms in 2026, averaging more than a million a month, from an audience that is mostly Black and young.',
       'Our missing Black women investigation led to the reinstatement of Kansas City’s disbanded missing persons task force, and to a new statewide missing persons task force.',
       'Our walkout coverage alone drew more than 1.2 million views on Instagram, and the movement our reporting carried crossed state lines.',
@@ -369,9 +370,9 @@ export const IMPACT_AREAS: {
     name: 'Material Power',
     pillar: 'material',
     speaksTo: ['Mutual aid', 'Food access', 'Black economic power'],
-    heading: 'The People’s Free Store, Hamer & the People’s Buyout',
+    heading: 'The Free Clothing Program, the Hamer Free Food Program, and the People’s Buyout, all run by our Mutual Aid Team',
     programs: [
-      { name: 'The People’s Free Store', image: `${CDN}/2026/04/27141634/158A3299.jpg`, link: 'https://kansascitydefender.com/mutual-aid-community-programs/peoples-free-store-kc-defender-clothing-hygiene-distribution/' },
+      { name: 'The Free Clothing Program', image: `${CDN}/2026/04/27141634/158A3299.jpg`, link: 'https://kansascitydefender.com/mutual-aid-community-programs/peoples-free-store-kc-defender-clothing-hygiene-distribution/' },
       { name: 'The Hamer Free Food Program', image: '/photos/hamer-packing.jpg', link: 'https://kansascitydefender.com/mutual-aid-community-programs/kcs-black-farms-unite-hamer-free-food-program/' },
       { name: 'The People’s Buyout', image: `${CDN}/2026/10/01134303/KC-Black-Feast-Week-03-Mothers-Event6.jpg`, link: 'https://kansascitydefender.com/mutual-aid-community-programs/defender-peoples-programs/peoples-buyout-2026-black-feast-week/' },
     ],
@@ -406,11 +407,12 @@ export const IMPACT_AREAS: {
     name: 'Institutional Power',
     pillar: 'institutional',
     speaksTo: ['Sustainability', 'Organizational capacity'],
-    heading: 'Ms. Willa’s Books & the institution behind it',
+    heading: 'From one rented camera to an eight-time award-winning institution',
     programs: [
       { name: 'The Book Club at Ms. Willa’s', image: '/photos/book-club.jpg', link: '#willas' },
     ],
     proof: [
+      'In five years the Defender has grown from a single rented camera into an eight-time award-winning institution with a staff of 11 and 50+ members, and it grows every year. Our sustainability rests on more than a budget. It rests on paid subscribers and monthly donors, earned revenue from events and Black business partnerships, a permanent home, and young leaders who joined us as teenagers and now run whole departments.',
       'Ms. Willa’s Books, Missouri’s oldest Black bookstore, saved from auction. Our organizers cataloged the entire collection, and 2026 is our first full year running it as our headquarters.',
       'Khadijah Bland, our Director of Development & Revenue, named INN’s National Emerging Leader of the Year.',
       'An international desk led by two-time Pulitzer finalist Jon Jeter.',

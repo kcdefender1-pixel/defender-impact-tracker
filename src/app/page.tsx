@@ -146,9 +146,10 @@ export default function ImpactPage() {
                     <h3 className="display text-[2rem] md:text-[2.3rem]">{a.name}</h3>
                     <p className="kicker mt-1 opacity-80">Speaks to: {a.speaksTo.join(' · ')}</p>
                   </div>
+                  <div className={wide ? 'md:grid md:grid-cols-2 flex-1' : 'contents'}>
                   <div
                     className={`grid gap-[2px] bg-ink border-b-2 border-ink ${
-                      wide ? 'aspect-[16/9] md:aspect-[21/8]' : 'aspect-[16/9]'
+                      wide ? 'aspect-[16/9] md:aspect-auto md:min-h-[22rem] md:border-b-0 md:border-r-2' : 'aspect-[16/9]'
                     } ${
                       a.programs.length === 3
                         ? 'grid-cols-[2fr_1fr] grid-rows-2'
@@ -168,7 +169,7 @@ export default function ImpactPage() {
                           src={pr.image}
                           alt={pr.name}
                           fill
-                          sizes={wide ? '(min-width: 768px) 1280px, 100vw' : '(min-width: 768px) 640px, 100vw'}
+                          sizes="(min-width: 768px) 640px, 100vw"
                           className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                         />
                         <figcaption className="absolute left-0 bottom-0 bg-ink text-paper text-[11.5px] font-bold px-2 py-1 leading-tight">
@@ -179,7 +180,7 @@ export default function ImpactPage() {
                   </div>
                   <div className="p-6 flex flex-col flex-1">
                     <p className="font-serif font-semibold text-[1.3rem] leading-snug">{a.heading}</p>
-                    <ul className={`mt-5 grid gap-3 ${wide ? 'md:grid-cols-2 md:gap-x-8' : ''}`}>
+                    <ul className="mt-5 grid gap-3">
                       {a.proof.map((p) => (
                         <li key={p} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-2">
                           <span className={`mt-[7px] w-2 h-2 shrink-0 ${style.dot} ring-1 ring-ink`} aria-hidden />
@@ -203,6 +204,7 @@ export default function ImpactPage() {
                           ))}
                       </div>
                     )}
+                  </div>
                   </div>
                 </article>
               );

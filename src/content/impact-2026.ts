@@ -421,7 +421,7 @@ export const IMPACT_AREAS: {
     speaksTo: ['Civic engagement', 'Organizing & power building'],
     claim: 'We build organizers, and we help Kansas City’s movements grow.',
     proof: [
-      'We are part of the city’s organizing infrastructure. Our coverage gives voice to KC Tenants, Decarcerate KC, the Community Defense Team, AIRR, and more, and every story carries a call to action to join them, so their movements grow and recruit through us.',
+      'We are part of the city’s organizing infrastructure. As the people’s press on the ground, we are who KC Tenants, Decarcerate KC, the Community Defense Team, Advocates for Immigrants Rights and Reconciliation (AIRR), and others call first, trust, and turn to when the record needs setting straight. We deploy our platform to cover their fights, and every story carries a call to action to join them.',
       'More than 100 people signed up for Community Defense Trainings and the Rapid Response Network through one of our dispatches.',
       'The media arm for the 23-organization coalition fighting Kansas City’s World Cup Jail.',
       'Students from more than 10 school districts trained in organizing, civic engagement, and know your rights, plus the Student Action Network we pulled together across 10+ schools.',
@@ -485,7 +485,7 @@ export const MILESTONES: Milestone[] = [
     pillar: 'narrative',
     kind: 'win',
     title: 'Kansas City passes a five-year ban on mass detention facilities',
-    summary: 'As Homeland Security eyed Kansas City for a 7,500-bed ICE detention center, we led the on-the-ground coverage in the weeks before the vote, reporting on AIRR, Decarcerate KC, and the other organizations fighting it. Then the City Council passed a five-year moratorium on non-municipal detention facilities.',
+    summary: 'As Homeland Security eyed Kansas City for a 7,500-bed ICE detention center, we led the on-the-ground coverage in the weeks before the vote, reporting on Advocates for Immigrants Rights and Reconciliation (AIRR), Decarcerate KC, and the other organizations fighting it. Then the City Council passed a five-year moratorium on non-municipal detention facilities.',
     outcome: 'No permits for new non-municipal detention facilities in Kansas City through 2031. The ban was a real win, but it did not stop ICE from trying to turn the Platform Ventures warehouse into a detention center weeks later.',
     metric: { value: '489K+', label: 'views on Instagram alone' },
     link: 'https://kansascitydefender.com/national/immigration/kc-bans-mass-detention-facilities/',

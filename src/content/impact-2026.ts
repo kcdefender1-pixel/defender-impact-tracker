@@ -1008,6 +1008,9 @@ export const MILESTONES: Milestone[] = [
     title: 'Our first live broadcast ever: election night',
     summary: 'Ryan Sorrell hosted from the studio while Mili Mansaray and Tiffany Watts broadcast in from an election night party, giving electoral breakdowns and real-time analysis as results came in. Over the course of the night, leaders from Abortion Action and Missouri Workers, national and local organizers, and a streamer joined us on the stream.',
     outcome: 'The Defender launched live broadcasting, a new medium for bringing movement analysis to our audience as history happens.',
+    metric: { value: '2h 49m', label: 'live on air' },
+    image: '/photos/election-night-live.jpg',
+    imageAlt: 'Election Night Live with Ryan Sorrell, in front of the Missouri State Capitol',
   },
 ];
 

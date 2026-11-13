@@ -10,6 +10,7 @@ export type MilestoneKind = 'win' | 'investigation' | 'program' | 'recognition' 
 export interface Milestone {
   slug: string;
   date: string; // YYYY-MM-DD
+  dateLabel?: string; // shown instead of the day, e.g. "October" when only the month is known
   pillar: Pillar;
   kind: MilestoneKind;
   title: string;
@@ -400,6 +401,7 @@ export const IMPACT_AREAS: {
       'Dozens of Black vendors and 500+ neighbors at the Juneteenth Cookout, where RADAR honored its first class of Kansas City creators.',
       'Liberation Now’s Black Theology & Black Power series, with Dr. J. Kameron Carter and Minister Andrew Hairston.',
       'A Black Panther film screening that sold out in 48 hours.',
+      'KCXL, produced by the Defender with Rez: the first cypher series in Kansas City history, bringing the city’s top hip hop artists to one mic across five live groups.',
     ],
   },
   {
@@ -638,6 +640,34 @@ export const MILESTONES: Milestone[] = [
     imageAlt: 'Mutual aid organizers sorting clothing into storage units',
   },
   {
+    slug: 'missing-black-women',
+    date: '2026-04-01',
+    pillar: 'narrative',
+    kind: 'investigation',
+    title: 'Before the System Believes You: who Kansas City decides is worth finding',
+    summary: 'Senior Editor Mili Mansaray and Senior Investigative Reporter Vaughan Harrison analyzed two months of KCPD’s own missing persons reports. Black women and girls were listed as actively missing nearly twice as often as white women and girls, and Black girls four to five times as often as white girls. They followed families, AdHoc Group Against Crime, and Kris Wade of Justice Project KC through a system that makes Black women prove they are worth searching for.',
+    outcome: 'The city’s own data, read for the first time for who it leaves behind, and the women it failed named in public.',
+    metric: { value: '30%', label: 'of active missing cases, from 14% of the city' },
+    image: '/photos/before-the-system-believes-you.jpg',
+    imageAlt: 'Before the System Believes You. Missing Black women. A system built to look away.',
+  },
+  {
+    slug: 'erica-green',
+    date: '2026-04-28',
+    pillar: 'narrative',
+    kind: 'investigation',
+    title: 'The headlines called her Precious Doe. Her name was Erica Green.',
+    summary: 'Twenty-five years after the body of three-year-old Erica Green was found at 59th and Kensington, Vaughan Harrison went back to the case of the little girl Kansas City first knew only as Precious Doe. The city is still learning how to say her name.',
+  },
+  {
+    slug: 'kayla-huff',
+    date: '2026-05-29',
+    pillar: 'narrative',
+    kind: 'investigation',
+    title: 'What we know about Kayla Huff, the Black Missouri teen found dead after going missing',
+    summary: 'Kayla Huff’s family and community searched for her for days after she went missing in early May. Her body was found in central Missouri a week later. Mili Mansaray and Vaughan Harrison reported the case as five adults and a 17-year-old faced accusations connected to her disappearance and death.',
+  },
+  {
     slug: 'lipman',
     date: '2026-04-15',
     pillar: 'institutional',
@@ -794,6 +824,19 @@ export const MILESTONES: Milestone[] = [
     image: `${CDN}/2026/08/06120942/data-center.webp`,
   },
   {
+    slug: 'kcxl-cypher',
+    date: '2026-08-06',
+    pillar: 'cultural',
+    kind: 'program',
+    title: 'KCXL: the first cypher series of Kansas City’s top hip hop artists',
+    summary: 'In partnership with Rez (R3Z), Kansas City’s most buzzing up-and-coming creator, the Defender produced KCXL, bringing together the city’s top hip hop artists, including Young Devi, MB58, 3Mani9, CMTG Mak, Nolimit TC, Sleazyworld Skyy, and Fallout Bino, to perform live across five groups. One beat, one mic, beats by Domo (YeahItis).',
+    outcome: 'For the first time in Kansas City history, the city’s top hip hop artists shared one stage, and the launch post drew 3,000+ comments as fans tagged who deserved a spot. The lineup reveal drew 2,900 likes.',
+    metric: { value: '3,000+', label: 'comments on the launch post' },
+    image: '/photos/kcxl-lineup.jpg',
+    imageAlt: 'KCXL official artist lineup, presented by the Kansas City Defender',
+    imageTop: true,
+  },
+  {
     slug: 'trans-prisoners',
     date: '2026-08-11',
     pillar: 'narrative',
@@ -947,6 +990,15 @@ export const MILESTONES: Milestone[] = [
     link: 'https://kansascitydefender.com/politics/peoples-ballot-november-2026-voter-guide/',
     image: '/photos/peoples-ballot.jpg',
     imageAlt: 'The People’s Ballot November voter guide',
+  },
+  {
+    slug: 'missing-black-women-breakthrough',
+    date: '2026-10-31',
+    dateLabel: 'October',
+    pillar: 'narrative',
+    kind: 'investigation',
+    title: 'Bombshell breakthroughs in our missing Black women investigation',
+    summary: 'In October, Mili Mansaray and Vaughan Harrison made major breakthroughs in the investigation they have carried all year. We will publish what they found before the end of 2026 or in early 2027.',
   },
 ];
 

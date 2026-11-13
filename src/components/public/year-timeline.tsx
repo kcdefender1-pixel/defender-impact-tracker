@@ -189,7 +189,7 @@ function MilestoneItem({ m }: { m: Milestone }) {
       >
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="kicker text-ink-3">{formatMonthDay(m.date)}</span>
+            <span className="kicker text-ink-3">{m.dateLabel ?? formatMonthDay(m.date)}</span>
             <span className={`kicker px-1.5 py-[3px] ${isWin || m.featured ? 'bg-ink text-paper' : style.fill}`}>
               {m.featured ? '★ Top honor' : isWin ? 'Win' : KIND_LABEL[m.kind]}
             </span>

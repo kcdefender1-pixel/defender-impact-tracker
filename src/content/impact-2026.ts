@@ -1000,6 +1000,15 @@ export const MILESTONES: Milestone[] = [
     title: 'Bombshell breakthroughs in our missing Black women investigation',
     summary: 'In October, Mili Mansaray and Vaughan Harrison made major breakthroughs in the investigation they have carried all year. We will publish what they found before the end of 2026 or in early 2027.',
   },
+  {
+    slug: 'election-night-live',
+    date: '2026-11-03',
+    pillar: 'narrative',
+    kind: 'program',
+    title: 'Our first live broadcast ever: election night',
+    summary: 'Ryan Sorrell hosted from the studio while Mili Mansaray and Tiffany Watts broadcast in from an election night party, giving electoral breakdowns and real-time analysis as results came in. Over the course of the night, leaders from Abortion Action and Missouri Workers, national and local organizers, and a streamer joined us on the stream.',
+    outcome: 'The Defender launched live broadcasting, a new medium for bringing movement analysis to our audience as history happens.',
+  },
 ];
 
 // ─── The Victory Board: wins you can open ───────────────────────────────────
